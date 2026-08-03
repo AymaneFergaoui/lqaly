@@ -8,18 +8,27 @@ on:
       - '.github/workflows/deploy-backend.yml'
   workflow_dispatch:
 
+# GITHUB_TOKEN needs package-write to push to GHCR; contents:read for checkout.
+permissions:
+  contents: read
+  packages: write
+
+env:
+  IMAGE: ghcr.io/aayush412/buildestate-api
+
 jobs:
-  build-and-deploy:
+  build-and-push:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v6
 
-      - name: Log in to Docker Hub
+      - name: Log in to GitHub Container Registry
         uses: docker/login-action@v4
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Build and push image
         uses: docker/build-push-action@v7
@@ -29,12 +38,5 @@ jobs:
           # SHA tag guarantees the App Service sees a config change and
           # actually pulls + restarts; :latest alone is a no-op redeploy.
           tags: |
-            ${{ secrets.DOCKERHUB_USERNAME }}/buildestate-api:latest
-            ${{ secrets.DOCKERHUB_USERNAME }}/buildestate-api:${{ github.sha }}
-
-      - name: Deploy to Azure App Service
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: buildestate-api
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          images: ${{ secrets.DOCKERHUB_USERNAME }}/buildestate-api:${{ github.sha }}
+            ${{ env.IMAGE }}:latest
+            ${{ env.IMAGE }}:${{ github.sha }}
