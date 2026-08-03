@@ -15,9 +15,10 @@ permissions:
 
 env:
   IMAGE: ghcr.io/aayush412/buildestate-api
+  AZURE_WEBAPP_NAME: buildestate-api-prod
 
 jobs:
-  build-and-push:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -40,3 +41,10 @@ jobs:
           tags: |
             ${{ env.IMAGE }}:latest
             ${{ env.IMAGE }}:${{ github.sha }}
+
+      - name: Deploy to Azure App Service
+        uses: azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.AZURE_WEBAPP_NAME }}
+          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+          images: ${{ env.IMAGE }}:${{ github.sha }}
