@@ -13,12 +13,12 @@ const ContactInfoCards: React.FC = () => {
           </div>
           <div className="flex-1">
             <h3 className="font-syne font-bold text-lg text-[#221410] mb-2">
-              Visit Our Office
+              Visitez Notre Bureau
             </h3>
             <p className="font-manrope font-extralight text-sm text-[#4B5563] leading-relaxed mb-3">
-              502, Devpath Building,<br />
-              Near Torrent Lab,<br />
-              Ashram Road, Ahmedabad
+              Twin Center,<br />
+              Boulevard Al Massira Al Khadra,<br />
+              Casablanca, Maroc
             </p>
             <a 
               href="https://maps.google.com" 
@@ -26,7 +26,7 @@ const ContactInfoCards: React.FC = () => {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1 font-manrope font-medium text-sm text-[#FC0903] hover:text-[#C05621] transition-[color]"
             >
-              <span>Get Directions</span>
+              <span>Obtenir l'itinéraire</span>
               <span className="material-icons text-sm">
                 arrow_forward
               </span>
@@ -45,17 +45,17 @@ const ContactInfoCards: React.FC = () => {
           </div>
           <div className="flex-1">
             <h3 className="font-syne font-bold text-lg text-[#221410] mb-3">
-              Call or Email Us
+              Appelez-nous ou Envoyez un Email
             </h3>
             <div className="space-y-2">
               <a 
-                href="tel:+919876543210" 
+                href="tel:+212600000000" 
                 className="flex items-center gap-2 font-manrope font-extralight text-sm text-[#4B5563] hover:text-[#FC0903] transition-[color]"
               >
                 <span className="material-icons text-base">
                   call
                 </span>
-                <span>+91 98765 43210</span>
+                <span>+212 600 000 000</span>
               </a>
               <a 
                 href="mailto:hello@lqaly.com" 
@@ -81,20 +81,20 @@ const ContactInfoCards: React.FC = () => {
           </div>
           <div className="flex-1">
             <h3 className="font-syne font-bold text-lg text-[#221410] mb-3">
-              Business Hours
+              Heures d'Ouverture
             </h3>
             <div className="space-y-2 font-manrope font-extralight text-sm text-[#4B5563]">
               <div className="flex justify-between items-center">
-                <span>Mon - Fri:</span>
+                <span>Lun - Ven :</span>
                 <span className="font-medium text-[#221410]">09:00 - 18:00</span>
               </div>
               <div className="flex justify-between items-center">
-                <span>Saturday:</span>
+                <span>Samedi :</span>
                 <span className="font-medium text-[#221410]">10:00 - 16:00</span>
               </div>
               <div className="flex justify-between items-center">
-                <span>Sunday:</span>
-                <span className="font-medium text-[#221410]">Closed</span>
+                <span>Dimanche :</span>
+                <span className="font-medium text-[#221410]">Fermé</span>
               </div>
             </div>
           </div>

@@ -38,12 +38,12 @@ const ContactFormCard: React.FC = () => {
       });
 
       setStatus('success');
-      setStatusMessage('Message sent successfully! We\'ll get back to you within 24 hours.');
+      setStatusMessage('Message envoyé avec succès ! Nous vous répondrons dans les 24 heures.');
       setFormData({ firstName: '', lastName: '', email: '', phoneNumber: '', message: '' });
     } catch (err: any) {
       setStatus('error');
       setStatusMessage(
-        err.response?.data?.message || 'Something went wrong. Please try again later.'
+        err.response?.data?.message || 'Un problème est survenu. Veuillez réessayer plus tard.'
       );
     } finally {
       setLoading(false);
@@ -55,10 +55,10 @@ const ContactFormCard: React.FC = () => {
       {/* Card Header */}
       <div className="mb-8">
         <h2 className="font-syne font-bold text-2xl text-[#221410] mb-2">
-          Send Us a Message
+          Envoyez-nous un Message
         </h2>
         <p className="font-manrope font-extralight text-sm text-[#4B5563]">
-          Fill in the form below and our team will get back to you within 24 hours.
+          Remplissez le formulaire ci-dessous et notre équipe vous répondra dans les 24 heures.
         </p>
       </div>
 
@@ -68,14 +68,14 @@ const ContactFormCard: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
           <div>
             <label className="block font-manrope font-extralight text-xs text-[#64748B] uppercase tracking-wider mb-2">
-              First Name
+              Prénom
             </label>
             <input
               type="text"
               name="firstName"
               value={formData.firstName}
               onChange={handleInputChange}
-              placeholder="John"
+              placeholder="Jean"
               className="w-full bg-[#F5F1E8] border border-[#E6E0DA] rounded-lg px-4 py-3 font-manrope font-extralight text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:outline-none focus:border-[#FC0903] transition-[border-color]"
               required
             />
@@ -83,14 +83,14 @@ const ContactFormCard: React.FC = () => {
 
           <div>
             <label className="block font-manrope font-extralight text-xs text-[#64748B] uppercase tracking-wider mb-2">
-              Last Name
+              Nom
             </label>
             <input
               type="text"
               name="lastName"
               value={formData.lastName}
               onChange={handleInputChange}
-              placeholder="Doe"
+              placeholder="Dupont"
               className="w-full bg-[#F5F1E8] border border-[#E6E0DA] rounded-lg px-4 py-3 font-manrope font-extralight text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:outline-none focus:border-[#FC0903] transition-[border-color]"
               required
             />
@@ -107,7 +107,7 @@ const ContactFormCard: React.FC = () => {
             name="email"
             value={formData.email}
             onChange={handleInputChange}
-            placeholder="john.doe@example.com"
+            placeholder="jean.dupont@exemple.com"
             className="w-full bg-[#F5F1E8] border border-[#E6E0DA] rounded-lg px-4 py-3 font-manrope font-extralight text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:outline-none focus:border-[#FC0903] transition-[border-color]"
             required
           />
@@ -116,14 +116,14 @@ const ContactFormCard: React.FC = () => {
         {/* Phone Number */}
         <div>
           <label className="block font-manrope font-extralight text-xs text-[#64748B] uppercase tracking-wider mb-2">
-            Phone Number
+            Numéro de téléphone
           </label>
           <input
             type="tel"
             name="phoneNumber"
             value={formData.phoneNumber}
             onChange={handleInputChange}
-            placeholder="+91 98765 43210"
+            placeholder="+212 600 000 000"
             className="w-full bg-[#F5F1E8] border border-[#E6E0DA] rounded-lg px-4 py-3 font-manrope font-extralight text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:outline-none focus:border-[#FC0903] transition-[border-color]"
             required
           />
@@ -138,7 +138,7 @@ const ContactFormCard: React.FC = () => {
             name="message"
             value={formData.message}
             onChange={handleInputChange}
-            placeholder="Tell us about your inquiry..."
+            placeholder="Parlez-nous de votre demande..."
             rows={5}
             className="w-full bg-[#F5F1E8] border border-[#E6E0DA] rounded-lg px-4 py-3 font-manrope font-extralight text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:outline-none focus:border-[#FC0903] transition-[border-color] resize-none"
             required

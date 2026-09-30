@@ -13,25 +13,25 @@ const OtherWaysSection: React.FC = () => {
   const methods: ContactMethod[] = [
     {
       icon: 'chat',
-      title: 'WhatsApp Us',
-      description: 'Chat directly with our support team via WhatsApp for instant assistance.',
-      action: 'Start Chat',
-      actionLink: 'https://wa.me/919876543210',
+      title: 'Contactez-nous sur WhatsApp',
+      description: 'Discutez directement avec notre équipe d\'assistance via WhatsApp pour une aide instantanée.',
+      action: 'Démarrer le chat',
+      actionLink: 'https://wa.me/212600000000',
       bgColor: 'bg-[#E8F5E9]'
     },
     {
       icon: 'chat_bubble',
-      title: 'Live Chat',
-      description: 'Connect with a property expert instantly through our live chat feature.',
-      action: 'Launch Chat',
+      title: 'Chat en Direct',
+      description: 'Connectez-vous instantanément avec un expert immobilier via notre chat en direct.',
+      action: 'Lancer le chat',
       actionLink: '#',
       bgColor: 'bg-[#E3F2FD]'
     },
     {
       icon: 'event',
-      title: 'Schedule a Call',
-      description: 'Book a convenient time for a detailed consultation with our specialists.',
-      action: 'Book Now',
+      title: 'Planifier un Appel',
+      description: 'Réservez un moment qui vous convient pour une consultation détaillée avec nos spécialistes.',
+      action: 'Réserver Maintenant',
       actionLink: '#',
       bgColor: 'bg-[#FFF3E0]'
     }
@@ -43,10 +43,10 @@ const OtherWaysSection: React.FC = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <h2 className="font-syne font-bold text-4xl text-[#221410] mb-4">
-            Other Ways to Connect
+            Autres Moyens de Contact
           </h2>
           <p className="font-manrope text-lg text-[#4B5563] leading-relaxed max-w-[640px] mx-auto">
-            Need faster support? Try our instant messaging options.
+            Besoin d'une assistance plus rapide ? Essayez nos options de messagerie instantanée.
           </p>
         </div>
 

@@ -12,23 +12,23 @@ const FAQSection: React.FC = () => {
   const faqs: FAQItem[] = [
     {
       id: 1,
-      question: "How does the AI matching process work?",
-      answer: "Our proprietary algorithm analyzes over 50 data points from your preferences and lifestyle inputs to suggest properties that align with your unique needs, often uncovering options you might have missed."
+      question: "Comment fonctionne le processus de mise en relation par IA ?",
+      answer: "Notre algorithme analyse plus de 50 points de données à partir de vos préférences et de votre style de vie pour vous suggérer des propriétés qui correspondent à vos besoins uniques, vous faisant souvent découvrir des options que vous auriez pu manquer."
     },
     {
       id: 2,
-      question: "What areas do you currently cover?",
-      answer: "We currently cover major metropolitan areas including Ahmedabad, Mumbai, Delhi, Bangalore, and Pune. We're expanding to more cities across India and will update our coverage area regularly."
+      question: "Quelles zones couvrez-vous actuellement ?",
+      answer: "Nous couvrons actuellement les principales villes du Maroc telles que Casablanca, Rabat, Marrakech et Tanger. Nous étendons régulièrement notre couverture à d'autres régions."
     },
     {
       id: 3,
-      question: "Can I list my property exclusively with Lqaly?",
-      answer: "Yes, we offer exclusive listing agreements with premium marketing benefits including professional photography, virtual tours, AI-powered listing optimization, and dedicated property consultant support throughout the selling process."
+      question: "Puis-je lister ma propriété en exclusivité avec Lqaly ?",
+      answer: "Oui, nous proposons des accords de référencement exclusifs avec des avantages marketing premium, notamment des photographies professionnelles, des visites virtuelles, une optimisation de l'annonce par IA et un conseiller dédié tout au long du processus de vente."
     },
     {
       id: 4,
-      question: "How do I schedule a virtual tour?",
-      answer: "You can schedule a virtual tour directly from any property listing page by clicking the 'Schedule Virtual Tour' button. Choose your preferred date and time, and our team will send you a confirmation with the video conference link."
+      question: "Comment puis-je planifier une visite virtuelle ?",
+      answer: "Vous pouvez planifier une visite virtuelle directement depuis la page de l'annonce en cliquant sur le bouton 'Planifier une visite virtuelle'. Choisissez la date et l'heure de votre choix, et notre équipe vous enverra une confirmation avec le lien pour la visioconférence."
     }
   ];
 
@@ -43,15 +43,14 @@ const FAQSection: React.FC = () => {
         <div className="text-center mb-16">
           <div className="flex justify-center mb-3">
             <span className="font-space-mono text-xs text-[#FC0903] uppercase tracking-widest">
-              Help Center
+              Centre d'Aide
             </span>
           </div>
           <h2 className="font-syne font-bold text-4xl text-[#221410] mb-4">
-            Common Questions
+            Questions Fréquentes
           </h2>
           <p className="font-manrope text-lg text-[#4B5563] leading-relaxed max-w-[640px] mx-auto">
-            Find quick answers to your most pressing questions about buying, selling, and
-            partnering with Lqaly.
+            Trouvez des réponses rapides à vos questions les plus urgentes concernant l'achat, la vente et le partenariat avec Lqaly.
           </p>
         </div>
 
@@ -105,7 +104,7 @@ const FAQSection: React.FC = () => {
             href="#" 
             className="inline-flex items-center gap-2 font-manrope font-bold text-base text-[#FC0903] hover:text-[#C05621] transition-[color] group"
           >
-            <span>Get Full Knowledge Base</span>
+            <span>Voir toute la Base de Connaissances</span>
             <span className="material-icons text-lg group-hover:translate-x-1 transition-transform">
               arrow_forward
             </span>
