@@ -71,9 +71,11 @@ const Login = () => {
         {/* Logo */}
         <div className="relative z-10">
           <div className="flex items-center gap-3 mb-16">
-            <div className="w-10 h-10 bg-[#FC0903] rounded-xl flex items-center justify-center">
-              <Home className="h-5 w-5 text-white" />
-            </div>
+            <img
+              src="/logo.png"
+              alt="Lqaly Logo"
+              className="w-10 h-10 object-contain"
+            />
             <div>
               <div className="text-xl font-bold text-[#FAF8F4]">Lqaly</div>
               <div className="text-xs text-[#9CA3AF] uppercase tracking-widest">Admin Panel</div>
@@ -120,9 +122,11 @@ const Login = () => {
         <div className="w-full max-w-md">
           {/* Mobile Logo */}
           <div className="flex items-center gap-3 mb-10 lg:hidden">
-            <div className="w-9 h-9 bg-[#1C1B1A] rounded-xl flex items-center justify-center">
-              <Home className="h-5 w-5 text-[#FC0903]" />
-            </div>
+            <img
+              src="/logo.png"
+              alt="Lqaly Logo"
+              className="w-9 h-9 object-contain"
+            />
             <div className="text-lg font-bold text-[#1C1B1A]">Lqaly Admin</div>
           </div>
 

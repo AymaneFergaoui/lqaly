@@ -100,13 +100,11 @@ const Sidebar = ({ isOpen, setIsOpen, isCollapsed, setIsCollapsed }) => {
         <div className="h-16 flex items-center justify-between px-6 border-b border-white/10 flex-shrink-0">
           {!isCollapsed ? (
             <Link to="/dashboard" className="flex items-center gap-3 group">
-              <motion.div
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="w-9 h-9 bg-[#FC0903] rounded-lg flex items-center justify-center shadow-lg"
-              >
-                <Home className="h-5 w-5 text-white" />
-              </motion.div>
+              <img
+                src="/logo.png"
+                alt="Lqaly Logo"
+                className="w-9 h-9 object-contain"
+              />
               <div>
                 <span className="text-base font-bold text-[#FAF8F4] tracking-tight">
                   Lqaly
