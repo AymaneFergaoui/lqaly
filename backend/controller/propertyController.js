@@ -648,12 +648,9 @@ async function uploadImages(files) {
     return Promise.all(
         files.map(async (file) => {
             const result = await imagekit.upload({
-                file: fs.readFileSync(file.path),
+                file: file.buffer,
                 fileName: file.originalname,
                 folder: 'Property',
-            });
-            fs.unlink(file.path, (err) => {
-                if (err) logger.warn("Error deleting temp file", { error: err?.message });
             });
             return result.url;
         })

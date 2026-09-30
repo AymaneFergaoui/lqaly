@@ -13,16 +13,13 @@ const addproperty = async (req, res) => {
 
         const images = [image1, image2, image3, image4].filter((item) => item !== undefined);
 
-        // Upload images to ImageKit and delete after upload
+        // Upload images to ImageKit
         const imageUrls = await Promise.all(
             images.map(async (item) => {
                 const result = await imagekit.upload({
-                    file: fs.readFileSync(item.path),
+                    file: item.buffer,
                     fileName: item.originalname,
                     folder: "Property",
-                });
-                fs.unlink(item.path, (err) => {
-                    if (err) console.log("Error deleting the file: ", err);
                 });
                 return result.url;
             })
@@ -146,16 +143,13 @@ const updateproperty = async (req, res) => {
 
         const images = [image1, image2, image3, image4].filter((item) => item !== undefined);
 
-        // Upload images to ImageKit and delete after upload
+        // Upload images to ImageKit
         const imageUrls = await Promise.all(
             images.map(async (item) => {
                 const result = await imagekit.upload({
-                    file: fs.readFileSync(item.path),
+                    file: item.buffer,
                     fileName: item.originalname,
                     folder: "Property",
-                });
-                fs.unlink(item.path, (err) => {
-                    if (err) console.log("Error deleting the file: ", err);
                 });
                 return result.url;
             })

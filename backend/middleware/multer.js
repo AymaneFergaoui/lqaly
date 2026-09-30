@@ -1,41 +1,7 @@
 import multer from "multer";
-import fs from "fs";
 import path from "path";
-import crypto from "crypto";
 
-// Auto-create uploads directory if missing
-const uploadDir = path.join(process.cwd(), "uploads");
-if (!fs.existsSync(uploadDir)) {
-    fs.mkdirSync(uploadDir, { recursive: true });
-}
-
-// Secure filename generation
-const generateSecureFilename = (originalname) => {
-    const ext = path.extname(originalname).toLowerCase();
-    const allowedExtensions = ['.jpg', '.jpeg', '.png', '.gif', '.webp'];
-
-    if (!allowedExtensions.includes(ext)) {
-        throw new Error('Invalid file extension');
-    }
-
-    // Generate cryptographically secure filename
-    const randomName = crypto.randomBytes(16).toString('hex');
-    return `${randomName}${ext}`;
-};
-
-const storage = multer.diskStorage({
-    destination: (req, file, cb) => {
-        cb(null, uploadDir);
-    },
-    filename: (req, file, cb) => {
-        try {
-            const secureFilename = generateSecureFilename(file.originalname);
-            cb(null, secureFilename);
-        } catch (error) {
-            cb(error);
-        }
-    },
-});
+const storage = multer.memoryStorage();
 
 // Enhanced file validation
 const fileFilter = (req, file, cb) => {
