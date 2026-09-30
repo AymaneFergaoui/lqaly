@@ -36,9 +36,9 @@ const PROPERTY_TYPES = ['Flat', 'Villa', 'House', 'Penthouse', 'Plot', 'Studio']
 const CATEGORIES = ['Residential', 'Commercial'];
 
 const LOAD_STEPS = [
-  { label: 'Searching listings',        desc: 'Querying 99acres, MagicBricks, Housing.com & NoBroker' },
-  { label: 'Reading property details',  desc: 'Extracting data from live listing pages'  },
-  { label: 'Getting AI insights',       desc: 'Ranking & analysing by your criteria'     },
+  { label: 'Recherche d\'annonces',        desc: 'Interrogation de 99acres, MagicBricks, Housing.com & NoBroker' },
+  { label: 'Lecture des détails',  desc: 'Extraction de données des pages d\'annonces'  },
+  { label: 'Obtention d\'analyses IA',       desc: 'Classement & analyse selon vos critères'     },
 ];
 
 type BudgetUnit = 'Lakh' | 'Cr';
@@ -285,22 +285,22 @@ const AIHeroSection: React.FC<AIHeroSectionProps> = ({ onSearch, loading, sseSta
         <div className="relative max-w-[1200px] mx-auto px-6 pt-32 pb-14">
           <div className="text-center max-w-[760px] mx-auto">
             <h1 className="font-fraunces text-4xl md:text-5xl lg:text-6xl leading-tight text-[#221410] mb-6 [text-wrap:balance]">
-              Find Properties with<br />
-              <span className="text-[#FC0903]">AI Intelligence</span>
+              Trouvez des Propriétés avec<br />
+              <span className="text-[#FC0903]">l'Intelligence Artificielle</span>
             </h1>
 
             <p className="font-manrope text-lg text-[#57534E] max-w-[620px] mx-auto leading-relaxed">
-              Tell us where you want to live — we search live listings on 99acres,
-              MagicBricks &amp; Housing.com, then rank the best matches for your budget.
+              Dites-nous où vous voulez vivre — nous recherchons les annonces en direct sur 99acres,
+              MagicBricks &amp; Housing.com, puis nous classons les meilleures correspondances selon votre budget.
             </p>
           </div>
 
           {/* ── How it works — real 3-step sequence ── */}
           <div className="mt-10 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-[880px] mx-auto">
             {[
-              { n: '1', title: 'Tell us what you need', desc: 'City, budget and home type — takes 30 seconds.' },
-              { n: '2', title: 'We scan live listings', desc: 'Real properties from 99acres, MagicBricks & Housing.com.' },
-              { n: '3', title: 'AI ranks your matches', desc: 'Scored, flagged and explained — best value first.' },
+              { n: '1', title: 'Dites-nous ce qu\'il vous faut', desc: 'Ville, budget et type de maison — ça prend 30 secondes.' },
+              { n: '2', title: 'Nous scannons les annonces', desc: 'Propriétés réelles sur 99acres, MagicBricks & Housing.com.' },
+              { n: '3', title: 'L\'IA classe vos matchs', desc: 'Noté, signalé et expliqué — la meilleure valeur en premier.' },
             ].map((s) => (
               <div key={s.n} className="flex items-start gap-3 bg-white border border-[#E6E0DA] rounded-xl px-4 py-3.5">
                 <span className="font-fraunces text-xl text-[#FC0903] leading-none mt-0.5">{s.n}</span>
@@ -318,26 +318,26 @@ const AIHeroSection: React.FC<AIHeroSectionProps> = ({ onSearch, loading, sseSta
               <div className="flex flex-wrap items-center gap-3 bg-emerald-50 border border-emerald-200 rounded-xl px-5 py-3">
                 <CheckCircle2 className="w-5 h-5 text-emerald-600 shrink-0" />
                 <p className="font-manrope text-sm font-medium text-emerald-800 flex-1 min-w-[220px]">
-                  Firecrawl key active — searches use your scraping quota, AI analysis runs on our servers.
+                  Clé Firecrawl active — les recherches utilisent votre quota de scraping, l'analyse IA s'exécute sur nos serveurs.
                 </p>
                 <button
                   onClick={() => setShowKeyModal(true)}
                   className="flex items-center gap-1.5 bg-emerald-100 hover:bg-emerald-200 border border-emerald-200 text-emerald-700 font-manrope font-bold text-xs px-4 py-2 rounded-lg transition-colors whitespace-nowrap"
                 >
-                  <KeyRound className="w-3.5 h-3.5" /> Manage Key
+                  <KeyRound className="w-3.5 h-3.5" /> Gérer la Clé
                 </button>
               </div>
             ) : (
               <div className="flex flex-wrap items-center gap-3 bg-amber-50 border border-amber-200 rounded-xl px-5 py-3">
                 <AlertTriangle className="w-5 h-5 text-amber-600 shrink-0" />
                 <p className="font-manrope text-sm font-medium text-amber-800 flex-1 min-w-[220px]">
-                  Add your <strong className="text-amber-900 font-bold">free</strong> Firecrawl key to search live listings — takes 2 minutes, no card needed.
+                  Ajoutez votre clé Firecrawl <strong className="text-amber-900 font-bold">gratuite</strong> pour chercher des annonces — prend 2 min, aucune carte requise.
                 </p>
                 <button
                   onClick={() => setShowKeyModal(true)}
                   className="flex items-center gap-1.5 bg-amber-100 hover:bg-amber-200 border border-amber-200 text-amber-800 font-manrope font-bold text-xs px-4 py-2 rounded-lg transition-colors whitespace-nowrap"
                 >
-                  <KeyRound className="w-3.5 h-3.5" /> Add Free Key
+                  <KeyRound className="w-3.5 h-3.5" /> Ajouter Clé Gratuite
                 </button>
               </div>
             )}
@@ -352,7 +352,7 @@ const AIHeroSection: React.FC<AIHeroSectionProps> = ({ onSearch, loading, sseSta
         {availableModels.length > 0 && (
           <div className="max-w-[900px] mx-auto mb-4 relative z-10">
             <div className="flex items-center gap-2 mb-2 px-1">
-              <span className="font-space-mono text-[10px] text-[#9CA3AF] uppercase tracking-widest font-semibold">AI Model</span>
+              <span className="font-space-mono text-[10px] text-[#9CA3AF] uppercase tracking-widest font-semibold">Modèle IA</span>
             </div>
             <div className="flex gap-2 flex-wrap">
               {availableModels.map(m => (
@@ -387,7 +387,7 @@ const AIHeroSection: React.FC<AIHeroSectionProps> = ({ onSearch, loading, sseSta
             {/* City */}
             <div className="mb-6">
               <label className="block font-manrope text-sm font-semibold text-[#221410] mb-2 ml-1">
-                Where do you want to live?
+                Où voulez-vous vivre ?
               </label>
               <div className="relative">
                 <div className="relative bg-white border border-[#E6E0DA] rounded-xl p-4 flex items-center gap-3 focus-within:ring-2 focus-within:ring-[#FC0903]/30 focus-within:border-[#FC0903] transition-all shadow-sm">
@@ -400,7 +400,7 @@ const AIHeroSection: React.FC<AIHeroSectionProps> = ({ onSearch, loading, sseSta
                     onFocus={() => setShowSuggestions(true)}
                     onKeyDown={handleCityKeyDown}
                     className="flex-1 bg-transparent font-manrope text-base text-[#221410] outline-none placeholder:text-[#9CA3AF] placeholder:font-light"
-                    placeholder="Enter city — e.g. Mumbai, Pune, Bangalore…"
+                    placeholder="Entrez une ville — ex. Mumbai, Pune, Bangalore…"
                     autoComplete="off"
                     required
                   />
@@ -452,7 +452,7 @@ const AIHeroSection: React.FC<AIHeroSectionProps> = ({ onSearch, loading, sseSta
             {/* ── Locality / Area ─────────────────────────────── */}
             <div className="mb-6">
               <label className="block font-manrope text-sm font-semibold text-[#221410] mb-2 ml-1">
-                Specific Area <span className="font-normal text-[#6B7280]">(optional — narrows results the most)</span>
+                Quartier Spécifique <span className="font-normal text-[#6B7280]">(optionnel — affine les résultats)</span>
               </label>
               <div className="relative">
                 <div className="relative bg-white border border-[#E6E0DA] rounded-xl p-4 flex items-center gap-3 focus-within:ring-2 focus-within:ring-[#FC0903]/30 focus-within:border-[#FC0903] transition-all shadow-sm">
@@ -465,7 +465,7 @@ const AIHeroSection: React.FC<AIHeroSectionProps> = ({ onSearch, loading, sseSta
                     onFocus={() => { if (localitySuggestions.length > 0) setShowLocalitySuggestions(true); }}
                     onKeyDown={handleLocalityKeyDown}
                     className="flex-1 bg-transparent font-manrope text-base text-[#221410] outline-none placeholder:text-[#9CA3AF] placeholder:font-light"
-                    placeholder={city.trim() ? `Search areas in ${city}…` : 'e.g. Powai, Andheri West, Koramangala…'}
+                    placeholder={city.trim() ? `Rechercher des quartiers à ${city}…` : 'ex. Powai, Andheri West, Koramangala…'}
                     autoComplete="off"
                   />
                 </div>
@@ -503,7 +503,7 @@ const AIHeroSection: React.FC<AIHeroSectionProps> = ({ onSearch, loading, sseSta
               <div>
                 <div className="flex items-center justify-between mb-2">
                   <label className="font-manrope text-sm font-semibold text-[#221410] ml-1">
-                    Max Budget
+                    Budget Max
                   </label>
                   {/* Unit toggle */}
                   <div className="flex items-center bg-[#FAF8F4] border border-[#E6E0DA] rounded p-0.5">
@@ -550,7 +550,7 @@ const AIHeroSection: React.FC<AIHeroSectionProps> = ({ onSearch, loading, sseSta
               {/* Property type */}
               <div>
                 <label className="block font-manrope text-sm font-semibold text-[#221410] mb-2 ml-1">
-                  Property Type
+                  Type de Propriété
                 </label>
                 <div className="relative bg-white border border-[#E6E0DA] rounded-xl p-4 flex items-center gap-3 focus-within:ring-2 focus-within:ring-[#FC0903]/30 focus-within:border-[#FC0903] transition-all shadow-sm">
                   <Home className="w-5 h-5 text-[#FC0903] shrink-0" />
@@ -569,7 +569,7 @@ const AIHeroSection: React.FC<AIHeroSectionProps> = ({ onSearch, loading, sseSta
               {/* Category */}
               <div>
                 <label className="block font-manrope text-sm font-semibold text-[#221410] mb-2 ml-1">
-                  Category
+                  Catégorie
                 </label>
                 <div className="relative bg-white border border-[#E6E0DA] rounded-xl p-4 flex items-center gap-3 focus-within:ring-2 focus-within:ring-[#FC0903]/30 focus-within:border-[#FC0903] transition-all shadow-sm">
                   <Building2 className="w-5 h-5 text-[#FC0903] shrink-0" />
@@ -590,7 +590,7 @@ const AIHeroSection: React.FC<AIHeroSectionProps> = ({ onSearch, loading, sseSta
             <div className="grid grid-cols-1 md:grid-cols-2 gap-5 mb-8">
               <div>
                 <label className="block font-manrope text-sm font-semibold text-[#221410] mb-3 ml-1">
-                  BHK Configuration
+                  Configuration (BHK)
                 </label>
                 <div className="flex flex-wrap gap-2">
                   {(['Any', '1BHK', '2BHK', '3BHK', '4BHK+'] as const).map((option) => (
@@ -604,7 +604,7 @@ const AIHeroSection: React.FC<AIHeroSectionProps> = ({ onSearch, loading, sseSta
                           : 'bg-white border-[#E6E0DA] text-[#6B7280] hover:border-[#FC0903]/50 hover:text-[#FC0903]'
                       }`}
                     >
-                      {option === 'Any' ? 'Any BHK' : option}
+                      {option === 'Any' ? 'Tout' : option}
                     </button>
                   ))}
                 </div>
@@ -612,13 +612,13 @@ const AIHeroSection: React.FC<AIHeroSectionProps> = ({ onSearch, loading, sseSta
 
               <div>
                 <label className="block font-manrope text-sm font-semibold text-[#221410] mb-3 ml-1">
-                  Possession
+                  Disponibilité
                 </label>
                 <div className="flex flex-wrap gap-2">
                   {([
-                    { value: 'any',               label: 'Any' },
-                    { value: 'ready',             label: 'Ready to Move' },
-                    { value: 'underconstruction', label: 'Under Construction' },
+                    { value: 'any',               label: 'Tout' },
+                    { value: 'ready',             label: 'Prêt à emménager' },
+                    { value: 'underconstruction', label: 'En construction' },
                   ] as const).map((opt) => (
                     <button
                       key={opt.value}
@@ -647,24 +647,24 @@ const AIHeroSection: React.FC<AIHeroSectionProps> = ({ onSearch, loading, sseSta
                 {loading ? (
                   <>
                     <Loader2 className="w-5 h-5 animate-spin" />
-                    Searching properties…
+                    Recherche de propriétés…
                   </>
                 ) : !keysReady ? (
                   <>
                     <KeyRound className="w-5 h-5" />
-                    Set API Keys to Search
+                    Ajouter Clé API pour Chercher
                   </>
                 ) : (
                   <>
                     <Search className="w-5 h-5" />
-                    Search with AI
+                    Rechercher avec l'IA
                   </>
                 )}
               </button>
               {/* Tooltip shown when keys are missing */}
               {!keysReady && !loading && (
                 <div className="absolute -top-12 left-1/2 -translate-x-1/2 hidden group-hover:block bg-[#221410] border border-[#E6E0DA]/20 text-white font-manrope text-xs rounded-lg px-4 py-2 whitespace-nowrap pointer-events-none shadow-xl z-10 transition-opacity">
-                  Add your free Firecrawl key first
+                  Ajoutez d'abord votre clé Firecrawl gratuite
                   <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-2 h-2 bg-[#221410] border-b border-r border-[#E6E0DA]/20 rotate-45" />
                 </div>
               )}
@@ -702,8 +702,8 @@ const AIHeroSection: React.FC<AIHeroSectionProps> = ({ onSearch, loading, sseSta
                 {/* Search context summary */}
                 <p className="font-manrope text-xs text-[#9CA3AF] text-center mt-5 leading-relaxed">
                   {bhk !== 'Any' ? `${bhk} ` : ''}{propertyType.toLowerCase()}s
-                  {locality ? ` in ${locality},` : ' in'} <span className="font-semibold text-[#6B7280]">{city}</span>
-                  {' '}· under {maxBudget} {budgetUnit} · usually takes 15–30 s
+                  {locality ? ` à ${locality},` : ' à'} <span className="font-semibold text-[#6B7280]">{city}</span>
+                  {' '}· sous {maxBudget} {budgetUnit} · prend généralement 15–30 s
                 </p>
               </div>
             )}

@@ -26,11 +26,10 @@ const SOURCE_META: Record<string, { label: string; cls: string }> = {
   nobroker:     { label: 'NoBroker',    cls: 'bg-green-50   text-green-700   border-green-200'   },
 };
 
-/* ── Value verdict ───────────────────────────────────────── */
 const VERDICT_META = {
-  good_deal:  { label: 'Good Deal',  icon: '🟢', cls: 'bg-emerald-50 text-emerald-700 border-emerald-200' },
-  fair:       { label: 'Fair Price', icon: '🟡', cls: 'bg-amber-50   text-amber-700   border-amber-200'   },
-  overpriced: { label: 'Overpriced', icon: '🔴', cls: 'bg-red-50     text-red-600     border-red-200'     },
+  good_deal:  { label: 'Bonne Affaire',  icon: '🟢', cls: 'bg-emerald-50 text-emerald-700 border-emerald-200' },
+  fair:       { label: 'Prix Juste', icon: '🟡', cls: 'bg-amber-50   text-amber-700   border-amber-200'   },
+  overpriced: { label: 'Trop Cher', icon: '🔴', cls: 'bg-red-50     text-red-600     border-red-200'     },
 } as const;
 
 /* ── Known builders for verified badge ──────────────────── */
@@ -41,31 +40,31 @@ const KNOWN_BUILDERS = [
 
 /* ── Comparison table rows ───────────────────────────────── */
 const COMPARE_ROWS = [
-  { key: 'price',             label: 'Price'       },
-  { key: 'price_per_sqft',    label: 'Per sqft'    },
-  { key: 'area_sqft',         label: 'Carpet area' },
-  { key: 'floor',             label: 'Floor'       },
-  { key: 'possession_status', label: 'Possession'  },
-  { key: 'facing_direction',  label: 'Facing'      },
+  { key: 'price',             label: 'Prix'       },
+  { key: 'price_per_sqft',    label: 'Par m²'    },
+  { key: 'area_sqft',         label: 'Superficie' },
+  { key: 'floor',             label: 'Étage'       },
+  { key: 'possession_status', label: 'Disponibilité'  },
+  { key: 'facing_direction',  label: 'Orientation'      },
   { key: 'parking',           label: 'Parking'     },
   { key: 'rera_number',       label: 'RERA'        },
-  { key: 'builder_name',      label: 'Builder'     },
-  { key: 'amenities',         label: 'Amenities'   },
-  { key: 'ai_verdict',        label: 'AI Verdict'  },
-  { key: 'ai_insight',        label: 'AI Insight'  },
+  { key: 'builder_name',      label: 'Constructeur'     },
+  { key: 'amenities',         label: 'Équipements'   },
+  { key: 'ai_verdict',        label: 'Verdict IA'  },
+  { key: 'ai_insight',        label: 'Aperçu IA'  },
 ] as const;
 
 /* ── Status stage messages ───────────────────────────────── */
 const STAGE_LINES: Record<string, string[]> = {
   searching: [
-    'Querying 99acres, MagicBricks, Housing.com...',
-    'Fetching live listings from portals...',
-    'Scraping property data in parallel...',
+    'Interrogation de 99acres, MagicBricks, Housing.com...',
+    'Récupération des annonces en direct des portails...',
+    'Extraction des données des propriétés en parallèle...',
   ],
   analyzing: [
-    'AI is reading each listing...',
-    'Scoring value-for-money across properties...',
-    'Ranking by match score and price efficiency...',
+    'L\'IA lit chaque annonce...',
+    'Évaluation du rapport qualité-prix...',
+    'Classement par score de correspondance et efficacité du prix...',
   ],
 };
 
@@ -133,7 +132,7 @@ const PropertyCard: React.FC<{
 
         {/* Building name */}
         <h3 className="font-syne text-[18px] font-bold text-[#221410] mb-0.5 leading-tight line-clamp-2 [text-wrap:balance]">
-          {property.building_name || 'Premium Property'}
+          {property.building_name || 'Propriété Premium'}
         </h3>
 
         {/* Builder + verified inline */}
@@ -141,11 +140,11 @@ const PropertyCard: React.FC<{
           <div className="flex items-center gap-1.5 mb-1.5">
             <Building2 className="w-3 h-3 text-[#9CA3AF] shrink-0" />
             <span className="font-manrope text-[12px] text-[#6B7280]">
-              by <span className="font-medium text-[#4B5563]">{property.builder_name}</span>
+              par <span className="font-medium text-[#4B5563]">{property.builder_name}</span>
             </span>
             {isVerified && (
               <span className="font-manrope text-[10px] font-semibold text-amber-600 bg-amber-50 border border-amber-200 px-1.5 py-0.5 rounded-md ml-0.5">
-                ★ Verified
+                ★ Vérifié
               </span>
             )}
           </div>
@@ -155,16 +154,16 @@ const PropertyCard: React.FC<{
         <div className="flex items-center gap-1.5 mb-4">
           <MapPin className="w-3 h-3 text-[#FC0903]/60 shrink-0" />
           <span className="font-manrope text-[12px] text-[#6B7280] line-clamp-1">
-            {property.location_address || 'Location not specified'}
+            {property.location_address || 'Lieu non spécifié'}
           </span>
         </div>
 
         {/* Price box */}
         <div className="flex items-center justify-between bg-[#FAF8F4] rounded-xl px-4 py-3 mb-3 shadow-[0_0_0_1px_rgba(0,0,0,0.05)]">
           <div>
-            <p className="font-space-mono text-[9px] text-[#9CA3AF] font-bold tracking-widest uppercase mb-0.5">Price</p>
+            <p className="font-space-mono text-[9px] text-[#9CA3AF] font-bold tracking-widest uppercase mb-0.5">Prix</p>
             <p className="font-manrope font-extrabold text-[#FC0903] text-[20px] leading-none tabular-nums">
-              {property.price || 'Contact for price'}
+              {property.price || 'Contactez pour le prix'}
             </p>
           </div>
           {(property.price_per_sqft || property.area_sqft) && (
@@ -177,7 +176,7 @@ const PropertyCard: React.FC<{
               {property.area_sqft && (
                 <p className="font-manrope text-[11px] text-[#9CA3AF] flex items-center gap-1 justify-end mt-0.5 tabular-nums">
                   <Maximize className="w-3 h-3" />
-                  {property.area_sqft} sqft
+                  {property.area_sqft} m²
                 </p>
               )}
             </div>
@@ -191,8 +190,8 @@ const PropertyCard: React.FC<{
               property.bhk_config,
               property.floor_number
                 ? property.total_floors
-                  ? `Floor ${property.floor_number} of ${property.total_floors}`
-                  : `Floor ${property.floor_number}`
+                  ? `Étage ${property.floor_number} sur ${property.total_floors}`
+                  : `Étage ${property.floor_number}`
                 : null,
             ]
               .filter(Boolean)
@@ -233,7 +232,7 @@ const PropertyCard: React.FC<{
               <Sparkles className="w-3.5 h-3.5 text-[#FC0903]/30" />
             </div>
             <p className="font-space-mono text-[9px] text-[#FC0903]/60 font-bold uppercase tracking-widest mb-1.5">
-              AI Insight
+              Aperçu IA
             </p>
             <p className="font-manrope text-[12px] text-[#4B5563] leading-relaxed pr-4 [text-wrap:pretty]">
               &ldquo;{insight.one_line_insight}&rdquo;
@@ -265,7 +264,7 @@ const PropertyCard: React.FC<{
               className="flex items-center gap-2 w-full text-left font-manrope text-[11px] font-medium text-amber-700 bg-amber-50 border border-amber-200 rounded-lg px-3 py-2 hover:bg-amber-100 transition-[background-color] active:scale-[0.98]"
             >
               <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
-              <span>{redFlags.length} concern{redFlags.length > 1 ? 's' : ''}</span>
+              <span>{redFlags.length} problème{redFlags.length > 1 ? 's' : ''}</span>
               {showFlags
                 ? <ChevronUp className="w-3.5 h-3.5 ml-auto" />
                 : <ChevronDown className="w-3.5 h-3.5 ml-auto" />}
@@ -308,11 +307,11 @@ const PropertyCard: React.FC<{
               onClick={e => e.stopPropagation()}
               className="flex-1 inline-flex items-center justify-center gap-1.5 bg-[#FC0903] hover:bg-[#C05621] text-white font-manrope font-semibold text-sm py-2.5 rounded-xl transition-[background-color,box-shadow] duration-150 shadow-sm shadow-[#FC0903]/20 active:scale-[0.96]"
             >
-              View Listing <ExternalLink className="w-3.5 h-3.5" />
+              Voir l'Annonce <ExternalLink className="w-3.5 h-3.5" />
             </a>
           ) : (
             <span className="flex-1 inline-flex items-center justify-center bg-[#F3F0EC] text-[#9CA3AF] font-manrope font-semibold text-sm py-2.5 rounded-xl cursor-not-allowed">
-              No link
+              Aucun lien
             </span>
           )}
           <button
@@ -327,7 +326,7 @@ const PropertyCard: React.FC<{
                   : 'border-[#E6E0DA]/50 text-[#C4C4C4] cursor-not-allowed opacity-50'
             }`}
           >
-            {isComparing ? '✓ Added' : '+ Compare'}
+            {isComparing ? '✓ Ajouté' : '+ Comparer'}
           </button>
         </div>
       </div>
@@ -417,7 +416,7 @@ const ComparisonModal: React.FC<{
             <div className="w-8 h-8 bg-[#FAF8F4] border border-[#E6E0DA] rounded-full flex items-center justify-center">
               <BarChart2 className="w-4 h-4 text-[#FC0903]" />
             </div>
-            <h2 className="font-syne text-xl font-bold text-[#221410]">Compare Properties</h2>
+            <h2 className="font-syne text-xl font-bold text-[#221410]">Comparer des Propriétés</h2>
           </div>
           <button
             type="button"
@@ -434,7 +433,7 @@ const ComparisonModal: React.FC<{
                 <th className="w-[140px] sm:w-[160px] bg-[#FAF8F4] px-4 py-4 sticky left-0 z-10 border-r border-[#E6E0DA]" />
                 {items.map((p, i) => (
                   <th key={i} className="px-5 py-4 text-left min-w-[220px]">
-                    <p className="font-syne font-bold text-[#221410] text-[15px] leading-tight">{p.building_name || 'Property'}</p>
+                    <p className="font-syne font-bold text-[#221410] text-[15px] leading-tight">{p.building_name || 'Propriété'}</p>
                     <p className="font-manrope text-[12px] text-[#9CA3AF] mt-1 line-clamp-1">{p.location_address || ''}</p>
                   </th>
                 ))}
@@ -509,13 +508,13 @@ const AILoadingState: React.FC<{ city: string; sseStage?: 'searching' | 'analyzi
             transition={{ duration: 0.25 }}
             className="font-space-mono text-[10px] text-[#FC0903] font-bold uppercase tracking-widest mb-2"
           >
-            {stage === 'analyzing' ? 'AI Analysis' : 'Live Search'}
+            {stage === 'analyzing' ? 'Analyse IA' : 'Recherche en direct'}
           </motion.p>
         </AnimatePresence>
         <h2 className="font-syne text-2xl font-bold text-[#221410] mb-1 [text-wrap:balance]">
-          {stage === 'analyzing' ? 'AI is reviewing listings' : `Searching in ${city}`}
+          {stage === 'analyzing' ? 'L\'IA examine les annonces' : `Recherche à ${city}`}
         </h2>
-        <p className="font-manrope text-sm text-[#6B7280]">This takes about 25–35 seconds. Stay on this page.</p>
+        <p className="font-manrope text-sm text-[#6B7280]">Cela prend environ 25 à 35 secondes. Restez sur cette page.</p>
       </div>
 
       {/* Streaming status messages */}
@@ -525,7 +524,7 @@ const AILoadingState: React.FC<{ city: string; sseStage?: 'searching' | 'analyzi
           <div className="w-2.5 h-2.5 rounded-full bg-red-400" />
           <div className="w-2.5 h-2.5 rounded-full bg-amber-400" />
           <div className="w-2.5 h-2.5 rounded-full bg-emerald-400" />
-          <span className="font-space-mono text-[10px] text-[#9CA3AF] ml-2 uppercase tracking-wider">AI Agent</span>
+          <span className="font-space-mono text-[10px] text-[#9CA3AF] ml-2 uppercase tracking-wider">Agent IA</span>
         </div>
         {/* Log lines */}
         <div className="px-4 py-4 space-y-2.5">
@@ -537,7 +536,7 @@ const AILoadingState: React.FC<{ city: string; sseStage?: 'searching' | 'analyzi
               className="flex items-start gap-2.5"
             >
               <span className="font-space-mono text-[10px] text-emerald-500 mt-0.5 shrink-0">✓</span>
-              <span className="font-space-mono text-[11px] text-[#9CA3AF]">Scraped listings from 3 portals</span>
+              <span className="font-space-mono text-[11px] text-[#9CA3AF]">Annonces extraites de 3 portails</span>
             </motion.div>
           )}
           {/* Active line */}
@@ -622,7 +621,7 @@ const AISearchResults: React.FC<Props> = ({ properties, loading, sseStage, statu
         <div className="w-16 h-16 bg-red-50 border border-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
           <SearchX className="w-8 h-8 text-red-400" />
         </div>
-        <h3 className="font-syne text-2xl text-[#221410] mb-2">Search Failed</h3>
+        <h3 className="font-syne text-2xl text-[#221410] mb-2">Recherche Échouée</h3>
         <p className="font-manrope font-light text-[#6b7280] [text-wrap:pretty]">{error}</p>
       </div>
     );
@@ -634,9 +633,9 @@ const AISearchResults: React.FC<Props> = ({ properties, loading, sseStage, statu
         <div className="w-16 h-16 bg-[#FC0903]/10 rounded-full flex items-center justify-center mx-auto mb-4">
           <Home className="w-8 h-8 text-[#FC0903]" />
         </div>
-        <h3 className="font-syne text-2xl text-[#221410] mb-2">No Properties Found</h3>
+        <h3 className="font-syne text-2xl text-[#221410] mb-2">Aucune Propriété Trouvée</h3>
         <p className="font-manrope font-light text-[#6b7280]">
-          No properties found in {city} within your budget. Try increasing your budget or changing the property type.
+          Aucune propriété trouvée à {city} dans votre budget. Essayez d'augmenter votre budget ou de modifier le type de propriété.
         </p>
       </div>
     );
@@ -654,16 +653,16 @@ const AISearchResults: React.FC<Props> = ({ properties, loading, sseStage, statu
           <div>
             <div className="font-space-mono text-[10px] text-[#FC0903] font-bold uppercase tracking-widest mb-2 flex items-center gap-2">
               <TrendingUp className="w-3 h-3" />
-              Live AI Results
+              Résultats IA en direct
             </div>
             <h2 className="font-syne text-3xl font-bold text-[#221410] mb-1.5 [text-wrap:balance]">
-              Properties in {city}
+              Propriétés à {city}
             </h2>
             <p className="font-manrope text-sm text-[#6B7280]">
               <span className="tabular-nums font-semibold text-[#221410]">{properties.length}</span>{' '}
-              {properties.length === 1 ? 'match' : 'matches'} found
+              {properties.length === 1 ? 'résultat' : 'résultats'} trouvé{properties.length > 1 ? 's' : ''}
               {aiMatchCount > 0 && (
-                <> · <span className="tabular-nums font-semibold text-[#FC0903]">{aiMatchCount}</span> with AI insights</>
+                <> · <span className="tabular-nums font-semibold text-[#FC0903]">{aiMatchCount}</span> avec des aperçus IA</>
               )}
             </p>
           </div>
@@ -718,7 +717,7 @@ const AISearchResults: React.FC<Props> = ({ properties, loading, sseStage, statu
                   {compareList.map((p, i) => (
                     <div key={i} className="flex items-center gap-2 bg-[#FAF8F4] border border-[#E6E0DA] rounded-xl px-3 py-1.5 min-w-0 shadow-[0_0_0_1px_rgba(0,0,0,0.04)]">
                       <span className="font-manrope text-[13px] font-semibold text-[#221410] truncate max-w-[140px]">
-                        {p.building_name || 'Property'}
+                        {p.building_name || 'Propriété'}
                       </span>
                       <button
                         type="button"
@@ -732,7 +731,7 @@ const AISearchResults: React.FC<Props> = ({ properties, loading, sseStage, statu
                 </div>
                 <div className="flex items-center gap-3 shrink-0">
                   <span className="font-manrope text-[13px] text-[#6B7280] hidden sm:block tabular-nums">
-                    {compareList.length} selected
+                    {compareList.length} sélectionné{compareList.length > 1 ? 's' : ''}
                   </span>
                   <button
                     type="button"
@@ -740,7 +739,7 @@ const AISearchResults: React.FC<Props> = ({ properties, loading, sseStage, statu
                     className="inline-flex items-center gap-2 bg-[#FC0903] hover:bg-[#C05621] text-white font-manrope font-semibold text-sm px-5 py-2.5 rounded-xl transition-[background-color] duration-150 shadow-sm shadow-[#FC0903]/25 active:scale-[0.96]"
                   >
                     <BarChart2 className="w-4 h-4" />
-                    Compare Now
+                    Comparer Maintenant
                   </button>
                 </div>
               </div>

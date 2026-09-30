@@ -352,17 +352,17 @@ const AIHubDevPage: React.FC = () => {
     const serverMsg  = err.message ?? '';
 
     if (status === 403 || serverCode === 'KEYS_REQUIRED' || serverCode === 'KEYS_INVALID')
-      return { msg: 'Your Firecrawl key is missing or invalid. Please add or update it.', isKeyError: true };
+      return { msg: 'Votre clé Firecrawl est manquante ou invalide. Veuillez l\'ajouter ou la mettre à jour.', isKeyError: true };
     if (serverCode === 'KEY_VALIDATION_FAILED')
-      return { msg: 'We could not validate your API keys right now. Please try again shortly.', isKeyError: false };
+      return { msg: 'Nous n\'avons pas pu valider vos clés API pour le moment. Veuillez réessayer plus tard.', isKeyError: false };
     if (status === 402 || serverCode === 'FIRECRAWL_CREDITS_EXHAUSTED')
-      return { msg: 'Your Firecrawl API credits have been exhausted. Please upgrade your plan or add more credits at firecrawl.dev/pricing', isKeyError: false };
+      return { msg: 'Vos crédits d\'API Firecrawl sont épuisés. Veuillez mettre à niveau votre plan ou ajouter des crédits sur firecrawl.dev/pricing', isKeyError: false };
     if (status === 429 || serverCode === 'RATE_LIMIT_EXCEEDED')
-      return { msg: "Rate limit reached — you've used 10 AI searches this hour. Please wait before searching again.", isKeyError: false };
+      return { msg: "Limite de débit atteinte — vous avez utilisé 10 recherches IA cette heure. Veuillez patienter avant de chercher à nouveau.", isKeyError: false };
     if (status === 503 || serverCode === 'FIRECRAWL_ERROR')
-      return { msg: 'The property scraping service is temporarily unavailable. Please try again in a few minutes.', isKeyError: false };
+      return { msg: 'Le service de scraping de propriétés est temporairement indisponible. Veuillez réessayer dans quelques minutes.', isKeyError: false };
     if (status === 404)
-      return { msg: serverMsg || 'No results found for your search criteria.', isKeyError: false };
+      return { msg: serverMsg || 'Aucun résultat trouvé pour vos critères de recherche.', isKeyError: false };
     return { msg: serverMsg || fallback, isKeyError: false };
   }, []);
 
@@ -428,7 +428,7 @@ const AIHubDevPage: React.FC = () => {
           setTimeout(() => resultsRef.current?.scrollIntoView({ behavior: 'smooth' }), 100);
         },
         onError: (err: { message?: string; error?: string; status?: number }) => {
-          const { msg, isKeyError } = friendlySSEError(err, 'Search failed. Please try again.');
+          const { msg, isKeyError } = friendlySSEError(err, 'La recherche a échoué. Veuillez réessayer.');
           setSearchError(msg);
           if (isKeyError) setOpenKeyModal(true);
           setSearchLoading(false);
@@ -466,7 +466,7 @@ const AIHubDevPage: React.FC = () => {
         error:   err?.response?.data?.error,
         status:  err?.response?.status,
       };
-      const { msg, isKeyError } = friendlySSEError(axiosErr, 'Failed to load location trends.');
+      const { msg, isKeyError } = friendlySSEError(axiosErr, 'Échec du chargement des tendances locales.');
       setTrendsError(msg);
       if (isKeyError) setOpenKeyModal(true);
     } finally {

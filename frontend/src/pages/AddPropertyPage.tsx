@@ -8,13 +8,13 @@ import Footer from '../components/common/Footer';
 
 // ── Constants ─────────────────────────────────────────────────────────────────
 
-const PROPERTY_TYPES = ['Flat', 'House', 'Villa', 'Plot', 'Penthouse', 'Studio', 'Commercial'];
-const AVAILABILITY_OPTIONS = ['For Sale', 'For Rent'];
+const PROPERTY_TYPES = ['Appartement', 'Maison', 'Villa', 'Terrain', 'Penthouse', 'Studio', 'Bureau'];
+const AVAILABILITY_OPTIONS = ['À Vendre', 'À Louer'];
 const AMENITIES_LIST = [
-  'Parking', 'Swimming Pool', 'Gym', 'Security', 'Power Backup',
-  'Lift', 'Garden', 'Club House', 'CCTV', 'Intercom',
-  'Rainwater Harvesting', 'Gated Community', 'Children Play Area',
-  'Jogging Track', 'Basketball Court',
+  'Parking', 'Piscine', 'Salle de sport', 'Sécurité', 'Générateur électrique',
+  'Ascenseur', 'Jardin', 'Clubhouse', 'Vidéosurveillance', 'Interphone',
+  'Balcon', 'Résidence fermée', 'Aire de jeux',
+  'Piste de course', 'Terrain de basket',
 ];
 
 // ── Types ─────────────────────────────────────────────────────────────────────
@@ -49,8 +49,8 @@ const AddPropertyPage: React.FC = () => {
 
   const [form, setForm] = useState<FormState>({
     title: '',
-    type: 'Flat',
-    availability: 'For Sale',
+    type: 'Appartement',
+    availability: 'À Vendre',
     location: '',
     price: '',
     beds: '',

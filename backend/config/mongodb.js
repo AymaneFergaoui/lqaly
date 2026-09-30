@@ -3,17 +3,41 @@ import dotenv from "dotenv";
 
 dotenv.config();
 
+let cached = global.mongoose;
+
+if (!cached) {
+  cached = global.mongoose = { conn: null, promise: null };
+}
+
 const connectdb = async () => {
   try {
+    if (cached.conn) {
+      if (process.env.NODE_ENV === 'production') console.log('Using cached MongoDB connection');
+      return cached.conn;
+    }
+    
+    if (mongoose.connection.readyState >= 1) {
+      if (process.env.NODE_ENV === 'production') console.log('MongoDB already connected (readyState).');
+      return mongoose.connection;
+    }
+
     // Check if MongoDB URI is provided
     if (!process.env.MONGO_URI) {
       throw new Error('MONGO_URI environment variable is not defined');
     }
 
-    const conn = await mongoose.connect(process.env.MONGO_URI, {
-      serverSelectionTimeoutMS: 10000, // Increased timeout for better stability
-      socketTimeoutMS: 45000
-    });
+    if (!cached.promise) {
+      cached.promise = mongoose.connect(process.env.MONGO_URI, {
+        serverSelectionTimeoutMS: 10000, // Increased timeout for better stability
+        socketTimeoutMS: 45000,
+        maxPoolSize: 10,
+      }).then((mongoose) => {
+        return mongoose;
+      });
+    }
+    
+    cached.conn = await cached.promise;
+    const conn = cached.conn;
 
     if (process.env.NODE_ENV === 'production') console.log(`MongoDB Connected: ${conn.connection.host}`);
     

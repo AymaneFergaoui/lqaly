@@ -230,7 +230,7 @@ const PropertyHeroImage: React.FC<PropertyHeroImageProps> = ({ images = [], imag
                 <div className="absolute inset-0 bg-black/55 flex flex-col items-center justify-center gap-1">
                   <Images className="w-5 h-5 text-white" />
                   <span className="font-manrope font-semibold text-white text-sm">
-                    +{imgs.length - 5} more
+                    +{imgs.length - 5} de plus
                   </span>
                 </div>
               )}
@@ -244,7 +244,7 @@ const PropertyHeroImage: React.FC<PropertyHeroImageProps> = ({ images = [], imag
           className="absolute bottom-4 right-4 flex items-center gap-2 bg-white/90 backdrop-blur-sm hover:bg-white text-[#221410] font-manrope font-semibold text-sm px-4 py-2 rounded-xl shadow-md transition-all active:scale-[0.96]"
         >
           <Images className="w-4 h-4" />
-          Show all {imgs.length} photos
+          Voir toutes les {imgs.length} photos
         </button>
       </div>
 

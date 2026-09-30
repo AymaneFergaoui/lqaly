@@ -8,7 +8,7 @@ interface PropertyBreadcrumbProps {
 }
 
 const PropertyBreadcrumb: React.FC<PropertyBreadcrumbProps> = ({
-  city = 'Properties',
+  city = 'Propriétés',
   propertyName = '',
 }) => {
   return (
@@ -29,7 +29,7 @@ const PropertyBreadcrumb: React.FC<PropertyBreadcrumbProps> = ({
             to="/properties"
             className="hover:text-[#FC0903] transition-colors duration-150"
           >
-            Properties
+            Propriétés
           </Link>
 
           {city && (

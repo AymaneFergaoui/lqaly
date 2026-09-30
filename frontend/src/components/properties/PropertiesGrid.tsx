@@ -32,9 +32,9 @@ const item: Variants = {
 // List view row — more compact than the card
 const PropertyRow: React.FC<{ property: Property; index: number }> = ({ property, index }) => {
   const img = property.image?.[0] || fallbackImages[index % fallbackImages.length];
-  const badge = property.availability === 'sold' ? 'SOLD'
-    : property.availability === 'rent' ? 'FOR RENT'
-    : property.availability === 'sale' ? 'FOR SALE'
+  const badge = property.availability === 'sold' ? 'VENDU'
+    : property.availability === 'rent' ? 'À LOUER'
+    : property.availability === 'sale' ? 'À VENDRE'
     : property.availability?.toUpperCase();
 
   return (
@@ -67,9 +67,9 @@ const PropertyRow: React.FC<{ property: Property; index: number }> = ({ property
               <span className="font-manrope text-sm text-[#6B7280]">{property.location}</span>
             </div>
             <div className="flex items-center gap-4 font-manrope text-sm text-[#6B7280]">
-              <span className="flex items-center gap-1.5"><Bed className="w-4 h-4" />{property.beds} Beds</span>
-              <span className="flex items-center gap-1.5"><Bath className="w-4 h-4" />{property.baths} Baths</span>
-              <span className="flex items-center gap-1.5"><Maximize2 className="w-4 h-4" />{property.sqft.toLocaleString()} sqft</span>
+              <span className="flex items-center gap-1.5"><Bed className="w-4 h-4" />{property.beds} Lits</span>
+              <span className="flex items-center gap-1.5"><Bath className="w-4 h-4" />{property.baths} Sdb</span>
+              <span className="flex items-center gap-1.5"><Maximize2 className="w-4 h-4" />{property.sqft.toLocaleString()} m²</span>
             </div>
           </div>
           <div className="flex items-center justify-between mt-4">
@@ -110,9 +110,9 @@ const PropertiesGrid: React.FC<PropertiesGridProps> = ({ properties, viewMode = 
                 baths={property.baths}
                 sqft={property.sqft}
                 badge={
-                  property.availability === 'sold' ? 'SOLD' :
-                  property.availability === 'rent' ? 'FOR RENT' :
-                  property.availability === 'sale' ? 'FOR SALE' :
+                  property.availability === 'sold' ? 'VENDU' :
+                  property.availability === 'rent' ? 'À LOUER' :
+                  property.availability === 'sale' ? 'À VENDRE' :
                   property.availability?.toUpperCase()
                 }
                 tags={property.type ? [property.type] : []}

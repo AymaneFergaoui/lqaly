@@ -32,11 +32,11 @@ const AIApiKeyModal: React.FC<AIApiKeyModalProps> = ({ isOpen, onClose, onKeysCh
     const entered = firecrawlKey.trim();
 
     if (!entered) {
-      showToast('error', 'Enter your Firecrawl API key to save.');
+      showToast('error', 'Entrez votre clé API Firecrawl pour sauvegarder.');
       return;
     }
     if (!entered.startsWith('fc-')) {
-      showToast('error', 'Firecrawl key should start with fc-');
+      showToast('error', 'La clé Firecrawl doit commencer par fc-');
       return;
     }
 
@@ -45,10 +45,10 @@ const AIApiKeyModal: React.FC<AIApiKeyModalProps> = ({ isOpen, onClose, onKeysCh
       await aiAPI.validateKeys({ firecrawlKey: entered });
       apiKeyStorage.setFirecrawlKey(entered);
       setFirecrawlKey('');
-      showToast('success', 'Firecrawl key verified and saved!');
+      showToast('success', 'Clé Firecrawl vérifiée et sauvegardée !');
       onKeysChanged();
     } catch (err: any) {
-      const msg = err?.response?.data?.message || 'Could not verify key. Please check and try again.';
+      const msg = err?.response?.data?.message || 'Impossible de vérifier la clé. Veuillez vérifier et réessayer.';
       showToast('error', msg);
     } finally {
       setSaving(false);
@@ -57,7 +57,7 @@ const AIApiKeyModal: React.FC<AIApiKeyModalProps> = ({ isOpen, onClose, onKeysCh
 
   const handleClear = () => {
     apiKeyStorage.clear();
-    showToast('success', 'Key removed.');
+    showToast('success', 'Clé supprimée.');
     onKeysChanged();
   };
 
@@ -76,8 +76,8 @@ const AIApiKeyModal: React.FC<AIApiKeyModalProps> = ({ isOpen, onClose, onKeysCh
               <Key className="w-4 h-4 text-[#FC0903]" />
             </div>
             <div>
-              <h2 className="font-syne font-bold text-white text-lg">Firecrawl API Key</h2>
-              <p className="font-manrope text-xs text-white/40">Saved in your browser only — never sent to our servers.</p>
+              <h2 className="font-syne font-bold text-white text-lg">Clé API Firecrawl</h2>
+              <p className="font-manrope text-xs text-white/40">Sauvegardée uniquement dans votre navigateur — jamais envoyée à nos serveurs.</p>
             </div>
           </div>
           <button onClick={onClose} className="text-white/40 hover:text-white transition-[color]">
@@ -89,7 +89,7 @@ const AIApiKeyModal: React.FC<AIApiKeyModalProps> = ({ isOpen, onClose, onKeysCh
         <div className="mx-6 mt-4 flex items-start gap-3 bg-emerald-500/10 border border-emerald-500/20 rounded-xl px-4 py-3">
           <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 mt-0.5" />
           <p className="font-manrope text-xs text-emerald-300/90 leading-relaxed">
-            <strong className="text-emerald-300">AI is powered by our servers</strong> — you only need a free Firecrawl key to enable live property scraping.
+            <strong className="text-emerald-300">L'IA est propulsée par nos serveurs</strong> — vous avez seulement besoin d'une clé Firecrawl gratuite pour permettre le scraping des propriétés en direct.
           </p>
         </div>
 
@@ -118,7 +118,7 @@ const AIApiKeyModal: React.FC<AIApiKeyModalProps> = ({ isOpen, onClose, onKeysCh
               ? <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400" />
               : <AlertCircle  className="w-3.5 h-3.5 text-amber-400" />}
             <span className={`font-manrope text-xs ${hasFirecrawl ? 'text-emerald-300' : 'text-amber-300'}`}>
-              {hasFirecrawl ? 'Firecrawl key active ✓' : 'Firecrawl key required'}
+              {hasFirecrawl ? 'Clé Firecrawl active ✓' : 'Clé Firecrawl requise'}
             </span>
           </div>
         </div>
@@ -128,9 +128,9 @@ const AIApiKeyModal: React.FC<AIApiKeyModalProps> = ({ isOpen, onClose, onKeysCh
           <div className="flex items-center justify-between mb-1.5">
             <div className="flex items-center gap-2">
               <label className="font-space-mono text-[10px] text-white/50 uppercase tracking-widest">
-                Firecrawl API Key
+                Clé API Firecrawl
               </label>
-              <span className="font-manrope text-[9px] text-[#FC0903]/70 uppercase">required</span>
+              <span className="font-manrope text-[9px] text-[#FC0903]/70 uppercase">requise</span>
             </div>
             <a
               href="https://firecrawl.dev"
@@ -138,7 +138,7 @@ const AIApiKeyModal: React.FC<AIApiKeyModalProps> = ({ isOpen, onClose, onKeysCh
               rel="noopener noreferrer"
               className="flex items-center gap-1 font-manrope text-[11px] text-[#FC0903] hover:text-[#e88a6f] transition-[color]"
             >
-              Get free key → <ExternalLink className="w-3 h-3" />
+              Obtenir une clé gratuite → <ExternalLink className="w-3 h-3" />
             </a>
           </div>
           <div className="relative bg-white/[0.07] border border-white/10 rounded-xl px-4 py-3 flex items-center gap-3 focus-within:border-[#FC0903]/50 transition-all">
@@ -157,7 +157,7 @@ const AIApiKeyModal: React.FC<AIApiKeyModalProps> = ({ isOpen, onClose, onKeysCh
             </button>
           </div>
           <p className="mt-2 font-manrope text-[11px] text-white/30 leading-relaxed">
-            Free tier includes 500 scrape credits/month — enough for ~80 property searches.
+            La version gratuite inclut 500 crédits de scrape/mois — suffisant pour ~80 recherches de propriétés.
           </p>
         </div>
 
@@ -169,7 +169,7 @@ const AIApiKeyModal: React.FC<AIApiKeyModalProps> = ({ isOpen, onClose, onKeysCh
             className="flex-1 flex items-center justify-center gap-2 bg-[#FC0903] hover:bg-[#C05621] disabled:opacity-40 disabled:cursor-not-allowed text-white font-manrope font-semibold text-sm py-3 rounded-xl transition-all"
           >
             <Save className="w-4 h-4" />
-            {saving ? 'Verifying...' : 'Save Key'}
+            {saving ? 'Vérification...' : 'Sauvegarder la Clé'}
           </button>
 
           {hasFirecrawl && (
@@ -178,7 +178,7 @@ const AIApiKeyModal: React.FC<AIApiKeyModalProps> = ({ isOpen, onClose, onKeysCh
               className="flex items-center gap-2 bg-red-600/15 hover:bg-red-600/25 border border-red-500/30 text-red-400 font-manrope font-semibold text-sm py-3 px-5 rounded-xl transition-all"
             >
               <Trash2 className="w-4 h-4" />
-              Remove
+              Retirer
             </button>
           )}
         </div>

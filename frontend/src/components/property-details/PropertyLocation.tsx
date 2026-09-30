@@ -66,7 +66,7 @@ const PropertyLocation: React.FC<PropertyLocationProps> = ({ address, city, stat
       <div className="flex items-center gap-3 mb-6">
         <div className="w-1 h-6 bg-[#FC0903] rounded-full" />
         <h2 className="font-syne text-2xl text-[#0F172A]">
-          Location
+          Emplacement
         </h2>
       </div>
 
@@ -91,7 +91,7 @@ const PropertyLocation: React.FC<PropertyLocationProps> = ({ address, city, stat
               rel="noopener noreferrer"
               className="inline-flex items-center gap-1.5 text-[#FC0903] hover:text-[#B86851] font-manrope text-sm font-medium shrink-0 transition-[color]"
             >
-              Open in Maps
+              Ouvrir dans Maps
               <ExternalLink className="w-4 h-4" />
             </a>
           )}
@@ -119,10 +119,10 @@ const PropertyLocation: React.FC<PropertyLocationProps> = ({ address, city, stat
               <MapPin className="w-8 h-8 text-[#FC0903]/60" />
             </div>
             <p className="font-manrope text-sm text-[#64748B]">
-              Map not available for this property
+              Carte non disponible pour cette propriété
             </p>
             <p className="font-manrope text-xs text-[#94A3B8]">
-              Contact us for directions
+              Contactez-nous pour l'itinéraire
             </p>
           </div>
         )}

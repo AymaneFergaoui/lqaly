@@ -33,15 +33,15 @@ const ScheduleViewingCard: React.FC<ScheduleViewingCardProps> = ({ property, pri
         name: form.fullName,
         email: form.email,
         phone: form.phone,
-        message: `Viewing request for ${property.name}`,
+        message: `Demande de visite pour ${property.name}`,
       });
       setSuccess(true);
-      toast.success('Visit Scheduled!', { description: "We'll confirm within 24 hours." });
+      toast.success('Visite planifiée !', { description: "Nous confirmerons sous 24 heures." });
       setForm({ fullName: '', email: '', phone: '', date: '', timeSlot: '' });
     } catch (err: any) {
-      const msg = err.response?.data?.message || 'Failed to schedule. Please try again.';
+      const msg = err.response?.data?.message || 'Échec de la planification. Veuillez réessayer.';
       setError(msg);
-      toast.error('Scheduling Failed', { description: msg });
+      toast.error('Échec de la planification', { description: msg });
     } finally {
       setSubmitting(false);
     }
@@ -51,7 +51,7 @@ const ScheduleViewingCard: React.FC<ScheduleViewingCardProps> = ({ property, pri
     <div className="sticky top-24 bg-[#221410] rounded-2xl overflow-hidden shadow-[0_20px_60px_rgba(0,0,0,0.25)]">
       {/* Price header */}
       <div className="px-6 pt-6 pb-5 border-b border-white/10">
-        <p className="font-manrope text-xs text-white/50 uppercase tracking-wider mb-1">Listed Price</p>
+        <p className="font-manrope text-xs text-white/50 uppercase tracking-wider mb-1">Prix demandé</p>
         {price && (
           <p className="font-fraunces text-3xl font-bold text-[#FC0903] tabular-nums leading-none">
             {price}
@@ -70,44 +70,44 @@ const ScheduleViewingCard: React.FC<ScheduleViewingCardProps> = ({ property, pri
               className="text-center py-8"
             >
               <CheckCircle2 className="w-12 h-12 text-emerald-400 mx-auto mb-4" />
-              <h3 className="font-fraunces text-xl text-white mb-2">Visit Scheduled!</h3>
+              <h3 className="font-fraunces text-xl text-white mb-2">Visite planifiée !</h3>
               <p className="font-manrope text-sm text-white/50 mb-6">
-                We'll confirm your appointment within 24 hours.
+                Nous confirmerons votre rendez-vous sous 24 heures.
               </p>
               <button
                 onClick={() => setSuccess(false)}
                 className="font-manrope text-sm text-[#FC0903] hover:text-[#E8917A] transition-colors"
               >
-                Schedule another visit
+                Planifier une autre visite
               </button>
             </motion.div>
           ) : (
             <motion.div key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
               <div className="flex items-center gap-2 mb-5">
                 <Calendar className="w-4 h-4 text-[#FC0903]" />
-                <h3 className="font-manrope font-semibold text-sm text-white">Schedule a Viewing</h3>
+                <h3 className="font-manrope font-semibold text-sm text-white">Planifier une visite</h3>
               </div>
 
               <form onSubmit={handleSubmit} className="space-y-3">
                 <div>
-                  <label className={LABEL}>Full Name</label>
+                  <label className={LABEL}>Nom complet</label>
                   <input
                     type="text" name="fullName" value={form.fullName} onChange={handleChange}
-                    placeholder="Your full name" className={INPUT} required
+                    placeholder="Votre nom complet" className={INPUT} required
                   />
                 </div>
                 <div>
                   <label className={LABEL}>Email</label>
                   <input
                     type="email" name="email" value={form.email} onChange={handleChange}
-                    placeholder="your@email.com" className={INPUT} required
+                    placeholder="votre@email.com" className={INPUT} required
                   />
                 </div>
                 <div>
-                  <label className={LABEL}>Phone</label>
+                  <label className={LABEL}>Téléphone</label>
                   <input
                     type="tel" name="phone" value={form.phone} onChange={handleChange}
-                    placeholder="+91 98765 43210" className={INPUT} required
+                    placeholder="+212 600000000" className={INPUT} required
                   />
                 </div>
                 <div className="grid grid-cols-2 gap-3">
@@ -119,16 +119,15 @@ const ScheduleViewingCard: React.FC<ScheduleViewingCardProps> = ({ property, pri
                     />
                   </div>
                   <div>
-                    <label className={LABEL}>Time</label>
+                    <label className={LABEL}>Heure</label>
                     <select
                       name="timeSlot" value={form.timeSlot} onChange={handleChange}
                       className={INPUT + ' appearance-none cursor-pointer'} required
                     >
-                      <option value="" className="bg-[#221410]">Pick time</option>
+                      <option value="" className="bg-[#221410]">Choisir l'heure</option>
                       {['09:00','10:00','11:00','14:00','15:00','16:00'].map(t => (
                         <option key={t} value={t} className="bg-[#221410]">
                           {t.replace('09:','9:')}
-                          {+t.split(':')[0] < 12 ? ' AM' : ' PM'}
                         </option>
                       ))}
                     </select>
@@ -144,11 +143,11 @@ const ScheduleViewingCard: React.FC<ScheduleViewingCardProps> = ({ property, pri
                   disabled={submitting}
                   className="w-full mt-2 bg-[#FC0903] hover:bg-[#C05621] disabled:opacity-50 text-white font-manrope font-bold text-sm py-3.5 rounded-xl transition-all active:scale-[0.98] shadow-lg"
                 >
-                  {submitting ? 'Scheduling…' : 'Schedule Visit'}
+                  {submitting ? 'Planification en cours…' : 'Planifier la visite'}
                 </button>
 
                 <p className="text-center font-manrope text-xs text-white/30 pt-1">
-                  Confirmed within 24 hours · No spam
+                  Confirmé sous 24 heures · Pas de spam
                 </p>
               </form>
             </motion.div>

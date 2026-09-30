@@ -75,7 +75,7 @@ const AIAnalysisPanel: React.FC<Props> = ({ analysis, loading, error, city }) =>
         </div>
         <div>
           <h2 className="font-syne text-base font-bold text-[#221410] leading-tight">
-            AI Market Analysis
+            Analyse de Marché IA
           </h2>
           <p className="font-manrope text-[12px] text-[#9CA3AF] leading-tight mt-0.5">
             {city}
@@ -96,17 +96,17 @@ const AIAnalysisPanel: React.FC<Props> = ({ analysis, loading, error, city }) =>
         <div className="flex flex-wrap gap-1.5">
           {verdictCounts.good_deal > 0 && (
             <span className="font-space-mono text-[10px] font-bold px-2.5 py-1 rounded-full border bg-emerald-50 text-emerald-700 border-emerald-200">
-              🟢 Good Deal: {verdictCounts.good_deal}
+              🟢 Bonne Affaire : {verdictCounts.good_deal}
             </span>
           )}
           {verdictCounts.fair > 0 && (
             <span className="font-space-mono text-[10px] font-bold px-2.5 py-1 rounded-full border bg-amber-50 text-amber-700 border-amber-200">
-              🟡 Fair: {verdictCounts.fair}
+              🟡 Juste : {verdictCounts.fair}
             </span>
           )}
           {verdictCounts.overpriced > 0 && (
             <span className="font-space-mono text-[10px] font-bold px-2.5 py-1 rounded-full border bg-red-50 text-red-600 border-red-200">
-              🔴 Overpriced: {verdictCounts.overpriced}
+              🔴 Trop Cher : {verdictCounts.overpriced}
             </span>
           )}
         </div>
@@ -123,7 +123,7 @@ const AIAnalysisPanel: React.FC<Props> = ({ analysis, loading, error, city }) =>
             </div>
             <span className="font-space-mono text-[10px] text-[#FC0903] uppercase tracking-widest font-bold flex items-center gap-1.5">
               <span className="w-1.5 h-1.5 rounded-full bg-[#FC0903] animate-pulse inline-block" />
-              Best Value Pick
+              Choix du Meilleur Rapport Qualité/Prix
             </span>
           </div>
 
@@ -143,7 +143,7 @@ const AIAnalysisPanel: React.FC<Props> = ({ analysis, loading, error, city }) =>
         <div className="bg-[#FAF8F4] border border-[#E6E0DA] rounded-xl p-5">
           <h3 className="font-syne text-sm font-bold text-[#221410] mb-3 flex items-center gap-2 pb-3 border-b border-[#E6E0DA]/60">
             <Lightbulb className="w-4 h-4 text-[#FC0903] shrink-0" />
-            Strategic Recommendations
+            Recommandations Stratégiques
           </h3>
 
           <ul className="flex flex-col gap-2">

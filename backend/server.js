@@ -182,6 +182,16 @@ connectdb().then(() => {
 // Health check routes (mounted early for reliability)
 app.use('/health', healthRouter);
 
+// Ensure database connection for API routes (critical for serverless environments)
+app.use('/api', async (req, res, next) => {
+  try {
+    await connectdb();
+    next();
+  } catch (err) {
+    next(err);
+  }
+});
+
 // API Routes
 app.use('/api/products', propertyrouter);
 app.use('/api/users', userrouter);

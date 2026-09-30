@@ -16,8 +16,8 @@ interface PropertyCardProps {
 }
 
 const badgeColor: Record<string, string> = {
-  'FOR RENT': 'bg-blue-500',
-  'SOLD': 'bg-[#6B7280]',
+  'À LOUER': 'bg-blue-500',
+  'VENDU': 'bg-[#6B7280]',
   'HOT': 'bg-[#FC0903]',
 };
 
@@ -85,11 +85,11 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
 
           {/* Specs — dot-separated, no icons */}
           <div className="flex items-center gap-1.5 font-manrope text-xs text-[#6B7280] tabular-nums">
-            <span>{beds} {beds === 1 ? 'Bed' : 'Beds'}</span>
+            <span>{beds} {beds === 1 ? 'Chambre' : 'Chambres'}</span>
             <span className="text-[#D4C4BC]">·</span>
-            <span>{baths} {baths === 1 ? 'Bath' : 'Baths'}</span>
+            <span>{baths} Sdb</span>
             <span className="text-[#D4C4BC]">·</span>
-            <span>{sqft.toLocaleString()} sqft</span>
+            <span>{sqft.toLocaleString()} m²</span>
           </div>
 
           {/* Type tag — only first tag, subtle */}
