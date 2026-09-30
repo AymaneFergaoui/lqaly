@@ -1,8 +1,8 @@
-<img src="https://capsule-render.vercel.app/api?type=waving&color=0:F97316,100:FB923C&height=220&section=header&text=BuildEstate&fontSize=80&fontColor=ffffff&fontAlignY=35&animation=fadeIn&desc=AI-Powered+Real+Estate+Platform&descAlignY=58&descSize=24" width="100%"/>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=0:F97316,100:FB923C&height=220&section=header&text=Lqaly&fontSize=80&fontColor=ffffff&fontAlignY=35&animation=fadeIn&desc=AI-Powered+Real+Estate+Platform&descAlignY=58&descSize=24" width="100%"/>
 
 <div align="center">
 
-  <img src="./frontend/Assets/Logo.svg" alt="BuildEstate Logo" height="80" />
+  <img src="./frontend/Assets/Logo.svg" alt="Lqaly Logo" height="80" />
 
 <br/><br/>
 
@@ -24,7 +24,7 @@
 
 <br/>
 
-[![Live Demo](https://img.shields.io/badge/%F0%9F%9A%80_Live_Demo-buildestate.vercel.app-4285F4?style=for-the-badge)](https://buildestate.vercel.app)
+[![Live Demo](https://img.shields.io/badge/%F0%9F%9A%80_Live_Demo-lqaly.vercel.app-4285F4?style=for-the-badge)](https://lqaly.vercel.app)
 [![Backend API](https://img.shields.io/badge/%E2%9A%99%EF%B8%8F_Backend_API-Render-46E3B7?style=for-the-badge)](https://real-estate-website-backend-zfu7.onrender.com)
 
 <br/>
@@ -41,9 +41,9 @@
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
-## 🏠 What is BuildEstate?
+## 🏠 What is Lqaly?
 
-**BuildEstate is a complete real-estate website for India** — think of a mini 99acres/MagicBricks with an AI twist. In plain words, here is what you can do on it:
+**Lqaly is a complete real-estate website for India** — think of a mini 99acres/MagicBricks with an AI twist. In plain words, here is what you can do on it:
 
 - **Browse properties** listed on the platform, filter them, view photo galleries, and **book a property viewing** (works even without an account)
 - **List your own property** for sale or rent from your user dashboard — an admin reviews it before it goes live
@@ -59,7 +59,7 @@ This repo contains all three apps: the **user website** (`frontend/`), the **adm
 ## 📸 Platform Preview
 
 <div align="center">
-  <img src="./Image/Home_page.png" alt="BuildEstate Homepage" width="100%" />
+  <img src="./Image/Home_page.png" alt="Lqaly Homepage" width="100%" />
 </div>
 
 <br/>
@@ -72,7 +72,7 @@ This repo contains all three apps: the **user website** (`frontend/`), the **adm
 
 |     | Section                                          |
 | :-: | :----------------------------------------------- |
-| 🧠  | [Why BuildEstate?](#-why-buildestate)            |
+| 🧠  | [Why Lqaly?](#-why-lqaly)            |
 | 🤖  | [AI Property Hub](#-ai-property-hub)             |
 | 🌟  | [Features](#-features)                           |
 | 🏗️  | [Architecture](#%EF%B8%8F-architecture)          |
@@ -91,11 +91,11 @@ This repo contains all three apps: the **user website** (`frontend/`), the **adm
 
 <img src="https://user-images.githubusercontent.com/73097560/115834477-dbab4500-a447-11eb-908a-139a6edaec5c.gif" width="100%">
 
-## 🧠 Why BuildEstate?
+## 🧠 Why Lqaly?
 
-Most real-estate aggregators show you generic listings. BuildEstate is different:
+Most real-estate aggregators show you generic listings. Lqaly is different:
 
-| Problem | BuildEstate Solution |
+| Problem | Lqaly Solution |
 |---|---|
 | Generic search results with mixed content | **Multi-source search** — 99acres, MagicBricks, Housing.com results deduplicated & ranked |
 | No AI intelligence in traditional portals | **Multi-model AI analysis** — best-value picks, investment insights, red-flag detection, with a user-selectable model (GLM, Nemotron & more) |
@@ -234,7 +234,7 @@ Users provide their **own free Firecrawl key** in the browser — it lives in lo
 
 ```
 User's browser (localStorage)
-  buildestate_firecrawl_key = "fc-xxx"
+  lqaly_firecrawl_key = "fc-xxx"
          │
          │  X-Firecrawl-Key header on every AI request
          ▼
@@ -483,9 +483,9 @@ Edit `backend/.env.local` with your actual values:
 
 ```env
 # Essential Configuration (Required)
-MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/buildestate?retryWrites=true&w=majority
+MONGO_URI=mongodb+srv://username:password@cluster.mongodb.net/lqaly?retryWrites=true&w=majority
 JWT_SECRET=your_super_secure_jwt_secret_here  # Generate with: openssl rand -base64 32
-ADMIN_EMAIL=admin@buildestate.com
+ADMIN_EMAIL=admin@lqaly.com
 ADMIN_PASSWORD=your_secure_admin_password
 
 # Email Service (Brevo SMTP - Free tier available)
@@ -658,7 +658,7 @@ npm run dev   # Starts admin panel on http://localhost:5174
 **🚀 Quick Deploy (5 minutes):**
 
 ### Live Deployments
-- **🌐 Frontend**: [buildestate.vercel.app](https://buildestate.vercel.app/) (Vercel)
+- **🌐 Frontend**: [lqaly.vercel.app](https://lqaly.vercel.app/) (Vercel)
 - **⚙️ Backend**: [real-estate-website-backend-zfu7.onrender.com](https://real-estate-website-backend-zfu7.onrender.com/) (Render)
 
 <details>

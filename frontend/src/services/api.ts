@@ -15,7 +15,7 @@ const apiClient = axios.create({
 // ── Request interceptor: attach auth token ──────────────────
 apiClient.interceptors.request.use(
   (config) => {
-    const token = localStorage.getItem('buildestate_token');
+    const token = localStorage.getItem('lqaly_token');
     if (token) config.headers.Authorization = `Bearer ${token}`;
     return config;
   },
@@ -35,8 +35,8 @@ const attemptRefresh = () => {
 };
 
 const clearSession = () => {
-  localStorage.removeItem('buildestate_token');
-  localStorage.removeItem('buildestate_user');
+  localStorage.removeItem('lqaly_token');
+  localStorage.removeItem('lqaly_user');
   if (window.location.pathname !== '/signin') window.location.href = '/signin';
 };
 
@@ -54,7 +54,7 @@ apiClient.interceptors.response.use(
       try {
         const { data } = await attemptRefresh() as { data: { token: string; success: boolean } };
         if (data.success && data.token) {
-          localStorage.setItem('buildestate_token', data.token);
+          localStorage.setItem('lqaly_token', data.token);
           original.headers.Authorization = `Bearer ${data.token}`;
           return apiClient(original);
         }
@@ -179,7 +179,7 @@ export const aiAPI = {
     category?: string;
     model?: string;
   }) => {
-    const firecrawlKey = localStorage.getItem('buildestate_firecrawl_key');
+    const firecrawlKey = localStorage.getItem('lqaly_firecrawl_key');
     return apiClient.post('/ai/search', data, {
       headers: {
         ...(firecrawlKey && { 'X-Firecrawl-Key': firecrawlKey }),
@@ -210,8 +210,8 @@ export const aiAPI = {
     }
   ): (() => void) => {
     const controller   = new AbortController();
-    const firecrawlKey = localStorage.getItem('buildestate_firecrawl_key');
-    const token        = localStorage.getItem('buildestate_token');
+    const firecrawlKey = localStorage.getItem('lqaly_firecrawl_key');
+    const token        = localStorage.getItem('lqaly_token');
 
     const headers: Record<string, string> = {
       'Content-Type': 'application/json',
@@ -290,7 +290,7 @@ export const aiAPI = {
     apiClient.get('/ai/localities', { params: { city, ...(q && { q }) } }),
 
   locationTrends: (city: string, model?: string) => {
-    const firecrawlKey = localStorage.getItem('buildestate_firecrawl_key');
+    const firecrawlKey = localStorage.getItem('lqaly_firecrawl_key');
     return apiClient.get(`/locations/${encodeURIComponent(city)}/trends`, {
       params: { ...(model && { model }) },
       headers: {
@@ -300,7 +300,7 @@ export const aiAPI = {
   },
 
   validateKeys: (keys?: { firecrawlKey?: string }) => {
-    const firecrawlKey = (keys?.firecrawlKey ?? localStorage.getItem('buildestate_firecrawl_key') ?? '').trim();
+    const firecrawlKey = (keys?.firecrawlKey ?? localStorage.getItem('lqaly_firecrawl_key') ?? '').trim();
     return apiClient.post('/ai/validate-keys', {}, {
       headers: {
         ...(firecrawlKey && { 'X-Firecrawl-Key': firecrawlKey }),
@@ -311,10 +311,10 @@ export const aiAPI = {
 
 // Firecrawl key storage — AI keys are server-side, users only manage Firecrawl.
 export const apiKeyStorage = {
-  getFirecrawlKey: ()            => localStorage.getItem('buildestate_firecrawl_key') || '',
-  setFirecrawlKey: (key: string) => localStorage.setItem('buildestate_firecrawl_key', key),
-  hasKeys:         ()            => !!localStorage.getItem('buildestate_firecrawl_key'),
-  clear:           ()            => localStorage.removeItem('buildestate_firecrawl_key'),
+  getFirecrawlKey: ()            => localStorage.getItem('lqaly_firecrawl_key') || '',
+  setFirecrawlKey: (key: string) => localStorage.setItem('lqaly_firecrawl_key', key),
+  hasKeys:         ()            => !!localStorage.getItem('lqaly_firecrawl_key'),
+  clear:           ()            => localStorage.removeItem('lqaly_firecrawl_key'),
 };
 
 // Contact Form

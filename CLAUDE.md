@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Repository Overview
 
-**BuildEstate** is a full-stack real estate platform (monorepo) with three apps:
+**Lqaly** is a full-stack real estate platform (monorepo) with three apps:
 - `frontend/` — User-facing website (React 18 + TypeScript + Vite, port 5173)
 - `admin/` — Admin dashboard (React + JavaScript + Vite, port 5174)
 - `backend/` — REST API (Node.js + Express, port 4000)
@@ -45,7 +45,7 @@ AI features (`/api/ai/search`, `/api/locations/:city/trends`) require **user-sup
 ### Request Flow (AI Property Hub — headline feature)
 
 ```
-Browser (localStorage: buildestate_github_key, buildestate_firecrawl_key)
+Browser (localStorage: lqaly_github_key, lqaly_firecrawl_key)
   → POST /api/ai/search with X-Github-Key + X-Firecrawl-Key headers
   → backend/services/firecrawlService.js builds 3 parallel Firecrawl search queries
     (site:99acres.com, site:magicbricks.com, site:housing.com)
@@ -57,7 +57,7 @@ Browser (localStorage: buildestate_github_key, buildestate_firecrawl_key)
 
 ### Auth Flow
 
-- JWT stored in `localStorage` as `buildestate_token`
+- JWT stored in `localStorage` as `lqaly_token`
 - Frontend attaches token via Axios request interceptor (`frontend/src/services/api.ts`)
 - Auto-logout on 401 response
 - Admin login via `POST /api/users/admin` (separate from user login)

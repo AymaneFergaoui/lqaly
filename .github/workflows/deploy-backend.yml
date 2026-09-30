@@ -14,8 +14,8 @@ permissions:
   packages: write
 
 env:
-  IMAGE: ghcr.io/aayush412/buildestate-api
-  AZURE_WEBAPP_NAME: buildestate-api-prod
+  IMAGE: ghcr.io/aayush412/lqaly-api
+  AZURE_WEBAPP_NAME: lqaly-api-prod
 
 jobs:
   build-and-deploy:

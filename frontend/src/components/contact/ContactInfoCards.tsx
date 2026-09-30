@@ -58,13 +58,13 @@ const ContactInfoCards: React.FC = () => {
                 <span>+91 98765 43210</span>
               </a>
               <a 
-                href="mailto:hello@buildestate.com" 
+                href="mailto:hello@lqaly.com" 
                 className="flex items-center gap-2 font-manrope font-extralight text-sm text-[#4B5563] hover:text-[#D4755B] transition-[color]"
               >
                 <span className="material-icons text-base">
                   email
                 </span>
-                <span>hello@buildestate.com</span>
+                <span>hello@lqaly.com</span>
               </a>
             </div>
           </div>

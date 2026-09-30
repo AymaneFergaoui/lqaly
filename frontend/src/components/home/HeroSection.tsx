@@ -94,7 +94,7 @@ const HeroSection: React.FC = () => {
               {/* Description */}
               <motion.p data-speakable variants={itemVariants} className="font-manrope font-light text-xl leading-7 text-[#4b5563] mb-12 max-w-[676px]">
                 Trouvez des appartements, villas et propriétés à Mumbai, Delhi, Bangalore, Ahmedabad et Pune.
-                BuildEstate utilise une recherche propulsée par l'IA et une analyse de marché en direct pour vous trouver la bonne propriété.
+                Lqaly utilise une recherche propulsée par l'IA et une analyse de marché en direct pour vous trouver la bonne propriété.
               </motion.p>
 
               {/* CTA Buttons */}

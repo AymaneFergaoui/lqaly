@@ -1,5 +1,5 @@
 /**
- * Winston Structured Logger for BuildEstate Backend
+ * Winston Structured Logger for Lqaly Backend
  *
  * Features:
  * - Log levels: error, warn, info, http, debug
@@ -49,7 +49,7 @@ const getLogLevel = () => {
 const logger = winston.createLogger({
   level: getLogLevel(),
   format: process.env.NODE_ENV === 'production' ? prodFormat : devFormat,
-  defaultMeta: { service: 'buildestate-api' },
+  defaultMeta: { service: 'lqaly-api' },
   transports: [
     new winston.transports.Console({
       stderrLevels: ['error'],

@@ -1,10 +1,10 @@
-# BuildEstate — AI-Powered Real Estate Platform
+# Lqaly — AI-Powered Real Estate Platform
 
-> BuildEstate helps users find residential and commercial properties across India using GPT-4 powered search, live market scraping from 99acres, MagicBricks, and Housing.com, and location trend analysis.
+> Lqaly helps users find residential and commercial properties across India using GPT-4 powered search, live market scraping from 99acres, MagicBricks, and Housing.com, and location trend analysis.
 
-## What BuildEstate Is
+## What Lqaly Is
 
-BuildEstate is an AI-powered real estate platform serving homebuyers, sellers, and renters across India. Users search for flats, villas, apartments, and houses using natural language; the platform scrapes live listings from major Indian property portals and ranks results using GPT-4.1.
+Lqaly is an AI-powered real estate platform serving homebuyers, sellers, and renters across India. Users search for flats, villas, apartments, and houses using natural language; the platform scrapes live listings from major Indian property portals and ranks results using GPT-4.1.
 
 ## Core Features
 
@@ -32,9 +32,9 @@ Apartments (1BHK, 2BHK, 3BHK, 4BHK+), Villas, Independent Houses, Commercial Spa
 
 ## Links
 
-- Website: https://buildestate.vercel.app
-- Properties: https://buildestate.vercel.app/properties
-- AI Hub: https://buildestate.vercel.app/ai-hub
-- About: https://buildestate.vercel.app/about
-- Contact: https://buildestate.vercel.app/contact
+- Website: https://lqaly.vercel.app
+- Properties: https://lqaly.vercel.app/properties
+- AI Hub: https://lqaly.vercel.app/ai-hub
+- About: https://lqaly.vercel.app/about
+- Contact: https://lqaly.vercel.app/contact
 - Source code: https://github.com/AAYUSH412/Real-Estate-Website

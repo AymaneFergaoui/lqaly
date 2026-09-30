@@ -3,7 +3,7 @@ import react from '@vitejs/plugin-react'
 
 // Startup banner — matches the backend's terminal art
 const banner = (mode, env) => ({
-  name: 'buildestate-banner',
+  name: 'lqaly-banner',
   apply: 'serve',
   configureServer(server) {
     server.httpServer?.once('listening', () => {
@@ -14,7 +14,7 @@ const banner = (mode, env) => ({
         console.log([
           '',
           '╔══════════════════════════════════════════════╗',
-          '║          BuildEstate Admin  v1.0.0           ║',
+          '║          Lqaly Admin  v1.0.0           ║',
           '╚══════════════════════════════════════════════╝',
           '',
           `  ◆ Environment       ${mode}`,

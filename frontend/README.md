@@ -1,15 +1,15 @@
 <div align="center">
 
-# BuildEstate — Frontend 🌐
+# Lqaly — Frontend 🌐
 
-_The user-facing website of BuildEstate — browse & list properties, book viewings, and search live listings with AI._
+_The user-facing website of Lqaly — browse & list properties, book viewings, and search live listings with AI._
 
 [![React](https://img.shields.io/badge/React-18.3-61DAFB?style=for-the-badge&logo=react&logoColor=white)](https://react.dev)
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.5-3178C6?style=for-the-badge&logo=typescript&logoColor=white)](https://www.typescriptlang.org)
 [![Vite](https://img.shields.io/badge/Vite-6-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
 [![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-06B6D4?style=for-the-badge&logo=tailwindcss&logoColor=white)](https://tailwindcss.com)
 
-[![Live Demo](https://img.shields.io/badge/Live_Demo-buildestate.vercel.app-2ea44f?style=for-the-badge&logo=vercel)](https://buildestate.vercel.app)
+[![Live Demo](https://img.shields.io/badge/Live_Demo-lqaly.vercel.app-2ea44f?style=for-the-badge&logo=vercel)](https://lqaly.vercel.app)
 [![Portfolio](https://img.shields.io/badge/Portfolio-Aayush_Vaghela-000000?style=for-the-badge)](https://aayush-vaghela.vercel.app/)
 
 </div>
@@ -19,7 +19,7 @@ _The user-facing website of BuildEstate — browse & list properties, book viewi
 ## 📸 Preview
 
 <div align="center">
-  <img src="../Image/Home_page.png" alt="BuildEstate homepage" width="100%" />
+  <img src="../Image/Home_page.png" alt="Lqaly homepage" width="100%" />
   <br/><br/>
   <img src="../Image/Ai_hub_property_result.png" alt="AI Property Hub results" width="48%" />
   &nbsp;&nbsp;
@@ -170,7 +170,7 @@ frontend/src/
 5. **Critically:** Do not set `VITE_ENABLE_AI_HUB` in Vercel to preserve limits.
 6. Trigger Deploy.
 
-Currently live at: **https://buildestate.vercel.app**
+Currently live at: **https://lqaly.vercel.app**
 
 ---
 

@@ -1,8 +1,8 @@
 // Vercel serverless function — generates a dynamic sitemap that includes live property pages.
 // Served at /sitemap.xml via the rewrite in vercel.json.
 
-const SITE_URL = 'https://buildestate.vercel.app';
-const BACKEND_URL = process.env.VITE_API_BASE_URL || 'https://buildestate-backend.onrender.com';
+const SITE_URL = 'https://lqaly.vercel.app';
+const BACKEND_URL = process.env.VITE_API_BASE_URL || 'https://lqaly-backend.onrender.com';
 
 const STATIC_PAGES = [
   { url: '/',           changefreq: 'weekly',  priority: '1.0' },

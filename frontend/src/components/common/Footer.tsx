@@ -19,8 +19,8 @@ const Footer: React.FC = () => {
           {/* Brand Column */}
           <div>
             <Link to="/" className="flex items-center gap-3 mb-6">
-              <img src="/logo.png" alt="BuildEstate" loading="lazy" decoding="async" width="40" height="40" className="h-10 w-auto brightness-0 invert" />
-              <span className="font-fraunces text-2xl font-bold">BuildEstate</span>
+              <img src="/logo.png" alt="Lqaly" loading="lazy" decoding="async" width="40" height="40" className="h-10 w-auto brightness-0 invert" />
+              <span className="font-fraunces text-2xl font-bold">Lqaly</span>
             </Link>
             <p className="font-manrope font-extralight text-[#9ca3af] text-sm leading-relaxed mb-6">
               Plateforme d'immobilier de luxe propulsée par l'IA vous connectant à la maison de vos rêves grâce à une correspondance intelligente et des recommandations personnalisées.
@@ -128,9 +128,9 @@ const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a href="mailto:hello@buildestate.com" className="flex items-center gap-3 font-manrope font-extralight text-[#9ca3af] text-sm hover:text-white transition-[color]">
+                <a href="mailto:hello@lqaly.com" className="flex items-center gap-3 font-manrope font-extralight text-[#9ca3af] text-sm hover:text-white transition-[color]">
                   <Mail className="w-5 h-5 flex-shrink-0 text-[#D4755B]" />
-                  <span>hello@buildestate.com</span>
+                  <span>hello@lqaly.com</span>
                 </a>
               </li>
             </ul>
@@ -168,7 +168,7 @@ const Footer: React.FC = () => {
         <div className="border-t border-[rgba(255,255,255,0.1)] pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="font-manrope font-extralight text-[#6b7280] text-sm text-center md:text-left">
-              © 2026 BuildEstate. Tous droits réservés. Propulsé par l'IA.
+              © 2026 Lqaly. Tous droits réservés. Propulsé par l'IA.
             </p>
             <div className="flex flex-wrap justify-center gap-6">
               <a href="#" className="font-manrope font-extralight text-[#6b7280] text-sm hover:text-white transition-[color]">
