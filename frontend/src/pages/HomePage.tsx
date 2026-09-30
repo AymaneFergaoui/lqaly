@@ -14,8 +14,8 @@ import CTASection from '../components/home/CTASection';
 
 const HomePage: React.FC = () => {
   useSEO({
-    title: 'Trouvez des Appartements et Villas en Inde avec l\'IA',
-    description: 'Lqaly vous aide à trouver des appartements et des villas à Mumbai, Delhi, Bangalore, Ahmedabad et Pune grâce à la recherche alimentée par l\'IA et l\'analyse de marché en direct.',
+    title: 'Trouvez des Appartements et Villas au Maroc avec l\'IA',
+    description: 'Lqaly vous aide à trouver des appartements et des villas à Casablanca, Rabat, Marrakech et Tanger grâce à la recherche alimentée par l\'IA et l\'analyse de marché en direct.',
     url: 'https://lqaly.vercel.app',
   });
 

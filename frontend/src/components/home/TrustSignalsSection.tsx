@@ -7,7 +7,7 @@ const TrustSignalsSection: React.FC = () => {
       <div className="max-w-[1280px] mx-auto px-8">
         {/* Section Header */}
         <div className="text-center mb-12">
-          <h2 className="font-fraunces text-5xl text-[#111827] mb-6">Redefining Real Estate</h2>
+          <h2 className="font-fraunces text-5xl text-[#111827] mb-6">Redéfinir l'Immobilier</h2>
           <div className="w-24 h-1 bg-[#FC0903] mx-auto" />
         </div>
 
@@ -34,10 +34,10 @@ const TrustSignalsSection: React.FC = () => {
                 </div>
               </div>
               <div>
-                <h4 className="font-syne font-bold text-xl text-[#111827] mb-2">Verified Listings Only</h4>
+                <h4 className="font-syne font-bold text-xl text-[#111827] mb-2">Annonces Vérifiées Uniquement</h4>
                 <p className="font-manrope text-base text-[#4b5563] leading-relaxed">
-                  Every property on our platform is physically verified by our team to
-                  ensure what you see is what you get.
+                  Chaque propriété sur notre plateforme est physiquement vérifiée par notre équipe pour
+                  vous garantir que ce que vous voyez correspond à la réalité.
                 </p>
               </div>
             </div>
@@ -50,10 +50,10 @@ const TrustSignalsSection: React.FC = () => {
                 </div>
               </div>
               <div>
-                <h4 className="font-syne font-bold text-xl text-[#111827] mb-2">24/7 Concierge Support</h4>
+                <h4 className="font-syne font-bold text-xl text-[#111827] mb-2">Support Conciergerie 24/7</h4>
                 <p className="font-manrope text-base text-[#4b5563] leading-relaxed">
-                  Our dedicated team is always available to answer questions,
-                  schedule viewings, and provide expert advice.
+                  Notre équipe dédiée est toujours disponible pour répondre à vos questions,
+                  planifier des visites et vous fournir des conseils d'experts.
                 </p>
               </div>
             </div>
@@ -66,10 +66,10 @@ const TrustSignalsSection: React.FC = () => {
                 </div>
               </div>
               <div>
-                <h4 className="font-syne font-bold text-xl text-[#111827] mb-2">Transparent Pricing</h4>
+                <h4 className="font-syne font-bold text-xl text-[#111827] mb-2">Tarification Transparente</h4>
                 <p className="font-manrope text-base text-[#4b5563] leading-relaxed">
-                  No hidden fees. We provide clear, upfront cost breakdowns so you
-                  can budget with confidence.
+                  Pas de frais cachés. Nous fournissons des répartitions de coûts claires et initiales pour que
+                  vous puissiez budgétiser en toute confiance.
                 </p>
               </div>
             </div>

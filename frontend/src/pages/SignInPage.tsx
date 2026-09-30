@@ -15,7 +15,7 @@ const SignInPage: React.FC = () => {
       await login(formData.email, formData.password, formData.rememberMe);
       navigate('/');
     } catch (err: any) {
-      setError(err.response?.data?.message || err.message || 'Login failed. Please try again.');
+      setError(err.response?.data?.message || err.message || 'Échec de la connexion. Veuillez réessayer.');
     }
   };
 
@@ -30,10 +30,10 @@ const SignInPage: React.FC = () => {
           {/* Header */}
           <div className="text-center mb-8">
             <h1 className="font-syne font-bold text-3xl text-[#221410] mb-2">
-              Welcome Back
+              Bon Retour
             </h1>
             <p className="font-manrope font-extralight text-sm text-[#4B5563]">
-              Sign in to access your account
+              Connectez-vous pour accéder à votre compte
             </p>
           </div>
 
@@ -49,12 +49,12 @@ const SignInPage: React.FC = () => {
 
           {/* Sign Up Link */}
           <p className="text-center font-manrope font-extralight text-sm text-[#64748B] mt-6">
-            Don't have an account?{' '}
+            Vous n'avez pas de compte ?{' '}
             <Link
               to="/signup"
               className="font-semibold text-[#FC0903] hover:text-[#C05621] transition-[color]"
             >
-              Sign Up
+              S'inscrire
             </Link>
           </p>
         </div>
@@ -66,7 +66,7 @@ const SignInPage: React.FC = () => {
             className="inline-flex items-center gap-2 font-manrope font-medium text-sm text-[#64748B] hover:text-[#FC0903] transition-[color]"
           >
             <span className="material-icons text-base">arrow_back</span>
-            <span>Back to Home</span>
+            <span>Retour à l'Accueil</span>
           </Link>
         </div>
       </div>

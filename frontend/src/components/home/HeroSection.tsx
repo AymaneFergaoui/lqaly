@@ -93,7 +93,7 @@ const HeroSection: React.FC = () => {
 
               {/* Description */}
               <motion.p data-speakable variants={itemVariants} className="font-manrope font-light text-xl leading-7 text-[#4b5563] mb-12 max-w-[676px]">
-                Trouvez des appartements, villas et propriétés à Mumbai, Delhi, Bangalore, Ahmedabad et Pune.
+                Trouvez des appartements, villas et propriétés à Casablanca, Rabat, Marrakech et Tanger.
                 Lqaly utilise une recherche propulsée par l'IA et une analyse de marché en direct pour vous trouver la bonne propriété.
               </motion.p>
 
@@ -139,7 +139,7 @@ const HeroSection: React.FC = () => {
                     <div className="flex justify-between items-start mb-3">
                       <div>
                         <h3 className="font-fraunces font-bold text-lg text-[#111827] mb-1">Villa Serenity</h3>
-                        <p className="font-space-mono text-xs text-[#6b7280] uppercase tracking-wide">Beverly Hills, CA</p>
+                        <p className="font-space-mono text-xs text-[#6b7280] uppercase tracking-wide">Marrakech, MA</p>
                       </div>
                       <div className="bg-[rgba(212,117,91,0.1)] px-2 py-1 rounded">
                         <span className="font-manrope font-bold text-xs text-[#FC0903]">CORRESPONDANCE IA : 98%</span>

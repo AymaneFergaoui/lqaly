@@ -14,7 +14,7 @@ const SimpleFooter: React.FC = () => {
 
         {/* Copyright */}
         <p className="font-manrope font-extralight text-xs text-[#94A3B8]">
-          © 2023 Lqaly. All rights reserved.
+          © 2026 Lqaly. Tous droits réservés.
         </p>
       </div>
     </footer>

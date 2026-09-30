@@ -13,7 +13,7 @@ const ForgotPasswordPage: React.FC = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!email) {
-      toast.error('Please enter your email address');
+      toast.error('Veuillez entrer votre adresse e-mail');
       return;
     }
 
@@ -22,13 +22,13 @@ const ForgotPasswordPage: React.FC = () => {
       const { data } = await userAPI.forgotPassword(email);
       if (data.success) {
         setIsSuccess(true);
-        toast.success('Reset link sent to your email!');
+        toast.success('Lien de réinitialisation envoyé à votre e-mail !');
       } else {
-        toast.error(data.message || 'Failed to send reset link');
+        toast.error(data.message || 'Échec de l\'envoi du lien de réinitialisation');
       }
     } catch (error: any) {
       console.error('Error sending reset email:', error);
-      toast.error(error.response?.data?.message || 'Failed to send reset link. Please try again.');
+      toast.error(error.response?.data?.message || 'Échec de l\'envoi du lien de réinitialisation. Veuillez réessayer.');
     } finally {
       setLoading(false);
     }
@@ -49,16 +49,16 @@ const ForgotPasswordPage: React.FC = () => {
                 <CheckCircle className="w-8 h-8 text-green-500" />
               </div>
               <h1 className="font-syne font-bold text-2xl text-[#221410] mb-3">
-                Check Your Email
+                Vérifiez Votre E-mail
               </h1>
               <p className="font-manrope font-extralight text-sm text-[#4B5563] mb-6 leading-relaxed">
-                We've sent a password reset link to{' '}
+                Nous avons envoyé un lien de réinitialisation de mot de passe à{' '}
                 <span className="font-semibold text-[#221410]">{email}</span>.
                 <br />
-                Please check your inbox and follow the instructions.
+                Veuillez vérifier votre boîte de réception et suivre les instructions.
               </p>
               <p className="font-manrope font-extralight text-xs text-[#9CA3AF] mb-8">
-                Didn't receive the email? Check your spam folder or try again.
+                Vous n'avez pas reçu l'e-mail ? Vérifiez vos spams ou réessayez.
               </p>
               <div className="flex flex-col gap-3">
                 <button
@@ -68,13 +68,13 @@ const ForgotPasswordPage: React.FC = () => {
                   }}
                   className="w-full bg-transparent border border-[#FC0903] text-[#FC0903] font-manrope font-bold py-3 rounded-xl hover:bg-[#FC0903] hover:text-white transition-all"
                 >
-                  Try Another Email
+                  Essayer un Autre E-mail
                 </button>
                 <Link
                   to="/signin"
                   className="w-full bg-[#FC0903] text-white font-manrope font-bold py-3 rounded-xl hover:bg-[#C05621] transition-all text-center"
                 >
-                  Back to Sign In
+                  Retour à la Connexion
                 </Link>
               </div>
             </div>
@@ -86,10 +86,10 @@ const ForgotPasswordPage: React.FC = () => {
                   <Mail className="w-7 h-7 text-[#FC0903]" />
                 </div>
                 <h1 className="font-syne font-bold text-3xl text-[#221410] mb-2">
-                  Forgot Password?
+                  Mot de Passe Oublié ?
                 </h1>
                 <p className="font-manrope font-extralight text-sm text-[#4B5563]">
-                  No worries! Enter your email and we'll send you a reset link.
+                  Pas d'inquiétude ! Entrez votre e-mail et nous vous enverrons un lien de réinitialisation.
                 </p>
               </div>
 
@@ -97,7 +97,7 @@ const ForgotPasswordPage: React.FC = () => {
                 {/* Email Input */}
                 <div>
                   <label className="block font-manrope font-medium text-sm text-[#374151] mb-2">
-                    Email Address
+                    Adresse E-mail
                   </label>
                   <div className="relative">
                     <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#9CA3AF]" />
@@ -105,7 +105,7 @@ const ForgotPasswordPage: React.FC = () => {
                       type="email"
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
-                      placeholder="you@example.com"
+                      placeholder="vous@exemple.com"
                       className="w-full bg-[#F5F1E8] border border-[#EBE5DE] rounded-xl pl-12 pr-4 py-3.5 font-manrope text-sm text-[#221410] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#FC0903] focus:ring-1 focus:ring-[#FC0903] transition-all"
                       required
                     />
@@ -121,10 +121,10 @@ const ForgotPasswordPage: React.FC = () => {
                   {loading ? (
                     <>
                       <Loader className="w-5 h-5 animate-spin" />
-                      Sending...
+                      Envoi...
                     </>
                   ) : (
-                    'Send Reset Link'
+                    'Envoyer le Lien de Réinitialisation'
                   )}
                 </button>
               </form>
@@ -135,7 +135,7 @@ const ForgotPasswordPage: React.FC = () => {
                 className="flex items-center justify-center gap-2 mt-6 font-manrope font-medium text-sm text-[#64748B] hover:text-[#FC0903] transition-[color]"
               >
                 <ArrowLeft className="w-4 h-4" />
-                Back to Sign In
+                Retour à la Connexion
               </Link>
             </>
           )}

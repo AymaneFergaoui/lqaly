@@ -154,10 +154,10 @@ const ContactFormCard: React.FC = () => {
           {loading ? (
             <>
               <Loader2 className="w-5 h-5 animate-spin" />
-              Sending…
+              Envoi en cours…
             </>
           ) : (
-            'Send Message'
+            'Envoyer le Message'
           )}
         </button>
 

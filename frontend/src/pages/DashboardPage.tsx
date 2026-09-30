@@ -44,10 +44,10 @@ interface ListingSummary {
 // ── Status config ─────────────────────────────────────────────────────────────
 
 const APPOINTMENT_STATUS = {
-  pending: { label: 'Pending', bg: 'bg-amber-100', text: 'text-amber-800', dot: 'bg-amber-400' },
-  confirmed: { label: 'Confirmed', bg: 'bg-green-100', text: 'text-green-800', dot: 'bg-green-500' },
-  cancelled: { label: 'Cancelled', bg: 'bg-red-100', text: 'text-red-800', dot: 'bg-red-500' },
-  completed: { label: 'Completed', bg: 'bg-gray-100', text: 'text-gray-600', dot: 'bg-gray-400' },
+  pending: { label: 'En attente', bg: 'bg-amber-100', text: 'text-amber-800', dot: 'bg-amber-400' },
+  confirmed: { label: 'Confirmé', bg: 'bg-green-100', text: 'text-green-800', dot: 'bg-green-500' },
+  cancelled: { label: 'Annulé', bg: 'bg-red-100', text: 'text-red-800', dot: 'bg-red-500' },
+  completed: { label: 'Terminé', bg: 'bg-gray-100', text: 'text-gray-600', dot: 'bg-gray-400' },
 } as const;
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -80,7 +80,7 @@ const SettingsTab: React.FC = () => {
 
   const handleSaveProfile = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!name.trim()) { toast.error('Name cannot be empty.'); return; }
+    if (!name.trim()) { toast.error('Le nom ne peut pas être vide.'); return; }
 
     setSaving(true);
     try {
@@ -88,14 +88,14 @@ const SettingsTab: React.FC = () => {
       if (name.trim() !== user?.name) payload.name = name.trim();
 
       if (newPassword) {
-        if (newPassword.length < 8) { toast.error('New password must be at least 8 characters.'); setSaving(false); return; }
-        if (newPassword !== confirmPassword) { toast.error('Passwords do not match.'); setSaving(false); return; }
-        if (!currentPassword) { toast.error('Enter your current password to set a new one.'); setSaving(false); return; }
+        if (newPassword.length < 8) { toast.error('Le nouveau mot de passe doit comporter au moins 8 caractères.'); setSaving(false); return; }
+        if (newPassword !== confirmPassword) { toast.error('Les mots de passe ne correspondent pas.'); setSaving(false); return; }
+        if (!currentPassword) { toast.error('Entrez votre mot de passe actuel pour en définir un nouveau.'); setSaving(false); return; }
         payload.currentPassword = currentPassword;
         payload.newPassword = newPassword;
       }
 
-      if (Object.keys(payload).length === 0) { toast.info('No changes to save.'); setSaving(false); return; }
+      if (Object.keys(payload).length === 0) { toast.info('Aucune modification à sauvegarder.'); setSaving(false); return; }
 
       const { data } = await userAPI.updateProfile(payload);
       if (data.success) {
@@ -103,13 +103,13 @@ const SettingsTab: React.FC = () => {
         setCurrentPassword('');
         setNewPassword('');
         setConfirmPassword('');
-        toast.success('Profile updated.');
+        toast.success('Profil mis à jour.');
       } else {
-        toast.error(data.message || 'Update failed.');
+        toast.error(data.message || 'Échec de la mise à jour.');
       }
     } catch (err: unknown) {
       const msg = (err as { response?: { data?: { message?: string } } })?.response?.data?.message;
-      toast.error(msg || 'Update failed. Please try again.');
+      toast.error(msg || 'Échec de la mise à jour. Veuillez réessayer.');
     } finally {
       setSaving(false);
     }
@@ -119,16 +119,16 @@ const SettingsTab: React.FC = () => {
     <form onSubmit={handleSaveProfile} className="max-w-lg space-y-8">
       {/* Profile */}
       <section className="bg-white border border-[#E6E0DA] rounded-2xl p-6">
-        <h3 className="font-syne font-bold text-base text-[#221410] mb-5">Profile</h3>
+        <h3 className="font-syne font-bold text-base text-[#221410] mb-5">Profil</h3>
         <div className="space-y-4">
           <div>
-            <label className="font-manrope text-xs font-semibold text-[#4B5563] mb-1.5 block">Full Name</label>
+            <label className="font-manrope text-xs font-semibold text-[#4B5563] mb-1.5 block">Nom Complet</label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
               className="w-full border border-[#E6E0DA] rounded-xl px-4 py-2.5 font-manrope text-sm text-[#221410] focus:outline-none focus:border-[#FC0903] transition-[border-color]"
-              placeholder="Your name"
+              placeholder="Votre nom"
             />
           </div>
           <div>
@@ -139,18 +139,18 @@ const SettingsTab: React.FC = () => {
               disabled
               className="w-full border border-[#E6E0DA] rounded-xl px-4 py-2.5 font-manrope text-sm text-[#9CA3AF] bg-[#FAF8F4] cursor-not-allowed"
             />
-            <p className="font-manrope text-[11px] text-[#9CA3AF] mt-1">Email cannot be changed.</p>
+            <p className="font-manrope text-[11px] text-[#9CA3AF] mt-1">L'e-mail ne peut pas être modifié.</p>
           </div>
         </div>
       </section>
 
       {/* Password */}
       <section className="bg-white border border-[#E6E0DA] rounded-2xl p-6">
-        <h3 className="font-syne font-bold text-base text-[#221410] mb-1">Change Password</h3>
-        <p className="font-manrope text-xs text-[#9CA3AF] mb-5">Leave blank to keep your current password.</p>
+        <h3 className="font-syne font-bold text-base text-[#221410] mb-1">Changer le Mot de Passe</h3>
+        <p className="font-manrope text-xs text-[#9CA3AF] mb-5">Laissez vide pour conserver votre mot de passe actuel.</p>
         <div className="space-y-4">
           <div>
-            <label className="font-manrope text-xs font-semibold text-[#4B5563] mb-1.5 block">Current Password</label>
+            <label className="font-manrope text-xs font-semibold text-[#4B5563] mb-1.5 block">Mot de Passe Actuel</label>
             <input
               type="password"
               value={currentPassword}
@@ -161,18 +161,18 @@ const SettingsTab: React.FC = () => {
             />
           </div>
           <div>
-            <label className="font-manrope text-xs font-semibold text-[#4B5563] mb-1.5 block">New Password</label>
+            <label className="font-manrope text-xs font-semibold text-[#4B5563] mb-1.5 block">Nouveau Mot de Passe</label>
             <input
               type="password"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               className="w-full border border-[#E6E0DA] rounded-xl px-4 py-2.5 font-manrope text-sm text-[#221410] focus:outline-none focus:border-[#FC0903] transition-[border-color]"
-              placeholder="Min 8 characters"
+              placeholder="Min 8 caractères"
               autoComplete="new-password"
             />
           </div>
           <div>
-            <label className="font-manrope text-xs font-semibold text-[#4B5563] mb-1.5 block">Confirm New Password</label>
+            <label className="font-manrope text-xs font-semibold text-[#4B5563] mb-1.5 block">Confirmer le Nouveau Mot de Passe</label>
             <input
               type="password"
               value={confirmPassword}
@@ -190,7 +190,7 @@ const SettingsTab: React.FC = () => {
         disabled={saving}
         className="bg-[#FC0903] font-manrope font-bold text-sm text-white px-6 py-2.5 rounded-xl hover:bg-[#B86851] transition-[background-color] disabled:opacity-60 disabled:cursor-not-allowed"
       >
-        {saving ? 'Saving…' : 'Save Changes'}
+        {saving ? 'Enregistrement…' : 'Enregistrer les Modifications'}
       </button>
     </form>
   );
@@ -215,7 +215,7 @@ const DashboardPage: React.FC = () => {
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
-      toast.error('Please sign in to view your dashboard.');
+      toast.error('Veuillez vous connecter pour voir votre tableau de bord.');
       navigate('/signin', { replace: true });
     }
   }, [isAuthenticated, isLoading, navigate]);
@@ -232,7 +232,7 @@ const DashboardPage: React.FC = () => {
     if (aptRes.status === 'fulfilled') {
       setAppointments(aptRes.value.data.appointments ?? []);
     } else {
-      toast.error('Failed to load your appointments.');
+      toast.error('Échec du chargement de vos rendez-vous.');
     }
 
     if (listRes.status === 'fulfilled') {
@@ -253,12 +253,12 @@ const DashboardPage: React.FC = () => {
     setCancelling(true);
     try {
       await appointmentsAPI.cancel(cancelTarget._id, 'Cancelled by user from dashboard');
-      toast.success('Appointment cancelled.');
+      toast.success('Rendez-vous annulé.');
       setAppointments((prev) =>
         prev.map((a) => (a._id === cancelTarget._id ? { ...a, status: 'cancelled' } : a))
       );
     } catch {
-      toast.error('Failed to cancel the appointment. Please try again.');
+      toast.error('Échec de l\'annulation du rendez-vous. Veuillez réessayer.');
     } finally {
       setCancelling(false);
       setCancelTarget(null);
@@ -271,10 +271,10 @@ const DashboardPage: React.FC = () => {
   const liveListings = listings.filter((l) => l.status === 'active').length;
 
   const stats = [
-    { label: 'Upcoming Viewings', value: upcomingCount, icon: 'event' },
-    { label: 'Total Appointments', value: appointments.length, icon: 'calendar_month' },
-    { label: 'My Listings', value: listings.length, icon: 'home_work' },
-    { label: 'Live Listings', value: liveListings, icon: 'verified' },
+    { label: 'Visites à Venir', value: upcomingCount, icon: 'event' },
+    { label: 'Total des Rendez-vous', value: appointments.length, icon: 'calendar_month' },
+    { label: 'Mes Annonces', value: listings.length, icon: 'home_work' },
+    { label: 'Annonces en Ligne', value: liveListings, icon: 'verified' },
   ];
 
   const sortedAppointments = [...appointments].sort(
@@ -291,10 +291,10 @@ const DashboardPage: React.FC = () => {
         {/* Header */}
         <div className="mb-6">
           <h1 className="font-syne font-bold text-3xl text-[#221410] mb-1">
-            Welcome back{user?.name ? `, ${user.name.split(' ')[0]}` : ''}
+            Bon retour{user?.name ? `, ${user.name.split(' ')[0]}` : ''}
           </h1>
           <p className="font-manrope text-sm text-[#4B5563]">
-            Your appointments and property listings in one place.
+            Vos rendez-vous et annonces immobilières au même endroit.
           </p>
         </div>
 
@@ -310,7 +310,7 @@ const DashboardPage: React.FC = () => {
                   : 'border-transparent text-[#4B5563] hover:text-[#221410]'
               }`}
             >
-              {tab === 'overview' ? 'Overview' : 'Settings'}
+              {tab === 'overview' ? 'Aperçu' : 'Paramètres'}
             </button>
           ))}
         </div>
@@ -340,25 +340,25 @@ const DashboardPage: React.FC = () => {
             to="/my-listings"
             className="bg-white border border-[#E6E0DA] font-manrope font-semibold text-sm text-[#221410] px-5 py-2.5 rounded-xl hover:border-[#FC0903] hover:text-[#FC0903] transition-[border-color,color]"
           >
-            Manage My Listings
+            Gérer Mes Annonces
           </Link>
           <Link
             to="/add-property"
             className="bg-[#FC0903] font-manrope font-bold text-sm text-white px-5 py-2.5 rounded-xl hover:bg-[#B86851] transition-[background-color]"
           >
-            + List a Property
+            + Lister une Propriété
           </Link>
           <Link
             to="/properties"
             className="bg-white border border-[#E6E0DA] font-manrope font-semibold text-sm text-[#221410] px-5 py-2.5 rounded-xl hover:border-[#FC0903] hover:text-[#FC0903] transition-[border-color,color]"
           >
-            Browse Properties
+            Parcourir les Propriétés
           </Link>
         </div>
 
         {/* Appointments */}
         <section>
-          <h2 className="font-syne font-bold text-xl text-[#221410] mb-4">My Appointments</h2>
+          <h2 className="font-syne font-bold text-xl text-[#221410] mb-4">Mes Rendez-vous</h2>
 
           {fetchLoading ? (
             <div className="space-y-3">
@@ -370,13 +370,13 @@ const DashboardPage: React.FC = () => {
             <div className="bg-white border border-[#E6E0DA] rounded-2xl p-10 text-center">
               <span className="font-material-icons text-4xl text-[#FC0903]/40" aria-hidden="true">event_busy</span>
               <p className="font-manrope text-sm text-[#4B5563] mt-3 mb-5">
-                No appointments yet. Book a viewing from any property page.
+                Aucun rendez-vous pour le moment. Réservez une visite depuis la page d'une propriété.
               </p>
               <Link
                 to="/properties"
                 className="inline-block bg-[#FC0903] font-manrope font-bold text-sm text-white px-5 py-2.5 rounded-xl hover:bg-[#B86851] transition-[background-color]"
               >
-                Browse Properties
+                Parcourir les Propriétés
               </Link>
             </div>
           ) : (
@@ -407,7 +407,7 @@ const DashboardPage: React.FC = () => {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2 flex-wrap">
                         <h3 className="font-manrope font-bold text-sm text-[#221410] truncate">
-                          {apt.propertyId?.title ?? 'Property no longer available'}
+                          {apt.propertyId?.title ?? 'Propriété n\'est plus disponible'}
                         </h3>
                         <span
                           className={`inline-flex items-center gap-1.5 px-2.5 py-0.5 rounded-full text-[11px] font-manrope font-semibold ${status.bg} ${status.text}`}
@@ -438,7 +438,7 @@ const DashboardPage: React.FC = () => {
                           rel="noopener noreferrer"
                           className="font-manrope font-semibold text-xs text-white bg-[#221410] px-4 py-2 rounded-lg hover:bg-[#FC0903] transition-[background-color]"
                         >
-                          Join Meeting
+                          Rejoindre la Réunion
                         </a>
                       )}
                       {apt.propertyId && (
@@ -446,7 +446,7 @@ const DashboardPage: React.FC = () => {
                           to={`/property/${apt.propertyId._id}`}
                           className="font-manrope font-semibold text-xs text-[#221410] border border-[#E6E0DA] px-4 py-2 rounded-lg hover:border-[#FC0903] hover:text-[#FC0903] transition-[border-color,color]"
                         >
-                          View
+                          Voir
                         </Link>
                       )}
                       {cancellable && (
@@ -454,7 +454,7 @@ const DashboardPage: React.FC = () => {
                           onClick={() => setCancelTarget(apt)}
                           className="font-manrope font-semibold text-xs text-red-600 border border-red-200 px-4 py-2 rounded-lg hover:bg-red-50 transition-[background-color]"
                         >
-                          Cancel
+                          Annuler
                         </button>
                       )}
                     </div>
@@ -470,25 +470,25 @@ const DashboardPage: React.FC = () => {
       <Footer />
 
       {/* Cancel confirmation */}
-      <AlertDialog open={!!cancelTarget} onOpenChange={(open) => !open && setCancelTarget(null)}>
+      <AlertDialog open={!!cancelTarget} onOpenChange={(open: boolean) => !open && setCancelTarget(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Cancel this viewing?</AlertDialogTitle>
+            <AlertDialogTitle>Annuler cette visite ?</AlertDialogTitle>
             <AlertDialogDescription>
               {cancelTarget?.propertyId?.title
-                ? `Your viewing of "${cancelTarget.propertyId.title}" on ${formatDate(cancelTarget.date)} at ${cancelTarget.time} will be cancelled.`
-                : 'This appointment will be cancelled.'}{' '}
-              A confirmation email will be sent to you.
+                ? `Votre visite de "${cancelTarget.propertyId.title}" le ${formatDate(cancelTarget.date)} à ${cancelTarget.time} sera annulée.`
+                : 'Ce rendez-vous sera annulé.'}{' '}
+              Un e-mail de confirmation vous sera envoyé.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel disabled={cancelling}>Keep Appointment</AlertDialogCancel>
+            <AlertDialogCancel disabled={cancelling}>Maintenir le Rendez-vous</AlertDialogCancel>
             <AlertDialogAction
               onClick={handleCancel}
               disabled={cancelling}
               className="bg-red-600 hover:bg-red-700"
             >
-              {cancelling ? 'Cancelling…' : 'Yes, Cancel'}
+              {cancelling ? 'Annulation…' : 'Oui, Annuler'}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

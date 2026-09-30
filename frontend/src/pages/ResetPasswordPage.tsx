@@ -40,10 +40,10 @@ const ResetPasswordPage: React.FC = () => {
   };
 
   const getStrengthLabel = () => {
-    if (passwordStrength <= 1) return 'Weak';
-    if (passwordStrength === 2) return 'Fair';
-    if (passwordStrength === 3) return 'Good';
-    return 'Strong';
+    if (passwordStrength <= 1) return 'Faible';
+    if (passwordStrength === 2) return 'Moyen';
+    if (passwordStrength === 3) return 'Bon';
+    return 'Fort';
   };
 
   const passwordsMatch = password && confirmPassword && password === confirmPassword;
@@ -53,12 +53,12 @@ const ResetPasswordPage: React.FC = () => {
     e.preventDefault();
 
     if (!isFormValid) {
-      toast.error('Please ensure passwords match and meet strength requirements.');
+      toast.error('Veuillez vous assurer que les mots de passe correspondent et répondent aux exigences de sécurité.');
       return;
     }
 
     if (!token) {
-      toast.error('Invalid reset link. Please request a new one.');
+      toast.error('Lien de réinitialisation invalide. Veuillez en demander un nouveau.');
       return;
     }
 
@@ -67,14 +67,14 @@ const ResetPasswordPage: React.FC = () => {
       const { data } = await userAPI.resetPassword(token, password);
       if (data.success) {
         setIsSuccess(true);
-        toast.success('Password reset successful!');
+        toast.success('Réinitialisation du mot de passe réussie !');
         setTimeout(() => navigate('/signin'), 3000);
       } else {
-        toast.error(data.message || 'Failed to reset password');
+        toast.error(data.message || 'Échec de la réinitialisation du mot de passe');
       }
     } catch (error: any) {
       console.error('Error resetting password:', error);
-      toast.error(error.response?.data?.message || 'Failed to reset password. The link may have expired.');
+      toast.error(error.response?.data?.message || 'Échec de la réinitialisation du mot de passe. Le lien a peut-être expiré.');
     } finally {
       setLoading(false);
     }
@@ -95,16 +95,16 @@ const ResetPasswordPage: React.FC = () => {
                 <CheckCircle className="w-8 h-8 text-green-500" />
               </div>
               <h1 className="font-syne font-bold text-2xl text-[#221410] mb-3">
-                Password Reset!
+                Mot de Passe Réinitialisé !
               </h1>
               <p className="font-manrope font-extralight text-sm text-[#4B5563] mb-6">
-                Your password has been reset successfully. Redirecting you to sign in...
+                Votre mot de passe a été réinitialisé avec succès. Redirection vers la connexion...
               </p>
               <Link
                 to="/signin"
                 className="w-full inline-block bg-[#FC0903] text-white font-manrope font-bold py-3 rounded-xl hover:bg-[#C05621] transition-all text-center"
               >
-                Sign In Now
+                Se Connecter Maintenant
               </Link>
             </div>
           ) : (
@@ -115,10 +115,10 @@ const ResetPasswordPage: React.FC = () => {
                   <Lock className="w-7 h-7 text-[#FC0903]" />
                 </div>
                 <h1 className="font-syne font-bold text-3xl text-[#221410] mb-2">
-                  Reset Password
+                  Réinitialiser le Mot de Passe
                 </h1>
                 <p className="font-manrope font-extralight text-sm text-[#4B5563]">
-                  Create a new secure password for your account.
+                  Créez un nouveau mot de passe sécurisé pour votre compte.
                 </p>
               </div>
 
@@ -126,7 +126,7 @@ const ResetPasswordPage: React.FC = () => {
                 {/* New Password */}
                 <div>
                   <label className="block font-manrope font-medium text-sm text-[#374151] mb-2">
-                    New Password
+                    Nouveau Mot de Passe
                   </label>
                   <div className="relative">
                     <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#9CA3AF]" />
@@ -134,7 +134,7 @@ const ResetPasswordPage: React.FC = () => {
                       type={showPassword ? 'text' : 'password'}
                       value={password}
                       onChange={handlePasswordChange}
-                      placeholder="Enter new password"
+                      placeholder="Entrez le nouveau mot de passe"
                       className="w-full bg-[#F5F1E8] border border-[#EBE5DE] rounded-xl pl-12 pr-12 py-3.5 font-manrope text-sm text-[#221410] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#FC0903] focus:ring-1 focus:ring-[#FC0903] transition-all"
                       required
                     />
@@ -161,7 +161,7 @@ const ResetPasswordPage: React.FC = () => {
                         ))}
                       </div>
                       <p className="font-manrope text-xs text-[#6B7280]">
-                        Password strength: <span className="font-medium">{getStrengthLabel()}</span>
+                        Force du mot de passe : <span className="font-medium">{getStrengthLabel()}</span>
                       </p>
                     </div>
                   )}
@@ -170,7 +170,7 @@ const ResetPasswordPage: React.FC = () => {
                 {/* Confirm Password */}
                 <div>
                   <label className="block font-manrope font-medium text-sm text-[#374151] mb-2">
-                    Confirm Password
+                    Confirmer le Mot de Passe
                   </label>
                   <div className="relative">
                     <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#9CA3AF]" />
@@ -178,7 +178,7 @@ const ResetPasswordPage: React.FC = () => {
                       type={showConfirmPassword ? 'text' : 'password'}
                       value={confirmPassword}
                       onChange={(e) => setConfirmPassword(e.target.value)}
-                      placeholder="Confirm new password"
+                      placeholder="Confirmez le nouveau mot de passe"
                       className="w-full bg-[#F5F1E8] border border-[#EBE5DE] rounded-xl pl-12 pr-12 py-3.5 font-manrope text-sm text-[#221410] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#FC0903] focus:ring-1 focus:ring-[#FC0903] transition-all"
                       required
                     />
@@ -197,12 +197,12 @@ const ResetPasswordPage: React.FC = () => {
                       {passwordsMatch ? (
                         <>
                           <CheckCircle className="w-4 h-4 text-green-500" />
-                          <span className="font-manrope text-xs text-green-600">Passwords match</span>
+                          <span className="font-manrope text-xs text-green-600">Les mots de passe correspondent</span>
                         </>
                       ) : (
                         <>
                           <AlertCircle className="w-4 h-4 text-red-500" />
-                          <span className="font-manrope text-xs text-red-600">Passwords don't match</span>
+                          <span className="font-manrope text-xs text-red-600">Les mots de passe ne correspondent pas</span>
                         </>
                       )}
                     </div>
@@ -211,14 +211,14 @@ const ResetPasswordPage: React.FC = () => {
 
                 {/* Requirements */}
                 <div className="bg-[#F5F1E8] rounded-xl p-4">
-                  <p className="font-manrope font-medium text-xs text-[#374151] mb-2">Password Requirements:</p>
+                  <p className="font-manrope font-medium text-xs text-[#374151] mb-2">Exigences du Mot de Passe :</p>
                   <ul className="space-y-1">
                     {[
-                      { text: 'At least 8 characters', met: password.length >= 8 },
-                      { text: 'One uppercase letter', met: /[A-Z]/.test(password) },
-                      { text: 'One lowercase letter', met: /[a-z]/.test(password) },
-                      { text: 'One number', met: /\d/.test(password) },
-                      { text: 'One special character', met: /[^A-Za-z0-9]/.test(password) },
+                      { text: 'Au moins 8 caractères', met: password.length >= 8 },
+                      { text: 'Une lettre majuscule', met: /[A-Z]/.test(password) },
+                      { text: 'Une lettre minuscule', met: /[a-z]/.test(password) },
+                      { text: 'Un chiffre', met: /\d/.test(password) },
+                      { text: 'Un caractère spécial', met: /[^A-Za-z0-9]/.test(password) },
                     ].map((req, i) => (
                       <li key={i} className="flex items-center gap-2">
                         <CheckCircle className={`w-3.5 h-3.5 ${req.met ? 'text-green-500' : 'text-[#D1D5DB]'}`} />
@@ -239,10 +239,10 @@ const ResetPasswordPage: React.FC = () => {
                   {loading ? (
                     <>
                       <Loader className="w-5 h-5 animate-spin" />
-                      Resetting...
+                      Réinitialisation...
                     </>
                   ) : (
-                    'Reset Password'
+                    'Réinitialiser le Mot de Passe'
                   )}
                 </button>
               </form>
@@ -253,7 +253,7 @@ const ResetPasswordPage: React.FC = () => {
                 className="flex items-center justify-center gap-2 mt-6 font-manrope font-medium text-sm text-[#64748B] hover:text-[#FC0903] transition-[color]"
               >
                 <ArrowLeft className="w-4 h-4" />
-                Back to Sign In
+                Retour à la Connexion
               </Link>
             </>
           )}

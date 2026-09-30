@@ -6,11 +6,10 @@ const AIIntelligenceSection: React.FC = () => {
       <div className="max-w-[1280px] mx-auto px-8">
         {/* Section Header */}
         <div className="text-center mb-16">
-          <div className="font-space-mono text-sm text-[#FC0903] uppercase tracking-widest mb-4">Why Choose AI?</div>
-          <h2 className="font-fraunces text-5xl text-[#111827] mb-6">AI-Powered Property Intelligence</h2>
+          <div className="font-space-mono text-sm text-[#FC0903] uppercase tracking-widest mb-4">Pourquoi Choisir l'IA ?</div>
+          <h2 className="font-fraunces text-5xl text-[#111827] mb-6">Intelligence Immobilière Propulsée par l'IA</h2>
           <p className="font-manrope font-light text-lg text-[#4b5563] max-w-[740px] mx-auto">
-            We leverage advanced algorithms to give you a competitive edge in the market, turning data
-            into your dream home.
+            Nous exploitons des algorithmes avancés pour vous donner un avantage concurrentiel sur le marché, transformant les données en votre maison de rêve.
           </p>
         </div>
 
@@ -21,10 +20,9 @@ const AIIntelligenceSection: React.FC = () => {
             <div className="w-14 h-14 bg-[rgba(212,117,91,0.1)] rounded-xl flex items-center justify-center mb-6">
               <span className="font-material-icons text-3xl text-[#FC0903]" aria-hidden="true">query_stats</span>
             </div>
-            <h3 className="font-syne font-bold text-2xl text-[#111827] mb-4">Live Market Scraping</h3>
+            <h3 className="font-syne font-bold text-2xl text-[#111827] mb-4">Analyse du Marché en Direct</h3>
             <p className="font-manrope text-base text-[#6b7280] leading-relaxed">
-              Real-time data feeds from every major listing source, aggregating hidden gems before
-              they hit the mainstream market.
+              Des flux de données en temps réel provenant de toutes les principales sources d'annonces, agrégeant des perles rares avant qu'elles ne soient connues du grand public.
             </p>
           </div>
 
@@ -33,10 +31,9 @@ const AIIntelligenceSection: React.FC = () => {
             <div className="w-14 h-14 bg-[rgba(212,117,91,0.1)] rounded-xl flex items-center justify-center mb-6">
               <span className="font-material-icons text-3xl text-[#FC0903]" aria-hidden="true">psychology</span>
             </div>
-            <h3 className="font-syne font-bold text-2xl text-[#111827] mb-4">Expert AI Insights</h3>
+            <h3 className="font-syne font-bold text-2xl text-[#111827] mb-4">Aperçus IA Experts</h3>
             <p className="font-manrope text-base text-[#6b7280] leading-relaxed">
-              Predictive analytics on value appreciation and investment potential, tailored to your
-              financial goals.
+              Analyses prédictives sur l'appréciation de la valeur et le potentiel d'investissement, adaptées à vos objectifs financiers.
             </p>
           </div>
 
@@ -45,10 +42,9 @@ const AIIntelligenceSection: React.FC = () => {
             <div className="w-14 h-14 bg-[rgba(212,117,91,0.1)] rounded-xl flex items-center justify-center mb-6">
               <span className="font-material-icons text-3xl text-[#FC0903]" aria-hidden="true">location_city</span>
             </div>
-            <h3 className="font-syne font-bold text-2xl text-[#111827] mb-4">Best Area Suggestions</h3>
+            <h3 className="font-syne font-bold text-2xl text-[#111827] mb-4">Meilleures Suggestions de Quartier</h3>
             <p className="font-manrope text-base text-[#6b7280] leading-relaxed">
-              Neighborhood matching based on your lifestyle habits, commute preferences, and
-              local amenities.
+              Correspondance de quartier basée sur vos habitudes de vie, vos préférences de trajet et les commodités locales.
             </p>
           </div>
         </div>

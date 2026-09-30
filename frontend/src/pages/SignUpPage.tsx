@@ -22,7 +22,7 @@ const SignUpPage: React.FC = () => {
         navigate('/');
       }
     } catch (err: any) {
-      setError(err.response?.data?.message || err.message || 'Registration failed. Please try again.');
+      setError(err.response?.data?.message || err.message || 'Échec de l\'inscription. Veuillez réessayer.');
     }
   };
 
@@ -36,20 +36,20 @@ const SignUpPage: React.FC = () => {
               <Mail className="w-8 h-8 text-[#FC0903]" />
             </div>
             <h1 className="font-syne font-bold text-2xl text-[#221410] mb-3">
-              Check Your Email
+              Vérifiez Votre E-mail
             </h1>
             <p className="font-manrope font-extralight text-sm text-[#4B5563] mb-2">
-              We've sent a verification link to
+              Nous avons envoyé un lien de vérification à
             </p>
             <p className="font-manrope font-semibold text-[#FC0903] mb-4">{verificationEmail}</p>
             <p className="font-manrope font-extralight text-sm text-[#6B7280] mb-6">
-              Click the link in the email to activate your account. The link expires in 24 hours.
+              Cliquez sur le lien dans l'e-mail pour activer votre compte. Le lien expire dans 24 heures.
             </p>
             <Link
               to="/signin"
               className="w-full inline-block bg-[#FC0903] text-white font-manrope font-bold py-3 rounded-xl hover:bg-[#C05621] transition-[background-color] text-center"
             >
-              Go to Sign In
+              Aller à la Connexion
             </Link>
           </div>
           <div className="text-center mt-6">
@@ -58,7 +58,7 @@ const SignUpPage: React.FC = () => {
               className="inline-flex items-center gap-2 font-manrope font-medium text-sm text-[#64748B] hover:text-[#FC0903] transition-[color]"
             >
               <ArrowLeft className="w-4 h-4" />
-              <span>Back to Home</span>
+              <span>Retour à l'Accueil</span>
             </Link>
           </div>
         </div>
@@ -77,10 +77,10 @@ const SignUpPage: React.FC = () => {
           {/* Header */}
           <div className="text-center mb-8">
             <h1 className="font-syne font-bold text-3xl text-[#221410] mb-2">
-              Create Account
+              Créer un Compte
             </h1>
             <p className="font-manrope font-extralight text-sm text-[#4B5563]">
-              Join Lqaly and find your dream home
+              Rejoignez Lqaly et trouvez la maison de vos rêves
             </p>
           </div>
 
@@ -96,12 +96,12 @@ const SignUpPage: React.FC = () => {
 
           {/* Sign In Link */}
           <p className="text-center font-manrope font-extralight text-sm text-[#64748B]">
-            Already have an account?{' '}
+            Vous avez déjà un compte ?{' '}
             <Link
               to="/signin"
               className="font-semibold text-[#FC0903] hover:text-[#C05621] transition-[color]"
             >
-              Sign In
+              Se Connecter
             </Link>
           </p>
         </div>
@@ -113,7 +113,7 @@ const SignUpPage: React.FC = () => {
             className="inline-flex items-center gap-2 font-manrope font-medium text-sm text-[#64748B] hover:text-[#FC0903] transition-[color]"
           >
             <ArrowLeft className="w-4 h-4" />
-            <span>Back to Home</span>
+            <span>Retour à l'Accueil</span>
           </Link>
         </div>
       </div>

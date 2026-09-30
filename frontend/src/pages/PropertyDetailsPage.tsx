@@ -85,7 +85,7 @@ const PropertyDetailsPage: React.FC = () => {
     return (
       <div className="bg-white min-h-screen">
         <Navbar />
-        <LoadingState message="Loading property details..." />
+        <LoadingState message="Chargement des détails de la propriété..." />
         <SimpleFooter />
       </div>
     );
@@ -98,12 +98,12 @@ const PropertyDetailsPage: React.FC = () => {
         <div className="flex items-center justify-center py-32">
           <div className="text-center">
             <span className="material-icons text-5xl text-[#FC0903] mb-4">error_outline</span>
-            <p className="font-manrope text-xl text-[#374151] mb-4">{error || 'Property not found'}</p>
+            <p className="font-manrope text-xl text-[#374151] mb-4">{error || 'Propriété introuvable'}</p>
             <Link
               to="/properties"
               className="bg-[#FC0903] text-white font-manrope font-bold px-8 py-3 rounded-lg hover:bg-[#B86851] transition-all inline-block"
             >
-              Back to Properties
+              Retour aux Propriétés
             </Link>
           </div>
         </div>
@@ -155,8 +155,8 @@ const PropertyDetailsPage: React.FC = () => {
         type="breadcrumb"
         data={{
           breadcrumbs: [
-            { name: 'Home', url: '/' },
-            { name: 'Properties', url: '/properties' },
+            { name: 'Accueil', url: '/' },
+            { name: 'Propriétés', url: '/properties' },
             { name: city, url: `/properties?location=${encodeURIComponent(city)}` },
             { name: property.title, url: `/property/${property._id}` },
           ],

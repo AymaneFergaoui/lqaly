@@ -18,7 +18,7 @@ const VerifyEmailPage: React.FC = () => {
     const verifyEmail = async () => {
       if (!token) {
         setStatus('error');
-        setMessage('Invalid verification link. No token provided.');
+        setMessage('Lien de vérification invalide. Aucun jeton fourni.');
         return;
       }
 
@@ -26,7 +26,7 @@ const VerifyEmailPage: React.FC = () => {
         const { data } = await userAPI.verifyEmail(token);
         if (data.success) {
           setStatus('success');
-          setMessage(data.message || 'Your email has been verified successfully!');
+          setMessage(data.message || 'Votre e-mail a été vérifié avec succès !');
           // If backend returned a token, log the user in automatically
           if (data.token && data.user) {
             localStorage.setItem('lqaly_token', data.token);
@@ -38,14 +38,14 @@ const VerifyEmailPage: React.FC = () => {
           }
         } else {
           setStatus('error');
-          setMessage(data.message || 'Verification failed. Please try again.');
+          setMessage(data.message || 'Échec de la vérification. Veuillez réessayer.');
         }
       } catch (error: any) {
         console.error('Email verification error:', error);
         setStatus('error');
         setMessage(
           error.response?.data?.message ||
-          'Verification failed. The link may have expired or is invalid.'
+          'Échec de la vérification. Le lien a peut-être expiré ou est invalide.'
         );
       }
     };
@@ -67,10 +67,10 @@ const VerifyEmailPage: React.FC = () => {
                 <Loader className="w-8 h-8 text-[#FC0903] animate-spin" />
               </div>
               <h1 className="font-syne font-bold text-2xl text-[#221410] mb-3">
-                Verifying Your Email
+                Vérification de Votre E-mail
               </h1>
               <p className="font-manrope font-extralight text-sm text-[#4B5563]">
-                Please wait while we verify your email address...
+                Veuillez patienter pendant que nous vérifions votre adresse e-mail...
               </p>
             </div>
           )}
@@ -81,19 +81,19 @@ const VerifyEmailPage: React.FC = () => {
                 <CheckCircle className="w-8 h-8 text-green-500" />
               </div>
               <h1 className="font-syne font-bold text-2xl text-[#221410] mb-3">
-                Email Verified!
+                E-mail Vérifié !
               </h1>
               <p className="font-manrope font-extralight text-sm text-[#4B5563] mb-6">
                 {message}
               </p>
               <p className="font-manrope text-xs text-[#9CA3AF] mb-6">
-                Redirecting you now...
+                Redirection en cours...
               </p>
               <Link
                 to="/signin"
                 className="w-full inline-block bg-[#FC0903] text-white font-manrope font-bold py-3 rounded-xl hover:bg-[#C05621] transition-all text-center"
               >
-                Sign In Now
+                Se Connecter Maintenant
               </Link>
             </div>
           )}
@@ -104,7 +104,7 @@ const VerifyEmailPage: React.FC = () => {
                 <XCircle className="w-8 h-8 text-red-500" />
               </div>
               <h1 className="font-syne font-bold text-2xl text-[#221410] mb-3">
-                Verification Failed
+                Échec de la Vérification
               </h1>
               <p className="font-manrope font-extralight text-sm text-[#4B5563] mb-6">
                 {message}
@@ -114,10 +114,10 @@ const VerifyEmailPage: React.FC = () => {
                   to="/signin"
                   className="w-full inline-block bg-[#FC0903] text-white font-manrope font-bold py-3 rounded-xl hover:bg-[#C05621] transition-all text-center"
                 >
-                  Try Signing In
+                  Essayez de vous Connecter
                 </Link>
                 <p className="font-manrope text-xs text-[#6B7280]">
-                  If your link expired, signing in will send a new verification email.
+                  Si votre lien a expiré, la connexion enverra un nouvel e-mail de vérification.
                 </p>
               </div>
             </div>
@@ -129,7 +129,7 @@ const VerifyEmailPage: React.FC = () => {
             className="flex items-center justify-center gap-2 mt-6 font-manrope font-medium text-sm text-[#64748B] hover:text-[#FC0903] transition-[color]"
           >
             <ArrowLeft className="w-4 h-4" />
-            Back to Home
+            Retour à l'Accueil
           </Link>
         </div>
       </div>

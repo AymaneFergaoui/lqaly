@@ -32,7 +32,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSubmit }) => {
       {/* Email Input */}
       <div>
         <label className="block font-manrope font-extralight text-xs text-[#64748B] uppercase tracking-wider mb-2">
-          Email Address
+          Adresse E-mail
         </label>
         <div className="relative">
           <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#94A3B8]" />
@@ -41,7 +41,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSubmit }) => {
             name="email"
             value={formData.email}
             onChange={handleInputChange}
-            placeholder="john.doe@example.com"
+            placeholder="jean.dupont@exemple.com"
             className="w-full bg-[#F5F1E8] border border-[#E6E0DA] rounded-lg pl-12 pr-4 py-3.5 font-manrope font-extralight text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:outline-none focus:border-[#FC0903] transition-[border-color]"
             required
           />
@@ -51,7 +51,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSubmit }) => {
       {/* Password Input */}
       <div>
         <label className="block font-manrope font-extralight text-xs text-[#64748B] uppercase tracking-wider mb-2">
-          Password
+          Mot de Passe
         </label>
         <div className="relative">
           <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#94A3B8]" />
@@ -60,7 +60,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSubmit }) => {
             name="password"
             value={formData.password}
             onChange={handleInputChange}
-            placeholder="Enter your password"
+            placeholder="Entrez votre mot de passe"
             className="w-full bg-[#F5F1E8] border border-[#E6E0DA] rounded-lg pl-12 pr-12 py-3.5 font-manrope font-extralight text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:outline-none focus:border-[#FC0903] transition-[border-color]"
             required
           />
@@ -85,14 +85,14 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSubmit }) => {
             className="w-4 h-4 rounded border-[#E6E0DA] text-[#FC0903] focus:ring-[#FC0903]"
           />
           <span className="font-manrope font-extralight text-sm text-[#4B5563]">
-            Remember me
+            Se souvenir de moi
           </span>
         </label>
         <Link
           to="/forgot-password"
           className="font-manrope font-medium text-sm text-[#FC0903] hover:text-[#C05621] transition-[color]"
         >
-          Forgot Password?
+          Mot de Passe Oublié ?
         </Link>
       </div>
 
@@ -101,7 +101,7 @@ const SignInForm: React.FC<SignInFormProps> = ({ onSubmit }) => {
         type="submit"
         className="w-full bg-[#FC0903] hover:bg-[#C05621] text-white font-manrope font-bold text-base py-3.5 rounded-xl transition-all shadow-lg hover:shadow-xl"
       >
-        Sign In
+        Se Connecter
       </button>
     </form>
   );

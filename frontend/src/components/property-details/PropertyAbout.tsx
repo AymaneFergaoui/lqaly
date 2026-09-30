@@ -5,9 +5,9 @@ interface PropertyAboutProps {
 }
 
 const PropertyAbout: React.FC<PropertyAboutProps> = ({ 
-  description = `Discover the epitome of urban luxury at Skyline Towers. This meticulously designed 4BHK residence offers a seamless blend of contemporary architecture and premium living. The property features an expansive living area with floor-to-ceiling windows, premium oak flooring, and state-of-the-art smart home integration.
+  description = `Découvrez l'apogée du luxe urbain aux Skyline Towers. Cette résidence T5 méticuleusement conçue offre un mélange harmonieux d'architecture contemporaine et de vie haut de gamme. La propriété dispose d'un vaste espace de vie avec des fenêtres du sol au plafond, un parquet en chêne de première qualité et une intégration de domotique dernier cri.
 
-The master suite is a sanctuary retreat with a spacious walk-in closet and an ensuite bathroom featuring imported Italian marble. All three additional bedrooms are generously proportioned, each with ample natural light coming in through floor-to-ceiling windows. The modern kitchen boasts top-tier appliances and custom Italian cabinetry. The home is crafted for discerning lifestyles.` 
+La suite parentale est un véritable sanctuaire avec un grand dressing et une salle de bain attenante dotée de marbre italien importé. Les trois autres chambres sont généreusement proportionnées, chacune bénéficiant d'une lumière naturelle abondante grâce à leurs fenêtres toute hauteur. La cuisine moderne comprend des appareils électroménagers haut de gamme et des placards sur mesure de conception italienne. Cette maison est pensée pour les modes de vie les plus exigeants.` 
 }) => {
   return (
     <div className="mb-12">
@@ -15,7 +15,7 @@ The master suite is a sanctuary retreat with a spacious walk-in closet and an en
       <div className="flex items-center gap-3 mb-6">
         <div className="w-1 h-6 bg-[#FC0903] rounded-full" />
         <h2 className="font-syne text-2xl text-[#0F172A]">
-          About The Property
+          À propos de la propriété
         </h2>
       </div>
 

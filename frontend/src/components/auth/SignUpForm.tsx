@@ -31,7 +31,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
     
     // Validate password match
     if (formData.password !== formData.confirmPassword) {
-      alert('Passwords do not match!');
+      alert('Les mots de passe ne correspondent pas !');
       return;
     }
     
@@ -44,7 +44,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
       <div className="grid grid-cols-2 gap-4">
         <div>
           <label className="block font-manrope font-extralight text-xs text-[#64748B] uppercase tracking-wider mb-2">
-            First Name
+            Prénom
           </label>
           <div className="relative">
             <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#94A3B8]" />
@@ -53,7 +53,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
               name="firstName"
               value={formData.firstName}
               onChange={handleInputChange}
-              placeholder="John"
+              placeholder="Jean"
               className="w-full bg-[#F5F1E8] border border-[#E6E0DA] rounded-lg pl-12 pr-4 py-3.5 font-manrope font-extralight text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:outline-none focus:border-[#FC0903] transition-[border-color]"
               required
             />
@@ -62,7 +62,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
 
         <div>
           <label className="block font-manrope font-extralight text-xs text-[#64748B] uppercase tracking-wider mb-2">
-            Last Name
+            Nom
           </label>
           <div className="relative">
             <User className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#94A3B8]" />
@@ -71,7 +71,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
               name="lastName"
               value={formData.lastName}
               onChange={handleInputChange}
-              placeholder="Doe"
+              placeholder="Dupont"
               className="w-full bg-[#F5F1E8] border border-[#E6E0DA] rounded-lg pl-12 pr-4 py-3.5 font-manrope font-extralight text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:outline-none focus:border-[#FC0903] transition-[border-color]"
               required
             />
@@ -82,7 +82,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
       {/* Email Input */}
       <div>
         <label className="block font-manrope font-extralight text-xs text-[#64748B] uppercase tracking-wider mb-2">
-          Email Address
+          Adresse E-mail
         </label>
         <div className="relative">
           <Mail className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#94A3B8]" />
@@ -91,7 +91,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
             name="email"
             value={formData.email}
             onChange={handleInputChange}
-            placeholder="john.doe@example.com"
+            placeholder="jean.dupont@exemple.com"
             className="w-full bg-[#F5F1E8] border border-[#E6E0DA] rounded-lg pl-12 pr-4 py-3.5 font-manrope font-extralight text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:outline-none focus:border-[#FC0903] transition-[border-color]"
             required
           />
@@ -101,7 +101,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
       {/* Password Input */}
       <div>
         <label className="block font-manrope font-extralight text-xs text-[#64748B] uppercase tracking-wider mb-2">
-          Password
+          Mot de Passe
         </label>
         <div className="relative">
           <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#94A3B8]" />
@@ -110,7 +110,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
             name="password"
             value={formData.password}
             onChange={handleInputChange}
-            placeholder="Create a strong password"
+            placeholder="Créez un mot de passe sécurisé"
             className="w-full bg-[#F5F1E8] border border-[#E6E0DA] rounded-lg pl-12 pr-12 py-3.5 font-manrope font-extralight text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:outline-none focus:border-[#FC0903] transition-[border-color]"
             required
             minLength={8}
@@ -128,7 +128,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
       {/* Confirm Password Input */}
       <div>
         <label className="block font-manrope font-extralight text-xs text-[#64748B] uppercase tracking-wider mb-2">
-          Confirm Password
+          Confirmer le Mot de Passe
         </label>
         <div className="relative">
           <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-[#94A3B8]" />
@@ -137,7 +137,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
             name="confirmPassword"
             value={formData.confirmPassword}
             onChange={handleInputChange}
-            placeholder="Re-enter your password"
+            placeholder="Entrez de nouveau votre mot de passe"
             className="w-full bg-[#F5F1E8] border border-[#E6E0DA] rounded-lg pl-12 pr-12 py-3.5 font-manrope font-extralight text-sm text-[#0F172A] placeholder:text-[#94A3B8] focus:outline-none focus:border-[#FC0903] transition-[border-color]"
             required
           />
@@ -163,13 +163,13 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
             required
           />
           <span className="font-manrope font-extralight text-sm text-[#4B5563] leading-relaxed">
-            I agree to the{' '}
+            J'accepte les{' '}
             <Link to="/terms" className="text-[#FC0903] hover:text-[#C05621] font-medium">
-              Terms & Conditions
+              Termes & Conditions
             </Link>
-            {' '}and{' '}
+            {' '}et la{' '}
             <Link to="/privacy" className="text-[#FC0903] hover:text-[#C05621] font-medium">
-              Privacy Policy
+              Politique de Confidentialité
             </Link>
           </span>
         </label>
@@ -180,7 +180,7 @@ const SignUpForm: React.FC<SignUpFormProps> = ({ onSubmit }) => {
         type="submit"
         className="w-full bg-[#FC0903] hover:bg-[#C05621] text-white font-manrope font-bold text-base py-3.5 rounded-xl transition-all shadow-lg hover:shadow-xl"
       >
-        Create Account
+        Créer un Compte
       </button>
     </form>
   );

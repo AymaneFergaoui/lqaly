@@ -40,25 +40,25 @@ interface Listing {
 
 const STATUS_CONFIG = {
   pending: {
-    label: 'Under Review',
+    label: 'En Révision',
     bg: 'bg-amber-100',
     text: 'text-amber-800',
     dot: 'bg-amber-400',
   },
   active: {
-    label: 'Live',
+    label: 'En Ligne',
     bg: 'bg-green-100',
     text: 'text-green-800',
     dot: 'bg-green-500',
   },
   rejected: {
-    label: 'Rejected',
+    label: 'Rejeté',
     bg: 'bg-red-100',
     text: 'text-red-800',
     dot: 'bg-red-500',
   },
   expired: {
-    label: 'Expired',
+    label: 'Expiré',
     bg: 'bg-gray-100',
     text: 'text-gray-600',
     dot: 'bg-gray-400',
@@ -95,7 +95,7 @@ const MyListingsPage: React.FC = () => {
 
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
-      toast.error('Please sign in to view your listings.');
+      toast.error('Veuillez vous connecter pour voir vos annonces.');
       navigate('/signin', { replace: true });
     }
   }, [isAuthenticated, isLoading, navigate]);
@@ -108,7 +108,7 @@ const MyListingsPage: React.FC = () => {
       const res = await userListingsAPI.getMyListings();
       setListings(res.data.properties ?? res.data ?? []);
     } catch {
-      toast.error('Failed to load your listings. Please try again.');
+      toast.error('Échec du chargement de vos annonces. Veuillez réessayer.');
     } finally {
       setFetchLoading(false);
     }
@@ -126,9 +126,9 @@ const MyListingsPage: React.FC = () => {
     try {
       await userListingsAPI.delete(deleteTarget._id);
       setListings((prev) => prev.filter((l) => l._id !== deleteTarget._id));
-      toast.success('Listing deleted successfully.');
+      toast.success('Annonce supprimée avec succès.');
     } catch (err: any) {
-      const msg = err.response?.data?.message || 'Failed to delete listing.';
+      const msg = err.response?.data?.message || 'Échec de la suppression de l\'annonce.';
       toast.error(msg);
     } finally {
       setDeleting(false);
@@ -174,15 +174,15 @@ const MyListingsPage: React.FC = () => {
                 d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
             </svg>
           </div>
-          <h2 className="font-fraunces text-3xl font-bold text-[#221410] mb-3">No listings yet</h2>
+          <h2 className="font-fraunces text-3xl font-bold text-[#221410] mb-3">Aucune annonce pour le moment</h2>
           <p className="font-manrope text-[#6B7280] mb-8">
-            You haven't posted any properties. List your first property and reach thousands of buyers.
+            Vous n'avez publié aucune propriété. Listez votre première propriété et touchez des milliers d'acheteurs.
           </p>
           <Link
             to="/add-property"
             className="inline-block bg-[#FC0903] text-white font-manrope font-semibold px-8 py-3 rounded-xl hover:bg-[#B86851] transition-[background-color]"
           >
-            + List a Property
+            + Lister une Propriété
           </Link>
         </div>
         <Footer />
@@ -209,9 +209,9 @@ const MyListingsPage: React.FC = () => {
         {/* ── Header ── */}
         <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-8">
           <div>
-            <h1 className="font-fraunces text-4xl font-bold text-[#221410]">My Listings</h1>
+            <h1 className="font-fraunces text-4xl font-bold text-[#221410]">Mes Annonces</h1>
             <p className="font-manrope text-[#6B7280] mt-1">
-              {counts.all} {counts.all === 1 ? 'property' : 'properties'} total
+              {counts.all} {counts.all === 1 ? 'propriété' : 'propriétés'} au total
             </p>
           </div>
           <Link
@@ -221,7 +221,7 @@ const MyListingsPage: React.FC = () => {
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
             </svg>
-            Add Listing
+            Ajouter une Annonce
           </Link>
         </div>
 
@@ -300,7 +300,7 @@ const MyListingsPage: React.FC = () => {
                     <div className="flex flex-wrap gap-3 font-manrope text-sm text-[#374151]">
                       <span className="font-semibold text-[#FC0903]">{formatPrice(listing.price)}</span>
                       <span>·</span>
-                      <span>{listing.beds} bed · {listing.baths} bath · {listing.sqft.toLocaleString()} sqft</span>
+                      <span>{listing.beds} {listing.beds > 1 ? 'chambres' : 'chambre'} · {listing.baths} {listing.baths > 1 ? 'salles de bain' : 'salle de bain'} · {listing.sqft.toLocaleString()} m²</span>
                       <span>·</span>
                       <span>{listing.type} · {listing.availability}</span>
                     </div>
@@ -313,7 +313,7 @@ const MyListingsPage: React.FC = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                       </svg>
                       <div>
-                        <p className="font-manrope text-xs font-semibold text-red-700 mb-0.5">Rejection Reason</p>
+                        <p className="font-manrope text-xs font-semibold text-red-700 mb-0.5">Raison du Rejet</p>
                         <p className="font-manrope text-xs text-red-600">{listing.rejectionReason}</p>
                       </div>
                     </div>
@@ -327,8 +327,8 @@ const MyListingsPage: React.FC = () => {
                       </svg>
                       <p className="font-manrope text-xs text-amber-700">
                         {expiresIn === 0
-                          ? 'Expires today'
-                          : `Expires in ${expiresIn} day${expiresIn > 1 ? 's' : ''}`}
+                          ? 'Expire aujourd\'hui'
+                          : `Expire dans ${expiresIn} jour${expiresIn > 1 ? 's' : ''}`}
                       </p>
                     </div>
                   )}
@@ -336,9 +336,9 @@ const MyListingsPage: React.FC = () => {
                   {/* Footer: date + actions */}
                   <div className="flex flex-wrap items-center justify-between gap-3 pt-1 border-t border-[#F3EDE8]">
                     <p className="font-manrope text-xs text-[#9CA3AF]">
-                      Listed {formatDate(listing.createdAt)}
+                      Publié le {formatDate(listing.createdAt)}
                       {listing.status === 'active' && listing.expiresAt && (
-                        <> · Expires {formatDate(listing.expiresAt)}</>
+                        <> · Expire le {formatDate(listing.expiresAt)}</>
                       )}
                     </p>
 
@@ -351,7 +351,7 @@ const MyListingsPage: React.FC = () => {
                           target="_blank"
                           rel="noopener noreferrer"
                         >
-                          View Live
+                          Voir en Ligne
                         </Link>
                       )}
 
@@ -363,7 +363,7 @@ const MyListingsPage: React.FC = () => {
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />
                         </svg>
-                        Edit
+                        Modifier
                       </Link>
 
                       {/* Delete */}
@@ -374,7 +374,7 @@ const MyListingsPage: React.FC = () => {
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
                         </svg>
-                        Delete
+                        Supprimer
                       </button>
                     </div>
                   </div>
@@ -389,20 +389,19 @@ const MyListingsPage: React.FC = () => {
       <AlertDialog open={!!deleteTarget} onOpenChange={(open: boolean) => !open && setDeleteTarget(null)}>
         <AlertDialogContent>
           <AlertDialogHeader>
-            <AlertDialogTitle>Delete this listing?</AlertDialogTitle>
+            <AlertDialogTitle>Supprimer cette annonce ?</AlertDialogTitle>
             <AlertDialogDescription>
-              <strong className="text-[#221410]">{deleteTarget?.title}</strong> will be permanently
-              removed. This action cannot be undone.
+              <strong className="text-[#221410]">{deleteTarget?.title}</strong> sera supprimée définitivement. Cette action ne peut pas être annulée.
             </AlertDialogDescription>
           </AlertDialogHeader>
           <AlertDialogFooter>
-            <AlertDialogCancel disabled={deleting}>Cancel</AlertDialogCancel>
+            <AlertDialogCancel disabled={deleting}>Annuler</AlertDialogCancel>
             <AlertDialogAction
               onClick={handleDelete}
               disabled={deleting}
               className="bg-red-600 text-white hover:bg-red-700"
             >
-              {deleting ? 'Deleting…' : 'Yes, delete'}
+              {deleting ? 'Suppression…' : 'Oui, supprimer'}
             </AlertDialogAction>
           </AlertDialogFooter>
         </AlertDialogContent>

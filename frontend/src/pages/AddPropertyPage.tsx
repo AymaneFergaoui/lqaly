@@ -42,7 +42,7 @@ const AddPropertyPage: React.FC = () => {
   // Redirect to sign-in if not authenticated
   useEffect(() => {
     if (!isLoading && !isAuthenticated) {
-      toast.error('Please sign in to add a property listing.');
+      toast.error('Veuillez vous connecter pour ajouter une annonce.');
       navigate('/signin', { replace: true });
     }
   }, [isAuthenticated, isLoading, navigate]);
@@ -86,7 +86,7 @@ const AddPropertyPage: React.FC = () => {
     const files = Array.from(e.target.files || []);
     const remaining = 4 - images.length;
     if (remaining <= 0) {
-      toast.error('Maximum 4 images allowed.');
+      toast.error('Maximum 4 images autorisées.');
       return;
     }
     const allowed = files.slice(0, remaining);
@@ -108,7 +108,7 @@ const AddPropertyPage: React.FC = () => {
     e.preventDefault();
 
     if (images.length === 0) {
-      toast.error('Please upload at least one image.');
+      toast.error('Veuillez télécharger au moins une image.');
       return;
     }
 
@@ -121,9 +121,9 @@ const AddPropertyPage: React.FC = () => {
     try {
       await userListingsAPI.create(fd);
       setSubmitted(true);
-      toast.success('Listing submitted! It will go live once approved by our team.');
+      toast.success('Annonce soumise ! Elle sera en ligne une fois approuvée par notre équipe.');
     } catch (err: any) {
-      const msg = err.response?.data?.message || 'Failed to submit listing. Please try again.';
+      const msg = err.response?.data?.message || 'Échec de la soumission de l\'annonce. Veuillez réessayer.';
       toast.error(msg);
     } finally {
       setSubmitting(false);
@@ -152,23 +152,23 @@ const AddPropertyPage: React.FC = () => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
           </div>
-          <h2 className="font-fraunces text-3xl font-bold text-[#221410] mb-3">Listing Submitted!</h2>
+          <h2 className="font-fraunces text-3xl font-bold text-[#221410] mb-3">Annonce Soumise !</h2>
           <p className="font-manrope text-[#6B7280] mb-8">
-            Your property listing is under review. Our team will approve it within 24–48 hours.
-            You'll receive an email once it goes live.
+            Votre annonce est en cours de révision. Notre équipe l'approuvera dans les 24 à 48 heures.
+            Vous recevrez un e-mail une fois qu'elle sera en ligne.
           </p>
           <div className="flex flex-col sm:flex-row gap-3 justify-center">
             <Link
               to="/my-listings"
               className="bg-[#FC0903] text-white font-manrope font-semibold px-6 py-3 rounded-lg hover:bg-[#B86851] transition-[background-color]"
             >
-              View My Listings
+              Voir Mes Annonces
             </Link>
             <Link
               to="/properties"
               className="border border-[#FC0903] text-[#FC0903] font-manrope font-semibold px-6 py-3 rounded-lg hover:bg-[#FC0903] hover:text-white transition-[background-color,color]"
             >
-              Browse Properties
+              Parcourir les Propriétés
             </Link>
           </div>
         </div>
@@ -187,10 +187,10 @@ const AddPropertyPage: React.FC = () => {
         {/* Header */}
         <div className="mb-10">
           <h1 className="font-fraunces text-4xl font-bold text-[#221410] mb-2">
-            List Your Property
+            Lister Votre Propriété
           </h1>
           <p className="font-manrope text-[#6B7280]">
-            Fill in the details below. Your listing will be reviewed by our team before going live.
+            Remplissez les détails ci-dessous. Votre annonce sera examinée par notre équipe avant d'être mise en ligne.
           </p>
         </div>
 
@@ -198,18 +198,18 @@ const AddPropertyPage: React.FC = () => {
 
           {/* ── Basic info ── */}
           <section className="bg-white border border-[#E6E0DA] rounded-2xl p-6 space-y-5">
-            <h2 className="font-fraunces text-xl font-semibold text-[#221410]">Basic Information</h2>
+            <h2 className="font-fraunces text-xl font-semibold text-[#221410]">Informations de Base</h2>
 
             <div>
               <label className="block font-manrope text-sm font-medium text-[#374151] mb-1">
-                Title <span className="text-red-500">*</span>
+                Titre <span className="text-red-500">*</span>
               </label>
               <input
                 name="title"
                 value={form.title}
                 onChange={handleChange}
                 required
-                placeholder="e.g. Spacious 3 BHK Apartment in Bandra"
+                placeholder="ex. Spacieux Appartement 3 Pièces à Casablanca"
                 className="w-full border border-[#E6E0DA] rounded-lg px-4 py-2.5 font-manrope text-sm text-[#221410] focus:outline-none focus:ring-2 focus:ring-[#FC0903]/40 focus:border-[#FC0903]"
               />
             </div>
@@ -217,7 +217,7 @@ const AddPropertyPage: React.FC = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block font-manrope text-sm font-medium text-[#374151] mb-1">
-                  Property Type <span className="text-red-500">*</span>
+                  Type de Propriété <span className="text-red-500">*</span>
                 </label>
                 <select
                   name="type"
@@ -233,7 +233,7 @@ const AddPropertyPage: React.FC = () => {
               </div>
               <div>
                 <label className="block font-manrope text-sm font-medium text-[#374151] mb-1">
-                  Listing For <span className="text-red-500">*</span>
+                  Type d'Annonce <span className="text-red-500">*</span>
                 </label>
                 <select
                   name="availability"
@@ -251,14 +251,14 @@ const AddPropertyPage: React.FC = () => {
 
             <div>
               <label className="block font-manrope text-sm font-medium text-[#374151] mb-1">
-                Full Address / Location <span className="text-red-500">*</span>
+                Adresse Complète / Emplacement <span className="text-red-500">*</span>
               </label>
               <input
                 name="location"
                 value={form.location}
                 onChange={handleChange}
                 required
-                placeholder="e.g. 12, MG Road, Bandra West, Mumbai, Maharashtra"
+                placeholder="ex. 12, Rue de la Liberté, Casablanca, Maroc"
                 className="w-full border border-[#E6E0DA] rounded-lg px-4 py-2.5 font-manrope text-sm text-[#221410] focus:outline-none focus:ring-2 focus:ring-[#FC0903]/40 focus:border-[#FC0903]"
               />
             </div>
@@ -266,12 +266,12 @@ const AddPropertyPage: React.FC = () => {
 
           {/* ── Price & specs ── */}
           <section className="bg-white border border-[#E6E0DA] rounded-2xl p-6 space-y-5">
-            <h2 className="font-fraunces text-xl font-semibold text-[#221410]">Price &amp; Details</h2>
+            <h2 className="font-fraunces text-xl font-semibold text-[#221410]">Prix &amp; Détails</h2>
 
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block font-manrope text-sm font-medium text-[#374151] mb-1">
-                  Price (MAD) <span className="text-red-500">*</span>
+                  Prix (MAD) <span className="text-red-500">*</span>
                 </label>
                 <input
                   name="price"
@@ -280,13 +280,13 @@ const AddPropertyPage: React.FC = () => {
                   onChange={handleChange}
                   required
                   min="1"
-                  placeholder="e.g. 8500000"
+                  placeholder="ex. 8500000"
                   className="w-full border border-[#E6E0DA] rounded-lg px-4 py-2.5 font-manrope text-sm text-[#221410] focus:outline-none focus:ring-2 focus:ring-[#FC0903]/40 focus:border-[#FC0903]"
                 />
               </div>
               <div>
                 <label className="block font-manrope text-sm font-medium text-[#374151] mb-1">
-                  Area (sqft) <span className="text-red-500">*</span>
+                  Surface (m²) <span className="text-red-500">*</span>
                 </label>
                 <input
                   name="sqft"
@@ -295,13 +295,13 @@ const AddPropertyPage: React.FC = () => {
                   onChange={handleChange}
                   required
                   min="1"
-                  placeholder="e.g. 1200"
+                  placeholder="ex. 120"
                   className="w-full border border-[#E6E0DA] rounded-lg px-4 py-2.5 font-manrope text-sm text-[#221410] focus:outline-none focus:ring-2 focus:ring-[#FC0903]/40 focus:border-[#FC0903]"
                 />
               </div>
               <div>
                 <label className="block font-manrope text-sm font-medium text-[#374151] mb-1">
-                  Bedrooms <span className="text-red-500">*</span>
+                  Chambres <span className="text-red-500">*</span>
                 </label>
                 <input
                   name="beds"
@@ -310,13 +310,13 @@ const AddPropertyPage: React.FC = () => {
                   onChange={handleChange}
                   required
                   min="0"
-                  placeholder="e.g. 3"
+                  placeholder="ex. 3"
                   className="w-full border border-[#E6E0DA] rounded-lg px-4 py-2.5 font-manrope text-sm text-[#221410] focus:outline-none focus:ring-2 focus:ring-[#FC0903]/40 focus:border-[#FC0903]"
                 />
               </div>
               <div>
                 <label className="block font-manrope text-sm font-medium text-[#374151] mb-1">
-                  Bathrooms <span className="text-red-500">*</span>
+                  Salles de Bain <span className="text-red-500">*</span>
                 </label>
                 <input
                   name="baths"
@@ -346,7 +346,7 @@ const AddPropertyPage: React.FC = () => {
                 onChange={handleChange}
                 required
                 rows={4}
-                placeholder="Describe the property — highlights, surroundings, unique features..."
+                placeholder="Décrivez la propriété — points forts, environs, caractéristiques uniques..."
                 className="w-full border border-[#E6E0DA] rounded-lg px-4 py-2.5 font-manrope text-sm text-[#221410] focus:outline-none focus:ring-2 focus:ring-[#FC0903]/40 focus:border-[#FC0903] resize-none"
               />
             </div>
@@ -354,20 +354,20 @@ const AddPropertyPage: React.FC = () => {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label className="block font-manrope text-sm font-medium text-[#374151] mb-1">
-                  Contact Phone <span className="text-red-500">*</span>
+                  Téléphone de Contact <span className="text-red-500">*</span>
                 </label>
                 <input
                   name="phone"
                   value={form.phone}
                   onChange={handleChange}
                   required
-                  placeholder="+91 98765 43210"
+                  placeholder="+212 6 00 00 00 00"
                   className="w-full border border-[#E6E0DA] rounded-lg px-4 py-2.5 font-manrope text-sm text-[#221410] focus:outline-none focus:ring-2 focus:ring-[#FC0903]/40 focus:border-[#FC0903]"
                 />
               </div>
               <div>
                 <label className="block font-manrope text-sm font-medium text-[#374151] mb-1">
-                  Google Maps Link <span className="text-[#6B7280] font-normal">(optional)</span>
+                  Lien Google Maps <span className="text-[#6B7280] font-normal">(optionnel)</span>
                 </label>
                 <input
                   name="googleMapLink"
@@ -382,7 +382,7 @@ const AddPropertyPage: React.FC = () => {
 
           {/* ── Amenities ── */}
           <section className="bg-white border border-[#E6E0DA] rounded-2xl p-6">
-            <h2 className="font-fraunces text-xl font-semibold text-[#221410] mb-4">Amenities</h2>
+            <h2 className="font-fraunces text-xl font-semibold text-[#221410] mb-4">Commodités</h2>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
               {AMENITIES_LIST.map((amenity) => {
                 const checked = amenities.includes(amenity);
@@ -425,7 +425,7 @@ const AddPropertyPage: React.FC = () => {
               Images <span className="text-red-500">*</span>
             </h2>
             <p className="font-manrope text-sm text-[#6B7280] mb-4">
-              Upload up to 4 images (JPG, PNG, WebP). First image will be the cover.
+              Téléchargez jusqu'à 4 images (JPG, PNG, WebP). La première image sera la couverture.
             </p>
 
             {/* Previews */}
@@ -444,7 +444,7 @@ const AddPropertyPage: React.FC = () => {
                     </button>
                     {idx === 0 && (
                       <span className="absolute bottom-1 left-1 bg-[#FC0903] text-white font-manrope text-xs px-2 py-0.5 rounded">
-                        Cover
+                        Couverture
                       </span>
                     )}
                   </div>
@@ -462,7 +462,7 @@ const AddPropertyPage: React.FC = () => {
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                 </svg>
-                Add Photos ({images.length}/4)
+                Ajouter des Photos ({images.length}/4)
               </button>
             )}
 
@@ -482,9 +482,9 @@ const AddPropertyPage: React.FC = () => {
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
             </svg>
             <p className="font-manrope text-sm text-amber-800">
-              Your listing will be reviewed by our team before it appears publicly. This helps keep
-              the platform safe and trustworthy for everyone. You'll be notified by email once
-              it's approved.
+              Votre annonce sera examinée par notre équipe avant d'apparaître publiquement. Cela permet de garder
+              la plateforme sûre et digne de confiance pour tous. Vous serez averti par e-mail une fois
+              qu'elle sera approuvée.
             </p>
           </div>
 
@@ -497,10 +497,10 @@ const AddPropertyPage: React.FC = () => {
             {submitting ? (
               <span className="flex items-center justify-center gap-2">
                 <span className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin" />
-                Submitting…
+                Soumission en cours…
               </span>
             ) : (
-              'Submit for Review'
+              'Soumettre pour Révision'
             )}
           </button>
         </form>

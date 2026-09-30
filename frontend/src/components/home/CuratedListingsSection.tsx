@@ -54,8 +54,8 @@ const CuratedListingsSection: React.FC = () => {
                 <div className="bg-[#FC0903] inline-block px-3 py-1 rounded text-white font-manrope font-bold text-xs mb-4">
                   EN VEDETTE
                 </div>
-                <h3 className="font-fraunces text-3xl text-white mb-2">The Glass Pavilion</h3>
-                <p className="font-manrope font-light text-white/80 mb-4">Montecito, Californie</p>
+                <h3 className="font-fraunces text-3xl text-white mb-2">Le Pavillon de Verre</h3>
+                <p className="font-manrope font-light text-white/80 mb-4">Bouskoura, Casablanca</p>
                 <div className="border-t border-white/20 pt-4 flex items-center justify-between">
                   <span className="font-space-mono text-white">12,500,000 MAD</span>
                   <div className="flex items-center gap-6 text-white/90">
@@ -65,7 +65,7 @@ const CuratedListingsSection: React.FC = () => {
                     </div>
                     <div className="flex items-center gap-2">
                       <span className="font-material-icons text-sm" aria-hidden="true">square_foot</span>
-                      <span className="font-space-mono text-sm">8,200 pi²</span>
+                      <span className="font-space-mono text-sm">750 m²</span>
                     </div>
                   </div>
                 </div>
@@ -84,8 +84,8 @@ const CuratedListingsSection: React.FC = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6">
-                <h3 className="font-fraunces text-xl text-white mb-1">Skyline Penthouse</h3>
-                <p className="font-manrope text-sm text-white/70 mb-3">New York, NY</p>
+                <h3 className="font-fraunces text-xl text-white mb-1">Penthouse Panoramique</h3>
+                <p className="font-manrope text-sm text-white/70 mb-3">Marina, Agadir</p>
                 <span className="font-space-mono text-sm text-white">8,950,000 MAD</span>
               </div>
             </div>
@@ -102,8 +102,8 @@ const CuratedListingsSection: React.FC = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-6">
-                <h3 className="font-fraunces text-xl text-white mb-1">Desert Oasis</h3>
-                <p className="font-manrope text-sm text-white/70 mb-3">Joshua Tree, CA</p>
+                <h3 className="font-fraunces text-xl text-white mb-1">Oasis du Désert</h3>
+                <p className="font-manrope text-sm text-white/70 mb-3">Palmeraie, Marrakech</p>
                 <span className="font-space-mono text-sm text-white">3,200,000 MAD</span>
               </div>
             </div>
@@ -120,8 +120,8 @@ const CuratedListingsSection: React.FC = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-8">
-                <h3 className="font-fraunces text-2xl text-white mb-2">Coastal Retreat</h3>
-                <p className="font-manrope text-white/70 mb-6">Malibu, Californie</p>
+                <h3 className="font-fraunces text-2xl text-white mb-2">Retraite Côtière</h3>
+                <p className="font-manrope text-white/70 mb-6">Achakar, Tanger</p>
                 <div className="border-t border-white/20 pt-6 flex items-center justify-between">
                   <span className="font-space-mono text-white">15,000,000 MAD</span>
                   <button className="text-white hover:bg-white/10 p-2 rounded-full transition-all" aria-label="Voir Coastal Retreat">

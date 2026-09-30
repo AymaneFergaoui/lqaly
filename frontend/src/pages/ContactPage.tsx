@@ -18,7 +18,7 @@ const FAQ_ITEMS = [
   },
   {
     question: 'Quelles régions couvrez-vous actuellement ?',
-    answer: 'Nous couvrons actuellement les principales zones métropolitaines, notamment Ahmedabad, Mumbai, Delhi, Bangalore et Pune. Nous nous étendons à d\'autres villes à travers l\'Inde et mettrons à jour notre zone de couverture régulièrement.',
+    answer: 'Nous couvrons actuellement les principales zones métropolitaines, notamment Casablanca, Rabat, Marrakech et Tanger. Nous nous étendons à d\'autres villes à travers le Maroc et mettrons à jour notre zone de couverture régulièrement.',
   },
   {
     question: 'Puis-je lister ma propriété exclusivement avec Lqaly ?',

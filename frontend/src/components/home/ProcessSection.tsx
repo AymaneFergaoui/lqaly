@@ -8,17 +8,16 @@ const ProcessSection: React.FC = () => {
           {/* Left - Sticky Content */}
           <div className="lg:col-span-4">
             <div className="lg:sticky lg:top-24">
-              <div className="font-space-mono text-sm text-[#FC0903] uppercase tracking-widest mb-6">Process</div>
+              <div className="font-space-mono text-sm text-[#FC0903] uppercase tracking-widest mb-6">Processus</div>
               <h2 className="font-fraunces text-5xl text-[#111827] mb-6 leading-tight">
-                The Path to Your<br />
-                <span className="italic text-[#FC0903]">New Beginning</span>
+                Le Chemin vers Votre<br />
+                <span className="italic text-[#FC0903]">Nouveau Départ</span>
               </h2>
               <p className="font-manrope font-light text-lg text-[#4b5563] mb-8 leading-relaxed">
-                We've simplified the complex journey of buying a home into four seamless, AI-
-                assisted steps.
+                Nous avons simplifié le parcours complexe de l'achat d'une maison en quatre étapes fluides assistées par l'IA.
               </p>
               <button className="bg-[#111827] text-white font-manrope font-medium px-8 py-3 rounded-lg shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1)] hover:bg-[#1f2937] transition-all">
-                Start Your Journey
+                Commencer Votre Parcours
               </button>
             </div>
           </div>
@@ -34,10 +33,9 @@ const ProcessSection: React.FC = () => {
                   </div>
                 </div>
                 <div>
-                  <h3 className="font-syne font-bold text-2xl text-[#111827] mb-3">Profile Analysis</h3>
+                  <h3 className="font-syne font-bold text-2xl text-[#111827] mb-3">Analyse du Profil</h3>
                   <p className="font-manrope text-base text-[#4b5563] leading-relaxed">
-                    Our AI deep-dives into your preferences, lifestyle needs, and financial goals to build a comprehensive
-                    buyer profile.
+                    Notre IA analyse en profondeur vos préférences, vos besoins de style de vie et vos objectifs financiers pour créer un profil d'acheteur complet.
                   </p>
                 </div>
               </div>
@@ -52,10 +50,9 @@ const ProcessSection: React.FC = () => {
                   </div>
                 </div>
                 <div>
-                  <h3 className="font-syne font-bold text-2xl text-[#111827] mb-3">Smart Matching</h3>
+                  <h3 className="font-syne font-bold text-2xl text-[#111827] mb-3">Correspondance Intelligente</h3>
                   <p className="font-manrope text-base text-[#4b5563] leading-relaxed">
-                    Algorithms scan thousands of listings to find properties that align with your unique criteria, filtering out
-                    the noise.
+                    Les algorithmes scannent des milliers d'annonces pour trouver les propriétés qui correspondent à vos critères uniques, en éliminant le superflu.
                   </p>
                 </div>
               </div>
@@ -70,10 +67,9 @@ const ProcessSection: React.FC = () => {
                   </div>
                 </div>
                 <div>
-                  <h3 className="font-syne font-bold text-2xl text-[#111827] mb-3">Virtual Tours & Insights</h3>
+                  <h3 className="font-syne font-bold text-2xl text-[#111827] mb-3">Visites Virtuelles & Aperçus</h3>
                   <p className="font-manrope text-base text-[#4b5563] leading-relaxed">
-                    Experience homes remotely with immersive 3D tours and receive detailed neighborhood analytics
-                    reports.
+                    Découvrez des maisons à distance avec des visites 3D immersives et recevez des rapports détaillés sur les analyses du quartier.
                   </p>
                 </div>
               </div>
@@ -88,10 +84,9 @@ const ProcessSection: React.FC = () => {
                   </div>
                 </div>
                 <div>
-                  <h3 className="font-syne font-bold text-2xl text-[#111827] mb-3">Seamless Closing</h3>
+                  <h3 className="font-syne font-bold text-2xl text-[#111827] mb-3">Clôture Transparente</h3>
                   <p className="font-manrope text-base text-[#4b5563] leading-relaxed">
-                    From offer to keys, our digital platform handles paperwork, negotiations, and closing logistics
-                    effortlessly.
+                    De l'offre à la remise des clés, notre plateforme numérique gère les formalités administratives, les négociations et la logistique de clôture sans effort.
                   </p>
                 </div>
               </div>

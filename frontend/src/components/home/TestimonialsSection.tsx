@@ -7,8 +7,8 @@ const TestimonialsSection: React.FC = () => {
         {/* Section Header */}
         <div className="flex justify-between items-center mb-16">
           <div>
-            <div className="font-space-mono text-sm text-[#FC0903] uppercase tracking-widest mb-4">Testimonials</div>
-            <h2 className="font-fraunces text-5xl text-[#111827]">What Our Clients Say</h2>
+            <div className="font-space-mono text-sm text-[#FC0903] uppercase tracking-widest mb-4">Témoignages</div>
+            <h2 className="font-fraunces text-5xl text-[#111827]">Ce que disent nos clients</h2>
           </div>
         </div>
 
@@ -22,13 +22,13 @@ const TestimonialsSection: React.FC = () => {
               ))}
             </div>
             <p className="font-manrope text-base text-[#4b5563] leading-relaxed mb-6">
-              "Lqaly's AI matched us with our dream home in just 2 weeks. The process was seamless and personalized."
+              "L'IA de Lqaly nous a trouvé la maison de nos rêves en seulement 2 semaines. Le processus était fluide et personnalisé."
             </p>
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 bg-[#E5E7EB] rounded-full" />
               <div>
                 <div className="font-syne font-bold text-sm text-[#111827]">Sarah Johnson</div>
-                <div className="font-manrope text-xs text-[#6b7280]">Los Angeles, CA</div>
+                <div className="font-manrope text-xs text-[#6b7280]">Casablanca, MA</div>
               </div>
             </div>
           </div>
@@ -41,13 +41,13 @@ const TestimonialsSection: React.FC = () => {
               ))}
             </div>
             <p className="font-manrope text-base text-[#4b5563] leading-relaxed mb-6">
-              "The neighborhood insights were invaluable. We knew exactly what we were getting before even visiting."
+              "Les informations sur les quartiers étaient inestimables. Nous savions exactement à quoi nous attendre avant même de visiter."
             </p>
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 bg-[#E5E7EB] rounded-full" />
               <div>
                 <div className="font-syne font-bold text-sm text-[#111827]">Michael Chen</div>
-                <div className="font-manrope text-xs text-[#6b7280]">San Francisco, CA</div>
+                <div className="font-manrope text-xs text-[#6b7280]">Rabat, MA</div>
               </div>
             </div>
           </div>
@@ -60,13 +60,13 @@ const TestimonialsSection: React.FC = () => {
               ))}
             </div>
             <p className="font-manrope text-base text-[#4b5563] leading-relaxed mb-6">
-              "Best real estate experience ever. The AI recommendations were spot-on and saved us months of searching."
+              "La meilleure expérience immobilière de ma vie. Les recommandations de l'IA étaient très précises et nous ont fait gagner des mois de recherche."
             </p>
             <div className="flex items-center gap-3">
               <div className="w-12 h-12 bg-[#E5E7EB] rounded-full" />
               <div>
                 <div className="font-syne font-bold text-sm text-[#111827]">Emily Rodriguez</div>
-                <div className="font-manrope text-xs text-[#6b7280]">Austin, TX</div>
+                <div className="font-manrope text-xs text-[#6b7280]">Tanger, MA</div>
               </div>
             </div>
           </div>

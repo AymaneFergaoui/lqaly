@@ -18,9 +18,9 @@ const statusDot: Record<string, string> = {
   pending: 'bg-amber-400',
 };
 const statusLabel: Record<string, string> = {
-  available: 'Available',
-  sold: 'Sold',
-  pending: 'Pending',
+  available: 'Disponible',
+  sold: 'Vendu',
+  pending: 'En attente',
 };
 
 const PropertyHeader: React.FC<PropertyHeaderProps> = ({
@@ -63,11 +63,11 @@ const PropertyHeader: React.FC<PropertyHeaderProps> = ({
 
       {/* Specs — dot-separated inline */}
       <div className="flex items-center gap-2 font-manrope text-sm text-[#374151] border-b border-[#E6E0DA] pb-6">
-        <span><strong className="font-semibold tabular-nums">{beds}</strong> {beds === 1 ? 'Bedroom' : 'Bedrooms'}</span>
+        <span><strong className="font-semibold tabular-nums">{beds}</strong> {beds === 1 ? 'Chambre' : 'Chambres'}</span>
         <span className="text-[#D4C4BC]">·</span>
-        <span><strong className="font-semibold tabular-nums">{baths}</strong> {baths === 1 ? 'Bathroom' : 'Bathrooms'}</span>
+        <span><strong className="font-semibold tabular-nums">{baths}</strong> {baths === 1 ? 'Salle de bain' : 'Salles de bain'}</span>
         <span className="text-[#D4C4BC]">·</span>
-        <span><strong className="font-semibold tabular-nums">{sqft.toLocaleString()}</strong> sqft</span>
+        <span><strong className="font-semibold tabular-nums">{sqft.toLocaleString()}</strong> m²</span>
       </div>
     </div>
   );

@@ -106,31 +106,31 @@ const AIHubProductionPage: React.FC = () => {
   const features = [
     {
       icon: 'search',
-      title: 'Smart Property Search',
-      description: 'Search across cities with AI-powered filters for budget, property type, and category.',
+      title: 'Recherche de Propriété Intelligente',
+      description: 'Recherchez à travers les villes avec des filtres propulsés par l\'IA pour le budget, le type de propriété et la catégorie.',
     },
     {
       icon: 'analytics',
-      title: 'Market Analysis',
-      description: 'Get GPT-4.1 powered analysis with best value picks and personalized recommendations.',
+      title: 'Analyse de Marché',
+      description: 'Obtenez une analyse propulsée par GPT-4.1 avec les meilleures offres et des recommandations personnalisées.',
     },
     {
       icon: 'trending_up',
-      title: 'Location Trends',
-      description: 'Real-time price trends, rental yields, appreciation rates, and investment insights.',
+      title: 'Tendances Locales',
+      description: 'Tendances des prix en temps réel, rendements locatifs, taux d\'appréciation et conseils d\'investissement.',
     },
     {
       icon: 'lightbulb',
-      title: 'Investment Tips',
-      description: 'AI-generated investment tips based on market data and location analysis.',
+      title: 'Conseils d\'Investissement',
+      description: 'Conseils d\'investissement générés par l\'IA basés sur les données du marché et l\'analyse locale.',
     },
   ];
 
   const steps = [
-    { step: '01', title: 'Clone the Repository', command: `git clone ${GITHUB_URL}.git` },
-    { step: '02', title: 'Install Dependencies', command: 'cd frontend && npm install' },
-    { step: '03', title: 'Set Up Environment', command: 'cp .env.example .env  # Add your API keys' },
-    { step: '04', title: 'Run Locally', command: 'npm run dev' },
+    { step: '01', title: 'Cloner le Dépôt', command: `git clone ${GITHUB_URL}.git` },
+    { step: '02', title: 'Installer les Dépendances', command: 'cd frontend && npm install' },
+    { step: '03', title: 'Configurer l\'Environnement', command: 'cp .env.example .env  # Ajoutez vos clés API' },
+    { step: '04', title: 'Lancer Localement', command: 'npm run dev' },
   ];
 
   return (
@@ -147,17 +147,17 @@ const AIHubProductionPage: React.FC = () => {
             <div className="inline-flex items-center gap-3 bg-[rgba(212,117,91,0.15)] border border-[rgba(212,117,91,0.3)] rounded-full px-5 py-2.5 mb-8">
               <span className="font-material-icons text-[#FC0903] text-lg" aria-hidden="true">smart_toy</span>
               <span className="font-manrope font-bold text-sm text-[#FC0903] uppercase tracking-wider">
-                AI-Powered Feature
+                Fonctionnalité Propulsée par l'IA
               </span>
             </div>
 
             <h1 className="font-fraunces text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
-              AI Property Hub
+              Hub Immobilier IA
             </h1>
             <p data-speakable className="font-manrope text-lg text-[#9ca3af] leading-relaxed mb-10 max-w-2xl mx-auto">
-              Search for flats, villas, and apartments across India using AI. Lqaly's AI Property Hub
-              scrapes live listings from 99acres, MagicBricks, and Housing.com using Firecrawl, then ranks
-              results with GPT-4 based on your requirements. Available when running the project locally.
+              Recherchez des appartements, villas et maisons au Maroc à l'aide de l'IA. Le Hub Immobilier IA de Lqaly
+              extrait des annonces en direct de Mubawab, Sarouty et Avito via Firecrawl, puis classe
+              les résultats avec GPT-4 selon vos besoins. Disponible en exécutant le projet localement.
             </p>
 
             {/* CTA Buttons */}
@@ -169,13 +169,13 @@ const AIHubProductionPage: React.FC = () => {
                 className="bg-[#FC0903] text-white font-manrope font-bold text-lg px-8 py-4 rounded-xl shadow-lg hover:bg-[#B86851] transition-all hover:shadow-xl inline-flex items-center gap-3"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" /></svg>
-                View on GitHub
+                Voir sur GitHub
               </a>
               <Link
                 to="/properties"
                 className="border-2 border-[rgba(255,255,255,0.2)] text-white font-manrope font-bold text-lg px-8 py-4 rounded-xl hover:border-[#FC0903] hover:text-[#FC0903] transition-all inline-flex items-center gap-2"
               >
-                Browse Properties
+                Parcourir les Propriétés
                 <span className="font-material-icons text-sm" aria-hidden="true">arrow_forward</span>
               </Link>
             </div>
@@ -185,8 +185,8 @@ const AIHubProductionPage: React.FC = () => {
               <div className="flex items-start gap-3">
                 <span className="font-material-icons text-[#FC0903] text-xl mt-0.5" aria-hidden="true">info</span>
                 <p className="font-manrope text-sm text-[#d1c4b7] text-left leading-relaxed">
-                  The AI Property Hub requires API credits to operate. To save deployment costs, this feature is
-                  disabled on the live site. Clone the repo and run it locally to experience the full AI capabilities.
+                  Le Hub Immobilier IA nécessite des crédits API pour fonctionner. Pour économiser les coûts de déploiement, cette fonctionnalité est
+                  désactivée sur le site en direct. Clonez le dépôt et exécutez-le localement pour découvrir toutes les capacités de l'IA.
                 </p>
               </div>
             </div>
@@ -198,10 +198,10 @@ const AIHubProductionPage: React.FC = () => {
       <section className="max-w-[1280px] mx-auto px-8 py-20">
         <div className="text-center mb-14">
           <h2 className="font-fraunces text-3xl lg:text-4xl font-bold text-[#111827] mb-4">
-            What You'll Get Locally
+            Ce Que Vous Obtiendrez Localement
           </h2>
           <p className="font-manrope text-[#6b7280] max-w-xl mx-auto">
-            All these AI-powered features are fully functional when you run the project on your machine.
+            Toutes ces fonctionnalités propulsées par l'IA sont entièrement fonctionnelles lorsque vous exécutez le projet sur votre machine.
           </p>
         </div>
 
@@ -228,10 +228,10 @@ const AIHubProductionPage: React.FC = () => {
         <div className="max-w-[1280px] mx-auto px-8">
           <div className="text-center mb-14">
             <h2 className="font-fraunces text-3xl lg:text-4xl font-bold text-[#111827] mb-4">
-              Get Started in 4 Steps
+              Commencer en 4 Étapes
             </h2>
             <p className="font-manrope text-[#6b7280] max-w-xl mx-auto">
-              Set up the project locally and start using the AI Property Hub in minutes.
+              Configurez le projet localement et commencez à utiliser le Hub Immobilier IA en quelques minutes.
             </p>
           </div>
 
@@ -258,7 +258,7 @@ const AIHubProductionPage: React.FC = () => {
               className="inline-flex items-center gap-3 bg-[#221410] text-white font-manrope font-bold px-8 py-4 rounded-xl hover:bg-[#3a2419] transition-all shadow-lg hover:shadow-xl"
             >
               <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" /></svg>
-              Download from GitHub
+              Télécharger depuis GitHub
             </a>
           </div>
         </div>
@@ -271,8 +271,8 @@ const AIHubProductionPage: React.FC = () => {
 
 const AIPropertyHubPage: React.FC = () => {
   useSEO({
-    title: 'AI Property Hub — Search Flats & Houses in India with GPT-4',
-    description: 'Search for flats, villas, and apartments across India using AI. Lqaly scrapes live listings from 99acres, MagicBricks, and Housing.com, then ranks results with GPT-4.',
+    title: 'Hub Immobilier IA — Recherchez des Appartements et Maisons au Maroc avec GPT-4',
+    description: 'Recherchez des appartements, villas et maisons au Maroc à l\'aide de l\'IA. Lqaly extrait des annonces en direct de Mubawab, Sarouty et Avito, puis classe les résultats avec GPT-4.',
     url: 'https://lqaly.vercel.app/ai-hub',
   });
 
@@ -545,14 +545,14 @@ const AIHubDevPage: React.FC = () => {
             <section className="bg-[#FAF8F4] py-10 border-t border-[#E6E0DA]">
               <div className="max-w-[1200px] mx-auto px-6 text-center">
                 <p className="font-manrope text-sm text-[#6b7280] mb-4">
-                  Want to see price trends and rental yields for {searchParams.city}?
+                  Voulez-vous voir les tendances des prix et les rendements locatifs pour {searchParams.city} ?
                 </p>
                 <button
                   onClick={() => fetchTrends(searchParams.city)}
                   className="inline-flex items-center gap-2 bg-[#FC0903] hover:bg-[#C05621] text-white font-manrope font-semibold text-sm px-6 py-3 rounded-xl transition-all shadow-md shadow-[#FC0903]/20"
                 >
                   <span className="text-base">&#x1F4C8;</span>
-                  Load Location Trends
+                  Charger les Tendances Locales
                 </button>
               </div>
             </section>

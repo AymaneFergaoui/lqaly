@@ -87,7 +87,7 @@ const PropertyAmenities: React.FC<PropertyAmenitiesProps> = ({ amenities = [] })
       <div className="flex items-center gap-3 mb-6">
         <div className="w-1 h-6 bg-[#FC0903] rounded-full" />
         <h2 className="font-syne text-2xl text-[#0F172A]">
-          Key Amenities
+          Équipements clés
         </h2>
       </div>
 
