@@ -105,13 +105,13 @@ const PropertyCard: React.FC<{
         transition-[box-shadow,transform] duration-200 ease-out
         hover:-translate-y-0.5
         ${isComparing
-          ? 'shadow-[0_0_0_2px_#D4755B,0_8px_24px_-4px_rgba(212,117,91,0.2)]'
+          ? 'shadow-[0_0_0_2px_#FC0903,0_8px_24px_-4px_rgba(212,117,91,0.2)]'
           : 'shadow-[0_0_0_1px_rgba(0,0,0,0.06),0_2px_8px_-2px_rgba(0,0,0,0.08)] hover:shadow-[0_0_0_1px_rgba(0,0,0,0.08),0_8px_24px_-4px_rgba(0,0,0,0.12)]'
         }
       `}
     >
       {/* Top gradient accent — stronger for #1 pick */}
-      <div className={`absolute top-0 inset-x-0 h-0.5 ${isBest ? 'bg-gradient-to-r from-[#D4755B] via-amber-400 to-[#D4755B]' : 'bg-gradient-to-r from-[#D4755B]/40 to-amber-400/40'}`} />
+      <div className={`absolute top-0 inset-x-0 h-0.5 ${isBest ? 'bg-gradient-to-r from-[#FC0903] via-amber-400 to-[#FC0903]' : 'bg-gradient-to-r from-[#FC0903]/40 to-amber-400/40'}`} />
 
       <div className="p-5 flex flex-col flex-1">
 
@@ -153,7 +153,7 @@ const PropertyCard: React.FC<{
 
         {/* Location */}
         <div className="flex items-center gap-1.5 mb-4">
-          <MapPin className="w-3 h-3 text-[#D4755B]/60 shrink-0" />
+          <MapPin className="w-3 h-3 text-[#FC0903]/60 shrink-0" />
           <span className="font-manrope text-[12px] text-[#6B7280] line-clamp-1">
             {property.location_address || 'Location not specified'}
           </span>
@@ -163,7 +163,7 @@ const PropertyCard: React.FC<{
         <div className="flex items-center justify-between bg-[#FAF8F4] rounded-xl px-4 py-3 mb-3 shadow-[0_0_0_1px_rgba(0,0,0,0.05)]">
           <div>
             <p className="font-space-mono text-[9px] text-[#9CA3AF] font-bold tracking-widest uppercase mb-0.5">Price</p>
-            <p className="font-manrope font-extrabold text-[#D4755B] text-[20px] leading-none tabular-nums">
+            <p className="font-manrope font-extrabold text-[#FC0903] text-[20px] leading-none tabular-nums">
               {property.price || 'Contact for price'}
             </p>
           </div>
@@ -228,11 +228,11 @@ const PropertyCard: React.FC<{
 
         {/* AI insight block — hero section */}
         {insight?.one_line_insight && (
-          <div className="relative bg-gradient-to-br from-[#FDF6F3] to-[#FAF4F0] border border-[#D4755B]/20 rounded-xl px-4 py-3 mb-3 overflow-hidden">
+          <div className="relative bg-gradient-to-br from-[#FDF6F3] to-[#FAF4F0] border border-[#FC0903]/20 rounded-xl px-4 py-3 mb-3 overflow-hidden">
             <div className="absolute top-2 right-2">
-              <Sparkles className="w-3.5 h-3.5 text-[#D4755B]/30" />
+              <Sparkles className="w-3.5 h-3.5 text-[#FC0903]/30" />
             </div>
-            <p className="font-space-mono text-[9px] text-[#D4755B]/60 font-bold uppercase tracking-widest mb-1.5">
+            <p className="font-space-mono text-[9px] text-[#FC0903]/60 font-bold uppercase tracking-widest mb-1.5">
               AI Insight
             </p>
             <p className="font-manrope text-[12px] text-[#4B5563] leading-relaxed pr-4 [text-wrap:pretty]">
@@ -242,7 +242,7 @@ const PropertyCard: React.FC<{
               <div className="flex items-center gap-2 mt-2.5">
                 <div className="flex-1 h-1 bg-[#E6E0DA] rounded-full overflow-hidden">
                   <motion.div
-                    className="h-full bg-gradient-to-r from-[#D4755B] to-amber-400 rounded-full"
+                    className="h-full bg-gradient-to-r from-[#FC0903] to-amber-400 rounded-full"
                     initial={{ width: 0 }}
                     animate={{ width: `${insight.match_score}%` }}
                     transition={{ duration: 0.8, delay: 0.3, ease: 'easeOut' }}
@@ -306,7 +306,7 @@ const PropertyCard: React.FC<{
               target="_blank"
               rel="noopener noreferrer"
               onClick={e => e.stopPropagation()}
-              className="flex-1 inline-flex items-center justify-center gap-1.5 bg-[#D4755B] hover:bg-[#C05621] text-white font-manrope font-semibold text-sm py-2.5 rounded-xl transition-[background-color,box-shadow] duration-150 shadow-sm shadow-[#D4755B]/20 active:scale-[0.96]"
+              className="flex-1 inline-flex items-center justify-center gap-1.5 bg-[#FC0903] hover:bg-[#C05621] text-white font-manrope font-semibold text-sm py-2.5 rounded-xl transition-[background-color,box-shadow] duration-150 shadow-sm shadow-[#FC0903]/20 active:scale-[0.96]"
             >
               View Listing <ExternalLink className="w-3.5 h-3.5" />
             </a>
@@ -321,9 +321,9 @@ const PropertyCard: React.FC<{
             disabled={!isComparing && !canCompare}
             className={`px-4 py-2.5 font-manrope font-semibold text-sm rounded-xl transition-[background-color,border-color,color] duration-150 border active:scale-[0.96] ${
               isComparing
-                ? 'bg-[#D4755B] border-[#D4755B] text-white hover:bg-[#C05621]'
+                ? 'bg-[#FC0903] border-[#FC0903] text-white hover:bg-[#C05621]'
                 : canCompare
-                  ? 'border-[#E6E0DA] text-[#6B7280] hover:border-[#D4755B]/50 hover:text-[#D4755B]'
+                  ? 'border-[#E6E0DA] text-[#6B7280] hover:border-[#FC0903]/50 hover:text-[#FC0903]'
                   : 'border-[#E6E0DA]/50 text-[#C4C4C4] cursor-not-allowed opacity-50'
             }`}
           >
@@ -346,7 +346,7 @@ const ComparisonModal: React.FC<{
     const insight = insightMap.get((property.building_name || '').toLowerCase().trim());
     switch (key) {
       case 'price':
-        return <span className="font-bold text-[#D4755B] tabular-nums">{property.price || '—'}</span>;
+        return <span className="font-bold text-[#FC0903] tabular-nums">{property.price || '—'}</span>;
       case 'price_per_sqft':
         return <span className="tabular-nums">{property.price_per_sqft || '—'}</span>;
       case 'area_sqft':
@@ -415,7 +415,7 @@ const ComparisonModal: React.FC<{
         <div className="flex items-center justify-between px-6 py-4 border-b border-[#E6E0DA] shrink-0">
           <div className="flex items-center gap-3">
             <div className="w-8 h-8 bg-[#FAF8F4] border border-[#E6E0DA] rounded-full flex items-center justify-center">
-              <BarChart2 className="w-4 h-4 text-[#D4755B]" />
+              <BarChart2 className="w-4 h-4 text-[#FC0903]" />
             </div>
             <h2 className="font-syne text-xl font-bold text-[#221410]">Compare Properties</h2>
           </div>
@@ -485,10 +485,10 @@ const AILoadingState: React.FC<{ city: string; sseStage?: 'searching' | 'analyzi
       <div className="flex justify-center mb-10">
         <div className="relative w-20 h-20">
           {/* Outer pulse rings */}
-          <div className="absolute inset-0 rounded-full bg-[#D4755B]/10 animate-ping" style={{ animationDuration: '1.8s' }} />
-          <div className="absolute inset-2 rounded-full bg-[#D4755B]/15 animate-ping" style={{ animationDuration: '2.4s', animationDelay: '0.4s' }} />
+          <div className="absolute inset-0 rounded-full bg-[#FC0903]/10 animate-ping" style={{ animationDuration: '1.8s' }} />
+          <div className="absolute inset-2 rounded-full bg-[#FC0903]/15 animate-ping" style={{ animationDuration: '2.4s', animationDelay: '0.4s' }} />
           {/* Core orb */}
-          <div className="absolute inset-4 rounded-full bg-gradient-to-br from-[#D4755B] to-amber-400 shadow-[0_0_24px_rgba(212,117,91,0.5)]" />
+          <div className="absolute inset-4 rounded-full bg-gradient-to-br from-[#FC0903] to-amber-400 shadow-[0_0_24px_rgba(212,117,91,0.5)]" />
           {/* Inner shimmer */}
           <div className="absolute inset-4 rounded-full bg-gradient-to-tr from-white/30 to-transparent" />
           {/* Icon */}
@@ -507,7 +507,7 @@ const AILoadingState: React.FC<{ city: string; sseStage?: 'searching' | 'analyzi
             animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
             exit={{ opacity: 0, y: -6, filter: 'blur(4px)' }}
             transition={{ duration: 0.25 }}
-            className="font-space-mono text-[10px] text-[#D4755B] font-bold uppercase tracking-widest mb-2"
+            className="font-space-mono text-[10px] text-[#FC0903] font-bold uppercase tracking-widest mb-2"
           >
             {stage === 'analyzing' ? 'AI Analysis' : 'Live Search'}
           </motion.p>
@@ -542,7 +542,7 @@ const AILoadingState: React.FC<{ city: string; sseStage?: 'searching' | 'analyzi
           )}
           {/* Active line */}
           <div className="flex items-start gap-2.5">
-            <span className="font-space-mono text-[10px] text-[#D4755B] mt-0.5 shrink-0">›</span>
+            <span className="font-space-mono text-[10px] text-[#FC0903] mt-0.5 shrink-0">›</span>
             <AnimatePresence mode="wait">
               <motion.span
                 key={displayMsg}
@@ -558,7 +558,7 @@ const AILoadingState: React.FC<{ city: string; sseStage?: 'searching' | 'analyzi
           </div>
           {/* Blinking cursor */}
           <div className="flex items-center gap-2.5 pl-5">
-            <span className="font-space-mono text-[11px] text-[#D4755B] animate-pulse">▋</span>
+            <span className="font-space-mono text-[11px] text-[#FC0903] animate-pulse">▋</span>
           </div>
         </div>
       </div>
@@ -580,7 +580,7 @@ const AILoadingState: React.FC<{ city: string; sseStage?: 'searching' | 'analyzi
             </div>
             <div className="h-12 bg-[#FDF6F3] rounded-xl mb-3" />
             <div className="flex gap-2 pt-3 border-t border-[#E6E0DA]/30">
-              <div className="flex-1 h-9 bg-[#D4755B]/15 rounded-xl" />
+              <div className="flex-1 h-9 bg-[#FC0903]/15 rounded-xl" />
               <div className="h-9 w-20 bg-[#E6E0DA]/40 rounded-xl" />
             </div>
           </div>
@@ -631,8 +631,8 @@ const AISearchResults: React.FC<Props> = ({ properties, loading, sseStage, statu
   if (properties.length === 0) {
     return (
       <div className="py-10 text-center">
-        <div className="w-16 h-16 bg-[#D4755B]/10 rounded-full flex items-center justify-center mx-auto mb-4">
-          <Home className="w-8 h-8 text-[#D4755B]" />
+        <div className="w-16 h-16 bg-[#FC0903]/10 rounded-full flex items-center justify-center mx-auto mb-4">
+          <Home className="w-8 h-8 text-[#FC0903]" />
         </div>
         <h3 className="font-syne text-2xl text-[#221410] mb-2">No Properties Found</h3>
         <p className="font-manrope font-light text-[#6b7280]">
@@ -652,7 +652,7 @@ const AISearchResults: React.FC<Props> = ({ properties, loading, sseStage, statu
         {/* Header */}
         <div className="mb-7 flex flex-col md:flex-row md:items-end justify-between gap-4">
           <div>
-            <div className="font-space-mono text-[10px] text-[#D4755B] font-bold uppercase tracking-widest mb-2 flex items-center gap-2">
+            <div className="font-space-mono text-[10px] text-[#FC0903] font-bold uppercase tracking-widest mb-2 flex items-center gap-2">
               <TrendingUp className="w-3 h-3" />
               Live AI Results
             </div>
@@ -663,7 +663,7 @@ const AISearchResults: React.FC<Props> = ({ properties, loading, sseStage, statu
               <span className="tabular-nums font-semibold text-[#221410]">{properties.length}</span>{' '}
               {properties.length === 1 ? 'match' : 'matches'} found
               {aiMatchCount > 0 && (
-                <> · <span className="tabular-nums font-semibold text-[#D4755B]">{aiMatchCount}</span> with AI insights</>
+                <> · <span className="tabular-nums font-semibold text-[#FC0903]">{aiMatchCount}</span> with AI insights</>
               )}
             </p>
           </div>
@@ -723,7 +723,7 @@ const AISearchResults: React.FC<Props> = ({ properties, loading, sseStage, statu
                       <button
                         type="button"
                         onClick={() => toggleCompare(p)}
-                        className="shrink-0 text-[#9CA3AF] hover:text-[#D4755B] transition-[color] active:scale-[0.96]"
+                        className="shrink-0 text-[#9CA3AF] hover:text-[#FC0903] transition-[color] active:scale-[0.96]"
                       >
                         <X className="w-3.5 h-3.5" />
                       </button>
@@ -737,7 +737,7 @@ const AISearchResults: React.FC<Props> = ({ properties, loading, sseStage, statu
                   <button
                     type="button"
                     onClick={() => setShowModal(true)}
-                    className="inline-flex items-center gap-2 bg-[#D4755B] hover:bg-[#C05621] text-white font-manrope font-semibold text-sm px-5 py-2.5 rounded-xl transition-[background-color] duration-150 shadow-sm shadow-[#D4755B]/25 active:scale-[0.96]"
+                    className="inline-flex items-center gap-2 bg-[#FC0903] hover:bg-[#C05621] text-white font-manrope font-semibold text-sm px-5 py-2.5 rounded-xl transition-[background-color] duration-150 shadow-sm shadow-[#FC0903]/25 active:scale-[0.96]"
                   >
                     <BarChart2 className="w-4 h-4" />
                     Compare Now

@@ -154,7 +154,7 @@ const AIModels = () => {
       <div className="max-w-5xl mx-auto">
         <div className="flex items-center justify-between mb-8">
           <div className="flex items-center gap-3">
-            <div className="h-10 w-10 bg-[#D4755B] rounded-xl flex items-center justify-center">
+            <div className="h-10 w-10 bg-[#FC0903] rounded-xl flex items-center justify-center">
               <Cpu className="h-5 w-5 text-white" />
             </div>
             <div>
@@ -171,7 +171,7 @@ const AIModels = () => {
             </button>
             <button
               onClick={openCreate}
-              className="flex items-center gap-2 bg-[#D4755B] text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#C05E44] transition-colors"
+              className="flex items-center gap-2 bg-[#FC0903] text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#C05E44] transition-colors"
             >
               <Plus className="h-4 w-4" />
               Add Model
@@ -210,7 +210,7 @@ const AIModels = () => {
                     <div className="flex items-center gap-2 flex-wrap">
                       <span className="font-semibold text-[#1C1B1A]">{model.name}</span>
                       {model.isDefault && (
-                        <span className="inline-flex items-center gap-1 text-xs bg-[#D4755B]/10 text-[#D4755B] px-2 py-0.5 rounded-full font-medium">
+                        <span className="inline-flex items-center gap-1 text-xs bg-[#FC0903]/10 text-[#FC0903] px-2 py-0.5 rounded-full font-medium">
                           <Star className="h-3 w-3" /> Default
                         </span>
                       )}
@@ -238,7 +238,7 @@ const AIModels = () => {
                     {!model.isDefault && (
                       <button
                         onClick={() => setDefault(model)}
-                        className="p-2 text-[#9CA3AF] hover:text-[#D4755B] hover:bg-[#D4755B]/10 rounded-lg transition-colors"
+                        className="p-2 text-[#9CA3AF] hover:text-[#FC0903] hover:bg-[#FC0903]/10 rounded-lg transition-colors"
                         title="Set as default"
                       >
                         <Star className="h-4 w-4" />
@@ -378,7 +378,7 @@ const AIModels = () => {
                     <div key={field}>
                       <label className="block text-sm font-semibold text-[#1C1B1A] mb-1">{label}</label>
                       <input
-                        className="w-full border border-[#E5E0D8] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#D4755B]/30 focus:border-[#D4755B]"
+                        className="w-full border border-[#E5E0D8] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#FC0903]/30 focus:border-[#FC0903]"
                         value={form[field]}
                         onChange={e => setField(field, e.target.value)}
                         placeholder={placeholder}
@@ -391,7 +391,7 @@ const AIModels = () => {
                       <label className="block text-sm font-semibold text-[#1C1B1A] mb-1">Order</label>
                       <input
                         type="number"
-                        className="w-full border border-[#E5E0D8] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#D4755B]/30 focus:border-[#D4755B]"
+                        className="w-full border border-[#E5E0D8] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#FC0903]/30 focus:border-[#FC0903]"
                         value={form.order}
                         onChange={e => setField('order', Number(e.target.value))}
                       />
@@ -424,7 +424,7 @@ const AIModels = () => {
                           <input
                             type={type}
                             step={step}
-                            className="w-full border border-[#E5E0D8] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#D4755B]/30 focus:border-[#D4755B]"
+                            className="w-full border border-[#E5E0D8] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#FC0903]/30 focus:border-[#FC0903]"
                             value={form.config[field.split('.')[1]] ?? ''}
                             onChange={e => {
                               const raw = e.target.value;
@@ -459,7 +459,7 @@ const AIModels = () => {
                   <button
                     onClick={handleSave}
                     disabled={saving}
-                    className="px-4 py-2 text-sm font-semibold text-white bg-[#D4755B] hover:bg-[#C05E44] rounded-lg transition-colors disabled:opacity-50"
+                    className="px-4 py-2 text-sm font-semibold text-white bg-[#FC0903] hover:bg-[#C05E44] rounded-lg transition-colors disabled:opacity-50"
                   >
                     {saving ? 'Saving…' : editingId ? 'Save Changes' : 'Create Model'}
                   </button>

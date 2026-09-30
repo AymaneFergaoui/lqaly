@@ -33,7 +33,7 @@ const AboutHeritageSection: React.FC = () => {
           <div className="lg:pt-16">
             {/* Label */}
             <div className="mb-6">
-              <p className="font-space-mono text-xs text-[#D4755B] uppercase tracking-[2.4px]">
+              <p className="font-space-mono text-xs text-[#FC0903] uppercase tracking-[2.4px]">
                 Our Heritage
               </p>
             </div>
@@ -43,7 +43,7 @@ const AboutHeritageSection: React.FC = () => {
               <span className="font-syne text-[40px] leading-[50px] text-[#221410] block font-semibold">
                 Redefining the Real Estate Landscape with
               </span>
-              <span className="font-fraunces italic text-[40px] leading-[50px] text-[#D4755B] block">
+              <span className="font-fraunces italic text-[40px] leading-[50px] text-[#FC0903] block">
                 Better Property Discovery
               </span>
             </h2>
@@ -64,8 +64,8 @@ const AboutHeritageSection: React.FC = () => {
             </div>
 
             {/* Blockquote */}
-            <blockquote className="border-l-4 border-[#D4755B] pl-6 mb-8">
-              <p className="font-fraunces italic text-2xl leading-8 text-[#D4755B]">
+            <blockquote className="border-l-4 border-[#FC0903] pl-6 mb-8">
+              <p className="font-fraunces italic text-2xl leading-8 text-[#FC0903]">
                 "We believe finding a home should be inspiring,
                 not exhausting."
               </p>
@@ -74,13 +74,13 @@ const AboutHeritageSection: React.FC = () => {
             {/* Link */}
             <a 
               href="#team" 
-              className="inline-flex items-center gap-2 border-b border-[#221410] pb-1 group hover:border-[#D4755B] transition-[border-color]"
+              className="inline-flex items-center gap-2 border-b border-[#221410] pb-1 group hover:border-[#FC0903] transition-[border-color]"
             >
-              <span className="font-space-mono text-sm text-[#221410] group-hover:text-[#D4755B] transition-[color]">
+              <span className="font-space-mono text-sm text-[#221410] group-hover:text-[#FC0903] transition-[color]">
                 Meet the Architects
               </span>
 
-              <ArrowRight className="w-4 h-4 text-[#221410] group-hover:text-[#D4755B] transition-[color]" />
+              <ArrowRight className="w-4 h-4 text-[#221410] group-hover:text-[#FC0903] transition-[color]" />
             </a>
           </div>
         </div>

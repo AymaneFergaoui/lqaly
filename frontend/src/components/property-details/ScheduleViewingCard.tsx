@@ -9,7 +9,7 @@ interface ScheduleViewingCardProps {
   price?: string;
 }
 
-const INPUT = "w-full bg-white/10 border border-white/15 rounded-xl px-4 py-3 font-manrope text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-[#D4755B] transition-[border-color]";
+const INPUT = "w-full bg-white/10 border border-white/15 rounded-xl px-4 py-3 font-manrope text-sm text-white placeholder:text-white/40 focus:outline-none focus:border-[#FC0903] transition-[border-color]";
 const LABEL = "block font-manrope text-xs font-medium text-white/50 uppercase tracking-wider mb-1.5";
 
 const ScheduleViewingCard: React.FC<ScheduleViewingCardProps> = ({ property, price }) => {
@@ -53,7 +53,7 @@ const ScheduleViewingCard: React.FC<ScheduleViewingCardProps> = ({ property, pri
       <div className="px-6 pt-6 pb-5 border-b border-white/10">
         <p className="font-manrope text-xs text-white/50 uppercase tracking-wider mb-1">Listed Price</p>
         {price && (
-          <p className="font-fraunces text-3xl font-bold text-[#D4755B] tabular-nums leading-none">
+          <p className="font-fraunces text-3xl font-bold text-[#FC0903] tabular-nums leading-none">
             {price}
           </p>
         )}
@@ -76,7 +76,7 @@ const ScheduleViewingCard: React.FC<ScheduleViewingCardProps> = ({ property, pri
               </p>
               <button
                 onClick={() => setSuccess(false)}
-                className="font-manrope text-sm text-[#D4755B] hover:text-[#E8917A] transition-colors"
+                className="font-manrope text-sm text-[#FC0903] hover:text-[#E8917A] transition-colors"
               >
                 Schedule another visit
               </button>
@@ -84,7 +84,7 @@ const ScheduleViewingCard: React.FC<ScheduleViewingCardProps> = ({ property, pri
           ) : (
             <motion.div key="form" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
               <div className="flex items-center gap-2 mb-5">
-                <Calendar className="w-4 h-4 text-[#D4755B]" />
+                <Calendar className="w-4 h-4 text-[#FC0903]" />
                 <h3 className="font-manrope font-semibold text-sm text-white">Schedule a Viewing</h3>
               </div>
 
@@ -142,7 +142,7 @@ const ScheduleViewingCard: React.FC<ScheduleViewingCardProps> = ({ property, pri
                 <button
                   type="submit"
                   disabled={submitting}
-                  className="w-full mt-2 bg-[#D4755B] hover:bg-[#C05621] disabled:opacity-50 text-white font-manrope font-bold text-sm py-3.5 rounded-xl transition-all active:scale-[0.98] shadow-lg"
+                  className="w-full mt-2 bg-[#FC0903] hover:bg-[#C05621] disabled:opacity-50 text-white font-manrope font-bold text-sm py-3.5 rounded-xl transition-all active:scale-[0.98] shadow-lg"
                 >
                   {submitting ? 'Scheduling…' : 'Schedule Visit'}
                 </button>

@@ -10,13 +10,13 @@ import { cn } from '../lib/utils';
 const PROPERTY_TYPES = ['House', 'Apartment', 'Office', 'Villa'];
 const AVAILABILITY_TYPES = ['rent', 'buy'];
 
-const inputClass = "w-full px-4 py-3 bg-white border border-[#E6D5C3] rounded-xl text-[#1C1B1A] placeholder-[#9CA3AF] text-sm transition-all duration-200 outline-none focus:border-[#D4755B] focus:ring-2 focus:ring-[#D4755B]/15";
+const inputClass = "w-full px-4 py-3 bg-white border border-[#E6D5C3] rounded-xl text-[#1C1B1A] placeholder-[#9CA3AF] text-sm transition-all duration-200 outline-none focus:border-[#FC0903] focus:ring-2 focus:ring-[#FC0903]/15";
 const labelClass = "block text-sm font-semibold text-[#1C1B1A] mb-2";
 
 const SectionHeader = ({ icon: Icon, title, subtitle }) => (
   <div className="flex items-center gap-3 mb-5">
-    <div className="w-9 h-9 bg-[#D4755B]/10 rounded-xl flex items-center justify-center">
-      <Icon className="w-4.5 h-4.5 text-[#D4755B]" />
+    <div className="w-9 h-9 bg-[#FC0903]/10 rounded-xl flex items-center justify-center">
+      <Icon className="w-4.5 h-4.5 text-[#FC0903]" />
     </div>
     <div>
       <h3 className="text-base font-bold text-[#1C1B1A]">{title}</h3>
@@ -134,7 +134,7 @@ const Update = () => {
     return (
       <div className="min-h-screen pt-8 flex items-center justify-center bg-[#FAF8F4]">
         <div className="text-center">
-          <div className="w-12 h-12 border-3 border-[#D4755B] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <div className="w-12 h-12 border-3 border-[#FC0903] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
           <p className="text-[#5A5856] font-medium">Loading property details...</p>
         </div>
       </div>
@@ -147,7 +147,7 @@ const Update = () => {
         {/* Header */}
         <motion.div initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
           <button onClick={() => navigate('/list')}
-            className="flex items-center gap-2 text-sm text-[#5A5856] hover:text-[#D4755B] mb-4 transition-colors">
+            className="flex items-center gap-2 text-sm text-[#5A5856] hover:text-[#FC0903] mb-4 transition-colors">
             <ArrowLeft className="w-4 h-4" />
             Back to Properties
           </button>
@@ -268,8 +268,8 @@ const Update = () => {
                     className={cn(
                       'flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200',
                       selected
-                        ? 'bg-[#D4755B] text-white shadow-sm'
-                        : 'bg-[#FAF8F4] text-[#5A5856] border border-[#E6D5C3] hover:border-[#D4755B] hover:text-[#D4755B]'
+                        ? 'bg-[#FC0903] text-white shadow-sm'
+                        : 'bg-[#FAF8F4] text-[#5A5856] border border-[#E6D5C3] hover:border-[#FC0903] hover:text-[#FC0903]'
                     )}>
                     {selected ? <CheckSquare className="w-3.5 h-3.5" /> : <Square className="w-3.5 h-3.5" />}
                     {amenity}
@@ -282,7 +282,7 @@ const Update = () => {
                 onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddAmenity())}
                 placeholder="Add custom amenity..." className={cn(inputClass, 'flex-1')} />
               <button type="button" onClick={handleAddAmenity}
-                className="flex items-center gap-1.5 px-4 py-2.5 bg-[#1C1B1A] text-white rounded-xl text-sm font-medium hover:bg-[#D4755B] transition-colors">
+                className="flex items-center gap-1.5 px-4 py-2.5 bg-[#1C1B1A] text-white rounded-xl text-sm font-medium hover:bg-[#FC0903] transition-colors">
                 <Plus className="w-4 h-4" /> Add
               </button>
             </div>
@@ -290,7 +290,7 @@ const Update = () => {
               <div className="mt-3 flex flex-wrap gap-2">
                 {formData.amenities.filter((a) => !AMENITIES_LIST.includes(a)).map((amenity) => (
                   <span key={amenity}
-                    className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#D4755B]/10 text-[#D4755B] rounded-full text-sm font-medium">
+                    className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#FC0903]/10 text-[#FC0903] rounded-full text-sm font-medium">
                     {amenity}
                     <button type="button" onClick={() => handleAmenityToggle(amenity)}
                       className="hover:text-[#C05E44]"><X size={13} /></button>
@@ -319,9 +319,9 @@ const Update = () => {
               </div>
             )}
             <label htmlFor="images"
-              className="flex flex-col items-center justify-center w-full h-28 border-2 border-dashed border-[#E6D5C3] rounded-xl cursor-pointer bg-[#FAF8F4] hover:border-[#D4755B] hover:bg-[#D4755B]/5 transition-all duration-200 group">
-              <Upload className="w-6 h-6 text-[#9CA3AF] group-hover:text-[#D4755B] mb-1.5 transition-colors" />
-              <span className="text-sm font-medium text-[#5A5856] group-hover:text-[#D4755B] transition-colors">
+              className="flex flex-col items-center justify-center w-full h-28 border-2 border-dashed border-[#E6D5C3] rounded-xl cursor-pointer bg-[#FAF8F4] hover:border-[#FC0903] hover:bg-[#FC0903]/5 transition-all duration-200 group">
+              <Upload className="w-6 h-6 text-[#9CA3AF] group-hover:text-[#FC0903] mb-1.5 transition-colors" />
+              <span className="text-sm font-medium text-[#5A5856] group-hover:text-[#FC0903] transition-colors">
                 Replace images
               </span>
               <input id="images" name="images" type="file" multiple accept="image/*"
@@ -337,7 +337,7 @@ const Update = () => {
             </button>
             <motion.button type="submit" disabled={loading}
               whileHover={{ scale: loading ? 1 : 1.01 }} whileTap={{ scale: loading ? 1 : 0.99 }}
-              className="flex-1 flex items-center justify-center gap-2 py-4 bg-[#1C1B1A] hover:bg-[#D4755B] text-[#FAF8F4] rounded-xl font-semibold text-base transition-all duration-300 shadow-lg hover:shadow-terracotta disabled:opacity-60 disabled:cursor-not-allowed">
+              className="flex-1 flex items-center justify-center gap-2 py-4 bg-[#1C1B1A] hover:bg-[#FC0903] text-[#FAF8F4] rounded-xl font-semibold text-base transition-all duration-300 shadow-lg hover:shadow-terracotta disabled:opacity-60 disabled:cursor-not-allowed">
               {loading ? <><Loader2 className="w-4 h-4 animate-spin" /> Saving...</> : 'Save Changes'}
             </motion.button>
           </div>

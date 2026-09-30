@@ -14,7 +14,7 @@ const AIDeepDiveSection: React.FC = () => {
     investmentMetrics: [
       { label: 'ROI (5yr)', value: '45%' },
       { label: 'Cap Rate', value: '5.2%' },
-      { label: 'Cash Flow', value: '$8k/mo' }
+      { label: 'Cash Flow', value: '8k MAD/mo' }
     ],
     neighborhoodScore: 94
   };
@@ -24,7 +24,7 @@ const AIDeepDiveSection: React.FC = () => {
       <div className="max-w-[1280px] mx-auto px-8">
         {/* Section Header */}
         <div className="mb-12">
-          <div className="font-space-mono text-xs text-[#D4755B] uppercase tracking-[1.2px] mb-4">
+          <div className="font-space-mono text-xs text-[#FC0903] uppercase tracking-[1.2px] mb-4">
             Deep Analysis
           </div>
           <h2 className="font-syne text-4xl text-[#221410]">
@@ -63,7 +63,7 @@ const AIDeepDiveSection: React.FC = () => {
               <span className="font-syne text-xs text-[#B55D45] uppercase tracking-wider">
                 Under Market Value
               </span>
-              <TrendingDown className="w-5 h-5 text-[#D4755B]" />
+              <TrendingDown className="w-5 h-5 text-[#FC0903]" />
             </div>
 
             {/* Property Details */}
@@ -71,8 +71,8 @@ const AIDeepDiveSection: React.FC = () => {
               <h3 className="font-syne text-xl text-[#221410] mb-2">
                 The Eames Retreat
               </h3>
-              <p className="font-space-mono font-bold text-lg text-[#D4755B] mb-4">
-                $2,400,000
+              <p className="font-space-mono font-bold text-lg text-[#FC0903] mb-4">
+                2,400,000 MAD
               </p>
 
               <p className="font-manrope font-extralight text-sm leading-relaxed text-[rgba(34,20,16,0.6)] mb-6">
@@ -118,13 +118,13 @@ const AIDeepDiveSection: React.FC = () => {
                       <span className="font-manrope font-extralight text-sm text-[#221410]">
                         {item.label}
                       </span>
-                      <span className="font-space-mono font-bold text-sm text-[#D4755B]">
+                      <span className="font-space-mono font-bold text-sm text-[#FC0903]">
                         {item.score}%
                       </span>
                     </div>
                     <div className="h-2 bg-[#E6E0DA] rounded-full overflow-hidden">
                       <div 
-                        className="h-full bg-[#D4755B] rounded-full transition-all duration-500"
+                        className="h-full bg-[#FC0903] rounded-full transition-all duration-500"
                         style={{ width: `${item.score}%` }}
                       />
                     </div>
@@ -141,7 +141,7 @@ const AIDeepDiveSection: React.FC = () => {
               <div className="grid grid-cols-3 gap-4">
                 {analysisData.investmentMetrics.map((metric, index) => (
                   <div key={index} className="text-center">
-                    <div className="font-space-mono font-bold text-2xl text-[#D4755B] mb-1">
+                    <div className="font-space-mono font-bold text-2xl text-[#FC0903] mb-1">
                       {metric.value}
                     </div>
                     <div className="font-manrope font-extralight text-xs text-[#6b7280]">
@@ -153,7 +153,7 @@ const AIDeepDiveSection: React.FC = () => {
             </div>
 
             {/* Neighborhood Analysis */}
-            <div className="bg-[#D4755B] text-white rounded-xl p-6 flex items-center justify-between">
+            <div className="bg-[#FC0903] text-white rounded-xl p-6 flex items-center justify-between">
               <div>
                 <h3 className="font-syne text-lg mb-2">
                   Neighborhood Match

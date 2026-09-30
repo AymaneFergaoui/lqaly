@@ -7,7 +7,7 @@ const TestimonialsSection: React.FC = () => {
         {/* Section Header */}
         <div className="flex justify-between items-center mb-16">
           <div>
-            <div className="font-space-mono text-sm text-[#D4755B] uppercase tracking-widest mb-4">Testimonials</div>
+            <div className="font-space-mono text-sm text-[#FC0903] uppercase tracking-widest mb-4">Testimonials</div>
             <h2 className="font-fraunces text-5xl text-[#111827]">What Our Clients Say</h2>
           </div>
         </div>

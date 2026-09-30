@@ -64,7 +64,7 @@ const VerifyEmailPage: React.FC = () => {
           {status === 'loading' && (
             <div className="text-center py-8">
               <div className="w-16 h-16 bg-[#FFF7ED] rounded-full flex items-center justify-center mx-auto mb-6">
-                <Loader className="w-8 h-8 text-[#D4755B] animate-spin" />
+                <Loader className="w-8 h-8 text-[#FC0903] animate-spin" />
               </div>
               <h1 className="font-syne font-bold text-2xl text-[#221410] mb-3">
                 Verifying Your Email
@@ -91,7 +91,7 @@ const VerifyEmailPage: React.FC = () => {
               </p>
               <Link
                 to="/signin"
-                className="w-full inline-block bg-[#D4755B] text-white font-manrope font-bold py-3 rounded-xl hover:bg-[#C05621] transition-all text-center"
+                className="w-full inline-block bg-[#FC0903] text-white font-manrope font-bold py-3 rounded-xl hover:bg-[#C05621] transition-all text-center"
               >
                 Sign In Now
               </Link>
@@ -112,7 +112,7 @@ const VerifyEmailPage: React.FC = () => {
               <div className="space-y-3">
                 <Link
                   to="/signin"
-                  className="w-full inline-block bg-[#D4755B] text-white font-manrope font-bold py-3 rounded-xl hover:bg-[#C05621] transition-all text-center"
+                  className="w-full inline-block bg-[#FC0903] text-white font-manrope font-bold py-3 rounded-xl hover:bg-[#C05621] transition-all text-center"
                 >
                   Try Signing In
                 </Link>
@@ -126,7 +126,7 @@ const VerifyEmailPage: React.FC = () => {
           {/* Back to Home */}
           <Link
             to="/"
-            className="flex items-center justify-center gap-2 mt-6 font-manrope font-medium text-sm text-[#64748B] hover:text-[#D4755B] transition-[color]"
+            className="flex items-center justify-center gap-2 mt-6 font-manrope font-medium text-sm text-[#64748B] hover:text-[#FC0903] transition-[color]"
           >
             <ArrowLeft className="w-4 h-4" />
             Back to Home

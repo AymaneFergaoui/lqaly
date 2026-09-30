@@ -80,7 +80,7 @@ const StructuredData: React.FC<StructuredDataProps> = ({ type, data }) => {
       logo: `${SITE_URL}/logo.png`,
       image: `${SITE_URL}/og-image.png`,
       areaServed: AREA_SERVED.map((city) => ({ '@type': 'City', name: city })),
-      priceRange: '₹₹₹',
+      priceRange: '$$$',
       address: {
         '@type': 'PostalAddress',
         addressCountry: 'IN',
@@ -105,7 +105,7 @@ const StructuredData: React.FC<StructuredDataProps> = ({ type, data }) => {
         addressRegion: data?.region || 'Region',
         addressCountry: 'IN',
       },
-      ...(data?.price && { price: `₹${data.price}`, priceCurrency: 'INR' }),
+      ...(data?.price && { price: `${data.price} MAD`, priceCurrency: 'MAD' }),
       ...(data?.sqft && {
         floorSize: { '@type': 'QuantitativeValue', unitText: 'SQFT', value: data.sqft },
       }),

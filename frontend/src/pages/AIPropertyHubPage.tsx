@@ -145,8 +145,8 @@ const AIHubProductionPage: React.FC = () => {
           <div className="text-center max-w-3xl mx-auto">
             {/* Badge */}
             <div className="inline-flex items-center gap-3 bg-[rgba(212,117,91,0.15)] border border-[rgba(212,117,91,0.3)] rounded-full px-5 py-2.5 mb-8">
-              <span className="font-material-icons text-[#D4755B] text-lg" aria-hidden="true">smart_toy</span>
-              <span className="font-manrope font-bold text-sm text-[#D4755B] uppercase tracking-wider">
+              <span className="font-material-icons text-[#FC0903] text-lg" aria-hidden="true">smart_toy</span>
+              <span className="font-manrope font-bold text-sm text-[#FC0903] uppercase tracking-wider">
                 AI-Powered Feature
               </span>
             </div>
@@ -166,14 +166,14 @@ const AIHubProductionPage: React.FC = () => {
                 href={GITHUB_URL}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="bg-[#D4755B] text-white font-manrope font-bold text-lg px-8 py-4 rounded-xl shadow-lg hover:bg-[#B86851] transition-all hover:shadow-xl inline-flex items-center gap-3"
+                className="bg-[#FC0903] text-white font-manrope font-bold text-lg px-8 py-4 rounded-xl shadow-lg hover:bg-[#B86851] transition-all hover:shadow-xl inline-flex items-center gap-3"
               >
                 <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" /></svg>
                 View on GitHub
               </a>
               <Link
                 to="/properties"
-                className="border-2 border-[rgba(255,255,255,0.2)] text-white font-manrope font-bold text-lg px-8 py-4 rounded-xl hover:border-[#D4755B] hover:text-[#D4755B] transition-all inline-flex items-center gap-2"
+                className="border-2 border-[rgba(255,255,255,0.2)] text-white font-manrope font-bold text-lg px-8 py-4 rounded-xl hover:border-[#FC0903] hover:text-[#FC0903] transition-all inline-flex items-center gap-2"
               >
                 Browse Properties
                 <span className="font-material-icons text-sm" aria-hidden="true">arrow_forward</span>
@@ -183,7 +183,7 @@ const AIHubProductionPage: React.FC = () => {
             {/* Info Banner */}
             <div className="bg-[rgba(212,117,91,0.1)] border border-[rgba(212,117,91,0.25)] rounded-2xl p-6 max-w-xl mx-auto">
               <div className="flex items-start gap-3">
-                <span className="font-material-icons text-[#D4755B] text-xl mt-0.5" aria-hidden="true">info</span>
+                <span className="font-material-icons text-[#FC0903] text-xl mt-0.5" aria-hidden="true">info</span>
                 <p className="font-manrope text-sm text-[#d1c4b7] text-left leading-relaxed">
                   The AI Property Hub requires API credits to operate. To save deployment costs, this feature is
                   disabled on the live site. Clone the repo and run it locally to experience the full AI capabilities.
@@ -209,10 +209,10 @@ const AIHubProductionPage: React.FC = () => {
           {features.map((feature, index) => (
             <div
               key={index}
-              className="bg-white border border-[#E6D5C3] rounded-2xl p-6 hover:shadow-lg hover:border-[#D4755B]/30 transition-all group"
+              className="bg-white border border-[#E6D5C3] rounded-2xl p-6 hover:shadow-lg hover:border-[#FC0903]/30 transition-all group"
             >
-              <div className="w-12 h-12 bg-[rgba(212,117,91,0.1)] rounded-xl flex items-center justify-center mb-4 group-hover:bg-[#D4755B] transition-[background-color]">
-                <span className="font-material-icons text-[#D4755B] group-hover:text-white transition-[color]" aria-hidden="true">
+              <div className="w-12 h-12 bg-[rgba(212,117,91,0.1)] rounded-xl flex items-center justify-center mb-4 group-hover:bg-[#FC0903] transition-[background-color]">
+                <span className="font-material-icons text-[#FC0903] group-hover:text-white transition-[color]" aria-hidden="true">
                   {feature.icon}
                 </span>
               </div>
@@ -238,11 +238,11 @@ const AIHubProductionPage: React.FC = () => {
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {steps.map((item) => (
               <div key={item.step} className="bg-white rounded-2xl p-6 border border-[#E6D5C3]">
-                <span className="font-space-mono text-4xl font-bold text-[#D4755B]/20 block mb-3">
+                <span className="font-space-mono text-4xl font-bold text-[#FC0903]/20 block mb-3">
                   {item.step}
                 </span>
                 <h3 className="font-syne font-bold text-lg text-[#111827] mb-3">{item.title}</h3>
-                <code className="block bg-[#221410] text-[#D4755B] font-space-mono text-xs rounded-lg p-3 overflow-x-auto">
+                <code className="block bg-[#221410] text-[#FC0903] font-space-mono text-xs rounded-lg p-3 overflow-x-auto">
                   {item.command}
                 </code>
               </div>
@@ -386,7 +386,7 @@ const AIHubDevPage: React.FC = () => {
     setLocationAnalysis(null);
     setHasLoadedTrends(false);
 
-    const maxPriceInRupees = params.maxBudget * 10_000_000; // Cr → ₹
+    const maxPriceInRupees = params.maxBudget * 10_000_000; // Cr → MAD 
 
     const abort = aiApiRef.searchStream(
       {
@@ -483,7 +483,7 @@ const AIHubDevPage: React.FC = () => {
 
       {/* Hero — search form */}
       {AIHeroSection && (
-        <React.Suspense fallback={<div className="h-96 flex items-center justify-center"><div className="w-12 h-12 border-4 border-[#D4755B] border-t-transparent rounded-full animate-spin" /></div>}>
+        <React.Suspense fallback={<div className="h-96 flex items-center justify-center"><div className="w-12 h-12 border-4 border-[#FC0903] border-t-transparent rounded-full animate-spin" /></div>}>
           <AIHeroSection
             onSearch={handleSearch}
             loading={searchLoading}
@@ -549,7 +549,7 @@ const AIHubDevPage: React.FC = () => {
                 </p>
                 <button
                   onClick={() => fetchTrends(searchParams.city)}
-                  className="inline-flex items-center gap-2 bg-[#D4755B] hover:bg-[#C05621] text-white font-manrope font-semibold text-sm px-6 py-3 rounded-xl transition-all shadow-md shadow-[#D4755B]/20"
+                  className="inline-flex items-center gap-2 bg-[#FC0903] hover:bg-[#C05621] text-white font-manrope font-semibold text-sm px-6 py-3 rounded-xl transition-all shadow-md shadow-[#FC0903]/20"
                 >
                   <span className="text-base">&#x1F4C8;</span>
                   Load Location Trends

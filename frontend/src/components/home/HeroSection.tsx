@@ -78,8 +78,8 @@ const HeroSection: React.FC = () => {
             >
               {/* Badge */}
               <motion.div variants={itemVariants} className="inline-flex items-center gap-3 bg-[rgba(212,117,91,0.1)] border border-[rgba(212,117,91,0.2)] rounded-full px-4 py-2 mb-10">
-                <div className="w-2 h-2 bg-[#D4755B] rounded-full" />
-                <span className="font-manrope font-bold text-xs text-[#D4755B] uppercase tracking-wider">
+                <div className="w-2 h-2 bg-[#FC0903] rounded-full" />
+                <span className="font-manrope font-bold text-xs text-[#FC0903] uppercase tracking-wider">
                   Immobilier Propulsé par l'IA
                 </span>
               </motion.div>
@@ -87,7 +87,7 @@ const HeroSection: React.FC = () => {
               {/* Heading */}
               <motion.h1 data-speakable variants={itemVariants} className="font-fraunces text-[56px] lg:text-[70px] leading-[1.1] text-[#111827] mb-8">
                 Découvrez la<br />
-                <span className="italic text-[#D4755B]">Maison de vos Rêves</span> avec<br />
+                <span className="italic text-[#FC0903]">Maison de vos Rêves</span> avec<br />
                 l'Intelligence Artificielle
               </motion.h1>
 
@@ -99,12 +99,12 @@ const HeroSection: React.FC = () => {
 
               {/* CTA Buttons */}
               <motion.div variants={itemVariants} className="flex flex-wrap gap-4 mb-10">
-                <Link to="/properties" className="bg-[#D4755B] text-white font-manrope font-bold text-lg px-8 py-4 rounded-xl shadow-[0px_10px_15px_-3px_rgba(212,117,91,0.25),0px_4px_6px_-4px_rgba(212,117,91,0.25)] hover:bg-[#B86851] transition-all hover:shadow-xl inline-flex items-center">
+                <Link to="/properties" className="bg-[#FC0903] text-white font-manrope font-bold text-lg px-8 py-4 rounded-xl shadow-[0px_10px_15px_-3px_rgba(212,117,91,0.25),0px_4px_6px_-4px_rgba(212,117,91,0.25)] hover:bg-[#B86851] transition-all hover:shadow-xl inline-flex items-center">
                   Explorer les Propriétés
                   <span className="font-material-icons text-sm ml-2" aria-hidden="true">arrow_forward</span>
                 </Link>
-                <Link to="/ai-hub" className="border-2 border-[#d1d5db] text-[#374151] font-manrope font-bold text-lg px-8 py-4 rounded-xl hover:border-[#D4755B] hover:text-[#D4755B] transition-all inline-flex items-center">
-                  <span className="font-material-icons text-2xl text-[#D4755B] mr-2" aria-hidden="true">smart_toy</span>
+                <Link to="/ai-hub" className="border-2 border-[#d1d5db] text-[#374151] font-manrope font-bold text-lg px-8 py-4 rounded-xl hover:border-[#FC0903] hover:text-[#FC0903] transition-all inline-flex items-center">
+                  <span className="font-material-icons text-2xl text-[#FC0903] mr-2" aria-hidden="true">smart_toy</span>
                   {import.meta.env.PROD ? 'Hub Immobilier IA' : 'Essayer la Recherche IA'}
                 </Link>
               </motion.div>
@@ -142,11 +142,11 @@ const HeroSection: React.FC = () => {
                         <p className="font-space-mono text-xs text-[#6b7280] uppercase tracking-wide">Beverly Hills, CA</p>
                       </div>
                       <div className="bg-[rgba(212,117,91,0.1)] px-2 py-1 rounded">
-                        <span className="font-manrope font-bold text-xs text-[#D4755B]">CORRESPONDANCE IA : 98%</span>
+                        <span className="font-manrope font-bold text-xs text-[#FC0903]">CORRESPONDANCE IA : 98%</span>
                       </div>
                     </div>
                     <div className="border-t border-[#e5e7eb] pt-3 flex items-center justify-between">
-                      <span className="font-space-mono text-sm text-[#4b5563]">$4,250,000</span>
+                      <span className="font-space-mono text-sm text-[#4b5563]">4,250,000 MAD</span>
                       <div className="flex items-center gap-4 text-[#4b5563]">
                         <div className="flex items-center gap-1">
                           <span className="font-material-icons text-xs" aria-hidden="true">bed</span>

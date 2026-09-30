@@ -5,13 +5,13 @@
  *   { city, locality, price: { min, max }, type, category, bhk, possession }
  *
  * Backend expects:
- *   { city, locality, bhk, minPrice, maxPrice (Crores string),
+ *   { city, locality, bhk, minPrice, maxPrice (M MAD string),
  *     propertyType, propertyCategory, possession, limit }
  */
 export const transformAISearchRequest = (req, res, next) => {
   const { city, locality, price, type, category, bhk, possession, model } = req.body;
 
-  // Convert price from absolute INR to Crores (1 Cr = 1,00,00,000)
+  // Convert price from absolute INR to M MAD (1 Cr = 1,00,00,000)
   let maxPriceInCr = '5';
   let minPriceInCr = '0';
   if (price?.max) maxPriceInCr = (price.max / 10_000_000).toFixed(2);

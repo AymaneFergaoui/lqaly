@@ -18,7 +18,7 @@ interface PropertyCardProps {
 const badgeColor: Record<string, string> = {
   'FOR RENT': 'bg-blue-500',
   'SOLD': 'bg-[#6B7280]',
-  'HOT': 'bg-[#D4755B]',
+  'HOT': 'bg-[#FC0903]',
 };
 
 const PropertyCard: React.FC<PropertyCardProps> = ({
@@ -27,7 +27,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
   const [favorited, setFavorited] = useState(false);
 
   return (
-    <Link to={`/property/${id}`} className="group block outline-none focus-visible:ring-2 focus-visible:ring-[#D4755B] rounded-2xl">
+    <Link to={`/property/${id}`} className="group block outline-none focus-visible:ring-2 focus-visible:ring-[#FC0903] rounded-2xl">
       <article className="bg-white rounded-2xl overflow-hidden shadow-[0_1px_3px_rgba(0,0,0,0.06),0_1px_2px_rgba(0,0,0,0.04)] hover:shadow-[0_8px_30px_rgba(0,0,0,0.10)] transition-shadow duration-300">
 
         {/* ── Image ──────────────────────────────────────── */}
@@ -58,7 +58,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
             className="absolute top-3 right-3 w-9 h-9 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-sm hover:bg-white/40 transition-colors duration-200 active:scale-[0.96]"
           >
             <Heart
-              className={`w-4 h-4 transition-colors duration-200 ${favorited ? 'text-[#D4755B] fill-[#D4755B]' : 'text-white'}`}
+              className={`w-4 h-4 transition-colors duration-200 ${favorited ? 'text-[#FC0903] fill-[#FC0903]' : 'text-white'}`}
             />
           </button>
 
@@ -79,7 +79,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
 
           {/* Location */}
           <div className="flex items-center gap-1 mb-3">
-            <MapPin className="w-3.5 h-3.5 text-[#D4755B] shrink-0" aria-hidden />
+            <MapPin className="w-3.5 h-3.5 text-[#FC0903] shrink-0" aria-hidden />
             <span className="font-manrope text-xs text-[#6B7280] truncate">{location}</span>
           </div>
 

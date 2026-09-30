@@ -99,7 +99,7 @@ const Lightbox: React.FC<{
               key={i}
               onClick={e => { e.stopPropagation(); setCurrent(i); }}
               className={`w-12 h-8 rounded-md overflow-hidden transition-all ${
-                i === current ? 'ring-2 ring-[#D4755B] opacity-100' : 'opacity-40 hover:opacity-70'
+                i === current ? 'ring-2 ring-[#FC0903] opacity-100' : 'opacity-40 hover:opacity-70'
               }`}
             >
               <img src={img} alt="" className="w-full h-full object-cover" />

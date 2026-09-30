@@ -42,7 +42,7 @@ const FAQSection: React.FC = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <div className="flex justify-center mb-3">
-            <span className="font-space-mono text-xs text-[#D4755B] uppercase tracking-widest">
+            <span className="font-space-mono text-xs text-[#FC0903] uppercase tracking-widest">
               Help Center
             </span>
           </div>
@@ -69,7 +69,7 @@ const FAQSection: React.FC = () => {
               >
                 {/* Number Badge */}
                 <div className="w-8 h-8 bg-[#F9F7F2] border border-[#E6E0DA] rounded-full flex items-center justify-center flex-shrink-0">
-                  <span className="font-syne font-bold text-sm text-[#D4755B]">
+                  <span className="font-syne font-bold text-sm text-[#FC0903]">
                     {String(faq.id).padStart(2, '0')}
                   </span>
                 </div>
@@ -80,7 +80,7 @@ const FAQSection: React.FC = () => {
                 </h3>
 
                 {/* Expand/Collapse Icon */}
-                <span className={`material-icons text-[#D4755B] transition-transform ${
+                <span className={`material-icons text-[#FC0903] transition-transform ${
                   openIndex === index ? 'rotate-180' : ''
                 }`}>
                   expand_more
@@ -103,7 +103,7 @@ const FAQSection: React.FC = () => {
         <div className="text-center mt-12">
           <a 
             href="#" 
-            className="inline-flex items-center gap-2 font-manrope font-bold text-base text-[#D4755B] hover:text-[#C05621] transition-[color] group"
+            className="inline-flex items-center gap-2 font-manrope font-bold text-base text-[#FC0903] hover:text-[#C05621] transition-[color] group"
           >
             <span>Get Full Knowledge Base</span>
             <span className="material-icons text-lg group-hover:translate-x-1 transition-transform">

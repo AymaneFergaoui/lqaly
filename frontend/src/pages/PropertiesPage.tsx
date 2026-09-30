@@ -26,8 +26,8 @@ export interface Property {
 
 const PropertiesPage: React.FC = () => {
   useSEO({
-    title: 'Browse Properties in Mumbai, Delhi, Bangalore & More',
-    description: 'Browse flats, villas, apartments, and houses for sale or rent in Mumbai, Delhi, Bangalore, Ahmedabad, and Pune. Filter by price, bedrooms, and location.',
+    title: 'Parcourir les propriétés',
+    description: 'Parcourez des appartements, villas et maisons à vendre ou à louer. Filtrez par prix, nombre de chambres et emplacement.',
     url: 'https://lqaly.vercel.app/properties',
   });
 
@@ -125,22 +125,22 @@ const PropertiesPage: React.FC = () => {
 
       {/* ── Page title ── */}
       <div className="max-w-[1440px] mx-auto px-6 pt-8 pb-2">
-        <h1 className="font-fraunces text-3xl font-semibold text-[#221410]">All Properties</h1>
+        <h1 className="font-fraunces text-3xl font-semibold text-[#221410]">Toutes les propriétés</h1>
       </div>
 
       {/* ── Content ── */}
-      {loading && <LoadingState message="Loading properties…" />}
+      {loading && <LoadingState message="Chargement des propriétés…" />}
 
       {error && !loading && (
         <div className="flex items-center justify-center py-24">
           <div className="text-center">
-            <span className="material-icons text-4xl text-[#D4755B] mb-4 block">error_outline</span>
-            <p className="font-manrope text-[#374151] mb-4">{error}</p>
+            <span className="material-icons text-4xl text-[#FC0903] mb-4 block">error_outline</span>
+            <p className="font-manrope text-[#374151] mb-4">Échec du chargement des propriétés. Veuillez réessayer plus tard.</p>
             <button
               onClick={() => window.location.reload()}
-              className="bg-[#D4755B] text-white font-manrope font-bold px-6 py-2.5 rounded-xl hover:bg-[#B86851] active:scale-[0.96] transition-all"
+              className="bg-[#FC0903] text-white font-manrope font-bold px-6 py-2.5 rounded-xl hover:bg-[#B86851] active:scale-[0.96] transition-all"
             >
-              Retry
+              Réessayer
             </button>
           </div>
         </div>
@@ -154,8 +154,8 @@ const PropertiesPage: React.FC = () => {
         >
           <div className="text-center">
             <span className="material-icons text-5xl text-[#D4C4BC] mb-4 block">search_off</span>
-            <p className="font-fraunces text-xl text-[#221410] mb-2">No properties found</p>
-            <p className="font-manrope text-sm text-[#6B7280]">Try adjusting your filters</p>
+            <p className="font-fraunces text-xl text-[#221410] mb-2">Aucune propriété trouvée</p>
+            <p className="font-manrope text-sm text-[#6B7280]">Essayez d'ajuster vos filtres</p>
           </div>
         </motion.div>
       )}

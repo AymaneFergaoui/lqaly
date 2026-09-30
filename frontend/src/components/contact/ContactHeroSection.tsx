@@ -7,20 +7,20 @@ const ContactHeroSection: React.FC = () => {
         <div className="text-center">
           {/* Label */}
           <div className="flex justify-center mb-4">
-            <span className="font-space-mono text-xs text-[#D4755B] uppercase tracking-widest">
+            <span className="font-space-mono text-xs text-[#FC0903] uppercase tracking-widest">
               Contact & Support
             </span>
           </div>
 
           {/* Main Heading */}
           <h1 className="font-fraunces text-6xl text-[#221410] mb-6">
-            We'd Love to Hear From You
+            Nous serions ravis d'échanger avec vous
           </h1>
 
           {/* Subtitle */}
           <p className="font-manrope text-lg text-[#4B5563] leading-relaxed max-w-[672px] mx-auto">
-            Whether you have a question about listings, need assistance with our AI tools, or
-            want to explore partnership opportunities, our team is ready to help.
+            Que vous ayez une question sur nos annonces, besoin d'assistance avec nos outils d'IA, ou
+            que vous souhaitiez explorer des opportunités de partenariat, notre équipe est à votre écoute.
           </p>
         </div>
       </div>

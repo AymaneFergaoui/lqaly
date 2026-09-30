@@ -348,7 +348,7 @@ export const searchProperties = async (req, res) => {
                 if (!propertiesData?.properties || propertiesData.properties.length === 0) {
                     return {
                         notFound: true,
-                        message: `No ${propertyType || ''} properties found in ${locality ? locality + ', ' : ''}${city} within ₹${parseFloat(maxPrice) < 1 ? Math.round(parseFloat(maxPrice) * 100) + ' Lakhs' : maxPrice + ' Crores'}. Try adjusting your budget or area.`
+                        message: `No ${propertyType || ''} properties found in ${locality ? locality + ', ' : ''}${city} within ${parseFloat(maxPrice) < 1 ? Math.round(parseFloat(maxPrice) * 100) + ' MAD' : maxPrice + ' M MAD'}. Try adjusting your budget or area.`
                     };
                 }
 

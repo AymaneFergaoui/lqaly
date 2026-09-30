@@ -50,13 +50,13 @@ const KPICard = ({ label, value, sub, icon: Icon, accent, index }) => (
     transition={{ delay: index * 0.06, duration: 0.3 }}
     className={cn(
       "bg-white rounded-xl p-5 border transition-shadow duration-200 hover:shadow-sm",
-      accent ? "border-[#D4755B]/25 shadow-[inset_0_0_0_1px_rgba(212,117,91,0.15)]" : "border-[#E8E7E5]"
+      accent ? "border-[#FC0903]/25 shadow-[inset_0_0_0_1px_rgba(212,117,91,0.15)]" : "border-[#E8E7E5]"
     )}
   >
     <div className="flex items-start justify-between mb-3">
       <p className="text-xs font-medium text-[#9B9B99] uppercase tracking-wider">{label}</p>
-      <div className={cn("w-7 h-7 rounded-lg flex items-center justify-center", accent ? "bg-[#D4755B]/10" : "bg-[#F5F5F3]")}>
-        <Icon className={cn("w-3.5 h-3.5", accent ? "text-[#D4755B]" : "text-[#9B9B99]")} />
+      <div className={cn("w-7 h-7 rounded-lg flex items-center justify-center", accent ? "bg-[#FC0903]/10" : "bg-[#F5F5F3]")}>
+        <Icon className={cn("w-3.5 h-3.5", accent ? "text-[#FC0903]" : "text-[#9B9B99]")} />
       </div>
     </div>
     <p className="font-space-mono text-3xl font-bold text-[#111110] tabular-nums leading-none mb-1.5">
@@ -73,7 +73,7 @@ const activityConfig = (item) => {
   if (a.includes("reject")) return { color: "#EF4444", Icon: XCircle, label: "Rejected" };
   if (a.includes("suspend") || a.includes("ban")) return { color: "#F59E0B", Icon: AlertTriangle, label: "Suspended" };
   if (a.includes("user")) return { color: "#3B82F6", Icon: Users, label: "User" };
-  return { color: "#D4755B", Icon: Activity, label: "Action" };
+  return { color: "#FC0903", Icon: Activity, label: "Action" };
 };
 
 const ActivityTimeline = ({ items }) => {
@@ -323,7 +323,7 @@ const Dashboard = () => {
           <p className="text-sm text-[#9B9B99] mb-5">{error}</p>
           <button
             onClick={() => fetchStats()}
-            className="px-5 py-2.5 bg-[#D4755B] text-white rounded-lg text-sm font-medium hover:bg-[#C05E44] active:scale-[0.98] transition-all"
+            className="px-5 py-2.5 bg-[#FC0903] text-white rounded-lg text-sm font-medium hover:bg-[#C05E44] active:scale-[0.98] transition-all"
           >
             Try Again
           </button>
@@ -349,7 +349,7 @@ const Dashboard = () => {
           <button
             onClick={() => fetchStats(true)}
             disabled={refreshing || inFlight}
-            className="flex items-center gap-2 px-4 py-2 bg-white border border-[#E8E7E5] text-[#6B6B6A] rounded-lg text-sm font-medium hover:border-[#D4755B] hover:text-[#D4755B] active:scale-[0.97] transition-all duration-150 disabled:opacity-50 shadow-sm"
+            className="flex items-center gap-2 px-4 py-2 bg-white border border-[#E8E7E5] text-[#6B6B6A] rounded-lg text-sm font-medium hover:border-[#FC0903] hover:text-[#FC0903] active:scale-[0.97] transition-all duration-150 disabled:opacity-50 shadow-sm"
           >
             <RefreshCw className={cn("w-3.5 h-3.5", (refreshing || inFlight) && "animate-spin")} />
             {refreshing || inFlight ? "Refreshing…" : "Refresh"}
@@ -410,7 +410,7 @@ const Dashboard = () => {
               <h2 className="text-base font-semibold text-[#111110]">Property Views</h2>
               <p className="text-xs text-[#9B9B99] mt-0.5">Daily view activity</p>
             </div>
-            <div className="flex items-center gap-1.5 text-xs font-medium text-[#D4755B]">
+            <div className="flex items-center gap-1.5 text-xs font-medium text-[#FC0903]">
               <TrendingUp className="w-3.5 h-3.5" />
               Last 30 days
             </div>
@@ -422,8 +422,8 @@ const Dashboard = () => {
                 <AreaChart data={viewsData} margin={{ top: 4, right: 4, left: -22, bottom: 0 }}>
                   <defs>
                     <linearGradient id="viewsGradient" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#D4755B" stopOpacity={0.14} />
-                      <stop offset="100%" stopColor="#D4755B" stopOpacity={0} />
+                      <stop offset="0%" stopColor="#FC0903" stopOpacity={0.14} />
+                      <stop offset="100%" stopColor="#FC0903" stopOpacity={0} />
                     </linearGradient>
                   </defs>
                   <CartesianGrid strokeDasharray="4 4" stroke="#F0EFED" vertical={false} />
@@ -441,10 +441,10 @@ const Dashboard = () => {
                   <Tooltip content={<ChartTooltip unit=" views" />} cursor={{ stroke: "#E8E7E5", strokeWidth: 1 }} />
                   <Area
                     type="monotone" dataKey="views"
-                    stroke="#D4755B" strokeWidth={1.5}
+                    stroke="#FC0903" strokeWidth={1.5}
                     fill="url(#viewsGradient)"
                     dot={false}
-                    activeDot={{ r: 3.5, fill: "#D4755B", strokeWidth: 0 }}
+                    activeDot={{ r: 3.5, fill: "#FC0903", strokeWidth: 0 }}
                     animationDuration={900}
                   />
                 </AreaChart>
@@ -596,7 +596,7 @@ const Dashboard = () => {
               </div>
               <Link
                 to="/activity-logs"
-                className="text-xs text-[#D4755B] hover:text-[#C05E44] font-medium transition-colors flex items-center gap-1"
+                className="text-xs text-[#FC0903] hover:text-[#C05E44] font-medium transition-colors flex items-center gap-1"
               >
                 View all <ArrowRight className="w-3 h-3" />
               </Link>

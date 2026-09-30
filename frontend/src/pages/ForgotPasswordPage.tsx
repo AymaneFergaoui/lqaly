@@ -66,13 +66,13 @@ const ForgotPasswordPage: React.FC = () => {
                     setIsSuccess(false);
                     setEmail('');
                   }}
-                  className="w-full bg-transparent border border-[#D4755B] text-[#D4755B] font-manrope font-bold py-3 rounded-xl hover:bg-[#D4755B] hover:text-white transition-all"
+                  className="w-full bg-transparent border border-[#FC0903] text-[#FC0903] font-manrope font-bold py-3 rounded-xl hover:bg-[#FC0903] hover:text-white transition-all"
                 >
                   Try Another Email
                 </button>
                 <Link
                   to="/signin"
-                  className="w-full bg-[#D4755B] text-white font-manrope font-bold py-3 rounded-xl hover:bg-[#C05621] transition-all text-center"
+                  className="w-full bg-[#FC0903] text-white font-manrope font-bold py-3 rounded-xl hover:bg-[#C05621] transition-all text-center"
                 >
                   Back to Sign In
                 </Link>
@@ -83,7 +83,7 @@ const ForgotPasswordPage: React.FC = () => {
             <>
               <div className="text-center mb-8">
                 <div className="w-14 h-14 bg-[#FFF7ED] rounded-full flex items-center justify-center mx-auto mb-5">
-                  <Mail className="w-7 h-7 text-[#D4755B]" />
+                  <Mail className="w-7 h-7 text-[#FC0903]" />
                 </div>
                 <h1 className="font-syne font-bold text-3xl text-[#221410] mb-2">
                   Forgot Password?
@@ -106,7 +106,7 @@ const ForgotPasswordPage: React.FC = () => {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       placeholder="you@example.com"
-                      className="w-full bg-[#F5F1E8] border border-[#EBE5DE] rounded-xl pl-12 pr-4 py-3.5 font-manrope text-sm text-[#221410] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#D4755B] focus:ring-1 focus:ring-[#D4755B] transition-all"
+                      className="w-full bg-[#F5F1E8] border border-[#EBE5DE] rounded-xl pl-12 pr-4 py-3.5 font-manrope text-sm text-[#221410] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#FC0903] focus:ring-1 focus:ring-[#FC0903] transition-all"
                       required
                     />
                   </div>
@@ -116,7 +116,7 @@ const ForgotPasswordPage: React.FC = () => {
                 <button
                   type="submit"
                   disabled={loading}
-                  className="w-full bg-[#D4755B] hover:bg-[#C05621] disabled:opacity-60 disabled:cursor-not-allowed text-white font-manrope font-bold text-base py-3.5 rounded-xl transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
+                  className="w-full bg-[#FC0903] hover:bg-[#C05621] disabled:opacity-60 disabled:cursor-not-allowed text-white font-manrope font-bold text-base py-3.5 rounded-xl transition-all shadow-lg hover:shadow-xl flex items-center justify-center gap-2"
                 >
                   {loading ? (
                     <>
@@ -132,7 +132,7 @@ const ForgotPasswordPage: React.FC = () => {
               {/* Back to Sign In */}
               <Link
                 to="/signin"
-                className="flex items-center justify-center gap-2 mt-6 font-manrope font-medium text-sm text-[#64748B] hover:text-[#D4755B] transition-[color]"
+                className="flex items-center justify-center gap-2 mt-6 font-manrope font-medium text-sm text-[#64748B] hover:text-[#FC0903] transition-[color]"
               >
                 <ArrowLeft className="w-4 h-4" />
                 Back to Sign In

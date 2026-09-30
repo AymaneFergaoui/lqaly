@@ -64,7 +64,7 @@ const PropertyLocation: React.FC<PropertyLocationProps> = ({ address, city, stat
     <div className="mb-12">
       {/* Section Header */}
       <div className="flex items-center gap-3 mb-6">
-        <div className="w-1 h-6 bg-[#D4755B] rounded-full" />
+        <div className="w-1 h-6 bg-[#FC0903] rounded-full" />
         <h2 className="font-syne text-2xl text-[#0F172A]">
           Location
         </h2>
@@ -74,7 +74,7 @@ const PropertyLocation: React.FC<PropertyLocationProps> = ({ address, city, stat
       <div className="bg-white border border-[#E6E0DA] rounded-xl p-6 mb-6">
         <div className="flex items-start gap-4">
           <div className="w-10 h-10 bg-[rgba(212,117,91,0.1)] rounded-full flex items-center justify-center flex-shrink-0">
-            <MapPin className="w-5 h-5 text-[#D4755B]" />
+            <MapPin className="w-5 h-5 text-[#FC0903]" />
           </div>
           <div className="flex-1">
             <h3 className="font-manrope font-medium text-base text-[#0F172A] mb-1">
@@ -89,7 +89,7 @@ const PropertyLocation: React.FC<PropertyLocationProps> = ({ address, city, stat
               href={googleMapLink}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1.5 text-[#D4755B] hover:text-[#B86851] font-manrope text-sm font-medium shrink-0 transition-[color]"
+              className="inline-flex items-center gap-1.5 text-[#FC0903] hover:text-[#B86851] font-manrope text-sm font-medium shrink-0 transition-[color]"
             >
               Open in Maps
               <ExternalLink className="w-4 h-4" />
@@ -116,7 +116,7 @@ const PropertyLocation: React.FC<PropertyLocationProps> = ({ address, city, stat
           /* Placeholder when no map link */
           <div className="absolute inset-0 bg-gradient-to-br from-[#F5F1E8] to-[#E6E0DA] flex flex-col items-center justify-center gap-3">
             <div className="w-16 h-16 bg-white/80 rounded-full flex items-center justify-center shadow-sm">
-              <MapPin className="w-8 h-8 text-[#D4755B]/60" />
+              <MapPin className="w-8 h-8 text-[#FC0903]/60" />
             </div>
             <p className="font-manrope text-sm text-[#64748B]">
               Map not available for this property

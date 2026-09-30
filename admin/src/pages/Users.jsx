@@ -302,7 +302,7 @@ const UsersManagement = () => {
           <h3 className="font-semibold text-[#111110] mb-1">Failed to load users</h3>
           <p className="text-sm text-[#9B9B99] mb-5">{error}</p>
           <button onClick={() => fetchUsers()}
-            className="px-5 py-2.5 bg-[#D4755B] text-white rounded-lg text-sm font-medium hover:bg-[#C05E44] active:scale-[0.98] transition-all">
+            className="px-5 py-2.5 bg-[#FC0903] text-white rounded-lg text-sm font-medium hover:bg-[#C05E44] active:scale-[0.98] transition-all">
             Try Again
           </button>
         </div>
@@ -325,7 +325,7 @@ const UsersManagement = () => {
           <button
             onClick={() => fetchUsers(true)}
             disabled={refreshing}
-            className="flex items-center gap-2 px-4 py-2 bg-white border border-[#E8E7E5] text-[#6B6B6A] rounded-lg text-sm font-medium hover:border-[#D4755B] hover:text-[#D4755B] active:scale-[0.97] transition-all shadow-sm disabled:opacity-50"
+            className="flex items-center gap-2 px-4 py-2 bg-white border border-[#E8E7E5] text-[#6B6B6A] rounded-lg text-sm font-medium hover:border-[#FC0903] hover:text-[#FC0903] active:scale-[0.97] transition-all shadow-sm disabled:opacity-50"
           >
             <RefreshCw className={cn("w-3.5 h-3.5", refreshing && "animate-spin")} />
             {refreshing ? "Refreshing…" : "Refresh"}
@@ -343,7 +343,7 @@ const UsersManagement = () => {
                 className={cn(
                   "px-5 py-3.5 text-sm font-medium transition-all border-b-2 -mb-px",
                   statusFilter === tab.key
-                    ? "border-[#D4755B] text-[#D4755B]"
+                    ? "border-[#FC0903] text-[#FC0903]"
                     : "border-transparent text-[#9B9B99] hover:text-[#111110]"
                 )}
               >
@@ -351,7 +351,7 @@ const UsersManagement = () => {
                 {tab.count !== undefined && (
                   <span className={cn(
                     "ml-2 px-1.5 py-0.5 rounded text-xs tabular-nums",
-                    statusFilter === tab.key ? "bg-[#D4755B]/10 text-[#D4755B]" : "bg-[#F5F5F3] text-[#9B9B99]"
+                    statusFilter === tab.key ? "bg-[#FC0903]/10 text-[#FC0903]" : "bg-[#F5F5F3] text-[#9B9B99]"
                   )}>
                     {tab.count ?? 0}
                   </span>
@@ -369,13 +369,13 @@ const UsersManagement = () => {
                 placeholder="Search by name or email…"
                 value={searchTerm}
                 onChange={(e) => { setSearchTerm(e.target.value); setCurrentPage(1); }}
-                className="w-full pl-10 pr-4 py-2 border border-[#E8E7E5] rounded-lg text-sm text-[#111110] placeholder:text-[#9B9B99] focus:outline-none focus:ring-2 focus:ring-[#D4755B]/15 focus:border-[#D4755B] transition-all"
+                className="w-full pl-10 pr-4 py-2 border border-[#E8E7E5] rounded-lg text-sm text-[#111110] placeholder:text-[#9B9B99] focus:outline-none focus:ring-2 focus:ring-[#FC0903]/15 focus:border-[#FC0903] transition-all"
               />
             </div>
             <select
               value={sortBy}
               onChange={(e) => { setSortBy(e.target.value); setCurrentPage(1); }}
-              className="px-3 py-2 border border-[#E8E7E5] rounded-lg bg-white text-sm text-[#6B6B6A] focus:outline-none focus:border-[#D4755B] transition-all"
+              className="px-3 py-2 border border-[#E8E7E5] rounded-lg bg-white text-sm text-[#6B6B6A] focus:outline-none focus:border-[#FC0903] transition-all"
             >
               <option value="createdAt">Date Joined</option>
               <option value="lastActive">Last Active</option>
@@ -402,7 +402,7 @@ const UsersManagement = () => {
                       type="checkbox"
                       checked={selectedUsers.size === users.length && users.length > 0}
                       onChange={handleSelectAll}
-                      className="w-4 h-4 rounded border-[#D0CFCE] accent-[#D4755B] cursor-pointer"
+                      className="w-4 h-4 rounded border-[#D0CFCE] accent-[#FC0903] cursor-pointer"
                     />
                   </th>
                   <th className="px-4 py-3 text-left text-xs font-semibold text-[#9B9B99] uppercase tracking-wider">User</th>
@@ -426,7 +426,7 @@ const UsersManagement = () => {
                         type="checkbox"
                         checked={selectedUsers.has(user._id)}
                         onChange={() => handleSelectUser(user._id)}
-                        className="w-4 h-4 rounded border-[#D0CFCE] accent-[#D4755B] cursor-pointer"
+                        className="w-4 h-4 rounded border-[#D0CFCE] accent-[#FC0903] cursor-pointer"
                       />
                     </td>
 

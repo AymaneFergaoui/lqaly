@@ -33,7 +33,7 @@ const SignUpPage: React.FC = () => {
           <AuthHeader />
           <div className="bg-white border border-[#E6E0DA] rounded-2xl p-8 shadow-xl text-center">
             <div className="w-16 h-16 bg-[#FFF7ED] rounded-full flex items-center justify-center mx-auto mb-6">
-              <Mail className="w-8 h-8 text-[#D4755B]" />
+              <Mail className="w-8 h-8 text-[#FC0903]" />
             </div>
             <h1 className="font-syne font-bold text-2xl text-[#221410] mb-3">
               Check Your Email
@@ -41,13 +41,13 @@ const SignUpPage: React.FC = () => {
             <p className="font-manrope font-extralight text-sm text-[#4B5563] mb-2">
               We've sent a verification link to
             </p>
-            <p className="font-manrope font-semibold text-[#D4755B] mb-4">{verificationEmail}</p>
+            <p className="font-manrope font-semibold text-[#FC0903] mb-4">{verificationEmail}</p>
             <p className="font-manrope font-extralight text-sm text-[#6B7280] mb-6">
               Click the link in the email to activate your account. The link expires in 24 hours.
             </p>
             <Link
               to="/signin"
-              className="w-full inline-block bg-[#D4755B] text-white font-manrope font-bold py-3 rounded-xl hover:bg-[#C05621] transition-[background-color] text-center"
+              className="w-full inline-block bg-[#FC0903] text-white font-manrope font-bold py-3 rounded-xl hover:bg-[#C05621] transition-[background-color] text-center"
             >
               Go to Sign In
             </Link>
@@ -55,7 +55,7 @@ const SignUpPage: React.FC = () => {
           <div className="text-center mt-6">
             <Link
               to="/"
-              className="inline-flex items-center gap-2 font-manrope font-medium text-sm text-[#64748B] hover:text-[#D4755B] transition-[color]"
+              className="inline-flex items-center gap-2 font-manrope font-medium text-sm text-[#64748B] hover:text-[#FC0903] transition-[color]"
             >
               <ArrowLeft className="w-4 h-4" />
               <span>Back to Home</span>
@@ -99,7 +99,7 @@ const SignUpPage: React.FC = () => {
             Already have an account?{' '}
             <Link
               to="/signin"
-              className="font-semibold text-[#D4755B] hover:text-[#C05621] transition-[color]"
+              className="font-semibold text-[#FC0903] hover:text-[#C05621] transition-[color]"
             >
               Sign In
             </Link>
@@ -110,7 +110,7 @@ const SignUpPage: React.FC = () => {
         <div className="text-center mt-6">
           <Link
             to="/"
-            className="inline-flex items-center gap-2 font-manrope font-medium text-sm text-[#64748B] hover:text-[#D4755B] transition-[color]"
+            className="inline-flex items-center gap-2 font-manrope font-medium text-sm text-[#64748B] hover:text-[#FC0903] transition-[color]"
           >
             <ArrowLeft className="w-4 h-4" />
             <span>Back to Home</span>

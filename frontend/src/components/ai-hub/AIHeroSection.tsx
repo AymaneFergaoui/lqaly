@@ -278,15 +278,15 @@ const AIHeroSection: React.FC<AIHeroSectionProps> = ({ onSearch, loading, sseSta
       {/* ── Hero band ────────────────────────────── */}
       <div className="relative bg-[#FAF8F4] overflow-hidden">
         <div className="absolute inset-0 pointer-events-none" aria-hidden>
-          <div className="absolute top-0 inset-x-0 h-[500px] bg-gradient-to-b from-[#D4755B]/8 to-transparent" />
-          <div className="absolute -top-24 right-0 w-[480px] h-[480px] bg-[#D4755B]/8 rounded-full blur-[100px]" />
+          <div className="absolute top-0 inset-x-0 h-[500px] bg-gradient-to-b from-[#FC0903]/8 to-transparent" />
+          <div className="absolute -top-24 right-0 w-[480px] h-[480px] bg-[#FC0903]/8 rounded-full blur-[100px]" />
         </div>
 
         <div className="relative max-w-[1200px] mx-auto px-6 pt-32 pb-14">
           <div className="text-center max-w-[760px] mx-auto">
             <h1 className="font-fraunces text-4xl md:text-5xl lg:text-6xl leading-tight text-[#221410] mb-6 [text-wrap:balance]">
               Find Properties with<br />
-              <span className="text-[#D4755B]">AI Intelligence</span>
+              <span className="text-[#FC0903]">AI Intelligence</span>
             </h1>
 
             <p className="font-manrope text-lg text-[#57534E] max-w-[620px] mx-auto leading-relaxed">
@@ -303,7 +303,7 @@ const AIHeroSection: React.FC<AIHeroSectionProps> = ({ onSearch, loading, sseSta
               { n: '3', title: 'AI ranks your matches', desc: 'Scored, flagged and explained — best value first.' },
             ].map((s) => (
               <div key={s.n} className="flex items-start gap-3 bg-white border border-[#E6E0DA] rounded-xl px-4 py-3.5">
-                <span className="font-fraunces text-xl text-[#D4755B] leading-none mt-0.5">{s.n}</span>
+                <span className="font-fraunces text-xl text-[#FC0903] leading-none mt-0.5">{s.n}</span>
                 <div className="text-left">
                   <p className="font-manrope text-sm font-semibold text-[#221410]">{s.title}</p>
                   <p className="font-manrope text-xs text-[#6B7280] mt-0.5 leading-relaxed">{s.desc}</p>
@@ -362,13 +362,13 @@ const AIHeroSection: React.FC<AIHeroSectionProps> = ({ onSearch, loading, sseSta
                   onClick={() => setSelectedModel(m.slug)}
                   className={`flex-1 min-w-[140px] text-left px-4 py-3 rounded-xl border text-sm transition-all ${
                     selectedModel === m.slug
-                      ? 'bg-[#221410] border-[#D4755B] text-white shadow-md'
-                      : 'bg-white border-[#E6E0DA] text-[#6B7280] hover:border-[#D4755B]/50 hover:text-[#1C1B1A]'
+                      ? 'bg-[#221410] border-[#FC0903] text-white shadow-md'
+                      : 'bg-white border-[#E6E0DA] text-[#6B7280] hover:border-[#FC0903]/50 hover:text-[#1C1B1A]'
                   }`}
                 >
                   <div className="font-semibold text-sm mb-0.5">{m.name}</div>
                   {m.badge && (
-                    <div className={`text-[10px] font-medium ${selectedModel === m.slug ? 'text-[#D4755B]' : 'text-[#9CA3AF]'}`}>
+                    <div className={`text-[10px] font-medium ${selectedModel === m.slug ? 'text-[#FC0903]' : 'text-[#9CA3AF]'}`}>
                       {m.badge}
                     </div>
                   )}
@@ -390,8 +390,8 @@ const AIHeroSection: React.FC<AIHeroSectionProps> = ({ onSearch, loading, sseSta
                 Where do you want to live?
               </label>
               <div className="relative">
-                <div className="relative bg-white border border-[#E6E0DA] rounded-xl p-4 flex items-center gap-3 focus-within:ring-2 focus-within:ring-[#D4755B]/30 focus-within:border-[#D4755B] transition-all shadow-sm">
-                  <MapPin className="w-5 h-5 text-[#D4755B] shrink-0" />
+                <div className="relative bg-white border border-[#E6E0DA] rounded-xl p-4 flex items-center gap-3 focus-within:ring-2 focus-within:ring-[#FC0903]/30 focus-within:border-[#FC0903] transition-all shadow-sm">
+                  <MapPin className="w-5 h-5 text-[#FC0903] shrink-0" />
                   <input
                     ref={cityInputRef}
                     type="text"
@@ -423,7 +423,7 @@ const AIHeroSection: React.FC<AIHeroSectionProps> = ({ onSearch, loading, sseSta
                           : 'text-[#6B7280] hover:bg-[#FAF8F4] hover:text-[#221410]'
                           }`}
                       >
-                        <MapPin className="w-4 h-4 text-[#D4755B] shrink-0" />
+                        <MapPin className="w-4 h-4 text-[#FC0903] shrink-0" />
                         <span className="font-manrope text-sm font-medium">{c}</span>
                       </button>
                     ))}
@@ -439,8 +439,8 @@ const AIHeroSection: React.FC<AIHeroSectionProps> = ({ onSearch, loading, sseSta
                     type="button"
                     onClick={() => selectCity(c)}
                     className={`font-manrope text-sm px-4 py-2 rounded-full border transition-all ${city === c
-                      ? 'bg-[#D4755B] border-[#D4755B] text-white font-medium shadow-sm'
-                      : 'bg-white border-[#E6E0DA] text-[#6B7280] hover:border-[#D4755B]/50 hover:text-[#D4755B]'
+                      ? 'bg-[#FC0903] border-[#FC0903] text-white font-medium shadow-sm'
+                      : 'bg-white border-[#E6E0DA] text-[#6B7280] hover:border-[#FC0903]/50 hover:text-[#FC0903]'
                       }`}
                   >
                     {c}
@@ -455,7 +455,7 @@ const AIHeroSection: React.FC<AIHeroSectionProps> = ({ onSearch, loading, sseSta
                 Specific Area <span className="font-normal text-[#6B7280]">(optional — narrows results the most)</span>
               </label>
               <div className="relative">
-                <div className="relative bg-white border border-[#E6E0DA] rounded-xl p-4 flex items-center gap-3 focus-within:ring-2 focus-within:ring-[#D4755B]/30 focus-within:border-[#D4755B] transition-all shadow-sm">
+                <div className="relative bg-white border border-[#E6E0DA] rounded-xl p-4 flex items-center gap-3 focus-within:ring-2 focus-within:ring-[#FC0903]/30 focus-within:border-[#FC0903] transition-all shadow-sm">
                   <MapPin className="w-5 h-5 text-[#9CA3AF] shrink-0" />
                   <input
                     ref={localityInputRef}
@@ -488,7 +488,7 @@ const AIHeroSection: React.FC<AIHeroSectionProps> = ({ onSearch, loading, sseSta
                             : 'text-[#6B7280] hover:bg-[#FAF8F4] hover:text-[#221410]'
                         }`}
                       >
-                        <MapPin className="w-4 h-4 text-[#D4755B] shrink-0" />
+                        <MapPin className="w-4 h-4 text-[#FC0903] shrink-0" />
                         <span className="font-manrope text-sm font-medium">{loc}</span>
                       </button>
                     ))}
@@ -523,7 +523,7 @@ const AIHeroSection: React.FC<AIHeroSectionProps> = ({ onSearch, loading, sseSta
                           }
                         }}
                         className={`font-space-mono text-[10px] uppercase font-bold px-2.5 py-1 transition-all rounded-sm ${budgetUnit === unit
-                          ? 'bg-white shadow-sm text-[#D4755B]'
+                          ? 'bg-white shadow-sm text-[#FC0903]'
                           : 'text-[#9CA3AF] hover:text-[#6B7280]'
                           }`}
                       >
@@ -532,8 +532,8 @@ const AIHeroSection: React.FC<AIHeroSectionProps> = ({ onSearch, loading, sseSta
                     ))}
                   </div>
                 </div>
-                <div className="relative bg-white border border-[#E6E0DA] rounded-xl p-4 flex items-center gap-3 focus-within:ring-2 focus-within:ring-[#D4755B]/30 focus-within:border-[#D4755B] transition-all shadow-sm">
-                  <IndianRupee className="w-5 h-5 text-[#D4755B] shrink-0" />
+                <div className="relative bg-white border border-[#E6E0DA] rounded-xl p-4 flex items-center gap-3 focus-within:ring-2 focus-within:ring-[#FC0903]/30 focus-within:border-[#FC0903] transition-all shadow-sm">
+                  <IndianRupee className="w-5 h-5 text-[#FC0903] shrink-0" />
                   <input
                     type="number"
                     value={maxBudget}
@@ -552,8 +552,8 @@ const AIHeroSection: React.FC<AIHeroSectionProps> = ({ onSearch, loading, sseSta
                 <label className="block font-manrope text-sm font-semibold text-[#221410] mb-2 ml-1">
                   Property Type
                 </label>
-                <div className="relative bg-white border border-[#E6E0DA] rounded-xl p-4 flex items-center gap-3 focus-within:ring-2 focus-within:ring-[#D4755B]/30 focus-within:border-[#D4755B] transition-all shadow-sm">
-                  <Home className="w-5 h-5 text-[#D4755B] shrink-0" />
+                <div className="relative bg-white border border-[#E6E0DA] rounded-xl p-4 flex items-center gap-3 focus-within:ring-2 focus-within:ring-[#FC0903]/30 focus-within:border-[#FC0903] transition-all shadow-sm">
+                  <Home className="w-5 h-5 text-[#FC0903] shrink-0" />
                   <select
                     value={propertyType}
                     onChange={(e) => setPropertyType(e.target.value)}
@@ -571,8 +571,8 @@ const AIHeroSection: React.FC<AIHeroSectionProps> = ({ onSearch, loading, sseSta
                 <label className="block font-manrope text-sm font-semibold text-[#221410] mb-2 ml-1">
                   Category
                 </label>
-                <div className="relative bg-white border border-[#E6E0DA] rounded-xl p-4 flex items-center gap-3 focus-within:ring-2 focus-within:ring-[#D4755B]/30 focus-within:border-[#D4755B] transition-all shadow-sm">
-                  <Building2 className="w-5 h-5 text-[#D4755B] shrink-0" />
+                <div className="relative bg-white border border-[#E6E0DA] rounded-xl p-4 flex items-center gap-3 focus-within:ring-2 focus-within:ring-[#FC0903]/30 focus-within:border-[#FC0903] transition-all shadow-sm">
+                  <Building2 className="w-5 h-5 text-[#FC0903] shrink-0" />
                   <select
                     value={category}
                     onChange={(e) => setCategory(e.target.value)}
@@ -600,8 +600,8 @@ const AIHeroSection: React.FC<AIHeroSectionProps> = ({ onSearch, loading, sseSta
                       onClick={() => setBhk(option)}
                       className={`font-manrope text-sm font-medium px-4 py-2 rounded-xl border transition-all ${
                         bhk === option
-                          ? 'bg-[#D4755B] border-[#D4755B] text-white shadow-sm'
-                          : 'bg-white border-[#E6E0DA] text-[#6B7280] hover:border-[#D4755B]/50 hover:text-[#D4755B]'
+                          ? 'bg-[#FC0903] border-[#FC0903] text-white shadow-sm'
+                          : 'bg-white border-[#E6E0DA] text-[#6B7280] hover:border-[#FC0903]/50 hover:text-[#FC0903]'
                       }`}
                     >
                       {option === 'Any' ? 'Any BHK' : option}
@@ -642,7 +642,7 @@ const AIHeroSection: React.FC<AIHeroSectionProps> = ({ onSearch, loading, sseSta
               <button
                 type="submit"
                 disabled={loading || !city.trim() || !keysReady}
-                className="w-full bg-[#D4755B] hover:bg-[#C05621] disabled:opacity-50 disabled:cursor-not-allowed text-white font-manrope font-semibold text-lg py-4 rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#D4755B]/20 hover:shadow-xl hover:shadow-[#D4755B]/30"
+                className="w-full bg-[#FC0903] hover:bg-[#C05621] disabled:opacity-50 disabled:cursor-not-allowed text-white font-manrope font-semibold text-lg py-4 rounded-xl transition-all flex items-center justify-center gap-2 shadow-lg shadow-[#FC0903]/20 hover:shadow-xl hover:shadow-[#FC0903]/30"
               >
                 {loading ? (
                   <>
@@ -683,8 +683,8 @@ const AIHeroSection: React.FC<AIHeroSectionProps> = ({ onSearch, loading, sseSta
                       <div key={s.label} className={`flex items-start gap-3 transition-opacity duration-500 ${isPending ? 'opacity-35' : 'opacity-100'}`}>
                         <div className="mt-0.5 shrink-0 w-5 h-5 flex items-center justify-center">
                           {isDone   ? <CheckCircle2 className="w-5 h-5 text-emerald-500" />
-                          : isActive ? <Loader2 className="w-5 h-5 text-[#D4755B] animate-spin" />
-                          :            <div className="w-4 h-4 rounded-full border-2 border-[#D4755B]/30" />}
+                          : isActive ? <Loader2 className="w-5 h-5 text-[#FC0903] animate-spin" />
+                          :            <div className="w-4 h-4 rounded-full border-2 border-[#FC0903]/30" />}
                         </div>
                         <div>
                           <p className={`font-manrope text-sm font-semibold ${isDone ? 'text-[#6B7280] line-through decoration-[#9CA3AF]' : isActive ? 'text-[#221410]' : 'text-[#9CA3AF]'}`}>
@@ -703,7 +703,7 @@ const AIHeroSection: React.FC<AIHeroSectionProps> = ({ onSearch, loading, sseSta
                 <p className="font-manrope text-xs text-[#9CA3AF] text-center mt-5 leading-relaxed">
                   {bhk !== 'Any' ? `${bhk} ` : ''}{propertyType.toLowerCase()}s
                   {locality ? ` in ${locality},` : ' in'} <span className="font-semibold text-[#6B7280]">{city}</span>
-                  {' '}· under ₹{maxBudget} {budgetUnit} · usually takes 15–30 s
+                  {' '}· under {maxBudget} {budgetUnit} · usually takes 15–30 s
                 </p>
               </div>
             )}

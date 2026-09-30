@@ -59,19 +59,19 @@ const Login = () => {
         <div className="absolute inset-0 opacity-5">
           <div className="absolute top-0 left-0 w-full h-full"
             style={{
-              backgroundImage: `radial-gradient(circle at 25% 25%, #D4755B 0%, transparent 50%), radial-gradient(circle at 75% 75%, #D4755B 0%, transparent 50%)`,
+              backgroundImage: `radial-gradient(circle at 25% 25%, #FC0903 0%, transparent 50%), radial-gradient(circle at 75% 75%, #FC0903 0%, transparent 50%)`,
             }}
           />
         </div>
 
         {/* Decorative circles */}
-        <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-[#D4755B]/10 rounded-full" />
-        <div className="absolute -top-12 -left-12 w-64 h-64 bg-[#D4755B]/5 rounded-full" />
+        <div className="absolute -bottom-24 -right-24 w-96 h-96 bg-[#FC0903]/10 rounded-full" />
+        <div className="absolute -top-12 -left-12 w-64 h-64 bg-[#FC0903]/5 rounded-full" />
 
         {/* Logo */}
         <div className="relative z-10">
           <div className="flex items-center gap-3 mb-16">
-            <div className="w-10 h-10 bg-[#D4755B] rounded-xl flex items-center justify-center">
+            <div className="w-10 h-10 bg-[#FC0903] rounded-xl flex items-center justify-center">
               <Home className="h-5 w-5 text-white" />
             </div>
             <div>
@@ -83,7 +83,7 @@ const Login = () => {
           <h1 className="text-4xl font-bold text-[#FAF8F4] leading-tight mb-4">
             Manage Your
             <br />
-            <span className="text-[#D4755B]">Real Estate</span>
+            <span className="text-[#FC0903]">Real Estate</span>
             <br />
             Portfolio
           </h1>
@@ -96,7 +96,7 @@ const Login = () => {
         <div className="relative z-10 grid grid-cols-3 gap-4">
           {stats.map(({ icon: Icon, label, value }) => (
             <div key={label} className="bg-white/5 border border-white/10 rounded-2xl p-4">
-              <Icon className="w-5 h-5 text-[#D4755B] mb-2" />
+              <Icon className="w-5 h-5 text-[#FC0903] mb-2" />
               <div className="text-xl font-bold text-[#FAF8F4]">{value}</div>
               <div className="text-xs text-[#9CA3AF]">{label}</div>
             </div>
@@ -121,7 +121,7 @@ const Login = () => {
           {/* Mobile Logo */}
           <div className="flex items-center gap-3 mb-10 lg:hidden">
             <div className="w-9 h-9 bg-[#1C1B1A] rounded-xl flex items-center justify-center">
-              <Home className="h-5 w-5 text-[#D4755B]" />
+              <Home className="h-5 w-5 text-[#FC0903]" />
             </div>
             <div className="text-lg font-bold text-[#1C1B1A]">Lqaly Admin</div>
           </div>
@@ -143,7 +143,7 @@ const Login = () => {
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                   <Mail className={cn(
                     "h-4.5 w-4.5 transition-colors duration-200",
-                    focusedField === "email" ? "text-[#D4755B]" : "text-[#9CA3AF]"
+                    focusedField === "email" ? "text-[#FC0903]" : "text-[#9CA3AF]"
                   )} />
                 </div>
                 <input
@@ -159,8 +159,8 @@ const Login = () => {
                   className={cn(
                     "w-full pl-11 pr-4 py-3.5 bg-white border rounded-xl text-[#1C1B1A] placeholder-[#9CA3AF] text-sm transition-all duration-200 outline-none",
                     focusedField === "email"
-                      ? "border-[#D4755B] ring-3 ring-[#D4755B]/15 shadow-sm"
-                      : "border-[#E6D5C3] hover:border-[#D4755B]/50"
+                      ? "border-[#FC0903] ring-3 ring-[#FC0903]/15 shadow-sm"
+                      : "border-[#E6D5C3] hover:border-[#FC0903]/50"
                   )}
                 />
               </div>
@@ -175,7 +175,7 @@ const Login = () => {
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
                   <Lock className={cn(
                     "h-4.5 w-4.5 transition-colors duration-200",
-                    focusedField === "password" ? "text-[#D4755B]" : "text-[#9CA3AF]"
+                    focusedField === "password" ? "text-[#FC0903]" : "text-[#9CA3AF]"
                   )} />
                 </div>
                 <input
@@ -191,14 +191,14 @@ const Login = () => {
                   className={cn(
                     "w-full pl-11 pr-12 py-3.5 bg-white border rounded-xl text-[#1C1B1A] placeholder-[#9CA3AF] text-sm transition-all duration-200 outline-none",
                     focusedField === "password"
-                      ? "border-[#D4755B] ring-3 ring-[#D4755B]/15 shadow-sm"
-                      : "border-[#E6D5C3] hover:border-[#D4755B]/50"
+                      ? "border-[#FC0903] ring-3 ring-[#FC0903]/15 shadow-sm"
+                      : "border-[#E6D5C3] hover:border-[#FC0903]/50"
                   )}
                 />
                 <button
                   type="button"
                   onClick={() => setShowPassword(!showPassword)}
-                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-[#9CA3AF] hover:text-[#D4755B] transition-colors"
+                  className="absolute inset-y-0 right-0 pr-4 flex items-center text-[#9CA3AF] hover:text-[#FC0903] transition-colors"
                 >
                   {showPassword ? <EyeOff className="h-4.5 w-4.5" /> : <Eye className="h-4.5 w-4.5" />}
                 </button>
@@ -211,7 +211,7 @@ const Login = () => {
               disabled={loading}
               whileHover={{ scale: loading ? 1 : 1.01 }}
               whileTap={{ scale: loading ? 1 : 0.99 }}
-              className="w-full flex items-center justify-center gap-2.5 bg-[#1C1B1A] hover:bg-[#D4755B] text-[#FAF8F4] py-3.5 px-6 rounded-xl font-semibold text-sm transition-all duration-300 shadow-lg hover:shadow-terracotta disabled:opacity-60 disabled:cursor-not-allowed mt-2"
+              className="w-full flex items-center justify-center gap-2.5 bg-[#1C1B1A] hover:bg-[#FC0903] text-[#FAF8F4] py-3.5 px-6 rounded-xl font-semibold text-sm transition-all duration-300 shadow-lg hover:shadow-terracotta disabled:opacity-60 disabled:cursor-not-allowed mt-2"
             >
               {loading ? (
                 <>

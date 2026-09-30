@@ -28,11 +28,11 @@ const MB_PROP_TYPE = {
 };
 
 // Convert crore float to MagicBricks BudgetMin/BudgetMax string
-// e.g. 0.50 → "50-Lac", 1.5 → "1.5-Crores", 5 → "5-Crores"
+// e.g. 0.50 → "50-Lac", 1.5 → "1.5-M MAD", 5 → "5-M MAD"
 function mbBudget(crores) {
     if (!crores || crores <= 0) return '';
     if (crores < 1) return `${Math.round(crores * 100)}-Lac`;
-    return `${crores}-Crores`;
+    return `${crores}-M MAD`;
 }
 
 function buildMagicBricksUrl({ city, bhk, minPrice, maxPrice, propertyType }) {
@@ -81,7 +81,7 @@ const ACRES99_PROP_TYPE = {
     'Penthouse': '1', 'Studio': '1', 'Commercial': '14',
 };
 
-// Budget in 99acres is in Lakhs × 10 (e.g. 1 Cr = budget param 100)
+// Budget in 99acres is in MAD × 10 (e.g. 1 Cr = budget param 100)
 function acres99Budget(crores) {
     if (!crores || crores <= 0) return '';
     return String(Math.round(crores * 100));
@@ -224,8 +224,8 @@ const SEARCH_RESULT_SCHEMA = {
                     property_type:          { type: "string", description: "Flat / House / Villa / Plot etc." },
                     bhk_config:             { type: "string", description: "e.g. 2 BHK, 3 BHK" },
                     location_address:       { type: "string", description: "Full address with locality and city" },
-                    total_price:            { type: "string", description: "Total purchase price e.g. ₹1.65 Cr" },
-                    price_per_sqft:         { type: "string", description: "Price per sq ft e.g. ₹12,500/sqft" },
+                    total_price:            { type: "string", description: "Total purchase price e.g. 1.65 Cr" },
+                    price_per_sqft:         { type: "string", description: "Price per sq ft e.g. 12,500/sqft" },
                     carpet_area_sqft:       { type: "string", description: "Carpet area in sqft" },
                     superbuiltup_area_sqft: { type: "string", description: "Super built-up area in sqft" },
                     floor_number:           { type: "string", description: "Floor number e.g. 5" },
@@ -249,13 +249,13 @@ const SEARCH_RESULT_SCHEMA = {
 function buildSearchResultPrompt(city) {
     return (
         `Extract FOR SALE (purchase) property listings from this page that are located in ${city}, India. ` +
-        "Each property must have a total purchase price in Crores or Lakhs — NOT a rental price in /month or /bed. " +
+        "Each property must have a total purchase price in M MAD or MAD — NOT a rental price in /month or /bed. " +
         "Skip PG, paying guest, rental listings, and any property whose address is NOT in " + city + ". " +
         "If this is a category page with multiple listings, extract up to 6 listings. " +
         "If this is a single property detail page, extract that one property. " +
         "For building_name: use the actual society/project name shown on the page. " +
         "If no project name is visible, use the locality name or street address — never invent generic names like 'Building A'. " +
-        "For total_price: copy the exact displayed price (e.g. '₹1.25 Cr', '₹75 Lakhs', 'Price on Request'). Never guess a price."
+        "For total_price: copy the exact displayed price (e.g. '1.25 Cr', '75 MAD', 'Price on Request'). Never guess a price."
     );
 }
 
@@ -292,13 +292,13 @@ function buildSourceUrls({ city, locality, bhk, minPrice, maxPrice, propertyType
 }
 
 /**
- * Parse an Indian price string to a float in Crores.
- * Handles: "₹1.65 Cr", "₹45 L", "₹45 Lakh", raw numbers.
+ * Parse an Indian price string to a float in M MAD.
+ * Handles: "1.65 Cr", "45 L", "45 Lakh", raw numbers.
  * Returns null if the string looks like a rental price or can't be parsed.
  */
-function parsePriceToCrores(priceStr) {
+function parsePriceToMAD(priceStr) {
     if (!priceStr || typeof priceStr !== 'string') return null;
-    const s = priceStr.replace(/[₹,\s]/g, '').toLowerCase();
+    const s = priceStr.replace(/[,\s]/g, '').toLowerCase();
 
     // Reject rental/PG price patterns
     if (/\/bed|\/bedroom|\/month|\/day/.test(s)) return null;
@@ -350,8 +350,8 @@ function reconstructPrice(p) {
     if (ppsft > 100 && area > 100) {
         const totalCr = (ppsft * area) / 1e7;
         const formatted = totalCr >= 1
-            ? `₹${totalCr.toFixed(2)} Cr`
-            : `₹${Math.round(totalCr * 100)} L`;
+            ? `${totalCr.toFixed(2)} Cr`
+            : `${Math.round(totalCr * 100)} L`;
         return { ...p, total_price: formatted, _price_reconstructed: true };
     }
 
@@ -417,8 +417,8 @@ function interleaveBySource(properties, limit) {
     // Sort each source's queue by price (descending) - higher priced first
     for (const src in queues) {
         queues[src].sort((a, b) => {
-            const priceA = parsePriceToCrores(a.total_price || '0') || 0;
-            const priceB = parsePriceToCrores(b.total_price || '0') || 0;
+            const priceA = parsePriceToMAD(a.total_price || '0') || 0;
+            const priceB = parsePriceToMAD(b.total_price || '0') || 0;
             return priceB - priceA; // Descending: higher prices first
         });
     }
@@ -472,7 +472,7 @@ function filterValidProperties(properties, minPrice, maxPrice) {
         if (isPOR) return true;
 
         // Parse and validate against budget
-        const priceInCr = parsePriceToCrores(price);
+        const priceInCr = parsePriceToMAD(price);
         if (priceInCr === null) return false;
 
         if (max > 0 && priceInCr > max * 1.15) return false;
@@ -653,8 +653,8 @@ class FirecrawlService {
             // applied — identical to what a user sees when manually searching.
             const priceNum    = parseFloat(maxPrice);
             const budgetLabel = priceNum < 1
-                ? `${Math.round(priceNum * 100)} Lakhs`
-                : `${priceNum} Crores`;
+                ? `${Math.round(priceNum * 100)} MAD`
+                : `${priceNum} M MAD`;
 
             const sourceUrls = buildSourceUrls({ city, locality, bhk, minPrice, maxPrice, propertyType });
 
@@ -776,7 +776,7 @@ class FirecrawlService {
             const maxPriceNum = parseFloat(maxPrice) || 0;
             const smartMinPrice = parseFloat(minPrice) || (maxPriceNum >= 1 ? maxPriceNum * 0.10 : 0);
             if (smartMinPrice > 0) {
-                console.log(`[DEBUG] Smart min price      : ₹${smartMinPrice.toFixed(2)} Cr (10% floor for ${maxPriceNum} Cr budget)`);
+                console.log(`[DEBUG] Smart min price      : ${smartMinPrice.toFixed(2)} Cr (10% floor for ${maxPriceNum} Cr budget)`);
             }
 
             const filtered = filterValidProperties(rawProperties, minPrice, maxPrice);

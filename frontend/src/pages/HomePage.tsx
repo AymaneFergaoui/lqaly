@@ -14,8 +14,8 @@ import CTASection from '../components/home/CTASection';
 
 const HomePage: React.FC = () => {
   useSEO({
-    title: 'Find Flats, Villas & Apartments in India with AI',
-    description: 'Lqaly helps you find flats, villas, and apartments in Mumbai, Delhi, Bangalore, Ahmedabad, and Pune using AI-powered search and live market analysis.',
+    title: 'Trouvez des Appartements et Villas en Inde avec l\'IA',
+    description: 'Lqaly vous aide à trouver des appartements et des villas à Mumbai, Delhi, Bangalore, Ahmedabad et Pune grâce à la recherche alimentée par l\'IA et l\'analyse de marché en direct.',
     url: 'https://lqaly.vercel.app',
   });
 
@@ -28,13 +28,13 @@ const HomePage: React.FC = () => {
       <StructuredData
         type="howTo"
         data={{
-          howToName: 'How to Buy Property with Lqaly',
-          howToDescription: 'AI-assisted steps to find and purchase your perfect home in India.',
+          howToName: 'Comment acheter une propriété avec Lqaly',
+          howToDescription: 'Étapes assistées par l\'IA pour trouver et acheter votre maison idéale.',
           steps: [
-            { name: 'Profile Analysis', text: 'Our AI deep-dives into your preferences, lifestyle needs, and financial goals to build a comprehensive buyer profile.' },
-            { name: 'Smart Matching', text: 'Algorithms scan thousands of listings to find properties that align with your unique criteria, filtering out the noise.' },
-            { name: 'Virtual Tours & Insights', text: 'Experience homes remotely with immersive 3D tours and receive detailed neighborhood analytics reports.' },
-            { name: 'Seamless Closing', text: 'From offer to keys, our digital platform handles paperwork, negotiations, and closing logistics effortlessly.' },
+            { name: 'Analyse du Profil', text: 'Notre IA analyse en profondeur vos préférences, votre style de vie et vos objectifs financiers pour créer un profil d\'acheteur complet.' },
+            { name: 'Correspondance Intelligente', text: 'Les algorithmes scannent des milliers d\'annonces pour trouver les propriétés qui correspondent à vos critères uniques, en éliminant le superflu.' },
+            { name: 'Visites Virtuelles & Aperçus', text: 'Découvrez des maisons à distance avec des visites 3D immersives et recevez des rapports détaillés sur les analyses du quartier.' },
+            { name: 'Clôture Transparente', text: 'De l\'offre à la remise des clés, notre plateforme numérique gère les formalités administratives, les négociations et la logistique de clôture sans effort.' },
           ],
         }}
       />

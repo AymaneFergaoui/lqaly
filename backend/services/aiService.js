@@ -6,7 +6,7 @@ import logger from '../utils/logger.js';
 const SYSTEM_PROMPT = `You are a concise Indian real estate expert assistant.
 Rules:
 - Always respond with valid JSON matching the requested schema.
-- Use INR currency (Lakhs/Crores) for all prices.
+- Use INR currency (MAD/M MAD) for all prices.
 - Keep analysis factual and data-driven — no speculation.
 - Never include markdown, code fences, or extra text outside the JSON.
 - Language: professional Indian English. Say "flat" not "apartment", "crore" not "Cr" in full text, "lakh" not "L" in full text. Never use American real-estate terms.`;
@@ -73,7 +73,7 @@ class AIService {
     }
 
     const lines = cityBenchmarks.map(t => {
-      const rate   = t.price_per_sqft ? `₹${Number(t.price_per_sqft).toLocaleString('en-IN')}/sqft` : 'N/A';
+      const rate   = t.price_per_sqft ? `${Number(t.price_per_sqft).toLocaleString('en-IN')}/sqft` : 'N/A';
       const change = t.yearly_change_pct != null
         ? ` (${t.yearly_change_pct > 0 ? '+' : ''}${t.yearly_change_pct}% YoY)`
         : '';
@@ -95,11 +95,11 @@ class AIService {
     const minNum   = parseFloat(minPrice) || 0;
     const maxNum   = parseFloat(maxPrice);
     const minLabel = minNum > 0
-      ? (minNum < 1 ? `₹${Math.round(minNum * 100)}L` : `₹${minNum}Cr`)
+      ? (minNum < 1 ? `${Math.round(minNum * 100)}L` : `${minNum}Cr`)
       : null;
     const maxLabel = maxNum < 1
-      ? `₹${Math.round(maxNum * 100)}L`
-      : `₹${maxNum}Cr`;
+      ? `${Math.round(maxNum * 100)}L`
+      : `${maxNum}Cr`;
     const budgetRange = minLabel ? `${minLabel}–${maxLabel}` : `up to ${maxLabel}`;
 
     const typeLabels = {
@@ -151,8 +151,8 @@ Input property:
 {
   "building_name": "Kalpataru Jade Skyline",
   "builder_name": "Kalpataru",
-  "price": "₹1.45 Cr",
-  "price_per_sqft": "₹6,100/sqft",
+  "price": "1.45 Cr",
+  "price_per_sqft": "6,100/sqft",
   "area_sqft": "1180",
   "location_address": "Wakad, Pune",
   "possession_status": "Ready to Move",
@@ -163,18 +163,18 @@ Input property:
 Correct output for this property:
 {
   "name": "Kalpataru Jade Skyline",
-  "price": "₹1.45 Cr",
+  "price": "1.45 Cr",
   "area": "1180 sqft",
   "location": "Wakad, Pune",
   "highlight": "Ready to Move with RERA ✓ and Hinjewadi IT Park 1.5km — strong rental catchment",
   "match_score": 88,
-  "one_line_insight": "₹6,100/sqft — 11% below Wakad avg, RERA ✓, Hinjewadi IT Park 1.5km",
+  "one_line_insight": "6,100/sqft — 11% below Wakad avg, RERA ✓, Hinjewadi IT Park 1.5km",
   "red_flags": [],
   "value_verdict": "good_deal",
   "investment_horizon": "both",
   "investment_reason": "IT park proximity + ready possession = immediate rental yield; Wakad prices rising 9% YoY",
   "negotiation_tips": [
-    "Builder has unsold inventory — ask for free covered parking (saves ₹3–5L)",
+    "Builder has unsold inventory — ask for free covered parking (saves 3–5L)",
     "Ready possession: negotiate 2–3% off for cash/cheque payment within 30 days"
   ],
   "price_trend_context": "Wakad has seen 9% price appreciation YoY driven by Hinjewadi Phase 3 expansion"
@@ -224,9 +224,9 @@ BAD (reject these patterns):
   "Well-maintained apartment near good schools and hospitals"
   "Affordable flat with modern facilities — good investment"
 GOOD (use this pattern — cite actual data fields):
-  "₹6,100/sqft — 11% below Wakad avg, RERA ✓, Hinjewadi IT Park 1.5km"
+  "6,100/sqft — 11% below Wakad avg, RERA ✓, Hinjewadi IT Park 1.5km"
   "No RERA, Dec 2027 possession, price undisclosed — high risk"
-  "Owner-direct (NoBroker), ₹8,400/sqft, Ready to Move, D-Mart 300m"
+  "Owner-direct (NoBroker), 8,400/sqft, Ready to Move, D-Mart 300m"
 Rule: every one_line_insight must contain at least one number (price, %, distance) and one named data point (RERA, landmark, possession date, builder).
 
 ━━━ END EXAMPLES — now analyse the actual properties above ━━━
@@ -236,7 +236,7 @@ ${preparedProperties.map((p, i) => `${i + 1}. ${p.building_name}`).join('\n')}
 
 For EACH of the ${preparedProperties.length} properties above provide all of these fields:
 - match_score: integer 0–100
-- one_line_insight: max 20 words, SPECIFIC — pattern: "₹X/sqft — Y% vs benchmark, KEY FACT (RERA/possession/landmark)"
+- one_line_insight: max 20 words, SPECIFIC — pattern: "X/sqft — Y% vs benchmark, KEY FACT (RERA/possession/landmark)"
 - red_flags: array of objects [{"flag": "text", "severity": "critical|medium|low"}] — empty [] if none
 - value_verdict: exactly one of "good_deal" | "fair" | "overpriced"
 - investment_horizon: exactly one of "short_term" | "long_term" | "both"
@@ -255,7 +255,7 @@ The overview array must have ${preparedProperties.length} objects — one per pr
       "location": "address",
       "highlight": "one specific standout feature using actual data",
       "match_score": 85,
-      "one_line_insight": "₹X/sqft — Y% vs area avg, KEY FACT",
+      "one_line_insight": "X/sqft — Y% vs area avg, KEY FACT",
       "red_flags": [{"flag": "concern text", "severity": "critical|medium|low"}],
       "value_verdict": "good_deal",
       "investment_horizon": "short_term",

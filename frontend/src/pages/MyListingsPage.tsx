@@ -169,7 +169,7 @@ const MyListingsPage: React.FC = () => {
         <Navbar />
         <div className="max-w-xl mx-auto px-4 py-24 text-center">
           <div className="w-20 h-20 bg-[#F3EDE8] rounded-full flex items-center justify-center mx-auto mb-6">
-            <svg className="w-10 h-10 text-[#D4755B]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <svg className="w-10 h-10 text-[#FC0903]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5}
                 d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
             </svg>
@@ -180,7 +180,7 @@ const MyListingsPage: React.FC = () => {
           </p>
           <Link
             to="/add-property"
-            className="inline-block bg-[#D4755B] text-white font-manrope font-semibold px-8 py-3 rounded-xl hover:bg-[#B86851] transition-[background-color]"
+            className="inline-block bg-[#FC0903] text-white font-manrope font-semibold px-8 py-3 rounded-xl hover:bg-[#B86851] transition-[background-color]"
           >
             + List a Property
           </Link>
@@ -216,7 +216,7 @@ const MyListingsPage: React.FC = () => {
           </div>
           <Link
             to="/add-property"
-            className="inline-flex items-center gap-2 bg-[#D4755B] text-white font-manrope font-semibold px-5 py-2.5 rounded-xl hover:bg-[#B86851] transition-[background-color] self-start sm:self-auto"
+            className="inline-flex items-center gap-2 bg-[#FC0903] text-white font-manrope font-semibold px-5 py-2.5 rounded-xl hover:bg-[#B86851] transition-[background-color] self-start sm:self-auto"
           >
             <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
@@ -298,7 +298,7 @@ const MyListingsPage: React.FC = () => {
                     </p>
 
                     <div className="flex flex-wrap gap-3 font-manrope text-sm text-[#374151]">
-                      <span className="font-semibold text-[#D4755B]">{formatPrice(listing.price)}</span>
+                      <span className="font-semibold text-[#FC0903]">{formatPrice(listing.price)}</span>
                       <span>·</span>
                       <span>{listing.beds} bed · {listing.baths} bath · {listing.sqft.toLocaleString()} sqft</span>
                       <span>·</span>
@@ -347,7 +347,7 @@ const MyListingsPage: React.FC = () => {
                       {listing.status === 'active' && (
                         <Link
                           to={`/property/${listing._id}`}
-                          className="font-manrope text-xs font-medium text-[#D4755B] hover:underline"
+                          className="font-manrope text-xs font-medium text-[#FC0903] hover:underline"
                           target="_blank"
                           rel="noopener noreferrer"
                         >
@@ -358,7 +358,7 @@ const MyListingsPage: React.FC = () => {
                       {/* Edit */}
                       <Link
                         to={`/edit-property/${listing._id}`}
-                        className="flex items-center gap-1.5 font-manrope text-xs font-semibold text-[#374151] border border-[#E6E0DA] px-3 py-1.5 rounded-lg hover:border-[#D4755B] hover:text-[#D4755B] transition-[border-color,color]"
+                        className="flex items-center gap-1.5 font-manrope text-xs font-semibold text-[#374151] border border-[#E6E0DA] px-3 py-1.5 rounded-lg hover:border-[#FC0903] hover:text-[#FC0903] transition-[border-color,color]"
                       >
                         <svg className="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z" />

@@ -59,7 +59,7 @@ const OtherWaysSection: React.FC = () => {
             >
               {/* Icon */}
               <div className={`w-16 h-16 ${method.bgColor} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
-                <span className="material-icons text-3xl text-[#D4755B]">
+                <span className="material-icons text-3xl text-[#FC0903]">
                   {method.icon}
                 </span>
               </div>
@@ -79,7 +79,7 @@ const OtherWaysSection: React.FC = () => {
                 href={method.actionLink}
                 target={method.actionLink.startsWith('http') ? '_blank' : '_self'}
                 rel={method.actionLink.startsWith('http') ? 'noopener noreferrer' : ''}
-                className="inline-flex items-center gap-2 font-manrope font-bold text-sm text-[#D4755B] hover:text-[#C05621] transition-[color] group"
+                className="inline-flex items-center gap-2 font-manrope font-bold text-sm text-[#FC0903] hover:text-[#C05621] transition-[color] group"
               >
                 <span>{method.action}</span>
                 <span className="material-icons text-sm group-hover:translate-x-1 transition-transform">

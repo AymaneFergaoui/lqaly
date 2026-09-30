@@ -72,8 +72,8 @@ const AIApiKeyModal: React.FC<AIApiKeyModalProps> = ({ isOpen, onClose, onKeysCh
         {/* Header */}
         <div className="flex items-center justify-between px-6 pt-6 pb-4 border-b border-white/10">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 bg-[#D4755B]/20 rounded-xl flex items-center justify-center">
-              <Key className="w-4 h-4 text-[#D4755B]" />
+            <div className="w-9 h-9 bg-[#FC0903]/20 rounded-xl flex items-center justify-center">
+              <Key className="w-4 h-4 text-[#FC0903]" />
             </div>
             <div>
               <h2 className="font-syne font-bold text-white text-lg">Firecrawl API Key</h2>
@@ -130,19 +130,19 @@ const AIApiKeyModal: React.FC<AIApiKeyModalProps> = ({ isOpen, onClose, onKeysCh
               <label className="font-space-mono text-[10px] text-white/50 uppercase tracking-widest">
                 Firecrawl API Key
               </label>
-              <span className="font-manrope text-[9px] text-[#D4755B]/70 uppercase">required</span>
+              <span className="font-manrope text-[9px] text-[#FC0903]/70 uppercase">required</span>
             </div>
             <a
               href="https://firecrawl.dev"
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1 font-manrope text-[11px] text-[#D4755B] hover:text-[#e88a6f] transition-[color]"
+              className="flex items-center gap-1 font-manrope text-[11px] text-[#FC0903] hover:text-[#e88a6f] transition-[color]"
             >
               Get free key → <ExternalLink className="w-3 h-3" />
             </a>
           </div>
-          <div className="relative bg-white/[0.07] border border-white/10 rounded-xl px-4 py-3 flex items-center gap-3 focus-within:border-[#D4755B]/50 transition-all">
-            <Key className="w-4 h-4 text-[#D4755B]/60 shrink-0" />
+          <div className="relative bg-white/[0.07] border border-white/10 rounded-xl px-4 py-3 flex items-center gap-3 focus-within:border-[#FC0903]/50 transition-all">
+            <Key className="w-4 h-4 text-[#FC0903]/60 shrink-0" />
             <input
               type={showFirecrawl ? 'text' : 'password'}
               value={firecrawlKey}
@@ -166,7 +166,7 @@ const AIApiKeyModal: React.FC<AIApiKeyModalProps> = ({ isOpen, onClose, onKeysCh
           <button
             onClick={handleSave}
             disabled={saving || !firecrawlKey.trim()}
-            className="flex-1 flex items-center justify-center gap-2 bg-[#D4755B] hover:bg-[#C05621] disabled:opacity-40 disabled:cursor-not-allowed text-white font-manrope font-semibold text-sm py-3 rounded-xl transition-all"
+            className="flex-1 flex items-center justify-center gap-2 bg-[#FC0903] hover:bg-[#C05621] disabled:opacity-40 disabled:cursor-not-allowed text-white font-manrope font-semibold text-sm py-3 rounded-xl transition-all"
           >
             <Save className="w-4 h-4" />
             {saving ? 'Verifying...' : 'Save Key'}

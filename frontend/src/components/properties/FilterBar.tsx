@@ -21,11 +21,11 @@ export interface FilterState {
   amenities?: string[];
 }
 
-const PROPERTY_TYPES = ['Apartment', 'House', 'Villa', 'Office'];
+const PROPERTY_TYPES = ['Appartement', 'Maison', 'Villa', 'Bureau'];
 const AMENITIES = [
-  'Parking', 'Swimming Pool', 'Gym', 'Garden', 'Security',
-  'Clubhouse', 'Power Backup', 'Lift', 'Balcony', 'CCTV Surveillance',
-  'Children Play Area', 'Gated Community',
+  'Parking', 'Piscine', 'Salle de sport', 'Jardin', 'Sécurité',
+  'Clubhouse', 'Générateur électrique', 'Ascenseur', 'Balcon', 'Vidéosurveillance',
+  'Aire de jeux', 'Résidence fermée',
 ];
 
 const formatPriceLabel = (value: number): string => {
@@ -58,7 +58,7 @@ const Dropdown: React.FC<{
         className={`flex items-center gap-1.5 h-10 px-4 rounded-xl border font-manrope text-sm font-medium transition-colors duration-200 active:scale-[0.96] ${
           active
             ? 'bg-[#221410] border-[#221410] text-white'
-            : 'bg-white border-[#E6E0DA] text-[#374151] hover:border-[#D4755B]'
+            : 'bg-white border-[#E6E0DA] text-[#374151] hover:border-[#FC0903]'
         }`}
       >
         {label}
@@ -154,8 +154,8 @@ const FilterBar: React.FC<FilterBarProps> = ({
               type="text"
               value={location}
               onChange={e => setLocation(e.target.value)}
-              placeholder="City or neighbourhood…"
-              className="w-full h-10 bg-[#F5F1E8] border border-[#E6E0DA] rounded-xl pl-9 pr-3 font-manrope text-sm text-[#221410] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#D4755B] transition-[border-color]"
+              placeholder="Ville ou quartier…"
+              className="w-full h-10 bg-[#F5F1E8] border border-[#E6E0DA] rounded-xl pl-9 pr-3 font-manrope text-sm text-[#221410] placeholder:text-[#9CA3AF] focus:outline-none focus:border-[#FC0903] transition-[border-color]"
             />
             {location && (
               <button onClick={() => setLocation('')} className="absolute right-2.5 top-1/2 -translate-y-1/2">
@@ -176,7 +176,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
                     : 'text-[#6B7280] hover:text-[#221410]'
                 }`}
               >
-                {a.charAt(0).toUpperCase() + a.slice(1)}
+                {a === 'buy' ? 'Acheter' : 'Louer'}
               </button>
             ))}
           </div>
@@ -184,28 +184,28 @@ const FilterBar: React.FC<FilterBarProps> = ({
           {/* Price */}
           <Dropdown
             label={priceRange[0] > 0 || priceRange[1] < 200
-              ? `₹${formatPriceLabel(priceRange[0])} – ₹${formatPriceLabel(priceRange[1])}`
-              : 'Price'}
+              ? `${formatPriceLabel(priceRange[0])} MAD – ${formatPriceLabel(priceRange[1])} MAD`
+              : 'Prix'}
             active={priceRange[0] > 0 || priceRange[1] < 200}
           >
             <div className="p-4 space-y-4 w-[260px]">
-              <p className="font-manrope font-semibold text-xs text-[#221410] uppercase tracking-wider">Price Range</p>
-              <div className="flex justify-between font-space-mono text-sm text-[#D4755B] tabular-nums">
-                <span>₹{formatPriceLabel(priceRange[0])}</span>
-                <span>₹{formatPriceLabel(priceRange[1])}</span>
+              <p className="font-manrope font-semibold text-xs text-[#221410] uppercase tracking-wider">Fourchette de prix</p>
+              <div className="flex justify-between font-space-mono text-sm text-[#FC0903] tabular-nums">
+                <span>{formatPriceLabel(priceRange[0])}</span>
+                <span>{formatPriceLabel(priceRange[1])}</span>
               </div>
               <div className="space-y-3">
                 <div>
                   <label className="font-manrope text-xs text-[#9CA3AF] mb-1 block">Min</label>
                   <input type="range" min="0" max="200" step="1" value={priceRange[0]}
                     onChange={e => { const v = +e.target.value; if (v < priceRange[1]) setPriceRange([v, priceRange[1]]); }}
-                    className="w-full accent-[#D4755B]" />
+                    className="w-full accent-[#FC0903]" />
                 </div>
                 <div>
                   <label className="font-manrope text-xs text-[#9CA3AF] mb-1 block">Max</label>
                   <input type="range" min="0" max="200" step="1" value={priceRange[1]}
                     onChange={e => { const v = +e.target.value; if (v > priceRange[0]) setPriceRange([priceRange[0], v]); }}
-                    className="w-full accent-[#D4755B]" />
+                    className="w-full accent-[#FC0903]" />
                 </div>
               </div>
             </div>
@@ -217,7 +217,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
             active={selectedTypes.length > 0}
           >
             <div className="p-3 w-[200px]">
-              <p className="font-manrope font-semibold text-xs text-[#221410] uppercase tracking-wider mb-3 px-1">Property Type</p>
+              <p className="font-manrope font-semibold text-xs text-[#221410] uppercase tracking-wider mb-3 px-1">Type de bien</p>
               <div className="grid grid-cols-2 gap-1.5">
                 {PROPERTY_TYPES.map(t => (
                   <button
@@ -238,11 +238,11 @@ const FilterBar: React.FC<FilterBarProps> = ({
 
           {/* Beds */}
           <Dropdown
-            label={bedrooms > 0 ? `${bedrooms === 5 ? '5+' : bedrooms} Bed${bedrooms !== 1 ? 's' : ''}` : 'Beds'}
+            label={bedrooms > 0 ? `${bedrooms === 5 ? '5+' : bedrooms} Lit${bedrooms !== 1 ? 's' : ''}` : 'Lits'}
             active={bedrooms > 0}
           >
             <div className="p-3 w-[200px]">
-              <p className="font-manrope font-semibold text-xs text-[#221410] uppercase tracking-wider mb-3 px-1">Bedrooms</p>
+              <p className="font-manrope font-semibold text-xs text-[#221410] uppercase tracking-wider mb-3 px-1">Chambres</p>
               <div className="flex gap-1.5 flex-wrap">
                 {[0, 1, 2, 3, 4, 5].map(n => (
                   <button
@@ -254,7 +254,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
                         : 'bg-[#F5F1E8] text-[#374151] hover:bg-[#EBE5DE]'
                     }`}
                   >
-                    {n === 0 ? 'Any' : n === 5 ? '5+' : n}
+                    {n === 0 ? 'Tous' : n === 5 ? '5+' : n}
                   </button>
                 ))}
               </div>
@@ -268,11 +268,11 @@ const FilterBar: React.FC<FilterBarProps> = ({
               className={`flex items-center gap-1.5 h-10 px-4 rounded-xl border font-manrope text-sm font-medium transition-colors duration-200 active:scale-[0.96] ${
                 selectedAmenities.length > 0
                   ? 'bg-[#221410] border-[#221410] text-white'
-                  : 'bg-white border-[#E6E0DA] text-[#374151] hover:border-[#D4755B]'
+                  : 'bg-white border-[#E6E0DA] text-[#374151] hover:border-[#FC0903]'
               }`}
             >
               <SlidersHorizontal className="w-3.5 h-3.5" />
-              More{selectedAmenities.length > 0 ? ` (${selectedAmenities.length})` : ''}
+              Plus{selectedAmenities.length > 0 ? ` (${selectedAmenities.length})` : ''}
             </button>
 
             <AnimatePresence>
@@ -284,7 +284,7 @@ const FilterBar: React.FC<FilterBarProps> = ({
                   transition={{ duration: 0.15, ease: [0.2, 0, 0, 1] }}
                   className="absolute top-full right-0 mt-2 z-30 bg-white border border-[#E6E0DA] rounded-2xl shadow-[0_8px_30px_rgba(0,0,0,0.10)] w-[300px] p-4"
                 >
-                  <p className="font-manrope font-semibold text-xs text-[#221410] uppercase tracking-wider mb-3">Amenities</p>
+                  <p className="font-manrope font-semibold text-xs text-[#221410] uppercase tracking-wider mb-3">Équipements</p>
                   <div className="grid grid-cols-2 gap-1.5 max-h-64 overflow-y-auto">
                     {AMENITIES.map(a => (
                       <button
@@ -309,9 +309,9 @@ const FilterBar: React.FC<FilterBarProps> = ({
           {activeCount > 0 && (
             <button
               onClick={handleReset}
-              className="flex items-center gap-1 h-10 px-3 rounded-xl font-manrope text-sm text-[#6B7280] hover:text-[#D4755B] transition-colors duration-200"
+              className="flex items-center gap-1 h-10 px-3 rounded-xl font-manrope text-sm text-[#6B7280] hover:text-[#FC0903] transition-colors duration-200"
             >
-              <X className="w-3.5 h-3.5" /> Clear
+              <X className="w-3.5 h-3.5" /> Effacer
             </button>
           )}
 
@@ -320,24 +320,24 @@ const FilterBar: React.FC<FilterBarProps> = ({
 
           {/* Count */}
           <span className="font-manrope text-sm text-[#6B7280] whitespace-nowrap">
-            {totalProperties} {totalProperties === 1 ? 'property' : 'properties'}
+            {totalProperties} {totalProperties === 1 ? 'propriété' : 'propriétés'}
           </span>
 
           {/* Sort */}
           <select
             value={sortBy}
             onChange={e => onSortChange?.(e.target.value)}
-            className="h-10 bg-white border border-[#E6E0DA] rounded-xl px-3 pr-7 font-manrope text-sm text-[#221410] cursor-pointer focus:outline-none focus:border-[#D4755B] appearance-none transition-[border-color]"
+            className="h-10 bg-white border border-[#E6E0DA] rounded-xl px-3 pr-7 font-manrope text-sm text-[#221410] cursor-pointer focus:outline-none focus:border-[#FC0903] appearance-none transition-[border-color]"
             style={{
               backgroundImage: `url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='10' height='10' viewBox='0 0 10 10'%3E%3Cpath fill='%236B7280' d='M5 7L1 3h8z'/%3E%3C/svg%3E")`,
               backgroundRepeat: 'no-repeat', backgroundPosition: 'right 0.6rem center'
             }}
           >
-            <option value="featured">Featured</option>
-            <option value="price-low">Price: Low → High</option>
-            <option value="price-high">Price: High → Low</option>
-            <option value="newest">Newest</option>
-            <option value="beds">Most Beds</option>
+            <option value="featured">En vedette</option>
+            <option value="price-low">Prix : Croissant</option>
+            <option value="price-high">Prix : Décroissant</option>
+            <option value="newest">Plus récent</option>
+            <option value="beds">Plus de lits</option>
           </select>
 
           {/* View toggle */}

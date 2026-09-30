@@ -16,12 +16,12 @@ module.exports = {
           200: '#F5F1E8',
         },
         terracotta: {
-          DEFAULT: '#D4755B',
+          DEFAULT: '#FC0903',
           50: '#FBF0EC',
           100: '#F5D9D0',
           200: '#EBB3A1',
           300: '#E08E72',
-          400: '#D4755B',
+          400: '#FC0903',
           500: '#C05E44',
           600: '#A34A33',
           700: '#863A27',
@@ -71,7 +71,7 @@ module.exports = {
         ],
       },
       backgroundImage: {
-        'gradient-terracotta': 'linear-gradient(135deg, #D4755B, #C05E44)',
+        'gradient-terracotta': 'linear-gradient(135deg, #FC0903, #C05E44)',
         'gradient-dark': 'linear-gradient(135deg, #1C1B1A, #2A2927)',
       },
       boxShadow: {

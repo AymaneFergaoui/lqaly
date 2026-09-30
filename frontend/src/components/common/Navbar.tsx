@@ -58,7 +58,7 @@ const Navbar: React.FC = () => {
     {/* Skip-to-main-content — keyboard accessibility */}
     <a
       href="#main-content"
-      className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-[#D4755B] focus:text-white focus:font-manrope focus:font-bold focus:px-4 focus:py-2 focus:rounded-lg focus:shadow-lg"
+      className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-[#FC0903] focus:text-white focus:font-manrope focus:font-bold focus:px-4 focus:py-2 focus:rounded-lg focus:shadow-lg"
     >
       Passer au contenu principal
     </a>
@@ -84,8 +84,8 @@ const Navbar: React.FC = () => {
               to={link.path}
               className={`font-manrope transition-[color] ${
                 isActive(link.path)
-                  ? 'text-[#D4755B] font-semibold'
-                  : 'text-[#374151] hover:text-[#D4755B]'
+                  ? 'text-[#FC0903] font-semibold'
+                  : 'text-[#374151] hover:text-[#FC0903]'
               }`}
             >
               {link.label}
@@ -99,7 +99,7 @@ const Navbar: React.FC = () => {
             <>
               <Link
                 to="/add-property"
-                className="bg-[#D4755B] text-white font-manrope font-bold px-5 py-2 rounded-xl hover:bg-[#B86851] transition-[background-color,box-shadow] hover:shadow-md active:scale-[0.96] transition-transform"
+                className="bg-[#FC0903] text-white font-manrope font-bold px-5 py-2 rounded-xl hover:bg-[#B86851] transition-[background-color,box-shadow] hover:shadow-md active:scale-[0.96] transition-transform"
               >
                 + Ajouter une Propriété
               </Link>
@@ -112,7 +112,7 @@ const Navbar: React.FC = () => {
                   aria-label="User menu"
                   className="flex items-center gap-2 pl-1 pr-3 py-1 rounded-xl hover:bg-[#FAF8F4] transition-[background-color,border-color] border border-transparent hover:border-[#E6D5C3] active:scale-[0.96]"
                 >
-                  <div className="w-8 h-8 rounded-lg bg-[#D4755B] text-white font-manrope font-bold text-xs flex items-center justify-center shrink-0">
+                  <div className="w-8 h-8 rounded-lg bg-[#FC0903] text-white font-manrope font-bold text-xs flex items-center justify-center shrink-0">
                     {initials}
                   </div>
                   <span className="font-manrope font-semibold text-[#221410] max-w-[100px] truncate">
@@ -138,7 +138,7 @@ const Navbar: React.FC = () => {
                         to={to}
                         onClick={() => setIsUserMenuOpen(false)}
                         className={`flex items-center gap-2.5 px-4 py-2.5 font-manrope text-sm transition-[background-color,color] mx-1 rounded-xl ${
-                          isActive(to) ? 'text-[#D4755B] font-semibold bg-[#FAF8F4]' : 'text-[#374151] hover:bg-[#FAF8F4] hover:text-[#D4755B]'
+                          isActive(to) ? 'text-[#FC0903] font-semibold bg-[#FAF8F4]' : 'text-[#374151] hover:bg-[#FAF8F4] hover:text-[#FC0903]'
                         }`}
                       >
                         <span className="font-material-icons text-base" aria-hidden="true">{icon}</span>
@@ -163,13 +163,13 @@ const Navbar: React.FC = () => {
             <>
               <Link
                 to="/signin"
-                className="font-manrope font-semibold text-[#374151] hover:text-[#D4755B] transition-[color] px-4 py-2"
+                className="font-manrope font-semibold text-[#374151] hover:text-[#FC0903] transition-[color] px-4 py-2"
               >
                 Se connecter
               </Link>
               <Link
                 to="/signup"
-                className="bg-[#D4755B] text-white font-manrope font-bold px-6 py-2 rounded-xl hover:bg-[#B86851] transition-[background-color,box-shadow] hover:shadow-md active:scale-[0.96]"
+                className="bg-[#FC0903] text-white font-manrope font-bold px-6 py-2 rounded-xl hover:bg-[#B86851] transition-[background-color,box-shadow] hover:shadow-md active:scale-[0.96]"
               >
                 S'inscrire
               </Link>
@@ -179,7 +179,7 @@ const Navbar: React.FC = () => {
 
         {/* Mobile menu button */}
         <button
-          className="md:hidden p-2 text-[#374151] hover:text-[#D4755B] transition-[color]"
+          className="md:hidden p-2 text-[#374151] hover:text-[#FC0903] transition-[color]"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
           aria-expanded={isMobileMenuOpen}
@@ -198,7 +198,7 @@ const Navbar: React.FC = () => {
               key={link.path}
               to={link.path}
               className={`font-manrope text-base py-2.5 transition-[color] ${
-                isActive(link.path) ? 'text-[#D4755B] font-semibold' : 'text-[#374151]'
+                isActive(link.path) ? 'text-[#FC0903] font-semibold' : 'text-[#374151]'
               }`}
               onClick={closeMobileMenu}
             >
@@ -212,11 +212,11 @@ const Navbar: React.FC = () => {
                 <p className="font-manrope text-xs text-[#9CA3AF] mb-1">
                   Connecté en tant que <span className="font-semibold text-[#374151]">{user.name}</span>
                 </p>
-                <Link to="/dashboard" className="font-manrope text-base py-2.5 text-[#374151] hover:text-[#D4755B] transition-[color]" onClick={closeMobileMenu}>Tableau de bord</Link>
-                <Link to="/my-listings" className="font-manrope text-base py-2.5 text-[#374151] hover:text-[#D4755B] transition-[color]" onClick={closeMobileMenu}>Mes Annonces</Link>
+                <Link to="/dashboard" className="font-manrope text-base py-2.5 text-[#374151] hover:text-[#FC0903] transition-[color]" onClick={closeMobileMenu}>Tableau de bord</Link>
+                <Link to="/my-listings" className="font-manrope text-base py-2.5 text-[#374151] hover:text-[#FC0903] transition-[color]" onClick={closeMobileMenu}>Mes Annonces</Link>
                 <Link
                   to="/add-property"
-                  className="mt-2 bg-[#D4755B] text-white font-manrope font-bold text-sm px-6 py-3 rounded-lg hover:bg-[#B86851] transition-all text-center"
+                  className="mt-2 bg-[#FC0903] text-white font-manrope font-bold text-sm px-6 py-3 rounded-lg hover:bg-[#B86851] transition-all text-center"
                   onClick={closeMobileMenu}
                 >
                   + Ajouter une Propriété
@@ -230,7 +230,7 @@ const Navbar: React.FC = () => {
                 <Link to="/signin" className="font-manrope font-semibold text-base py-2.5 text-[#374151]" onClick={closeMobileMenu}>Se connecter</Link>
                 <Link
                   to="/signup"
-                  className="mt-2 bg-[#D4755B] text-white font-manrope font-bold text-sm px-6 py-3 rounded-lg hover:bg-[#B86851] transition-all text-center"
+                  className="mt-2 bg-[#FC0903] text-white font-manrope font-bold text-sm px-6 py-3 rounded-lg hover:bg-[#B86851] transition-all text-center"
                   onClick={closeMobileMenu}
                 >
                   S'inscrire

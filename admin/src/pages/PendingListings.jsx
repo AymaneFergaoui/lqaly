@@ -296,13 +296,13 @@ const ListingCard = ({ listing, onApprove, onReject, actionLoading }) => {
 
         {/* Location */}
         <p className="flex items-center gap-1.5 text-sm text-[#6B6B6A] mb-3">
-          <MapPin className="w-3.5 h-3.5 text-[#D4755B] shrink-0" />
+          <MapPin className="w-3.5 h-3.5 text-[#FC0903] shrink-0" />
           <span className="line-clamp-1">{listing.location}</span>
         </p>
 
         {/* Specs */}
         <div className="flex flex-wrap items-center gap-3 mb-3">
-          <span className="font-space-mono font-bold text-[#D4755B] text-base tabular-nums">
+          <span className="font-space-mono font-bold text-[#FC0903] text-base tabular-nums">
             {formatPrice(listing.price)}
           </span>
           <span className="text-[#CCCCC9]">·</span>
@@ -489,7 +489,7 @@ const PendingListings = () => {
           </div>
           <button
             onClick={fetchPending}
-            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#6B6B6A] bg-white border border-[#E8E7E5] rounded-lg hover:border-[#D4755B] hover:text-[#D4755B] active:scale-[0.97] transition-all shadow-sm"
+            className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#6B6B6A] bg-white border border-[#E8E7E5] rounded-lg hover:border-[#FC0903] hover:text-[#FC0903] active:scale-[0.97] transition-all shadow-sm"
           >
             <RefreshCw className="w-3.5 h-3.5" />
             Refresh
@@ -505,7 +505,7 @@ const PendingListings = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search by title, location, or submitter…"
-              className="w-full pl-10 pr-4 py-2.5 bg-white border border-[#E8E7E5] rounded-xl text-sm text-[#111110] focus:outline-none focus:ring-2 focus:ring-[#D4755B]/20 focus:border-[#D4755B] transition-all"
+              className="w-full pl-10 pr-4 py-2.5 bg-white border border-[#E8E7E5] rounded-xl text-sm text-[#111110] focus:outline-none focus:ring-2 focus:ring-[#FC0903]/20 focus:border-[#FC0903] transition-all"
             />
           </div>
         )}

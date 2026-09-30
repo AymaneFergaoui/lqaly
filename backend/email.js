@@ -1,10 +1,10 @@
 // ═══════════════════════════════════════════════════════════
 // Lqaly Email Templates
-// Design: Warm terracotta (#D4755B), clean & professional
+// Design: Warm terracotta (#FC0903), clean & professional
 // ═══════════════════════════════════════════════════════════
 
 const BRAND = {
-  color: '#D4755B',
+  color: '#FC0903',
   dark: '#221410',
   bg: '#FAF8F4',
   border: '#E6E0DA',

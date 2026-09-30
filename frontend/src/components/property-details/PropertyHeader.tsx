@@ -57,7 +57,7 @@ const PropertyHeader: React.FC<PropertyHeaderProps> = ({
 
       {/* Location */}
       <div className="flex items-center gap-1.5 mb-5">
-        <MapPin className="w-4 h-4 text-[#D4755B] shrink-0" aria-hidden />
+        <MapPin className="w-4 h-4 text-[#FC0903] shrink-0" aria-hidden />
         <span className="font-manrope text-sm text-[#6B7280]">{location}</span>
       </div>
 

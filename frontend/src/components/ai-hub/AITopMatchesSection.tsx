@@ -12,7 +12,7 @@ const AITopMatchesSection: React.FC = () => {
       id: 1,
       image: propertyImages.property1,
       name: 'The Glass Pavilion',
-      price: '$2,800,000',
+      price: '2,800,000 MAD',
       beds: 4,
       baths: 3,
       sqft: '3.2k',
@@ -23,7 +23,7 @@ const AITopMatchesSection: React.FC = () => {
       id: 2,
       image: propertyImages.property2,
       name: 'Oceanfront Villa',
-      price: '$3,200,000',
+      price: '3,200,000 MAD',
       beds: 3,
       baths: 3,
       sqft: '2.8k',
@@ -34,7 +34,7 @@ const AITopMatchesSection: React.FC = () => {
       id: 3,
       image: propertyImages.property3,
       name: 'Modern Skyline Apartment',
-      price: '$2,100,000',
+      price: '2,100,000 MAD',
       beds: 3,
       baths: 2,
       sqft: '2.4k',
@@ -53,15 +53,15 @@ const AITopMatchesSection: React.FC = () => {
               Top Matches
             </h2>
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-[#D4755B] rounded-full animate-pulse" />
-              <span className="font-space-mono font-bold text-2xl text-[#D4755B]">
+              <div className="w-2 h-2 bg-[#FC0903] rounded-full animate-pulse" />
+              <span className="font-space-mono font-bold text-2xl text-[#FC0903]">
                 97%
               </span>
               <span className="font-space-mono text-sm text-[#6b7280]">Average Match Rate</span>
             </div>
           </div>
 
-          <button className="font-space-mono text-sm text-[#221410] border-b border-[#221410] hover:text-[#D4755B] hover:border-[#D4755B] transition-[color,border-color] pb-1">
+          <button className="font-space-mono text-sm text-[#221410] border-b border-[#221410] hover:text-[#FC0903] hover:border-[#FC0903] transition-[color,border-color] pb-1">
             View All → See more
           </button>
         </div>
@@ -86,7 +86,7 @@ const AITopMatchesSection: React.FC = () => {
                 <div className="absolute inset-0 bg-gradient-to-b from-black/50 to-transparent h-12" />
                 
                 {/* Badge */}
-                <div className="absolute top-4 left-4 bg-[#D4755B] text-white font-space-mono text-xs px-3 py-1.5 rounded-full shadow-lg">
+                <div className="absolute top-4 left-4 bg-[#FC0903] text-white font-space-mono text-xs px-3 py-1.5 rounded-full shadow-lg">
                   {property.badge}
                 </div>
 
@@ -107,7 +107,7 @@ const AITopMatchesSection: React.FC = () => {
                 <h3 className="font-syne text-xl text-[#221410] mb-2">
                   {property.name}
                 </h3>
-                <p className="font-space-mono font-bold text-lg text-[#D4755B] mb-4">
+                <p className="font-space-mono font-bold text-lg text-[#FC0903] mb-4">
                   {property.price}
                 </p>
 

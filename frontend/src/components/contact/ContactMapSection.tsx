@@ -18,18 +18,18 @@ const ContactMapSection: React.FC = () => {
           {/* Map Overlay Button */}
           <div className="absolute inset-0 flex items-center justify-center">
             <button className="bg-white shadow-2xl rounded-xl px-8 py-4 flex items-center gap-3 hover:shadow-3xl transition-shadow group">
-              <span className="material-icons text-2xl text-[#D4755B] group-hover:scale-110 transition-transform">
+              <span className="material-icons text-2xl text-[#FC0903] group-hover:scale-110 transition-transform">
                 location_on
               </span>
               <div className="text-left">
                 <p className="font-syne font-bold text-base text-[#221410] mb-0.5">
-                  Lqaly Office
+                  Bureau Lqaly
                 </p>
                 <p className="font-manrope font-extralight text-xs text-[#64748B]">
-                  Click to view on Google Maps
+                  Cliquez pour voir sur Google Maps
                 </p>
               </div>
-              <span className="material-icons text-[#D4755B]">
+              <span className="material-icons text-[#FC0903]">
                 arrow_forward
               </span>
             </button>

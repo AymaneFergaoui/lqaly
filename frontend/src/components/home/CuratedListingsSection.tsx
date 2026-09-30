@@ -18,7 +18,7 @@ const CuratedListingsSection: React.FC = () => {
       {/* Background Pattern */}
       <div className="absolute inset-0 opacity-30 pointer-events-none">
         <svg className="w-5 h-5" fill="none" viewBox="0 0 20 20">
-          <path d="M0 0h20v20H0z" fill="#D4755B" opacity="0.05" />
+          <path d="M0 0h20v20H0z" fill="#FC0903" opacity="0.05" />
         </svg>
       </div>
 
@@ -26,11 +26,11 @@ const CuratedListingsSection: React.FC = () => {
         {/* Section Header */}
         <div className="flex justify-between items-center mb-16">
           <div>
-            <div className="font-space-mono text-sm text-[#D4755B] uppercase tracking-widest mb-4">Sélection Exclusive</div>
+            <div className="font-space-mono text-sm text-[#FC0903] uppercase tracking-widest mb-4">Sélection Exclusive</div>
             <h2 className="font-fraunces text-5xl text-[#111827]">Propriétés d'Exception</h2>
           </div>
 
-          <Link to="/properties" className="flex items-center gap-2 font-manrope font-bold text-[#D4755B] hover:gap-4 transition-all">
+          <Link to="/properties" className="flex items-center gap-2 font-manrope font-bold text-[#FC0903] hover:gap-4 transition-all">
             Voir Toutes les Propriétés
             <span className="font-material-icons text-sm" aria-hidden="true">arrow_forward</span>
           </Link>
@@ -51,13 +51,13 @@ const CuratedListingsSection: React.FC = () => {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
               <div className="absolute bottom-0 left-0 right-0 p-8">
-                <div className="bg-[#D4755B] inline-block px-3 py-1 rounded text-white font-manrope font-bold text-xs mb-4">
+                <div className="bg-[#FC0903] inline-block px-3 py-1 rounded text-white font-manrope font-bold text-xs mb-4">
                   EN VEDETTE
                 </div>
                 <h3 className="font-fraunces text-3xl text-white mb-2">The Glass Pavilion</h3>
                 <p className="font-manrope font-light text-white/80 mb-4">Montecito, Californie</p>
                 <div className="border-t border-white/20 pt-4 flex items-center justify-between">
-                  <span className="font-space-mono text-white">$12,500,000</span>
+                  <span className="font-space-mono text-white">12,500,000 MAD</span>
                   <div className="flex items-center gap-6 text-white/90">
                     <div className="flex items-center gap-2">
                       <span className="font-material-icons text-sm" aria-hidden="true">bed</span>
@@ -86,7 +86,7 @@ const CuratedListingsSection: React.FC = () => {
               <div className="absolute bottom-0 left-0 right-0 p-6">
                 <h3 className="font-fraunces text-xl text-white mb-1">Skyline Penthouse</h3>
                 <p className="font-manrope text-sm text-white/70 mb-3">New York, NY</p>
-                <span className="font-space-mono text-sm text-white">$8,950,000</span>
+                <span className="font-space-mono text-sm text-white">8,950,000 MAD</span>
               </div>
             </div>
           </div>
@@ -104,7 +104,7 @@ const CuratedListingsSection: React.FC = () => {
               <div className="absolute bottom-0 left-0 right-0 p-6">
                 <h3 className="font-fraunces text-xl text-white mb-1">Desert Oasis</h3>
                 <p className="font-manrope text-sm text-white/70 mb-3">Joshua Tree, CA</p>
-                <span className="font-space-mono text-sm text-white">$3,200,000</span>
+                <span className="font-space-mono text-sm text-white">3,200,000 MAD</span>
               </div>
             </div>
           </div>
@@ -123,7 +123,7 @@ const CuratedListingsSection: React.FC = () => {
                 <h3 className="font-fraunces text-2xl text-white mb-2">Coastal Retreat</h3>
                 <p className="font-manrope text-white/70 mb-6">Malibu, Californie</p>
                 <div className="border-t border-white/20 pt-6 flex items-center justify-between">
-                  <span className="font-space-mono text-white">$15,000,000</span>
+                  <span className="font-space-mono text-white">15,000,000 MAD</span>
                   <button className="text-white hover:bg-white/10 p-2 rounded-full transition-all" aria-label="Voir Coastal Retreat">
                     <span className="font-material-icons text-2xl" aria-hidden="true">arrow_forward</span>
                   </button>

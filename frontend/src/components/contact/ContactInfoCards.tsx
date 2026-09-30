@@ -7,7 +7,7 @@ const ContactInfoCards: React.FC = () => {
       <div className="bg-white border border-[#E6E0DA] rounded-xl p-6">
         <div className="flex items-start gap-4">
           <div className="w-12 h-12 bg-[rgba(212,117,91,0.1)] rounded-full flex items-center justify-center flex-shrink-0">
-            <span className="material-icons text-2xl text-[#D4755B]">
+            <span className="material-icons text-2xl text-[#FC0903]">
               location_on
             </span>
           </div>
@@ -24,7 +24,7 @@ const ContactInfoCards: React.FC = () => {
               href="https://maps.google.com" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-1 font-manrope font-medium text-sm text-[#D4755B] hover:text-[#C05621] transition-[color]"
+              className="inline-flex items-center gap-1 font-manrope font-medium text-sm text-[#FC0903] hover:text-[#C05621] transition-[color]"
             >
               <span>Get Directions</span>
               <span className="material-icons text-sm">
@@ -39,7 +39,7 @@ const ContactInfoCards: React.FC = () => {
       <div className="bg-white border border-[#E6E0DA] rounded-xl p-6">
         <div className="flex items-start gap-4">
           <div className="w-12 h-12 bg-[rgba(212,117,91,0.1)] rounded-full flex items-center justify-center flex-shrink-0">
-            <span className="material-icons text-2xl text-[#D4755B]">
+            <span className="material-icons text-2xl text-[#FC0903]">
               phone
             </span>
           </div>
@@ -50,7 +50,7 @@ const ContactInfoCards: React.FC = () => {
             <div className="space-y-2">
               <a 
                 href="tel:+919876543210" 
-                className="flex items-center gap-2 font-manrope font-extralight text-sm text-[#4B5563] hover:text-[#D4755B] transition-[color]"
+                className="flex items-center gap-2 font-manrope font-extralight text-sm text-[#4B5563] hover:text-[#FC0903] transition-[color]"
               >
                 <span className="material-icons text-base">
                   call
@@ -59,7 +59,7 @@ const ContactInfoCards: React.FC = () => {
               </a>
               <a 
                 href="mailto:hello@lqaly.com" 
-                className="flex items-center gap-2 font-manrope font-extralight text-sm text-[#4B5563] hover:text-[#D4755B] transition-[color]"
+                className="flex items-center gap-2 font-manrope font-extralight text-sm text-[#4B5563] hover:text-[#FC0903] transition-[color]"
               >
                 <span className="material-icons text-base">
                   email
@@ -75,7 +75,7 @@ const ContactInfoCards: React.FC = () => {
       <div className="bg-white border border-[#E6E0DA] rounded-xl p-6">
         <div className="flex items-start gap-4">
           <div className="w-12 h-12 bg-[rgba(212,117,91,0.1)] rounded-full flex items-center justify-center flex-shrink-0">
-            <span className="material-icons text-2xl text-[#D4755B]">
+            <span className="material-icons text-2xl text-[#FC0903]">
               schedule
             </span>
           </div>

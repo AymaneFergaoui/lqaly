@@ -9,13 +9,13 @@ import { cn } from '../lib/utils';
 const PROPERTY_TYPES = ['House', 'Apartment', 'Office', 'Villa'];
 const AVAILABILITY_TYPES = ['rent', 'buy'];
 
-const inputClass = "w-full px-4 py-3 bg-white border border-[#E6D5C3] rounded-xl text-[#1C1B1A] placeholder-[#9CA3AF] text-sm transition-all duration-200 outline-none focus:border-[#D4755B] focus:ring-2 focus:ring-[#D4755B]/15";
+const inputClass = "w-full px-4 py-3 bg-white border border-[#E6D5C3] rounded-xl text-[#1C1B1A] placeholder-[#9CA3AF] text-sm transition-all duration-200 outline-none focus:border-[#FC0903] focus:ring-2 focus:ring-[#FC0903]/15";
 const labelClass = "block text-sm font-semibold text-[#1C1B1A] mb-2";
 
 const SectionHeader = ({ icon: Icon, title, subtitle }) => (
   <div className="flex items-center gap-3 mb-5">
-    <div className="w-9 h-9 bg-[#D4755B]/10 rounded-xl flex items-center justify-center">
-      <Icon className="w-4.5 h-4.5 text-[#D4755B]" />
+    <div className="w-9 h-9 bg-[#FC0903]/10 rounded-xl flex items-center justify-center">
+      <Icon className="w-4.5 h-4.5 text-[#FC0903]" />
     </div>
     <div>
       <h3 className="text-base font-bold text-[#1C1B1A]">{title}</h3>
@@ -275,8 +275,8 @@ const PropertyForm = () => {
                     className={cn(
                       'flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium transition-all duration-200',
                       selected
-                        ? 'bg-[#D4755B] text-white shadow-sm'
-                        : 'bg-[#FAF8F4] text-[#5A5856] border border-[#E6D5C3] hover:border-[#D4755B] hover:text-[#D4755B]'
+                        ? 'bg-[#FC0903] text-white shadow-sm'
+                        : 'bg-[#FAF8F4] text-[#5A5856] border border-[#E6D5C3] hover:border-[#FC0903] hover:text-[#FC0903]'
                     )}
                   >
                     {selected ? <CheckSquare className="w-3.5 h-3.5" /> : <Square className="w-3.5 h-3.5" />}
@@ -293,7 +293,7 @@ const PropertyForm = () => {
                 placeholder="Add custom amenity..."
                 className={cn(inputClass, 'flex-1')} />
               <button type="button" onClick={handleAddAmenity}
-                className="flex items-center gap-1.5 px-4 py-2.5 bg-[#1C1B1A] text-white rounded-xl text-sm font-medium hover:bg-[#D4755B] transition-colors">
+                className="flex items-center gap-1.5 px-4 py-2.5 bg-[#1C1B1A] text-white rounded-xl text-sm font-medium hover:bg-[#FC0903] transition-colors">
                 <Plus className="w-4 h-4" />
                 Add
               </button>
@@ -304,7 +304,7 @@ const PropertyForm = () => {
               <div className="mt-3 flex flex-wrap gap-2">
                 {formData.amenities.filter((a) => !AMENITIES_LIST.includes(a)).map((amenity) => (
                   <span key={amenity}
-                    className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#D4755B]/10 text-[#D4755B] rounded-full text-sm font-medium">
+                    className="inline-flex items-center gap-1.5 px-3 py-1 bg-[#FC0903]/10 text-[#FC0903] rounded-full text-sm font-medium">
                     {amenity}
                     <button type="button" onClick={() => handleAmenityToggle(amenity)}
                       className="hover:text-[#C05E44] transition-colors">
@@ -341,9 +341,9 @@ const PropertyForm = () => {
 
             {previewUrls.length < 4 && (
               <label htmlFor="images"
-                className="flex flex-col items-center justify-center w-full h-36 border-2 border-dashed border-[#E6D5C3] rounded-xl cursor-pointer bg-[#FAF8F4] hover:border-[#D4755B] hover:bg-[#D4755B]/5 transition-all duration-200 group">
-                <Upload className="w-8 h-8 text-[#9CA3AF] group-hover:text-[#D4755B] mb-2 transition-colors" />
-                <span className="text-sm font-medium text-[#5A5856] group-hover:text-[#D4755B] transition-colors">
+                className="flex flex-col items-center justify-center w-full h-36 border-2 border-dashed border-[#E6D5C3] rounded-xl cursor-pointer bg-[#FAF8F4] hover:border-[#FC0903] hover:bg-[#FC0903]/5 transition-all duration-200 group">
+                <Upload className="w-8 h-8 text-[#9CA3AF] group-hover:text-[#FC0903] mb-2 transition-colors" />
+                <span className="text-sm font-medium text-[#5A5856] group-hover:text-[#FC0903] transition-colors">
                   Click to upload images
                 </span>
                 <span className="text-xs text-[#9CA3AF] mt-1">PNG, JPG up to 10MB each</span>
@@ -359,7 +359,7 @@ const PropertyForm = () => {
             disabled={loading}
             whileHover={{ scale: loading ? 1 : 1.01 }}
             whileTap={{ scale: loading ? 1 : 0.99 }}
-            className="w-full py-4 bg-[#1C1B1A] hover:bg-[#D4755B] text-[#FAF8F4] rounded-xl font-semibold text-base transition-all duration-300 shadow-lg hover:shadow-terracotta disabled:opacity-60 disabled:cursor-not-allowed"
+            className="w-full py-4 bg-[#1C1B1A] hover:bg-[#FC0903] text-[#FAF8F4] rounded-xl font-semibold text-base transition-all duration-300 shadow-lg hover:shadow-terracotta disabled:opacity-60 disabled:cursor-not-allowed"
           >
             {loading ? 'Adding Property...' : 'Add Property'}
           </motion.button>

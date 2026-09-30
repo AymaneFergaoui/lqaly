@@ -34,7 +34,7 @@ export default function getStatusPage() {
 
     /* Endpoints */
     .section-title{font-size:1rem;font-weight:700;color:#221410;margin-bottom:16px}
-    .ep{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#FAF8F4;border-radius:8px;border-left:3px solid #D4755B;margin-bottom:8px;transition:background .15s}
+    .ep{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;background:#FAF8F4;border-radius:8px;border-left:3px solid #FC0903;margin-bottom:8px;transition:background .15s}
     .ep:hover{background:#F2EFE9}
     .ep-left{display:flex;align-items:center;gap:12px}
     .method{font-family:'SF Mono',Monaco,'Cascadia Code',monospace;font-size:.7rem;padding:3px 7px;border-radius:4px;font-weight:700;text-transform:uppercase}
@@ -48,7 +48,7 @@ export default function getStatusPage() {
 
     /* Footer */
     .ftr{background:#221410;color:rgba(255,255,255,.6);padding:20px 32px;border-radius:0 0 14px 14px;font-size:.78rem;text-align:center}
-    .ftr a{color:#D4755B;text-decoration:none;font-weight:500}
+    .ftr a{color:#FC0903;text-decoration:none;font-weight:500}
     .ftr a:hover{text-decoration:underline}
 
     @media(max-width:640px){.hdr{flex-direction:column;text-align:center}.body{padding:20px 16px}.grid{grid-template-columns:1fr 1fr}.ep{flex-direction:column;align-items:flex-start;gap:6px}}
