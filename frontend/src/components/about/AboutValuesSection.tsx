@@ -6,17 +6,17 @@ const AboutValuesSection: React.FC = () => {
     {
       icon: Lightbulb,
       title: 'Innovation',
-      description: 'We challenge the status quo of real estate, blending traditional service with cutting-edge technology to redefine what\'s possible.'
+      description: 'Nous remettons en question le statu quo de l\'immobilier en alliant un service traditionnel à une technologie de pointe pour redéfinir ce qui est possible.'
     },
     {
       icon: Eye,
-      title: 'Transparency',
-      description: 'No hidden data, no obscured histories. We believe in complete clarity, empowering you to make decisions with absolute confidence.'
+      title: 'Transparence',
+      description: 'Pas de données cachées, pas d\'historiques obscurs. Nous croyons en une clarté totale, vous permettant de prendre des décisions en toute confiance.'
     },
     {
       icon: Award,
       title: 'Excellence',
-      description: 'From the first search to the final signature, we curate an experience of uncompromising quality and refined elegance.'
+      description: 'De la première recherche à la signature finale, nous concevons une expérience d\'une qualité irréprochable et d\'une élégance raffinée.'
     }
   ];
 
@@ -26,10 +26,10 @@ const AboutValuesSection: React.FC = () => {
         {/* Section Header */}
         <div className="text-center mb-16">
           <div className="font-space-mono text-xs text-[#FC0903] uppercase tracking-[1.2px] mb-4">
-            Our Ethos
+            Notre Philosophie
           </div>
           <h2 className="font-syne text-4xl text-[#221410]">
-            Driven by Purpose
+            Guidés par un But
           </h2>
         </div>
 

@@ -34,40 +34,40 @@ const AboutHeritageSection: React.FC = () => {
             {/* Label */}
             <div className="mb-6">
               <p className="font-space-mono text-xs text-[#FC0903] uppercase tracking-[2.4px]">
-                Our Heritage
+                Notre Héritage
               </p>
             </div>
 
             {/* Headline */}
             <h2 className="mb-6">
               <span className="font-syne text-[40px] leading-[50px] text-[#221410] block font-semibold">
-                Redefining the Real Estate Landscape with
+                Redéfinir le Paysage Immobilier avec
               </span>
               <span className="font-fraunces italic text-[40px] leading-[50px] text-[#FC0903] block">
-                Better Property Discovery
+                Une Meilleure Découverte
               </span>
             </h2>
 
             {/* Description Paragraphs */}
             <div className="space-y-6 mb-8">
               <p className="font-manrope font-extralight text-base leading-[26px] text-[#4b5563]">
-                Founded by architects and data scientists, Lqaly emerged from a
-                simple observation: the search for a home had become a transaction, losing
-                the emotional resonance of finding one's sanctuary.
+                Fondée par des architectes et des experts en données, Lqaly est née d'une
+                simple observation : la recherche d'un logement était devenue une transaction froide, perdant
+                la résonance émotionnelle qui accompagne la découverte de son propre sanctuaire.
               </p>
 
               <p className="font-manrope font-extralight text-base leading-[26px] text-[#4b5563]">
-                We set out to bridge the gap between cold data and warm living spaces. By
-                harnessing advanced AI, we don't just match square footage; we match
-                lifestyles, aesthetics, and the intangible feelings that make a house a home.
+                Nous avons décidé de combler le fossé entre les données froides et les espaces de vie chaleureux. En
+                exploitant une IA avancée, nous ne nous contentons pas d'associer des mètres carrés ; nous faisons correspondre
+                des styles de vie, une esthétique et les émotions intangibles qui transforment une maison en un véritable foyer.
               </p>
             </div>
 
             {/* Blockquote */}
             <blockquote className="border-l-4 border-[#FC0903] pl-6 mb-8">
               <p className="font-fraunces italic text-2xl leading-8 text-[#FC0903]">
-                "We believe finding a home should be inspiring,
-                not exhausting."
+                "Nous pensons que trouver un logement doit être inspirant,
+                et non épuisant."
               </p>
             </blockquote>
 
@@ -77,7 +77,7 @@ const AboutHeritageSection: React.FC = () => {
               className="inline-flex items-center gap-2 border-b border-[#221410] pb-1 group hover:border-[#FC0903] transition-[border-color]"
             >
               <span className="font-space-mono text-sm text-[#221410] group-hover:text-[#FC0903] transition-[color]">
-                Meet the Architects
+                Rencontrez les Architectes
               </span>
 
               <ArrowRight className="w-4 h-4 text-[#221410] group-hover:text-[#FC0903] transition-[color]" />

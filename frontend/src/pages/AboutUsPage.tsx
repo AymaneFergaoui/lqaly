@@ -12,8 +12,8 @@ import AboutCTASection from '../components/about/AboutCTASection';
 
 const AboutUsPage: React.FC = () => {
   useSEO({
-    title: 'About Lqaly — AI-Powered Real Estate in India',
-    description: 'Lqaly is an AI-powered real estate platform serving homebuyers and sellers across Mumbai, Delhi, Bangalore, Ahmedabad, and Pune. Learn about our mission and technology.',
+    title: 'À propos de Lqaly — Immobilier propulsé par l\'IA au Maroc',
+    description: 'Lqaly est une plateforme immobilière propulsée par l\'IA au service des acheteurs et des vendeurs à Casablanca, Rabat, Marrakech et Tanger. Découvrez notre mission et notre technologie.',
     url: 'https://lqaly.vercel.app/about',
   });
 

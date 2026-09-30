@@ -5,10 +5,10 @@ const AboutAISection: React.FC = () => {
   const imgVerticalArchitecturalDetail = "https://images.unsplash.com/photo-1695067440629-b5e513976100?w=600";
   
   const features = [
-    "Predictive Market Analysis",
-    "Hyper-local Neighborhood Data",
-    "Investment Value Projection",
-    "Lifestyle Compatibility Scoring"
+    "Analyse de Marché Prédictive",
+    "Données Hyper-locales du Quartier",
+    "Projection de la Valeur d'Investissement",
+    "Score de Compatibilité du Style de Vie"
   ];
 
   return (
@@ -20,26 +20,23 @@ const AboutAISection: React.FC = () => {
             {/* Label */}
             <div className="mb-6">
               <p className="font-space-mono text-xs text-[#FC0903] uppercase tracking-[1.2px]">
-                The Engine
+                Le Moteur
               </p>
             </div>
 
             {/* Headline */}
             <h2 className="mb-6">
               <span className="font-syne text-5xl leading-[48px] text-[#221410] block font-semibold">
-                AI-Powered
+                Intelligence Immobilière
               </span>
               <span className="font-fraunces font-light italic text-5xl leading-[48px] text-[#FC0903] block">
-                Property Intelligence
+                Propulsée par l'IA
               </span>
             </h2>
 
             {/* Description */}
             <p className="font-manrope font-extralight text-lg leading-[29.25px] text-[#4b5563] mb-8">
-              Our proprietary algorithms analyze millions of data points—from sun
-              patterns and neighborhood noise levels to architectural styles and
-              historical value trends—to present you with opportunities others
-              miss.
+              Nos algorithmes propriétaires analysent des millions de points de données — de l'ensoleillement et des niveaux de bruit du quartier aux styles architecturaux et tendances de valeur historiques — pour vous présenter des opportunités que d'autres manquent.
             </p>
 
             {/* Features List */}
@@ -62,7 +59,7 @@ const AboutAISection: React.FC = () => {
               className="inline-flex items-center gap-2 border-b border-[#221410] pb-1 group hover:border-[#FC0903] transition-[border-color]"
             >
               <span className="font-space-mono text-sm text-[#221410] group-hover:text-[#FC0903] transition-[color]">
-                Learn about our Tech
+                Découvrez notre Technologie
               </span>
 
               <ArrowRight className="w-4 h-4 text-[#221410] group-hover:text-[#FC0903] transition-[color]" />
@@ -96,10 +93,10 @@ const AboutAISection: React.FC = () => {
                 {/* Content */}
                 <div>
                   <p className="font-space-mono text-xs text-[#6b7280] uppercase mb-1">
-                    Match Score
+                    Score de Match
                   </p>
                   <p className="font-manrope font-extralight text-lg text-[#221410]">
-                    98.5% Compatibility
+                    98.5% de Compatibilité
                   </p>
                 </div>
               </div>

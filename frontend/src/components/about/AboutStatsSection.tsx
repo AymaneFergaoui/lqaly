@@ -6,22 +6,22 @@ const AboutStatsSection: React.FC = () => {
     {
       icon: Building2,
       value: '2,450+',
-      label: 'Properties'
+      label: 'Propriétés'
     },
     {
       icon: Users,
       value: '12k+',
-      label: 'Happy Clients'
+      label: 'Clients Satisfaits'
     },
     {
       icon: MapPin,
       value: '18',
-      label: 'Major Cities'
+      label: 'Grandes Villes'
     },
     {
       icon: CheckCircle,
       value: '98%',
-      label: 'Match Rate'
+      label: 'Taux de Match'
     }
   ];
 
