@@ -23,7 +23,7 @@ const Footer: React.FC = () => {
               <span className="font-fraunces text-2xl font-bold">BuildEstate</span>
             </Link>
             <p className="font-manrope font-extralight text-[#9ca3af] text-sm leading-relaxed mb-6">
-              AI-powered luxury real estate platform connecting you with your dream home through intelligent matching and personalized recommendations.
+              Plateforme d'immobilier de luxe propulsée par l'IA vous connectant à la maison de vos rêves grâce à une correspondance intelligente et des recommandations personnalisées.
             </p>
             {/* Social Links */}
             <div className="flex gap-3">
@@ -72,21 +72,21 @@ const Footer: React.FC = () => {
 
           {/* Quick Links Column */}
           <div>
-            <h4 className="font-syne font-bold text-white text-lg mb-6">Quick Links</h4>
+            <h4 className="font-syne font-bold text-white text-lg mb-6">Liens Rapides</h4>
             <ul className="space-y-3">
               <li>
                 <Link to="/properties" className="font-manrope font-extralight text-[#9ca3af] text-sm hover:text-white hover:pl-2 transition-all inline-block">
-                  Browse Properties
+                  Parcourir les Propriétés
                 </Link>
               </li>
               <li>
                 <Link to="/ai-hub" className="font-manrope font-extralight text-[#9ca3af] text-sm hover:text-white hover:pl-2 transition-all inline-block">
-                  AI Property Hub
+                  Hub Immobilier IA
                 </Link>
               </li>
               <li>
                 <Link to="/about" className="font-manrope font-extralight text-[#9ca3af] text-sm hover:text-white hover:pl-2 transition-all inline-block">
-                  About Us
+                  À propos
                 </Link>
               </li>
               <li>
@@ -96,7 +96,7 @@ const Footer: React.FC = () => {
               </li>
               <li>
                 <a href="#" className="font-manrope font-extralight text-[#9ca3af] text-sm hover:text-white hover:pl-2 transition-all inline-block">
-                  Careers
+                  Carrières
                 </a>
               </li>
               <li>
@@ -109,7 +109,7 @@ const Footer: React.FC = () => {
 
           {/* Contact Info Column */}
           <div>
-            <h4 className="font-syne font-bold text-white text-lg mb-6">Contact Info</h4>
+            <h4 className="font-syne font-bold text-white text-lg mb-6">Coordonnées</h4>
             <ul className="space-y-4">
               <li>
                 <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 font-manrope font-extralight text-[#9ca3af] text-sm hover:text-white transition-[color] group">
@@ -138,16 +138,16 @@ const Footer: React.FC = () => {
 
           {/* Newsletter Column */}
           <div>
-            <h4 className="font-syne font-bold text-white text-lg mb-6">Stay Updated</h4>
+            <h4 className="font-syne font-bold text-white text-lg mb-6">Restez Informé</h4>
             <p className="font-manrope font-extralight text-[#9ca3af] text-sm mb-4 leading-relaxed">
-              Subscribe to our newsletter for the latest listings, market insights, and exclusive offers.
+              Abonnez-vous à notre newsletter pour les dernières annonces, analyses de marché et offres exclusives.
             </p>
             <form onSubmit={handleNewsletterSubmit} className="space-y-3">
               <input
                 type="email"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="Your email address"
+                placeholder="Votre adresse email"
                 className="w-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] rounded-lg px-4 py-3 font-manrope font-extralight text-sm text-white placeholder:text-[#6b7280] focus:outline-none focus:border-[#D4755B] transition-[border-color]"
                 required
               />
@@ -155,11 +155,11 @@ const Footer: React.FC = () => {
                 type="submit"
                 className="w-full bg-[#D4755B] hover:bg-[#C05621] text-white font-manrope font-bold text-sm px-4 py-3 rounded-lg transition-all shadow-lg hover:shadow-xl"
               >
-                Subscribe
+                S'abonner
               </button>
             </form>
             <p className="font-manrope font-extralight text-[#6b7280] text-xs mt-3">
-              We respect your privacy. Unsubscribe anytime.
+              Nous respectons votre vie privée. Désabonnez-vous à tout moment.
             </p>
           </div>
         </div>
@@ -168,20 +168,20 @@ const Footer: React.FC = () => {
         <div className="border-t border-[rgba(255,255,255,0.1)] pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="font-manrope font-extralight text-[#6b7280] text-sm text-center md:text-left">
-              © 2026 BuildEstate. All rights reserved. Powered by AI.
+              © 2026 BuildEstate. Tous droits réservés. Propulsé par l'IA.
             </p>
             <div className="flex flex-wrap justify-center gap-6">
               <a href="#" className="font-manrope font-extralight text-[#6b7280] text-sm hover:text-white transition-[color]">
-                Privacy Policy
+                Politique de Confidentialité
               </a>
               <a href="#" className="font-manrope font-extralight text-[#6b7280] text-sm hover:text-white transition-[color]">
-                Terms of Service
+                Conditions d'Utilisation
               </a>
               <a href="#" className="font-manrope font-extralight text-[#6b7280] text-sm hover:text-white transition-[color]">
-                Cookie Policy
+                Politique des Cookies
               </a>
               <a href="#" className="font-manrope font-extralight text-[#6b7280] text-sm hover:text-white transition-[color]">
-                Sitemap
+                Plan du Site
               </a>
             </div>
           </div>

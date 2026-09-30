@@ -4,10 +4,10 @@ import { motion, useScroll, useTransform } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
 
 const navLinks = [
-  { path: '/', label: 'Home' },
-  { path: '/properties', label: 'Properties' },
-  { path: '/ai-hub', label: 'AI Hub' },
-  { path: '/about', label: 'About' },
+  { path: '/', label: 'Accueil' },
+  { path: '/properties', label: 'Propriétés' },
+  { path: '/ai-hub', label: 'Hub IA' },
+  { path: '/about', label: 'À propos' },
   { path: '/contact', label: 'Contact' },
 ];
 
@@ -60,7 +60,7 @@ const Navbar: React.FC = () => {
       href="#main-content"
       className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-[#D4755B] focus:text-white focus:font-manrope focus:font-bold focus:px-4 focus:py-2 focus:rounded-lg focus:shadow-lg"
     >
-      Skip to main content
+      Passer au contenu principal
     </a>
     <motion.nav
       initial={{ y: -100 }}
@@ -101,7 +101,7 @@ const Navbar: React.FC = () => {
                 to="/add-property"
                 className="bg-[#D4755B] text-white font-manrope font-bold px-5 py-2 rounded-xl hover:bg-[#B86851] transition-[background-color,box-shadow] hover:shadow-md active:scale-[0.96] transition-transform"
               >
-                + List Property
+                + Ajouter une Propriété
               </Link>
 
               {/* User avatar dropdown */}
@@ -126,12 +126,12 @@ const Navbar: React.FC = () => {
                 {isUserMenuOpen && (
                   <div className="absolute right-0 top-full mt-2 w-52 bg-white border border-[#E6D5C3] rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.08),0_1px_4px_rgba(0,0,0,0.04)] py-2 z-50">
                     <div className="px-4 py-2.5 border-b border-[#F3F0EC] mb-1">
-                      <p className="font-manrope text-xs text-[#9CA3AF]">Signed in as</p>
+                      <p className="font-manrope text-xs text-[#9CA3AF]">Connecté en tant que</p>
                       <p className="font-manrope text-sm font-semibold text-[#221410] truncate">{user.email}</p>
                     </div>
                     {[
-                      { to: '/dashboard', icon: 'dashboard', label: 'Dashboard' },
-                      { to: '/my-listings', icon: 'home_work', label: 'My Listings' },
+                      { to: '/dashboard', icon: 'dashboard', label: 'Tableau de bord' },
+                      { to: '/my-listings', icon: 'home_work', label: 'Mes Annonces' },
                     ].map(({ to, icon, label }) => (
                       <Link
                         key={to}
@@ -152,7 +152,7 @@ const Navbar: React.FC = () => {
                         style={{ width: 'calc(100% - 8px)' }}
                       >
                         <span className="font-material-icons text-base" aria-hidden="true">logout</span>
-                        Logout
+                        Déconnexion
                       </button>
                     </div>
                   </div>
@@ -165,13 +165,13 @@ const Navbar: React.FC = () => {
                 to="/signin"
                 className="font-manrope font-semibold text-[#374151] hover:text-[#D4755B] transition-[color] px-4 py-2"
               >
-                Sign In
+                Se connecter
               </Link>
               <Link
                 to="/signup"
                 className="bg-[#D4755B] text-white font-manrope font-bold px-6 py-2 rounded-xl hover:bg-[#B86851] transition-[background-color,box-shadow] hover:shadow-md active:scale-[0.96]"
               >
-                Sign Up
+                S'inscrire
               </Link>
             </>
           )}
@@ -210,30 +210,30 @@ const Navbar: React.FC = () => {
             {isAuthenticated && user ? (
               <>
                 <p className="font-manrope text-xs text-[#9CA3AF] mb-1">
-                  Signed in as <span className="font-semibold text-[#374151]">{user.name}</span>
+                  Connecté en tant que <span className="font-semibold text-[#374151]">{user.name}</span>
                 </p>
-                <Link to="/dashboard" className="font-manrope text-base py-2.5 text-[#374151] hover:text-[#D4755B] transition-[color]" onClick={closeMobileMenu}>Dashboard</Link>
-                <Link to="/my-listings" className="font-manrope text-base py-2.5 text-[#374151] hover:text-[#D4755B] transition-[color]" onClick={closeMobileMenu}>My Listings</Link>
+                <Link to="/dashboard" className="font-manrope text-base py-2.5 text-[#374151] hover:text-[#D4755B] transition-[color]" onClick={closeMobileMenu}>Tableau de bord</Link>
+                <Link to="/my-listings" className="font-manrope text-base py-2.5 text-[#374151] hover:text-[#D4755B] transition-[color]" onClick={closeMobileMenu}>Mes Annonces</Link>
                 <Link
                   to="/add-property"
                   className="mt-2 bg-[#D4755B] text-white font-manrope font-bold text-sm px-6 py-3 rounded-lg hover:bg-[#B86851] transition-all text-center"
                   onClick={closeMobileMenu}
                 >
-                  + List Property
+                  + Ajouter une Propriété
                 </Link>
                 <button onClick={handleLogout} className="font-manrope text-base py-2.5 text-left text-[#374151] hover:text-red-500 transition-[color]">
-                  Logout
+                  Déconnexion
                 </button>
               </>
             ) : (
               <>
-                <Link to="/signin" className="font-manrope font-semibold text-base py-2.5 text-[#374151]" onClick={closeMobileMenu}>Sign In</Link>
+                <Link to="/signin" className="font-manrope font-semibold text-base py-2.5 text-[#374151]" onClick={closeMobileMenu}>Se connecter</Link>
                 <Link
                   to="/signup"
                   className="mt-2 bg-[#D4755B] text-white font-manrope font-bold text-sm px-6 py-3 rounded-lg hover:bg-[#B86851] transition-all text-center"
                   onClick={closeMobileMenu}
                 >
-                  Sign Up
+                  S'inscrire
                 </Link>
               </>
             )}
