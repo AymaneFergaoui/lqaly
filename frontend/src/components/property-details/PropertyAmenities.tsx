@@ -12,6 +12,7 @@ import {
 
 // Map amenity names (case-insensitive) to Lucide icons
 const AMENITY_ICON_MAP: Record<string, React.FC<{ className?: string }>> = {
+  // English keys
   'gym': Dumbbell,
   'fitness center': Dumbbell,
   'gymnasium': Dumbbell,
@@ -68,6 +69,42 @@ const AMENITY_ICON_MAP: Record<string, React.FC<{ className?: string }>> = {
   'guest bathroom': DoorClosed,
   'pet friendly': PawPrint,
   'vastu compliant': Compass,
+
+  // French keys
+  'salle de sport': Dumbbell,
+  'piscine': Waves,
+  'piste de course': Footprints,
+  "jeux d'intérieur": Gamepad2,
+  'installations sportives': Trophy,
+  'salle de yoga': Activity,
+  'club-house': Users,
+  'aire de jeux pour enfants': Baby,
+  'salle polyvalente': Building,
+  'home cinéma': Clapperboard,
+  'sécurité': Shield,
+  'surveillance vidéo': Camera,
+  'sécurité incendie': Flame,
+  'résidence fermée': Lock,
+  'interphone': Phone,
+  'parking couvert': ParkingCircle,
+  'parking visiteurs': ParkingCircle,
+  'recharge pour ve': Plug,
+  'générateur de secours': Zap,
+  'ascenseur': ArrowUpDown,
+  'eau 24/7': Droplet,
+  'gaz de ville': Fuel,
+  'climatisation': AirVent,
+  "récupération d'eau de pluie": Droplets,
+  'jardin': TreePine,
+  'jardin paysager': Flower2,
+  'balcon': DoorOpen,
+  'terrasse': DoorOpen,
+  'vue sur le lac': Eye,
+  'cheminée': Heater,
+  'service de blanchisserie': Shirt,
+  'chambre de service': DoorClosed,
+  'animaux acceptés': PawPrint,
+  'conforme au vastu': Compass,
 };
 
 function getAmenityIcon(name: string): React.FC<{ className?: string }> {

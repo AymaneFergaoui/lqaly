@@ -22,6 +22,10 @@ const VerifyEmailPage = lazy(() => import('./pages/VerifyEmailPage'));
 const AddPropertyPage = lazy(() => import('./pages/AddPropertyPage'));
 const MyListingsPage = lazy(() => import('./pages/MyListingsPage'));
 const DashboardPage = lazy(() => import('./pages/DashboardPage'));
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
+const TermsOfService = lazy(() => import('./pages/TermsOfService'));
+const CookiePolicy = lazy(() => import('./pages/CookiePolicy'));
+const Sitemap = lazy(() => import('./pages/Sitemap'));
 
 function NotFoundPage() {
   return (
@@ -69,6 +73,10 @@ function AnimatedRoutes() {
           <Route path="/add-property" element={<PageTransition><AddPropertyPage /></PageTransition>} />
           <Route path="/my-listings" element={<PageTransition><MyListingsPage /></PageTransition>} />
           <Route path="/dashboard" element={<PageTransition><DashboardPage /></PageTransition>} />
+          <Route path="/privacy-policy" element={<PageTransition><PrivacyPolicy /></PageTransition>} />
+          <Route path="/terms" element={<PageTransition><TermsOfService /></PageTransition>} />
+          <Route path="/cookie-policy" element={<PageTransition><CookiePolicy /></PageTransition>} />
+          <Route path="/sitemap" element={<PageTransition><Sitemap /></PageTransition>} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </AnimatePresence>

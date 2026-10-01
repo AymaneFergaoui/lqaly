@@ -117,7 +117,7 @@ const updateproperty = async (req, res) => {
             return res.status(404).json({ message: "Property not found", success: false });
         }
 
-        if (!req.files) {
+        if (!req.files || Object.keys(req.files).length === 0) {
             // No new images provided
             property.title = title;
             property.location = location;
@@ -131,7 +131,14 @@ const updateproperty = async (req, res) => {
             property.amenities = amenities;
             property.phone = phone;
             property.googleMapLink = googleMapLink || '';
-            // Keep existing images
+            
+            // Keep existing images or remove if cleared
+            if (req.body.existingImages) {
+                property.image = Array.isArray(req.body.existingImages) ? req.body.existingImages : [req.body.existingImages];
+            } else {
+                property.image = []; // user removed all images
+            }
+            
             await property.save();
             return res.json({ message: "Property updated successfully", success: true });
         }
@@ -155,6 +162,12 @@ const updateproperty = async (req, res) => {
             })
         );
 
+        let finalImages = [];
+        if (req.body.existingImages) {
+            finalImages = Array.isArray(req.body.existingImages) ? req.body.existingImages : [req.body.existingImages];
+        }
+        finalImages = finalImages.concat(imageUrls);
+
         property.title = title;
         property.location = location;
         property.price = price;
@@ -165,7 +178,7 @@ const updateproperty = async (req, res) => {
         property.availability = availability;
         property.description = description;
         property.amenities = amenities;
-        property.image = imageUrls;
+        property.image = finalImages;
         property.phone = phone;
         property.googleMapLink = googleMapLink || '';
 
@@ -196,4 +209,75 @@ const singleproperty = async (req, res) => {
     }
 };
 
-export { addproperty, listproperty, removeproperty, updateproperty , singleproperty};
+const addPropertyAi = async (req, res) => {
+    try {
+        const { prompt } = req.body;
+        if (!prompt) {
+            return res.status(400).json({ success: false, message: "Prompt is required" });
+        }
+
+        const systemMessage = `
+You are a real estate AI assistant for Lqaly.
+Extract the property details from the user's prompt and return exactly in this JSON format (NO extra text, NO markdown, JUST raw JSON):
+{
+  "title": "String",
+  "location": "String",
+  "price": Number (in MAD),
+  "image": ["String (URL)"],
+  "beds": Number,
+  "baths": Number,
+  "sqft": Number,
+  "type": "String",
+  "availability": "String",
+  "description": "String",
+  "amenities": ["String"],
+  "phone": "String",
+  "googleMapLink": "String"
+}
+Default phone to "0600000000" if missing. Default image to ["https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?w=800"] if missing. Default type to "Appartement" if missing. Default availability to "À vendre".
+`;
+
+        const { default: axios } = await import("axios");
+        const response = await axios.post(
+            `${process.env.CLAUDE_BASE_URL}/chat/completions`,
+            {
+                model: "claude-sonnet-4.6", // Using the permitted model from LiteLLM proxy
+                messages: [
+                    { role: "system", content: systemMessage },
+                    { role: "user", content: prompt }
+                ]
+            },
+            {
+                headers: {
+                    "Authorization": `Bearer ${process.env.CLAUDE_API_KEY}`,
+                    "Content-Type": "application/json"
+                }
+            }
+        );
+
+        let aiText = response.data.choices[0].message.content;
+        
+        // Remove markdown formatting if any
+        if (aiText.startsWith("```json")) {
+            aiText = aiText.replace(/^```json\n/, "").replace(/\n```$/, "");
+        } else if (aiText.startsWith("```")) {
+            aiText = aiText.replace(/^```\n/, "").replace(/\n```$/, "");
+        }
+
+        const propertyData = JSON.parse(aiText);
+
+        const newProperty = new Property({
+            ...propertyData,
+            status: "active"
+        });
+
+        await newProperty.save();
+
+        res.json({ success: true, message: "Property created by AI", property: newProperty });
+    } catch (error) {
+         console.error("AI Creation Error:", error.response?.data || error.message);
+         res.status(500).json({ success: false, message: "Failed to create property via AI", error: error.message });
+    }
+};
+
+export { addproperty, listproperty, removeproperty, updateproperty , singleproperty, addPropertyAi};
