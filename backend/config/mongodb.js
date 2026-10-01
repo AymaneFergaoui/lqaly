@@ -67,17 +67,12 @@ const connectdb = async () => {
     return conn;
   } catch (error) {
     console.error(`❌ MongoDB Connection Error: ${error.message}`);
-
-    // In production, retry connection instead of exiting
-    if (process.env.NODE_ENV === 'production') {
-      console.log('🔄 Retrying connection in 5 seconds...');
-      setTimeout(() => connectdb(), 5000);
-    } else {
-      // In development, throw the error instead of exiting
-      // Let the calling code handle the error appropriately
-      console.error('Development mode: MongoDB connection failed');
-      throw error;
-    }
+    
+    // Clear the promise so the next request can retry connecting
+    cached.promise = null;
+    
+    // Always throw the error in serverless environments to prevent requests from hanging
+    throw error;
   }
 };
 

@@ -7,14 +7,14 @@ const AIDeepDiveSection: React.FC = () => {
   // Mock data for analysis visualization
   const analysisData = {
     marketScoring: [
-      { label: 'Value Potential', score: 92 },
-      { label: 'Rental Yield', score: 85 },
-      { label: 'Appreciation', score: 88 }
+      { label: 'Potentiel de Valeur', score: 92 },
+      { label: 'Rendement Locatif', score: 85 },
+      { label: 'Appréciation', score: 88 }
     ],
     investmentMetrics: [
-      { label: 'ROI (5yr)', value: '45%' },
-      { label: 'Cap Rate', value: '5.2%' },
-      { label: 'Cash Flow', value: '8k MAD/mo' }
+      { label: 'ROI (5 ans)', value: '45%' },
+      { label: 'Taux de Capitalisation', value: '5.2%' },
+      { label: 'Flux de Trésorerie', value: '8k MAD/mois' }
     ],
     neighborhoodScore: 94
   };
@@ -25,10 +25,10 @@ const AIDeepDiveSection: React.FC = () => {
         {/* Section Header */}
         <div className="mb-12">
           <div className="font-space-mono text-xs text-[#FC0903] uppercase tracking-[1.2px] mb-4">
-            Deep Analysis
+            Analyse Approfondie
           </div>
           <h2 className="font-syne text-4xl text-[#221410]">
-            Deep Dive Analysis
+            Analyse Approfondie
           </h2>
         </div>
 
@@ -52,7 +52,7 @@ const AIDeepDiveSection: React.FC = () => {
                 <div className="flex items-center gap-2">
                   <div className="w-2 h-2 bg-[#10b981] rounded-full" />
                   <span className="font-space-mono text-xs text-[#221410] font-bold">
-                    97% Match
+                    Correspondance 97%
                   </span>
                 </div>
               </div>
@@ -61,7 +61,7 @@ const AIDeepDiveSection: React.FC = () => {
             {/* Market Badge */}
             <div className="bg-[rgba(212,117,91,0.1)] border-b border-[rgba(212,117,91,0.2)] px-6 py-4 flex items-center justify-between">
               <span className="font-syne text-xs text-[#B55D45] uppercase tracking-wider">
-                Under Market Value
+                Sous la Valeur du Marché
               </span>
               <TrendingDown className="w-5 h-5 text-[#FC0903]" />
             </div>
@@ -76,8 +76,8 @@ const AIDeepDiveSection: React.FC = () => {
               </p>
 
               <p className="font-manrope font-extralight text-sm leading-relaxed text-[rgba(34,20,16,0.6)] mb-6">
-                Unobstructed city views from the 45th floor. Recent
-                price drop makes this a prime acquisition target.
+                Vue imprenable sur la ville depuis le 45ème étage. La récente
+                baisse de prix en fait une cible d'acquisition de choix.
               </p>
 
               {/* Specs */}
@@ -85,19 +85,19 @@ const AIDeepDiveSection: React.FC = () => {
                 <div className="flex-1 text-center">
                   <div className="font-syne text-base text-[#221410] mb-1">4</div>
                   <div className="font-manrope font-extralight text-xs text-[rgba(34,20,16,0.5)] uppercase tracking-wide">
-                    Beds
+                    Lits
                   </div>
                 </div>
                 <div className="flex-1 text-center">
                   <div className="font-syne text-base text-[#221410] mb-1">3</div>
                   <div className="font-manrope font-extralight text-xs text-[rgba(34,20,16,0.5)] uppercase tracking-wide">
-                    Baths
+                    SDB
                   </div>
                 </div>
                 <div className="flex-1 text-center">
                   <div className="font-syne text-base text-[#221410] mb-1">2.8k</div>
                   <div className="font-manrope font-extralight text-xs text-[rgba(34,20,16,0.5)] uppercase tracking-wide">
-                    Sqft
+                    m²
                   </div>
                 </div>
               </div>
@@ -109,7 +109,7 @@ const AIDeepDiveSection: React.FC = () => {
             {/* Market Scoring */}
             <div className="bg-[#F8F6F6] border border-[#E6E0DA] rounded-xl p-6">
               <h3 className="font-syne text-lg text-[#221410] mb-6">
-                Market Scoring
+                Notation du Marché
               </h3>
               <div className="space-y-4">
                 {analysisData.marketScoring.map((item, index) => (
@@ -136,7 +136,7 @@ const AIDeepDiveSection: React.FC = () => {
             {/* Investment ROI Snapshot */}
             <div className="bg-[#F8F6F6] border border-[#E6E0DA] rounded-xl p-6">
               <h3 className="font-syne text-lg text-[#221410] mb-6">
-                Investment ROI Snapshot
+                Aperçu du ROI d'Investissement
               </h3>
               <div className="grid grid-cols-3 gap-4">
                 {analysisData.investmentMetrics.map((metric, index) => (
@@ -156,10 +156,10 @@ const AIDeepDiveSection: React.FC = () => {
             <div className="bg-[#FC0903] text-white rounded-xl p-6 flex items-center justify-between">
               <div>
                 <h3 className="font-syne text-lg mb-2">
-                  Neighborhood Match
+                  Correspondance Quartier
                 </h3>
                 <p className="font-manrope font-extralight text-sm opacity-90">
-                  Based on lifestyle preferences
+                  Basé sur les préférences de style de vie
                 </p>
               </div>
               <div className="relative w-20 h-20">

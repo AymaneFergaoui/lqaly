@@ -80,8 +80,6 @@ app.use(cookieParser()); // admin refresh token lives in an httpOnly cookie
 // Request ID middleware for tracing (early in chain)
 app.use(requestIdMiddleware);
 
-app.use(trackAPIStats);
-
 // NoSQL injection prevention
 app.use(mongoSanitize({
   replaceWith: '_',
@@ -191,6 +189,8 @@ app.use('/api', async (req, res, next) => {
     next(err);
   }
 });
+
+app.use(trackAPIStats);
 
 // API Routes
 app.use('/api/products', propertyrouter);

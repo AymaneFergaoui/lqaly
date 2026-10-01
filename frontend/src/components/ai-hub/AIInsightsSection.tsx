@@ -5,18 +5,18 @@ const AIInsightsSection: React.FC = () => {
   const insights = [
     {
       icon: TrendingUp,
-      title: 'Time-Trend Analysis',
-      description: 'We analyze historical price movements, seasonal fluctuations, and market cycles to predict the best buying windows and future appreciation.'
+      title: 'Analyse des Tendances Temporelles',
+      description: 'Nous analysons les mouvements de prix historiques, les fluctuations saisonnières et les cycles du marché pour prédire les meilleures fenêtres d\'achat et l\'appréciation future.'
     },
     {
       icon: Coffee,
-      title: 'Lifestyle Intelligence',
-      description: 'From commute times to coffee shops, schools to nightlife—our AI maps your lifestyle needs to neighborhood characteristics.'
+      title: 'Intelligence du Style de Vie',
+      description: 'Des temps de trajet aux cafés, des écoles à la vie nocturne—notre IA associe vos besoins en matière de style de vie aux caractéristiques du quartier.'
     },
     {
       icon: Award,
-      title: 'Expert Recommendations',
-      description: 'Our algorithms combine market data with architectural expertise, identifying hidden gems before they hit the mainstream.'
+      title: 'Recommandations d\'Experts',
+      description: 'Nos algorithmes combinent les données du marché avec l\'expertise architecturale, identifiant les joyaux cachés avant qu\'ils n\'atteignent le grand public.'
     }
   ];
 
@@ -31,10 +31,10 @@ const AIInsightsSection: React.FC = () => {
           </div>
 
           <h2 className="font-syne text-4xl text-[#221410] mb-4">
-            Intelligent Insights
+            Aperçus Intelligents
           </h2>
           <p className="font-manrope font-extralight text-lg text-[#4b5563] max-w-[700px] mx-auto">
-            Our AI doesn't just match properties—it understands your dreams, analyzes the market, and anticipates your future needs.
+            Notre IA ne se contente pas d'associer des propriétés—elle comprend vos rêves, analyse le marché et anticipe vos besoins futurs.
           </p>
         </div>
 

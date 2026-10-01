@@ -17,7 +17,7 @@ const AITopMatchesSection: React.FC = () => {
       baths: 3,
       sqft: '3.2k',
       matchScore: 97,
-      badge: 'HOT DEAL'
+      badge: 'BONNE AFFAIRE'
     },
     {
       id: 2,
@@ -28,7 +28,7 @@ const AITopMatchesSection: React.FC = () => {
       baths: 3,
       sqft: '2.8k',
       matchScore: 97,
-      badge: 'NEW LISTING'
+      badge: 'NOUVEAU'
     },
     {
       id: 3,
@@ -39,7 +39,7 @@ const AITopMatchesSection: React.FC = () => {
       baths: 2,
       sqft: '2.4k',
       matchScore: 97,
-      badge: 'PRICE DROP'
+      badge: 'BAISSE DE PRIX'
     }
   ];
 
@@ -50,19 +50,19 @@ const AITopMatchesSection: React.FC = () => {
         <div className="flex items-center justify-between mb-10">
           <div className="flex items-baseline gap-4">
             <h2 className="font-syne text-4xl text-[#221410]">
-              Top Matches
+              Meilleures Correspondances
             </h2>
             <div className="flex items-center gap-2">
               <div className="w-2 h-2 bg-[#FC0903] rounded-full animate-pulse" />
               <span className="font-space-mono font-bold text-2xl text-[#FC0903]">
                 97%
               </span>
-              <span className="font-space-mono text-sm text-[#6b7280]">Average Match Rate</span>
+              <span className="font-space-mono text-sm text-[#6b7280]">Taux de Correspondance Moyen</span>
             </div>
           </div>
 
           <button className="font-space-mono text-sm text-[#221410] border-b border-[#221410] hover:text-[#FC0903] hover:border-[#FC0903] transition-[color,border-color] pb-1">
-            View All → See more
+            Voir Tout →
           </button>
         </div>
 
@@ -95,7 +95,7 @@ const AITopMatchesSection: React.FC = () => {
                   <div className="flex items-center gap-2">
                     <div className="w-2 h-2 bg-[#10b981] rounded-full" />
                     <span className="font-space-mono text-xs text-[#221410] font-bold">
-                      {property.matchScore}% Match
+                      Correspondance {property.matchScore}%
                     </span>
                   </div>
                 </div>
@@ -118,7 +118,7 @@ const AITopMatchesSection: React.FC = () => {
                       {property.beds}
                     </div>
                     <div className="font-manrope font-extralight text-xs text-[rgba(34,20,16,0.5)] uppercase tracking-wide">
-                      Beds
+                      Lits
                     </div>
                   </div>
                   <div className="flex-1 text-center">
@@ -126,7 +126,7 @@ const AITopMatchesSection: React.FC = () => {
                       {property.baths}
                     </div>
                     <div className="font-manrope font-extralight text-xs text-[rgba(34,20,16,0.5)] uppercase tracking-wide">
-                      Baths
+                      SDB
                     </div>
                   </div>
                   <div className="flex-1 text-center">
@@ -134,7 +134,7 @@ const AITopMatchesSection: React.FC = () => {
                       {property.sqft}
                     </div>
                     <div className="font-manrope font-extralight text-xs text-[rgba(34,20,16,0.5)] uppercase tracking-wide">
-                      Sqft
+                      m²
                     </div>
                   </div>
                 </div>

@@ -48,8 +48,8 @@ const PropertiesPage: React.FC = () => {
           setProperties(data.property);
         }
       } catch (err: any) {
-        console.error('Failed to fetch properties:', err);
-        setError('Failed to load properties. Please try again later.');
+        console.error('Échec du chargement des propriétés:', err);
+        setError('Échec du chargement des propriétés. Veuillez réessayer plus tard.');
       } finally {
         setLoading(false);
       }

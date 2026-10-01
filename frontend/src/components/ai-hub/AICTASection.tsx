@@ -13,25 +13,25 @@ const AICTASection: React.FC = () => {
 
       <div className="max-w-[800px] mx-auto px-6 text-center relative z-10">
         <h2 className="font-fraunces text-4xl text-white mb-4">
-          Explore Our Full Property Listings
+          Explorez Toutes Nos Annonces Immobilières
         </h2>
         <p className="font-manrope font-light text-lg text-white/60 mb-8 max-w-[560px] mx-auto">
-          Browse all available properties or let our AI find
-          the perfect match for your needs.
+          Parcourez toutes les propriétés disponibles ou laissez notre IA trouver
+          celle qui correspond parfaitement à vos besoins.
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <Link
             to="/properties"
             className="inline-flex items-center justify-center gap-2 bg-[#FC0903] hover:bg-[#C05621] text-white font-manrope font-semibold px-8 py-4 rounded-xl transition-all"
           >
-            Browse Properties
+            Voir les Propriétés
             <ArrowRight className="w-4 h-4" />
           </Link>
           <Link
             to="/contact"
             className="inline-flex items-center justify-center gap-2 border border-white/20 hover:border-white/40 text-white font-manrope font-semibold px-8 py-4 rounded-xl transition-all hover:bg-white/5"
           >
-            Contact Us
+            Contactez-nous
           </Link>
         </div>
       </div>

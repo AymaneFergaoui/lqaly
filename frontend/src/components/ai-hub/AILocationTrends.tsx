@@ -34,7 +34,7 @@ const AILocationTrends: React.FC<Props> = ({
           <div className="inline-flex items-center gap-3 bg-[#FAF8F4] border border-[#E6E0DA] shadow-sm rounded-full px-5 py-2.5 mb-8">
             <div className="w-2 h-2 rounded-full bg-[#FC0903] animate-ping" />
             <span className="font-space-mono text-xs text-[#6B7280] font-bold uppercase tracking-wider">
-              AI is analyzing {city} trends...
+              L'IA analyse les tendances à {city}...
             </span>
           </div>
 
@@ -56,7 +56,7 @@ const AILocationTrends: React.FC<Props> = ({
           <div className="flex items-center justify-center gap-2 text-amber-600 mb-2">
             <AlertCircle className="w-5 h-5" />
             <span className="font-manrope text-sm font-medium">
-              Trends Unavailable
+              Tendances Indisponibles
             </span>
           </div>
           <p className="font-manrope font-light text-sm text-[#6b7280]">
@@ -82,10 +82,10 @@ const AILocationTrends: React.FC<Props> = ({
           </div>
           <div>
             <h2 className="font-syne text-3xl font-bold text-[#221410] mb-1">
-              Location Trends — {city}
+              Tendances par Lieu — {city}
             </h2>
             <p className="font-manrope text-[15px] text-[#6B7280]">
-              Market data from real listings analyzed by AI
+              Données de marché à partir d'annonces réelles analysées par l'IA
             </p>
           </div>
         </div>
@@ -98,16 +98,16 @@ const AILocationTrends: React.FC<Props> = ({
                 <thead>
                   <tr className="bg-[#FAF8F4] border-b border-[#E6E0DA]/70">
                     <th className="text-left font-space-mono text-[11px] font-bold uppercase tracking-widest text-[#9CA3AF] px-8 py-5">
-                      Location
+                      Lieu
                     </th>
                     <th className="text-right font-space-mono text-[11px] font-bold uppercase tracking-widest text-[#9CA3AF] px-8 py-5">
-                      Price / sq.ft
+                      Prix / m²
                     </th>
                     <th className="text-right font-space-mono text-[11px] font-bold uppercase tracking-widest text-[#9CA3AF] px-8 py-5">
-                      YoY Change
+                      Variation Annuelle
                     </th>
                     <th className="text-right font-space-mono text-[11px] font-bold uppercase tracking-widest text-[#9CA3AF] px-8 py-5">
-                      Rental Yield
+                      Rendement Locatif
                     </th>
                   </tr>
                 </thead>
@@ -163,7 +163,7 @@ const AILocationTrends: React.FC<Props> = ({
               <div className="bg-white border border-[#E6E0DA] shadow-sm rounded-2xl p-8">
                 <h3 className="font-syne text-xl font-bold text-[#221410] mb-6 flex items-center gap-2.5">
                   <TrendingUp className="w-5 h-5 text-[#FC0903]" />
-                  AI Trend Analysis
+                  Analyse des Tendances IA
                 </h3>
 
                 <div className="space-y-4">
@@ -201,7 +201,7 @@ const AILocationTrends: React.FC<Props> = ({
                         <div className="grid grid-cols-3 gap-2">
                           <div className="bg-white rounded-lg border border-[#E6E0DA]/50 p-3 text-center">
                             <span className="font-space-mono text-[10px] text-[#9CA3AF] font-bold uppercase tracking-widest block mb-1">
-                              MAD/sq.ft
+                              MAD/m²
                             </span>
                             <span className="font-manrope font-semibold text-[#221410] text-[15px]">
                               {trend.price_per_sqft
@@ -224,7 +224,7 @@ const AILocationTrends: React.FC<Props> = ({
                           </div>
                           <div className="bg-white rounded-lg border border-[#E6E0DA]/50 p-3 text-center">
                             <span className="font-space-mono text-[10px] text-[#9CA3AF] font-bold uppercase tracking-widest block mb-1">
-                              Yield
+                              Rendement
                             </span>
                             <span className="font-manrope font-semibold text-[#221410] text-[15px]">
                               {trend.rental_yield_pct && Number(trend.rental_yield_pct) !== 0
@@ -247,7 +247,7 @@ const AILocationTrends: React.FC<Props> = ({
                 <div className="bg-emerald-50 border border-emerald-100 rounded-2xl p-7 relative overflow-hidden">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-emerald-500/5 rounded-full blur-2xl pointer-events-none" />
                   <div className="font-space-mono text-[11px] text-emerald-600 font-bold uppercase tracking-widest mb-3 flex items-center gap-2">
-                    <ArrowUpRight className="w-4 h-4" /> Top Appreciation
+                    <ArrowUpRight className="w-4 h-4" /> Meilleure Appréciation
                   </div>
                   <h4 className="font-syne text-[22px] font-bold text-emerald-900 mb-2 relative z-10">
                     {analysis.top_appreciation.location}
@@ -263,7 +263,7 @@ const AILocationTrends: React.FC<Props> = ({
                 <div className="bg-[#F0FDF4] border border-[#14B8A6]/20 rounded-2xl p-7 relative overflow-hidden">
                   <div className="absolute top-0 right-0 w-32 h-32 bg-[#14B8A6]/5 rounded-full blur-2xl pointer-events-none" />
                   <div className="font-space-mono text-[11px] text-[#0F766E] font-bold uppercase tracking-widest mb-3 flex items-center gap-2">
-                    <BarChart3 className="w-4 h-4" /> Best Rental Yield
+                    <BarChart3 className="w-4 h-4" /> Meilleur Rendement Locatif
                   </div>
                   <h4 className="font-syne text-[22px] font-bold text-[#134E4A] mb-2 relative z-10">
                     {analysis.best_rental_yield.location}
@@ -278,7 +278,7 @@ const AILocationTrends: React.FC<Props> = ({
               {analysis.investment_tips?.length > 0 && (
                 <div className="bg-white border border-[#E6E0DA] shadow-sm rounded-2xl p-7 relative overflow-hidden">
                   <h3 className="font-syne text-xl font-bold text-[#221410] mb-5">
-                    Investment Tips
+                    Conseils d'Investissement
                   </h3>
                   <ul className="space-y-3">
                     {analysis.investment_tips.map((tip, i) => (
