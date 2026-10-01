@@ -25,10 +25,10 @@ const SuspendUserModal = ({
     // Validation
     const newErrors = {};
     if (!days || days < 1 || days > 365) {
-      newErrors.days = 'Days must be between 1 and 365';
+      newErrors.days = 'Le nombre de jours doit être compris entre 1 et 365';
     }
     if (!reason.trim()) {
-      newErrors.reason = 'Suspension reason is required';
+      newErrors.reason = 'Le motif de la suspension est requis';
     }
 
     setErrors(newErrors);
@@ -63,7 +63,7 @@ const SuspendUserModal = ({
                 <Clock className="w-5 h-5 text-amber-600" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-[#1C1B1A]">Suspend User</h3>
+                <h3 className="text-lg font-bold text-[#1C1B1A]">Suspendre l'utilisateur</h3>
                 <p className="text-sm text-[#5A5856]">{user?.name}</p>
               </div>
             </div>
@@ -82,10 +82,10 @@ const SuspendUserModal = ({
               <AlertTriangle className="w-5 h-5 text-amber-600 mt-0.5 flex-shrink-0" />
               <div>
                 <p className="text-sm font-medium text-amber-800 mb-1">
-                  This will temporarily suspend the user's account
+                  Ceci suspendra temporairement le compte de l'utilisateur
                 </p>
                 <p className="text-xs text-amber-700">
-                  Their listings will be hidden and they won't be able to log in during the suspension period.
+                  Ses annonces seront masquées et il ne pourra pas se connecter pendant la période de suspension.
                 </p>
               </div>
             </div>
@@ -93,7 +93,7 @@ const SuspendUserModal = ({
             {/* Days Input */}
             <div className="mb-4">
               <label className="block text-sm font-semibold text-[#1C1B1A] mb-2">
-                Suspension Duration
+                Durée de la suspension
               </label>
               <div className="relative">
                 <input
@@ -107,10 +107,10 @@ const SuspendUserModal = ({
                       ? 'border-red-300 focus:ring-red-500/20'
                       : 'border-[#E6E0DA] focus:border-[#FC0903] focus:ring-[#FC0903]/20'
                   }`}
-                  placeholder="Number of days"
+                  placeholder="Nombre de jours"
                 />
                 <div className="absolute inset-y-0 right-3 flex items-center text-sm text-[#5A5856]">
-                  day{days != 1 ? 's' : ''}
+                  jour{days != 1 ? 's' : ''}
                 </div>
               </div>
               {errors.days && (
@@ -121,7 +121,7 @@ const SuspendUserModal = ({
             {/* Reason Input */}
             <div className="mb-6">
               <label className="block text-sm font-semibold text-[#1C1B1A] mb-2">
-                Reason for Suspension
+                Motif de la suspension
               </label>
               <textarea
                 value={reason}
@@ -132,7 +132,7 @@ const SuspendUserModal = ({
                     ? 'border-red-300 focus:ring-red-500/20'
                     : 'border-[#E6E0DA] focus:border-[#FC0903] focus:ring-[#FC0903]/20'
                 }`}
-                placeholder="Explain why this user is being suspended..."
+                placeholder="Expliquez pourquoi cet utilisateur est suspendu..."
               />
               {errors.reason && (
                 <p className="text-xs text-red-600 mt-1">{errors.reason}</p>
@@ -147,7 +147,7 @@ const SuspendUserModal = ({
                 disabled={isLoading}
                 className="flex-1 px-4 py-3 border border-[#E6E0DA] text-[#1C1B1A] rounded-xl font-semibold text-sm hover:bg-[#F5F1E8] transition-colors disabled:opacity-50"
               >
-                Cancel
+                Annuler
               </button>
               <button
                 type="submit"
@@ -157,10 +157,10 @@ const SuspendUserModal = ({
                 {isLoading ? (
                   <>
                     <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
-                    Suspending...
+                    Suspension en cours...
                   </>
                 ) : (
-                  'Suspend User'
+                  'Suspendre l\'utilisateur'
                 )}
               </button>
             </div>

@@ -25,10 +25,10 @@ const BanUserModal = ({
     // Validation
     const newErrors = {};
     if (!reason.trim()) {
-      newErrors.reason = 'Ban reason is required';
+      newErrors.reason = 'Le motif du bannissement est requis';
     }
-    if (confirmText !== 'PERMANENTLY BAN') {
-      newErrors.confirmText = 'Please type "PERMANENTLY BAN" to confirm';
+    if (confirmText !== 'BANNIR DÉFINITIVEMENT') {
+      newErrors.confirmText = 'Veuillez taper "BANNIR DÉFINITIVEMENT" pour confirmer';
     }
 
     setErrors(newErrors);
@@ -63,7 +63,7 @@ const BanUserModal = ({
                 <Shield className="w-5 h-5 text-red-600" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-[#1C1B1A]">Ban User</h3>
+                <h3 className="text-lg font-bold text-[#1C1B1A]">Bannir l'utilisateur</h3>
                 <p className="text-sm text-[#5A5856]">{user?.name}</p>
               </div>
             </div>
@@ -82,12 +82,12 @@ const BanUserModal = ({
               <AlertTriangle className="w-5 h-5 text-red-600 mt-0.5 flex-shrink-0" />
               <div>
                 <p className="text-sm font-medium text-red-800 mb-1">
-                  ⚠️ This action is permanent and cannot be undone
+                  ⚠️ Cette action est définitive et ne peut pas être annulée
                 </p>
                 <ul className="text-xs text-red-700 space-y-1">
-                  <li>• User will lose access to their account immediately</li>
-                  <li>• All their listings will be removed from the platform</li>
-                  <li>• They cannot create new accounts</li>
+                  <li>• L'utilisateur perdra immédiatement l'accès à son compte</li>
+                  <li>• Toutes ses annonces seront supprimées de la plateforme</li>
+                  <li>• Il ne pourra pas créer de nouveaux comptes</li>
                 </ul>
               </div>
             </div>
@@ -95,7 +95,7 @@ const BanUserModal = ({
             {/* Reason Input */}
             <div className="mb-4">
               <label className="block text-sm font-semibold text-[#1C1B1A] mb-2">
-                Reason for Ban <span className="text-red-500">*</span>
+                Motif du bannissement <span className="text-red-500">*</span>
               </label>
               <textarea
                 value={reason}
@@ -106,7 +106,7 @@ const BanUserModal = ({
                     ? 'border-red-300 focus:ring-red-500/20'
                     : 'border-[#E6E0DA] focus:border-[#FC0903] focus:ring-[#FC0903]/20'
                 }`}
-                placeholder="Provide detailed explanation for the permanent ban..."
+                placeholder="Fournissez une explication détaillée pour le bannissement définitif..."
               />
               {errors.reason && (
                 <p className="text-xs text-red-600 mt-1">{errors.reason}</p>
@@ -116,7 +116,7 @@ const BanUserModal = ({
             {/* Confirmation Input */}
             <div className="mb-6">
               <label className="block text-sm font-semibold text-[#1C1B1A] mb-2">
-                Type "PERMANENTLY BAN" to confirm <span className="text-red-500">*</span>
+                Tapez "BANNIR DÉFINITIVEMENT" pour confirmer <span className="text-red-500">*</span>
               </label>
               <input
                 type="text"
@@ -127,7 +127,7 @@ const BanUserModal = ({
                     ? 'border-red-300 focus:ring-red-500/20'
                     : 'border-[#E6E0DA] focus:border-[#FC0903] focus:ring-[#FC0903]/20'
                 }`}
-                placeholder="PERMANENTLY BAN"
+                placeholder="BANNIR DÉFINITIVEMENT"
               />
               {errors.confirmText && (
                 <p className="text-xs text-red-600 mt-1">{errors.confirmText}</p>
@@ -142,20 +142,20 @@ const BanUserModal = ({
                 disabled={isLoading}
                 className="flex-1 px-4 py-3 border border-[#E6E0DA] text-[#1C1B1A] rounded-xl font-semibold text-sm hover:bg-[#F5F1E8] transition-colors disabled:opacity-50"
               >
-                Cancel
+                Annuler
               </button>
               <button
                 type="submit"
-                disabled={isLoading || confirmText !== 'PERMANENTLY BAN'}
+                disabled={isLoading || confirmText !== 'BANNIR DÉFINITIVEMENT'}
                 className="flex-1 px-4 py-3 bg-red-600 text-white rounded-xl font-semibold text-sm hover:bg-red-700 transition-colors disabled:opacity-50 flex items-center justify-center gap-2"
               >
                 {isLoading ? (
                   <>
                     <div className="w-4 h-4 border-2 border-white/20 border-t-white rounded-full animate-spin" />
-                    Banning...
+                    Bannissement en cours...
                   </>
                 ) : (
-                  'Ban Permanently'
+                  'Bannir Définitivement'
                 )}
               </button>
             </div>

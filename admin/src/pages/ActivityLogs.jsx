@@ -33,26 +33,26 @@ const ActivityLogs = () => {
 
   // Action and target type options
   const actionOptions = [
-    { value: '', label: 'All Actions' },
-    { value: 'approve_property', label: 'Approve Property' },
-    { value: 'reject_property', label: 'Reject Property' },
-    { value: 'delete_property', label: 'Delete Property' },
-    { value: 'bulk_approve_properties', label: 'Bulk Approve Properties' },
-    { value: 'bulk_reject_properties', label: 'Bulk Reject Properties' },
-    { value: 'bulk_delete_properties', label: 'Bulk Delete Properties' },
-    { value: 'suspend_user', label: 'Suspend User' },
-    { value: 'ban_user', label: 'Ban User' },
-    { value: 'unban_user', label: 'Unban User' },
-    { value: 'delete_user', label: 'Delete User' },
-    { value: 'bulk_suspend_users', label: 'Bulk Suspend Users' },
-    { value: 'bulk_ban_users', label: 'Bulk Ban Users' }
+    { value: '', label: 'Toutes les actions' },
+    { value: 'approve_property', label: 'Approuver la propriété' },
+    { value: 'reject_property', label: 'Rejeter la propriété' },
+    { value: 'delete_property', label: 'Supprimer la propriété' },
+    { value: 'bulk_approve_properties', label: 'Approuver les propriétés (en masse)' },
+    { value: 'bulk_reject_properties', label: 'Rejeter les propriétés (en masse)' },
+    { value: 'bulk_delete_properties', label: 'Supprimer les propriétés (en masse)' },
+    { value: 'suspend_user', label: 'Suspendre l\'utilisateur' },
+    { value: 'ban_user', label: 'Bannir l\'utilisateur' },
+    { value: 'unban_user', label: 'Débannir l\'utilisateur' },
+    { value: 'delete_user', label: 'Supprimer l\'utilisateur' },
+    { value: 'bulk_suspend_users', label: 'Suspendre les utilisateurs (en masse)' },
+    { value: 'bulk_ban_users', label: 'Bannir les utilisateurs (en masse)' }
   ];
 
   const targetTypeOptions = [
-    { value: '', label: 'All Types' },
-    { value: 'property', label: 'Property' },
-    { value: 'user', label: 'User' },
-    { value: 'appointment', label: 'Appointment' }
+    { value: '', label: 'Tous les types' },
+    { value: 'property', label: 'Propriété' },
+    { value: 'user', label: 'Utilisateur' },
+    { value: 'appointment', label: 'Rendez-vous' }
   ];
 
   // Fetch activity logs
@@ -72,7 +72,7 @@ const ActivityLogs = () => {
       setPagination(data.pagination || {});
     } catch (err) {
       console.error('Error fetching activity logs:', err);
-      setError(`Failed to load activity logs. ${err.message}`);
+      setError(`Échec du chargement des journaux d'activité. ${err.message}`);
     } finally {
       setLoading(false);
     }
@@ -109,7 +109,7 @@ const ActivityLogs = () => {
       document.body.removeChild(a);
     } catch (err) {
       console.error('Error exporting logs:', err);
-      setError('Failed to export logs. Please try again.');
+      setError('Échec de l\'exportation des journaux. Veuillez réessayer.');
     } finally {
       setExporting(false);
     }
@@ -175,7 +175,7 @@ const ActivityLogs = () => {
 
   // Format date
   const formatDate = (dateString) => {
-    return new Date(dateString).toLocaleString('en-US', {
+    return new Date(dateString).toLocaleString('fr-FR', {
       year: 'numeric',
       month: 'short',
       day: 'numeric',
@@ -203,9 +203,9 @@ const ActivityLogs = () => {
       <div className="mb-6">
         <div className="flex items-center justify-between">
           <div>
-            <h1 className="text-2xl font-bold text-[#1C1B1A]">Activity Logs</h1>
+            <h1 className="text-2xl font-bold text-[#1C1B1A]">Journaux d'activité</h1>
             <p className="text-gray-600 mt-1">
-              Comprehensive audit trail of all administrative actions
+              Piste d'audit complète de toutes les actions administratives
             </p>
           </div>
 
@@ -219,7 +219,7 @@ const ActivityLogs = () => {
               }`}
             >
               <FunnelIcon className="w-4 h-4 inline mr-2" />
-              Filters
+              Filtres
             </button>
 
             <button
@@ -229,7 +229,7 @@ const ActivityLogs = () => {
                        disabled:bg-gray-400 disabled:cursor-not-allowed transition-colors duration-200"
             >
               <ArrowDownTrayIcon className="w-4 h-4 inline mr-2" />
-              {exporting ? 'Exporting...' : 'Export CSV'}
+              {exporting ? 'Exportation en cours...' : 'Exporter CSV'}
             </button>
           </div>
         </div>
@@ -268,7 +268,7 @@ const ActivityLogs = () => {
               {/* Target Type Filter */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Target Type
+                  Type de cible
                 </label>
                 <select
                   value={filters.targetType}
@@ -287,7 +287,7 @@ const ActivityLogs = () => {
               {/* Admin Email Filter */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Admin Email
+                  Email de l'admin
                 </label>
                 <input
                   type="email"
@@ -302,7 +302,7 @@ const ActivityLogs = () => {
               {/* Start Date */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  Start Date
+                  Date de début
                 </label>
                 <input
                   type="date"
@@ -316,7 +316,7 @@ const ActivityLogs = () => {
               {/* End Date */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">
-                  End Date
+                  Date de fin
                 </label>
                 <input
                   type="date"
@@ -334,7 +334,7 @@ const ActivityLogs = () => {
                   className="w-full px-4 py-2 text-gray-700 bg-gray-100 rounded-md
                            hover:bg-gray-200 transition-colors duration-200"
                 >
-                  Clear Filters
+                  Effacer les filtres
                 </button>
               </div>
             </div>
@@ -361,14 +361,14 @@ const ActivityLogs = () => {
         <div className="bg-white rounded-lg border border-[#E6D5C3] p-6">
           <div className="text-center">
             <ExclamationTriangleIcon className="w-12 h-12 text-red-500 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">Error Loading Logs</h3>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">Erreur de chargement des journaux</h3>
             <p className="text-gray-600 mb-4">{error}</p>
             <button
               onClick={() => fetchLogs()}
               className="px-4 py-2 bg-[#FC0903] text-white rounded-lg hover:bg-[#C06549]
                        transition-colors duration-200"
             >
-              Try Again
+              Réessayer
             </button>
           </div>
         </div>
@@ -376,11 +376,11 @@ const ActivityLogs = () => {
         <div className="bg-white rounded-lg border border-[#E6D5C3] p-6">
           <div className="text-center">
             <MagnifyingGlassIcon className="w-12 h-12 text-gray-400 mx-auto mb-4" />
-            <h3 className="text-lg font-medium text-gray-900 mb-2">No Activity Logs Found</h3>
+            <h3 className="text-lg font-medium text-gray-900 mb-2">Aucun journal d'activité trouvé</h3>
             <p className="text-gray-600 mb-4">
               {Object.values(filters).some(v => v && v !== 1 && v !== 20)
-                ? 'No logs match your current filters.'
-                : 'No administrative actions have been recorded yet.'
+                ? 'Aucun journal ne correspond à vos filtres actuels.'
+                : 'Aucune action administrative n\'a encore été enregistrée.'
               }
             </p>
             {Object.values(filters).some(v => v && v !== 1 && v !== 20) && (
@@ -389,7 +389,7 @@ const ActivityLogs = () => {
                 className="px-4 py-2 bg-[#FC0903] text-white rounded-lg hover:bg-[#C06549]
                          transition-colors duration-200"
               >
-                Clear Filters
+                Effacer les filtres
               </button>
             )}
           </div>
@@ -402,7 +402,7 @@ const ActivityLogs = () => {
               <thead className="bg-[#FAF8F4] border-b border-[#E6D5C3]">
                 <tr>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Timestamp
+                    Horodatage
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Admin
@@ -411,10 +411,10 @@ const ActivityLogs = () => {
                     Action
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Target
+                    Cible
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                    Details
+                    Détails
                   </th>
                   <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                     Actions
@@ -455,7 +455,7 @@ const ActivityLogs = () => {
                       )}
                       {log.metadata?.count && (
                         <span className="text-xs text-gray-500">
-                          {log.metadata.count} items
+                          {log.metadata.count} éléments
                         </span>
                       )}
                     </td>
@@ -465,7 +465,7 @@ const ActivityLogs = () => {
                         className="text-[#FC0903] hover:text-[#C06549] font-medium"
                       >
                         <EyeIcon className="w-4 h-4 inline mr-1" />
-                        View Details
+                        Voir les détails
                       </button>
                     </td>
                   </tr>
@@ -478,9 +478,9 @@ const ActivityLogs = () => {
           {pagination.totalPages > 1 && (
             <div className="bg-[#FAF8F4] px-6 py-3 border-t border-[#E6D5C3] flex items-center justify-between">
               <div className="text-sm text-gray-700">
-                Showing {((pagination.currentPage - 1) * pagination.limit) + 1} to{' '}
-                {Math.min(pagination.currentPage * pagination.limit, pagination.total)} of{' '}
-                {pagination.total} results
+                Affichage de {((pagination.currentPage - 1) * pagination.limit) + 1} à{' '}
+                {Math.min(pagination.currentPage * pagination.limit, pagination.total)} sur{' '}
+                {pagination.total} résultats
               </div>
 
               <div className="flex items-center space-x-2">
@@ -490,11 +490,11 @@ const ActivityLogs = () => {
                   className="px-3 py-1 text-sm bg-white border border-gray-300 rounded-md
                            hover:bg-gray-50 disabled:bg-gray-100 disabled:cursor-not-allowed"
                 >
-                  Previous
+                  Précédent
                 </button>
 
                 <span className="px-3 py-1 text-sm text-gray-700">
-                  Page {pagination.currentPage} of {pagination.totalPages}
+                  Page {pagination.currentPage} sur {pagination.totalPages}
                 </span>
 
                 <button
@@ -503,7 +503,7 @@ const ActivityLogs = () => {
                   className="px-3 py-1 text-sm bg-white border border-gray-300 rounded-md
                            hover:bg-gray-50 disabled:bg-gray-100 disabled:cursor-not-allowed"
                 >
-                  Next
+                  Suivant
                 </button>
               </div>
             </div>

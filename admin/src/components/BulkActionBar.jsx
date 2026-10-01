@@ -23,21 +23,21 @@ const BulkActionBar = ({
 
   const userActions = [
     {
-      label: 'Suspend All',
+      label: 'Tout Suspendre',
       icon: Clock,
       onClick: onSuspendAll,
       variant: 'warning',
       show: !!onSuspendAll
     },
     {
-      label: 'Ban All',
+      label: 'Tout Bannir',
       icon: Shield,
       onClick: onBanAll,
       variant: 'danger',
       show: !!onBanAll
     },
     {
-      label: 'Delete All',
+      label: 'Tout Supprimer',
       icon: Trash2,
       onClick: onDeleteAll,
       variant: 'danger',
@@ -47,21 +47,21 @@ const BulkActionBar = ({
 
   const propertyActions = [
     {
-      label: 'Approve All',
+      label: 'Tout Approuver',
       icon: Shield,
       onClick: onBulkApprove,
       variant: 'success',
       show: !!onBulkApprove
     },
     {
-      label: 'Reject All',
+      label: 'Tout Rejeter',
       icon: X,
       onClick: onBulkReject,
       variant: 'warning',
       show: !!onBulkReject
     },
     {
-      label: 'Delete All',
+      label: 'Tout Supprimer',
       icon: Trash2,
       onClick: onBulkDelete,
       variant: 'danger',
@@ -106,10 +106,10 @@ const BulkActionBar = ({
                 </div>
                 <div>
                   <p className="text-sm font-bold text-[#1C1B1A]">
-                    {selectedCount} {context === 'users' ? 'user' : 'item'}{selectedCount !== 1 ? 's' : ''} selected
+                    {selectedCount} {context === 'users' ? 'utilisateur' : 'élément'}{selectedCount !== 1 ? 's' : ''} sélectionné{selectedCount !== 1 ? 's' : ''}
                   </p>
                   <p className="text-xs text-[#5A5856]">
-                    Choose an action to perform on all selected items
+                    Choisissez une action à effectuer sur tous les éléments sélectionnés
                   </p>
                 </div>
               </div>
@@ -134,7 +134,7 @@ const BulkActionBar = ({
                 <button
                   onClick={onClearSelection}
                   className="p-2.5 border border-[#E6E0DA] text-[#5A5856] rounded-xl hover:bg-[#F5F1E8] transition-colors"
-                  title="Clear selection"
+                  title="Effacer la sélection"
                 >
                   <X className="w-4 h-4" />
                 </button>

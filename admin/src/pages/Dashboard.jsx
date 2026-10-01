@@ -18,14 +18,14 @@ const timeAgo = (dateStr) => {
   if (!dateStr) return "";
   const diff = Date.now() - new Date(dateStr).getTime();
   const m = Math.floor(diff / 60000);
-  if (m < 1) return "just now";
-  if (m < 60) return `${m}m ago`;
+  if (m < 1) return "à l'instant";
+  if (m < 60) return `il y a ${m}m`;
   const h = Math.floor(m / 60);
-  if (h < 24) return `${h}h ago`;
-  return `${Math.floor(h / 24)}d ago`;
+  if (h < 24) return `il y a ${h}h`;
+  return `il y a ${Math.floor(h / 24)}j`;
 };
 
-const today = new Date().toLocaleDateString("en-IN", {
+const today = new Date().toLocaleDateString("fr-FR", {
   weekday: "long", day: "numeric", month: "long", year: "numeric",
 });
 
@@ -69,10 +69,10 @@ const KPICard = ({ label, value, sub, icon: Icon, accent, index }) => (
 // ─── Activity Timeline ────────────────────────────────────────────────────────
 const activityConfig = (item) => {
   const a = item.action || "";
-  if (a.includes("approve")) return { color: "#10B981", Icon: CheckCircle2, label: "Approved" };
-  if (a.includes("reject")) return { color: "#EF4444", Icon: XCircle, label: "Rejected" };
-  if (a.includes("suspend") || a.includes("ban")) return { color: "#F59E0B", Icon: AlertTriangle, label: "Suspended" };
-  if (a.includes("user")) return { color: "#3B82F6", Icon: Users, label: "User" };
+  if (a.includes("approve")) return { color: "#10B981", Icon: CheckCircle2, label: "Approuvé" };
+  if (a.includes("reject")) return { color: "#EF4444", Icon: XCircle, label: "Rejeté" };
+  if (a.includes("suspend") || a.includes("ban")) return { color: "#F59E0B", Icon: AlertTriangle, label: "Suspendu" };
+  if (a.includes("user")) return { color: "#3B82F6", Icon: Users, label: "Utilisateur" };
   return { color: "#FC0903", Icon: Activity, label: "Action" };
 };
 
@@ -81,7 +81,7 @@ const ActivityTimeline = ({ items }) => {
     return (
       <div className="flex flex-col items-center justify-center py-10 text-center">
         <Activity className="w-8 h-8 text-[#D0CEC9] mb-2" />
-        <p className="text-sm text-[#9B9B99]">No recent activity</p>
+        <p className="text-sm text-[#9B9B99]">Aucune activité récente</p>
       </div>
     );
   }
@@ -94,7 +94,7 @@ const ActivityTimeline = ({ items }) => {
           const actionText = (item.action || "").split("_").map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
           const desc = item.targetName
             ? `${actionText}: "${item.targetName}"`
-            : item.description || actionText || "Admin action";
+            : item.description || actionText || "Action de l'administrateur";
           return (
             <div key={item._id || i} className="relative flex gap-3.5 pb-5 last:pb-0">
               <div
@@ -167,7 +167,7 @@ const ReviewBar = ({ label, value, total, color, Icon }) => {
             style={{ backgroundColor: color }}
           />
         </div>
-        <p className="text-[10px] text-[#9B9B99] mt-0.5">{pct}% of submissions</p>
+        <p className="text-[10px] text-[#9B9B99] mt-0.5">{pct}% des soumissions</p>
       </div>
     </div>
   );
@@ -227,7 +227,7 @@ const Dashboard = () => {
 
       setError(null);
     } catch {
-      setError("Unable to connect. Please try again.");
+      setError("Impossible de se connecter. Veuillez réessayer.");
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -239,12 +239,12 @@ const Dashboard = () => {
 
   // Transform data for Recharts
   const viewsData = (stats?.viewsData?.labels || []).map((d, i) => ({
-    date: new Date(d).toLocaleDateString("en-US", { month: "short", day: "numeric" }),
+    date: new Date(d).toLocaleDateString("fr-FR", { month: "short", day: "numeric" }),
     views: stats.viewsData.datasets?.[0]?.data?.[i] ?? 0,
   }));
 
   const usersData = (userStats?.newUsersByDay || []).map((item) => ({
-    date: new Date(item._id).toLocaleDateString("en-US", { month: "short", day: "numeric" }),
+    date: new Date(item._id).toLocaleDateString("fr-FR", { month: "short", day: "numeric" }),
     users: item.count,
   }));
 
@@ -256,32 +256,32 @@ const Dashboard = () => {
 
   const kpis = [
     {
-      label: "Total Properties",
+      label: "Total des Propriétés",
       value: stats?.totalProperties,
-      sub: "All listed properties",
+      sub: "Toutes les propriétés listées",
       icon: Building2,
       accent: false,
     },
     {
-      label: "Total Users",
+      label: "Total des Utilisateurs",
       value: userStats?.Total || stats?.totalUsers,
-      sub: `${userStats?.Active ?? 0} active`,
+      sub: `${userStats?.Active ?? 0} actifs`,
       icon: Users,
       accent: false,
     },
     {
-      label: "Pending Appointments",
+      label: "Rendez-vous en attente",
       value: stats?.pendingAppointments,
-      sub: "Awaiting confirmation",
+      sub: "En attente de confirmation",
       icon: Calendar,
       accent: (stats?.pendingAppointments ?? 0) > 0,
     },
     {
-      label: "Avg Property Price",
+      label: "Prix Moyen des Propriétés",
       value: stats?.avgPropertyPrice
         ? `₹${(stats.avgPropertyPrice / 100000).toFixed(1)}L`
         : null,
-      sub: "Average listing price",
+      sub: "Prix moyen des annonces",
       icon: DollarSign,
       accent: false,
     },
@@ -319,13 +319,13 @@ const Dashboard = () => {
           <div className="w-14 h-14 bg-red-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
             <AlertCircle className="w-7 h-7 text-red-500" />
           </div>
-          <h3 className="text-base font-semibold text-[#111110] mb-1">Failed to load</h3>
+          <h3 className="text-base font-semibold text-[#111110] mb-1">Échec du chargement</h3>
           <p className="text-sm text-[#9B9B99] mb-5">{error}</p>
           <button
             onClick={() => fetchStats()}
             className="px-5 py-2.5 bg-[#FC0903] text-white rounded-lg text-sm font-medium hover:bg-[#C05E44] active:scale-[0.98] transition-all"
           >
-            Try Again
+            Réessayer
           </button>
         </div>
       </div>
@@ -343,7 +343,7 @@ const Dashboard = () => {
           className="flex items-start justify-between mb-6"
         >
           <div>
-            <h1 className="text-2xl font-bold text-[#111110] tracking-tight">Overview</h1>
+            <h1 className="text-2xl font-bold text-[#111110] tracking-tight">Vue d'ensemble</h1>
             <p className="text-sm text-[#9B9B99] mt-0.5">{today}</p>
           </div>
           <button
@@ -352,7 +352,7 @@ const Dashboard = () => {
             className="flex items-center gap-2 px-4 py-2 bg-white border border-[#E8E7E5] text-[#6B6B6A] rounded-lg text-sm font-medium hover:border-[#FC0903] hover:text-[#FC0903] active:scale-[0.97] transition-all duration-150 disabled:opacity-50 shadow-sm"
           >
             <RefreshCw className={cn("w-3.5 h-3.5", (refreshing || inFlight) && "animate-spin")} />
-            {refreshing || inFlight ? "Refreshing…" : "Refresh"}
+            {refreshing || inFlight ? "Actualisation…" : "Actualiser"}
           </button>
         </motion.div>
 
@@ -373,7 +373,7 @@ const Dashboard = () => {
                     to="/pending-listings"
                     className="flex items-center gap-1.5 text-sm text-amber-800 hover:text-amber-900 font-medium transition-colors"
                   >
-                    <span className="font-bold">{pendingListings}</span> listings need review
+                    <span className="font-bold">{pendingListings}</span> annonces nécessitent une révision
                     <ArrowRight className="w-3 h-3" />
                   </Link>
                 )}
@@ -382,7 +382,7 @@ const Dashboard = () => {
                     to="/appointments"
                     className="flex items-center gap-1.5 text-sm text-amber-800 hover:text-amber-900 font-medium transition-colors"
                   >
-                    <span className="font-bold">{pendingAppts}</span> appointments unconfirmed
+                    <span className="font-bold">{pendingAppts}</span> rendez-vous non confirmés
                     <ArrowRight className="w-3 h-3" />
                   </Link>
                 )}
@@ -407,12 +407,12 @@ const Dashboard = () => {
         >
           <div className="flex items-start justify-between mb-6">
             <div>
-              <h2 className="text-base font-semibold text-[#111110]">Property Views</h2>
-              <p className="text-xs text-[#9B9B99] mt-0.5">Daily view activity</p>
+              <h2 className="text-base font-semibold text-[#111110]">Vues des Propriétés</h2>
+              <p className="text-xs text-[#9B9B99] mt-0.5">Activité de vue quotidienne</p>
             </div>
             <div className="flex items-center gap-1.5 text-xs font-medium text-[#FC0903]">
               <TrendingUp className="w-3.5 h-3.5" />
-              Last 30 days
+              30 derniers jours
             </div>
           </div>
 
@@ -451,7 +451,7 @@ const Dashboard = () => {
               </ResponsiveContainer>
             ) : (
               <div className="h-full flex items-center justify-center">
-                <p className="text-sm text-[#9B9B99]">No view data yet</p>
+                <p className="text-sm text-[#9B9B99]">Aucune donnée de vue pour le moment</p>
               </div>
             )}
           </div>
@@ -467,8 +467,8 @@ const Dashboard = () => {
             transition={{ delay: 0.33 }}
             className="bg-white rounded-xl border border-[#E8E7E5] p-6"
           >
-            <h2 className="text-base font-semibold text-[#111110] mb-0.5">New Users</h2>
-            <p className="text-xs text-[#9B9B99] mb-5">Last 30 days</p>
+            <h2 className="text-base font-semibold text-[#111110] mb-0.5">Nouveaux Utilisateurs</h2>
+            <p className="text-xs text-[#9B9B99] mb-5">30 derniers jours</p>
 
             <div className="h-36">
               {usersData.length > 0 ? (
@@ -505,17 +505,17 @@ const Dashboard = () => {
                 </ResponsiveContainer>
               ) : (
                 <div className="h-full flex items-center justify-center">
-                  <p className="text-sm text-[#9B9B99]">No data yet</p>
+                  <p className="text-sm text-[#9B9B99]">Aucune donnée pour le moment</p>
                 </div>
               )}
             </div>
 
             {/* User status bars */}
             <div className="mt-5 pt-5 border-t border-[#F0EFED] space-y-3.5">
-              <p className="text-xs font-medium text-[#9B9B99] uppercase tracking-wider mb-3">Account Status</p>
-              <StatBar label="Active" value={userStats?.Active} total={userStats?.Total || 1} color="#10B981" />
-              <StatBar label="Suspended" value={userStats?.Suspended} total={userStats?.Total || 1} color="#F59E0B" />
-              <StatBar label="Banned" value={userStats?.Banned} total={userStats?.Total || 1} color="#EF4444" />
+              <p className="text-xs font-medium text-[#9B9B99] uppercase tracking-wider mb-3">Statut du Compte</p>
+              <StatBar label="Actif" value={userStats?.Active} total={userStats?.Total || 1} color="#10B981" />
+              <StatBar label="Suspendu" value={userStats?.Suspended} total={userStats?.Total || 1} color="#F59E0B" />
+              <StatBar label="Banni" value={userStats?.Banned} total={userStats?.Total || 1} color="#EF4444" />
             </div>
           </motion.div>
 
@@ -528,33 +528,33 @@ const Dashboard = () => {
           >
             <div className="flex items-start justify-between mb-5">
               <div>
-                <h2 className="text-base font-semibold text-[#111110] mb-0.5">Listing Review</h2>
-                <p className="text-xs text-[#9B9B99]">Property submission outcomes</p>
+                <h2 className="text-base font-semibold text-[#111110] mb-0.5">Révision des Annonces</h2>
+                <p className="text-xs text-[#9B9B99]">Résultats de soumission de propriété</p>
               </div>
               {propertyStats?.approvalRate != null && (
                 <span className="text-xs font-semibold text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded-full">
-                  {propertyStats.approvalRate}% approved
+                  {propertyStats.approvalRate}% approuvé
                 </span>
               )}
             </div>
 
             <div className="space-y-4">
               <ReviewBar
-                label="Approved"
+                label="Approuvé"
                 value={propertyStats?.approvedCount ?? 0}
                 total={reviewTotal}
                 color="#10B981"
                 Icon={CheckCircle2}
               />
               <ReviewBar
-                label="Pending"
+                label="En attente"
                 value={propertyStats?.pendingCount ?? 0}
                 total={reviewTotal}
                 color="#F59E0B"
                 Icon={Clock}
               />
               <ReviewBar
-                label="Rejected"
+                label="Rejeté"
                 value={propertyStats?.rejectedCount ?? 0}
                 total={reviewTotal}
                 color="#EF4444"
@@ -564,7 +564,7 @@ const Dashboard = () => {
 
             {/* Additional property stats */}
             <div className="mt-6 pt-5 border-t border-[#F0EFED]">
-              <p className="text-xs font-medium text-[#9B9B99] uppercase tracking-wider mb-3">Portfolio</p>
+              <p className="text-xs font-medium text-[#9B9B99] uppercase tracking-wider mb-3">Portefeuille</p>
               <div className="grid grid-cols-2 gap-3">
                 <div className="bg-[#F8F7F5] rounded-lg p-3">
                   <p className="font-space-mono text-xl font-bold text-[#111110] tabular-nums">
@@ -576,7 +576,7 @@ const Dashboard = () => {
                   <p className="font-space-mono text-xl font-bold text-emerald-600 tabular-nums">
                     {stats?.activeListings ?? "—"}
                   </p>
-                  <p className="text-xs text-[#9B9B99] mt-0.5">Active</p>
+                  <p className="text-xs text-[#9B9B99] mt-0.5">Actif</p>
                 </div>
               </div>
             </div>
@@ -591,14 +591,14 @@ const Dashboard = () => {
           >
             <div className="flex items-center justify-between mb-5">
               <div>
-                <h2 className="text-base font-semibold text-[#111110] mb-0.5">Recent Activity</h2>
-                <p className="text-xs text-[#9B9B99]">Admin actions</p>
+                <h2 className="text-base font-semibold text-[#111110] mb-0.5">Activité Récente</h2>
+                <p className="text-xs text-[#9B9B99]">Actions d'administration</p>
               </div>
               <Link
                 to="/activity-logs"
                 className="text-xs text-[#FC0903] hover:text-[#C05E44] font-medium transition-colors flex items-center gap-1"
               >
-                View all <ArrowRight className="w-3 h-3" />
+                Voir tout <ArrowRight className="w-3 h-3" />
               </Link>
             </div>
 

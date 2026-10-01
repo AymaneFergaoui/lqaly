@@ -27,9 +27,9 @@ function NotFoundPage() {
   return (
     <PageTransition className="min-h-screen flex flex-col items-center justify-center bg-[#FAF8F4]">
       <h1 className="font-fraunces text-6xl font-bold text-[#FC0903] mb-4">404</h1>
-      <p className="font-manrope text-xl text-[#374151] mb-8">Page not found</p>
+      <p className="font-manrope text-xl text-[#374151] mb-8">Page non trouvée</p>
       <a href="/" className="bg-[#FC0903] text-white font-manrope font-bold px-8 py-3 rounded-lg hover:bg-[#B86851] transition-all">
-        Go Home
+        Aller à l'Accueil
       </a>
     </PageTransition>
   );

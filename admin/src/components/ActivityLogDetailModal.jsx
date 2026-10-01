@@ -82,8 +82,8 @@ const ActivityLogDetailModal = ({
                 <Info className="w-5 h-5 text-[#FC0903]" />
               </div>
               <div>
-                <h3 className="text-lg font-bold text-[#1C1B1A]">Activity Details</h3>
-                <p className="text-sm text-[#5A5856]">Complete log information</p>
+                <h3 className="text-lg font-bold text-[#1C1B1A]">Détails de l'Activité</h3>
+                <p className="text-sm text-[#5A5856]">Informations complètes du journal</p>
               </div>
             </div>
             <button
@@ -106,30 +106,30 @@ const ActivityLogDetailModal = ({
             {/* Basic Details */}
             <div className="space-y-0 mb-6">
               <DetailRow
-                label="Timestamp"
+                label="Date et heure"
                 value={formatDate(log.createdAt)}
                 icon={Calendar}
               />
               <DetailRow
-                label="Admin"
+                label="Administrateur"
                 value={log.adminEmail}
                 icon={User}
               />
               <DetailRow
-                label="Target Type"
+                label="Type de Cible"
                 value={log.targetType}
                 icon={Target}
               />
               <DetailRow
-                label="Target Name"
+                label="Nom de la Cible"
                 value={log.targetName}
               />
               <DetailRow
-                label="IP Address"
+                label="Adresse IP"
                 value={log.ipAddress}
               />
               <DetailRow
-                label="User Agent"
+                label="Agent Utilisateur"
                 value={log.userAgent}
               />
             </div>
@@ -138,7 +138,7 @@ const ActivityLogDetailModal = ({
             {log.metadata && Object.keys(log.metadata).length > 0 && (
               <div className="border border-[#E6E0DA] rounded-xl p-4">
                 <div className="flex items-center justify-between mb-4">
-                  <h4 className="text-sm font-bold text-[#1C1B1A]">Additional Details</h4>
+                  <h4 className="text-sm font-bold text-[#1C1B1A]">Détails Supplémentaires</h4>
                   <button
                     onClick={handleCopyMetadata}
                     className="flex items-center gap-2 px-3 py-1.5 text-xs border border-[#E6E0DA] rounded-lg hover:bg-[#F5F1E8] transition-colors"
@@ -146,12 +146,12 @@ const ActivityLogDetailModal = ({
                     {copied ? (
                       <>
                         <Check className="w-3 h-3 text-emerald-600" />
-                        <span className="text-emerald-600">Copied!</span>
+                        <span className="text-emerald-600">Copié !</span>
                       </>
                     ) : (
                       <>
                         <Copy className="w-3 h-3" />
-                        Copy JSON
+                        Copier le JSON
                       </>
                     )}
                   </button>
@@ -173,7 +173,7 @@ const ActivityLogDetailModal = ({
                             ))}
                             {value.length > 10 && (
                               <p className="text-xs text-[#5A5856] italic">
-                                ... and {value.length - 10} more items
+                                ... et {value.length - 10} éléments de plus
                               </p>
                             )}
                           </div>
@@ -198,7 +198,7 @@ const ActivityLogDetailModal = ({
               onClick={onClose}
               className="w-full px-4 py-3 bg-[#FC0903] text-white rounded-xl font-semibold text-sm hover:bg-[#C05E44] transition-colors"
             >
-              Close
+              Fermer
             </button>
           </div>
         </motion.div>

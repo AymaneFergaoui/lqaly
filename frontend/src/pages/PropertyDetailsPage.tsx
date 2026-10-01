@@ -40,10 +40,10 @@ const PropertyDetailsPage: React.FC = () => {
 
   // Dynamic SEO based on loaded property
   useSEO({
-    title: property ? `${property.title} - ${property.location}` : 'Property Details',
+    title: property ? `${property.title} - ${property.location}` : 'Détails de la Propriété',
     description: property
-      ? `${property.title} in ${property.location}. ${property.beds} beds, ${property.baths} baths, ${property.sqft} sqft. ${property.type}.`
-      : 'View property details on Lqaly.',
+      ? `${property.title} à ${property.location}. ${property.beds} chambres, ${property.baths} salles de bain, ${property.sqft} m². ${property.type}.`
+      : 'Voir les détails de la propriété sur Lqaly.',
     image: property?.image?.[0] || undefined,
     url: property ? `https://lqaly.vercel.app/property/${property._id}` : undefined,
     type: 'article',
@@ -59,11 +59,11 @@ const PropertyDetailsPage: React.FC = () => {
         if (data.success && data.property) {
           setProperty(data.property);
         } else {
-          setError('Property not found');
+          setError('Propriété introuvable');
         }
       } catch (err: any) {
-        console.error('Failed to fetch property:', err);
-        setError('Failed to load property details. Please try again.');
+        console.error('Échec du chargement de la propriété:', err);
+        setError('Échec du chargement des détails de la propriété. Veuillez réessayer.');
       } finally {
         setLoading(false);
       }

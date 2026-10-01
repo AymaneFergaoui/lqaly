@@ -48,20 +48,20 @@ const Sidebar = ({ isOpen, setIsOpen, isCollapsed, setIsCollapsed }) => {
 
   const navSections = [
     {
-      label: 'Main',
+      label: 'Principal',
       items: [
-        { path: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
-        { path: '/pending-listings', label: 'Review Queue', icon: ClipboardList },
-        { path: '/list', label: 'All Properties', icon: Building2 },
-        { path: '/users', label: 'Users', icon: Users },
-        { path: '/appointments', label: 'Appointments', icon: Calendar },
+        { path: '/dashboard', label: 'Tableau de Bord', icon: LayoutDashboard },
+        { path: '/pending-listings', label: 'File de Révision', icon: ClipboardList },
+        { path: '/list', label: 'Toutes les Propriétés', icon: Building2 },
+        { path: '/users', label: 'Utilisateurs', icon: Users },
+        { path: '/appointments', label: 'Rendez-vous', icon: Calendar },
       ],
     },
     {
-      label: 'AI & Activity',
+      label: 'IA & Activité',
       items: [
-        { path: '/ai-models', label: 'AI Models', icon: Cpu },
-        { path: '/activity-logs', label: 'Activity Logs', icon: FileText },
+        { path: '/ai-models', label: 'Modèles d\'IA', icon: Cpu },
+        { path: '/activity-logs', label: 'Journaux d\'Activité', icon: FileText },
       ],
     },
   ];
@@ -110,7 +110,7 @@ const Sidebar = ({ isOpen, setIsOpen, isCollapsed, setIsCollapsed }) => {
                   Lqaly
                 </span>
                 <div className="text-[10px] text-[#9CA3AF] font-medium uppercase tracking-widest leading-none">
-                  Admin Panel
+                  Panneau d'Administration
                 </div>
               </div>
             </Link>
@@ -206,8 +206,8 @@ const Sidebar = ({ isOpen, setIsOpen, isCollapsed, setIsCollapsed }) => {
                 <User className="h-4 w-4 text-white" />
               </div>
               <div className="flex-1 min-w-0">
-                <div className="text-sm font-semibold text-[#FAF8F4] truncate">Admin</div>
-                <div className="text-xs text-[#9CA3AF]">Administrator</div>
+                <div className="text-sm font-semibold text-[#FAF8F4] truncate">Administrateur</div>
+                <div className="text-xs text-[#9CA3AF]">Administrateur</div>
               </div>
             </div>
           ) : (
@@ -225,13 +225,13 @@ const Sidebar = ({ isOpen, setIsOpen, isCollapsed, setIsCollapsed }) => {
               className="w-full flex items-center gap-3 px-3 py-2.5 text-sm text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-lg transition-colors font-medium"
             >
               <LogOut className="h-5 w-5" />
-              Logout
+              Déconnexion
             </button>
           ) : (
             <button
               onClick={handleLogout}
               className="w-full flex items-center justify-center px-3 py-2.5 text-sm text-red-400 hover:text-red-300 hover:bg-red-500/10 rounded-lg transition-colors"
-              title="Logout"
+              title="Déconnexion"
             >
               <LogOut className="h-5 w-5" />
             </button>

@@ -6,8 +6,16 @@ import { Upload, X, Plus, Home, MapPin, Phone, DollarSign, BedDouble, Bath, Maxi
 import { AMENITIES_LIST } from '../constants/amenities';
 import { cn } from '../lib/utils';
 
-const PROPERTY_TYPES = ['House', 'Apartment', 'Office', 'Villa'];
-const AVAILABILITY_TYPES = ['rent', 'buy'];
+const PROPERTY_TYPES = [
+  { value: 'House', label: 'Maison' },
+  { value: 'Apartment', label: 'Appartement' },
+  { value: 'Office', label: 'Bureau' },
+  { value: 'Villa', label: 'Villa' }
+];
+const AVAILABILITY_TYPES = [
+  { value: 'rent', label: 'À louer' },
+  { value: 'buy', label: 'À acheter' }
+];
 
 const inputClass = "w-full px-4 py-3 bg-white border border-[#E6D5C3] rounded-xl text-[#1C1B1A] placeholder-[#9CA3AF] text-sm transition-all duration-200 outline-none focus:border-[#FC0903] focus:ring-2 focus:ring-[#FC0903]/15";
 const labelClass = "block text-sm font-semibold text-[#1C1B1A] mb-2";
@@ -62,7 +70,7 @@ const PropertyForm = () => {
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
     if (files.length + previewUrls.length > 4) {
-      toast.error('Maximum 4 images allowed');
+      toast.error('Maximum 4 images autorisées');
       return;
     }
     const newPreviewUrls = files.map((file) => URL.createObjectURL(file));
@@ -103,7 +111,7 @@ const PropertyForm = () => {
       });
 
       if (response.data.success) {
-        toast.success('Property added successfully!');
+        toast.success('Propriété ajoutée avec succès !');
         setFormData({
           title: '', type: '', price: '', location: '', description: '',
           beds: '', baths: '', sqft: '', phone: '', availability: '',
@@ -115,7 +123,7 @@ const PropertyForm = () => {
       }
     } catch (error) {
       console.error('Error adding property:', error);
-      toast.error('An error occurred. Please try again.');
+      toast.error('Une erreur est survenue. Veuillez réessayer.');
     } finally {
       setLoading(false);
     }
@@ -130,8 +138,8 @@ const PropertyForm = () => {
           animate={{ opacity: 1, y: 0 }}
           className="mb-8"
         >
-          <h1 className="text-3xl font-bold text-[#1C1B1A] mb-1">Add New Property</h1>
-          <p className="text-[#5A5856]">Fill in the details to list a new property on Lqaly</p>
+          <h1 className="text-3xl font-bold text-[#1C1B1A] mb-1">Ajouter une nouvelle propriété</h1>
+          <p className="text-[#5A5856]">Remplissez les détails pour lister une nouvelle propriété sur Lqaly</p>
         </motion.div>
 
         <motion.form
@@ -143,12 +151,12 @@ const PropertyForm = () => {
         >
           {/* Basic Information */}
           <div className="bg-white rounded-2xl p-6 border border-[#E6D5C3] shadow-card">
-            <SectionHeader icon={Home} title="Basic Information" subtitle="Core property details" />
+            <SectionHeader icon={Home} title="Informations de base" subtitle="Détails principaux de la propriété" />
             <div className="space-y-4">
               <div>
-                <label htmlFor="title" className={labelClass}>Property Title</label>
+                <label htmlFor="title" className={labelClass}>Titre de la propriété</label>
                 <input type="text" id="title" name="title" required value={formData.title}
-                  onChange={handleInputChange} placeholder="e.g. Modern 3BHK Apartment in Bandra"
+                  onChange={handleInputChange} placeholder="ex. Appartement moderne 3 pièces à Paris"
                   className={inputClass} />
               </div>
 
@@ -156,28 +164,28 @@ const PropertyForm = () => {
                 <label htmlFor="description" className={labelClass}>Description</label>
                 <textarea id="description" name="description" required value={formData.description}
                   onChange={handleInputChange} rows={4}
-                  placeholder="Describe the property, its features, and surroundings..."
+                  placeholder="Décrivez la propriété, ses caractéristiques et ses environs..."
                   className={cn(inputClass, 'resize-none')} />
               </div>
 
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="type" className={labelClass}>Property Type</label>
+                  <label htmlFor="type" className={labelClass}>Type de propriété</label>
                   <select id="type" name="type" required value={formData.type}
                     onChange={handleInputChange} className={inputClass}>
-                    <option value="">Select Type</option>
+                    <option value="">Sélectionner le type</option>
                     {PROPERTY_TYPES.map((type) => (
-                      <option key={type} value={type}>{type}</option>
+                      <option key={type.value} value={type.value}>{type.label}</option>
                     ))}
                   </select>
                 </div>
                 <div>
-                  <label htmlFor="availability" className={labelClass}>Availability</label>
+                  <label htmlFor="availability" className={labelClass}>Disponibilité</label>
                   <select id="availability" name="availability" required value={formData.availability}
                     onChange={handleInputChange} className={inputClass}>
-                    <option value="">Select Availability</option>
+                    <option value="">Sélectionner la disponibilité</option>
                     {AVAILABILITY_TYPES.map((type) => (
-                      <option key={type} value={type}>{type.charAt(0).toUpperCase() + type.slice(1)}</option>
+                      <option key={type.value} value={type.value}>{type.label}</option>
                     ))}
                   </select>
                 </div>
@@ -187,10 +195,10 @@ const PropertyForm = () => {
 
           {/* Location & Pricing */}
           <div className="bg-white rounded-2xl p-6 border border-[#E6D5C3] shadow-card">
-            <SectionHeader icon={MapPin} title="Location & Pricing" />
+            <SectionHeader icon={MapPin} title="Emplacement et prix" />
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label htmlFor="price" className={labelClass}>Price (₹)</label>
+                <label htmlFor="price" className={labelClass}>Prix (MAD)</label>
                 <div className="relative">
                   <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9CA3AF]" />
                   <input type="number" id="price" name="price" required min="0"
@@ -199,16 +207,16 @@ const PropertyForm = () => {
                 </div>
               </div>
               <div>
-                <label htmlFor="location" className={labelClass}>Location</label>
+                <label htmlFor="location" className={labelClass}>Emplacement</label>
                 <div className="relative">
                   <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9CA3AF]" />
                   <input type="text" id="location" name="location" required
                     value={formData.location} onChange={handleInputChange}
-                    placeholder="e.g. Bandra West, Mumbai" className={cn(inputClass, 'pl-10')} />
+                    placeholder="ex. Centre-ville, Rabat" className={cn(inputClass, 'pl-10')} />
                 </div>
               </div>
               <div>
-                <label htmlFor="phone" className={labelClass}>Contact Phone</label>
+                <label htmlFor="phone" className={labelClass}>Téléphone de contact</label>
                 <div className="relative">
                   <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9CA3AF]" />
                   <input type="tel" id="phone" name="phone" required
@@ -218,7 +226,7 @@ const PropertyForm = () => {
               </div>
               <div>
                 <label htmlFor="googleMapLink" className={labelClass}>
-                  Google Maps Link <span className="text-[#9CA3AF] font-normal">(optional)</span>
+                  Lien Google Maps <span className="text-[#9CA3AF] font-normal">(optionnel)</span>
                 </label>
                 <div className="relative">
                   <LinkIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9CA3AF]" />
@@ -232,10 +240,10 @@ const PropertyForm = () => {
 
           {/* Property Details */}
           <div className="bg-white rounded-2xl p-6 border border-[#E6D5C3] shadow-card">
-            <SectionHeader icon={Maximize} title="Property Details" subtitle="Size and specifications" />
+            <SectionHeader icon={Maximize} title="Détails de la propriété" subtitle="Taille et spécifications" />
             <div className="grid grid-cols-3 gap-4">
               <div>
-                <label htmlFor="beds" className={labelClass}>Bedrooms</label>
+                <label htmlFor="beds" className={labelClass}>Chambres</label>
                 <div className="relative">
                   <BedDouble className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9CA3AF]" />
                   <input type="number" id="beds" name="beds" required min="0"
@@ -244,7 +252,7 @@ const PropertyForm = () => {
                 </div>
               </div>
               <div>
-                <label htmlFor="baths" className={labelClass}>Bathrooms</label>
+                <label htmlFor="baths" className={labelClass}>Salles de bain</label>
                 <div className="relative">
                   <Bath className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9CA3AF]" />
                   <input type="number" id="baths" name="baths" required min="0"
@@ -253,12 +261,12 @@ const PropertyForm = () => {
                 </div>
               </div>
               <div>
-                <label htmlFor="sqft" className={labelClass}>Square Feet</label>
+                <label htmlFor="sqft" className={labelClass}>Superficie (m²)</label>
                 <div className="relative">
                   <Maximize className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9CA3AF]" />
                   <input type="number" id="sqft" name="sqft" required min="0"
                     value={formData.sqft} onChange={handleInputChange}
-                    placeholder="1200" className={cn(inputClass, 'pl-10')} />
+                    placeholder="120" className={cn(inputClass, 'pl-10')} />
                 </div>
               </div>
             </div>
@@ -266,7 +274,7 @@ const PropertyForm = () => {
 
           {/* Amenities */}
           <div className="bg-white rounded-2xl p-6 border border-[#E6D5C3] shadow-card">
-            <SectionHeader icon={CheckSquare} title="Amenities" subtitle="Select all that apply" />
+            <SectionHeader icon={CheckSquare} title="Commodités" subtitle="Sélectionnez tout ce qui s'applique" />
             <div className="flex flex-wrap gap-2 mb-4">
               {AMENITIES_LIST.map((amenity) => {
                 const selected = formData.amenities.includes(amenity);
@@ -290,12 +298,12 @@ const PropertyForm = () => {
             <div className="flex gap-2">
               <input type="text" value={newAmenity} onChange={(e) => setNewAmenity(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddAmenity())}
-                placeholder="Add custom amenity..."
+                placeholder="Ajouter une commodité personnalisée..."
                 className={cn(inputClass, 'flex-1')} />
               <button type="button" onClick={handleAddAmenity}
                 className="flex items-center gap-1.5 px-4 py-2.5 bg-[#1C1B1A] text-white rounded-xl text-sm font-medium hover:bg-[#FC0903] transition-colors">
                 <Plus className="w-4 h-4" />
-                Add
+                Ajouter
               </button>
             </div>
 
@@ -318,7 +326,7 @@ const PropertyForm = () => {
 
           {/* Image Upload */}
           <div className="bg-white rounded-2xl p-6 border border-[#E6D5C3] shadow-card">
-            <SectionHeader icon={Upload} title="Property Images" subtitle={`${previewUrls.length}/4 images uploaded`} />
+            <SectionHeader icon={Upload} title="Images de la propriété" subtitle={`${previewUrls.length}/4 images téléchargées`} />
 
             {previewUrls.length > 0 && (
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
@@ -344,9 +352,9 @@ const PropertyForm = () => {
                 className="flex flex-col items-center justify-center w-full h-36 border-2 border-dashed border-[#E6D5C3] rounded-xl cursor-pointer bg-[#FAF8F4] hover:border-[#FC0903] hover:bg-[#FC0903]/5 transition-all duration-200 group">
                 <Upload className="w-8 h-8 text-[#9CA3AF] group-hover:text-[#FC0903] mb-2 transition-colors" />
                 <span className="text-sm font-medium text-[#5A5856] group-hover:text-[#FC0903] transition-colors">
-                  Click to upload images
+                  Cliquez pour télécharger des images
                 </span>
-                <span className="text-xs text-[#9CA3AF] mt-1">PNG, JPG up to 10MB each</span>
+                <span className="text-xs text-[#9CA3AF] mt-1">PNG, JPG jusqu'à 10 Mo chacun</span>
                 <input id="images" name="images" type="file" multiple accept="image/*"
                   onChange={handleImageChange} className="sr-only" />
               </label>
@@ -361,7 +369,7 @@ const PropertyForm = () => {
             whileTap={{ scale: loading ? 1 : 0.99 }}
             className="w-full py-4 bg-[#1C1B1A] hover:bg-[#FC0903] text-[#FAF8F4] rounded-xl font-semibold text-base transition-all duration-300 shadow-lg hover:shadow-terracotta disabled:opacity-60 disabled:cursor-not-allowed"
           >
-            {loading ? 'Adding Property...' : 'Add Property'}
+            {loading ? 'Ajout de la propriété...' : 'Ajouter la propriété'}
           </motion.button>
         </motion.form>
       </div>

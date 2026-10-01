@@ -7,19 +7,19 @@
 
 const STATUS_CONFIG = {
   active: {
-    label: 'Active',
+    label: 'Actif',
     bgColor: 'bg-emerald-50',
     textColor: 'text-emerald-700',
     dotColor: 'bg-emerald-500'
   },
   suspended: {
-    label: 'Suspended',
+    label: 'Suspendu',
     bgColor: 'bg-amber-50',
     textColor: 'text-amber-700',
     dotColor: 'bg-amber-500'
   },
   banned: {
-    label: 'Banned',
+    label: 'Banni',
     bgColor: 'bg-red-50',
     textColor: 'text-red-700',
     dotColor: 'bg-red-500'

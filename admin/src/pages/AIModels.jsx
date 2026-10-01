@@ -45,7 +45,7 @@ const AIModels = () => {
       const { data } = await apiClient.get('/api/admin/ai-models');
       setModels(data.models || []);
     } catch (err) {
-      setError(err.response?.data?.message || 'Failed to load AI models');
+      setError(err.response?.data?.message || 'Échec du chargement des modèles d\'IA');
     } finally {
       setLoading(false);
     }
@@ -96,22 +96,22 @@ const AIModels = () => {
 
   async function handleSave() {
     if (!form.name || !form.slug || !form.modelId) {
-      toast.error('Name, slug, and model ID are required');
+      toast.error('Le nom, le slug et l\'ID du modèle sont requis');
       return;
     }
     try {
       setSaving(true);
       if (editingId) {
         await apiClient.put(`/api/admin/ai-models/${editingId}`, form);
-        toast.success('Model updated');
+        toast.success('Modèle mis à jour');
       } else {
         await apiClient.post('/api/admin/ai-models', form);
-        toast.success('Model created');
+        toast.success('Modèle créé');
       }
       closeForm();
       fetchModels();
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Save failed');
+      toast.error(err.response?.data?.message || 'Échec de l\'enregistrement');
     } finally {
       setSaving(false);
     }
@@ -120,31 +120,31 @@ const AIModels = () => {
   async function handleDelete(id) {
     try {
       await apiClient.delete(`/api/admin/ai-models/${id}`);
-      toast.success('Model deleted');
+      toast.success('Modèle supprimé');
       setDeleteConfirm(null);
       fetchModels();
     } catch (err) {
-      toast.error(err.response?.data?.message || 'Delete failed');
+      toast.error(err.response?.data?.message || 'Échec de la suppression');
     }
   }
 
   async function toggleActive(model) {
     try {
       await apiClient.put(`/api/admin/ai-models/${model._id}`, { isActive: !model.isActive });
-      toast.success(model.isActive ? 'Model deactivated' : 'Model activated');
+      toast.success(model.isActive ? 'Modèle désactivé' : 'Modèle activé');
       fetchModels();
     } catch (err) {
-      toast.error('Failed to update model');
+      toast.error('Échec de la mise à jour du modèle');
     }
   }
 
   async function setDefault(model) {
     try {
       await apiClient.put(`/api/admin/ai-models/${model._id}`, { isDefault: true });
-      toast.success(`${model.name} set as default`);
+      toast.success(`${model.name} défini par défaut`);
       fetchModels();
     } catch (err) {
-      toast.error('Failed to update default');
+      toast.error('Échec de la mise à jour de la valeur par défaut');
     }
   }
 
@@ -158,8 +158,8 @@ const AIModels = () => {
               <Cpu className="h-5 w-5 text-white" />
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-[#1C1B1A]">AI Models</h1>
-              <p className="text-sm text-[#6B7280]">Manage NVIDIA NIM models available to users</p>
+              <h1 className="text-2xl font-bold text-[#1C1B1A]">Modèles d'IA</h1>
+              <p className="text-sm text-[#6B7280]">Gérer les modèles NVIDIA NIM disponibles pour les utilisateurs</p>
             </div>
           </div>
           <div className="flex gap-2">
@@ -174,7 +174,7 @@ const AIModels = () => {
               className="flex items-center gap-2 bg-[#FC0903] text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-[#C05E44] transition-colors"
             >
               <Plus className="h-4 w-4" />
-              Add Model
+              Ajouter un modèle
             </button>
           </div>
         </div>
@@ -211,7 +211,7 @@ const AIModels = () => {
                       <span className="font-semibold text-[#1C1B1A]">{model.name}</span>
                       {model.isDefault && (
                         <span className="inline-flex items-center gap-1 text-xs bg-[#FC0903]/10 text-[#FC0903] px-2 py-0.5 rounded-full font-medium">
-                          <Star className="h-3 w-3" /> Default
+                          <Star className="h-3 w-3" /> Par défaut
                         </span>
                       )}
                       {model.badge && (
@@ -231,7 +231,7 @@ const AIModels = () => {
                     <button
                       onClick={() => setExpandedConfig(expandedConfig === model._id ? null : model._id)}
                       className="p-2 text-[#9CA3AF] hover:text-[#1C1B1A] hover:bg-[#F3F0EB] rounded-lg transition-colors"
-                      title="Toggle config"
+                      title="Basculer la configuration"
                     >
                       {expandedConfig === model._id ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
                     </button>
@@ -239,7 +239,7 @@ const AIModels = () => {
                       <button
                         onClick={() => setDefault(model)}
                         className="p-2 text-[#9CA3AF] hover:text-[#FC0903] hover:bg-[#FC0903]/10 rounded-lg transition-colors"
-                        title="Set as default"
+                        title="Définir par défaut"
                       >
                         <Star className="h-4 w-4" />
                       </button>
@@ -252,21 +252,21 @@ const AIModels = () => {
                           ? 'text-green-600 hover:bg-green-50'
                           : 'text-[#9CA3AF] hover:bg-[#F3F0EB]'
                       )}
-                      title={model.isActive ? 'Deactivate' : 'Activate'}
+                      title={model.isActive ? 'Désactiver' : 'Activer'}
                     >
                       {model.isActive ? <ToggleRight className="h-4 w-4" /> : <ToggleLeft className="h-4 w-4" />}
                     </button>
                     <button
                       onClick={() => openEdit(model)}
                       className="p-2 text-[#9CA3AF] hover:text-[#1C1B1A] hover:bg-[#F3F0EB] rounded-lg transition-colors"
-                      title="Edit"
+                      title="Modifier"
                     >
                       <Pencil className="h-4 w-4" />
                     </button>
                     <button
                       onClick={() => setDeleteConfirm(model._id)}
                       className="p-2 text-[#9CA3AF] hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
-                      title="Delete"
+                      title="Supprimer"
                     >
                       <Trash2 className="h-4 w-4" />
                     </button>
@@ -311,19 +311,19 @@ const AIModels = () => {
                       className="overflow-hidden"
                     >
                       <div className="border-t border-red-100 bg-red-50 px-4 py-3 flex items-center justify-between">
-                        <span className="text-sm text-red-700">Delete <strong>{model.name}</strong>? This cannot be undone.</span>
+                        <span className="text-sm text-red-700">Supprimer <strong>{model.name}</strong> ? Cette action est irréversible.</span>
                         <div className="flex gap-2">
                           <button
                             onClick={() => setDeleteConfirm(null)}
                             className="flex items-center gap-1 text-sm text-[#6B7280] hover:text-[#1C1B1A] px-3 py-1.5 rounded-lg hover:bg-white transition-colors"
                           >
-                            <X className="h-3.5 w-3.5" /> Cancel
+                            <X className="h-3.5 w-3.5" /> Annuler
                           </button>
                           <button
                             onClick={() => handleDelete(model._id)}
                             className="flex items-center gap-1 text-sm text-white bg-red-600 hover:bg-red-700 px-3 py-1.5 rounded-lg transition-colors"
                           >
-                            <Check className="h-3.5 w-3.5" /> Delete
+                            <Check className="h-3.5 w-3.5" /> Supprimer
                           </button>
                         </div>
                       </div>
@@ -335,7 +335,7 @@ const AIModels = () => {
             {!models.length && !loading && (
               <div className="text-center py-16 text-[#9CA3AF]">
                 <Cpu className="h-10 w-10 mx-auto mb-3 opacity-30" />
-                <p className="text-sm">No AI models configured. Add one to get started.</p>
+                <p className="text-sm">Aucun modèle d'IA configuré. Ajoutez-en un pour commencer.</p>
               </div>
             )}
           </div>
@@ -359,7 +359,7 @@ const AIModels = () => {
               >
                 <div className="flex items-center justify-between p-5 border-b border-[#E5E0D8]">
                   <h2 className="font-bold text-lg text-[#1C1B1A]">
-                    {editingId ? 'Edit Model' : 'Add AI Model'}
+                    {editingId ? 'Modifier le modèle' : 'Ajouter un modèle d\'IA'}
                   </h2>
                   <button onClick={closeForm} className="p-1.5 text-[#9CA3AF] hover:text-[#1C1B1A] rounded-lg hover:bg-[#F3F0EB] transition-colors">
                     <X className="h-5 w-5" />
@@ -369,11 +369,11 @@ const AIModels = () => {
                 <div className="p-5 space-y-4">
                   {/* Basic fields */}
                   {[
-                    { label: 'Name', field: 'name', placeholder: 'Nemotron Nano' },
+                    { label: 'Nom', field: 'name', placeholder: 'Nemotron Nano' },
                     { label: 'Slug', field: 'slug', placeholder: 'nemotron-nano' },
-                    { label: 'Model ID', field: 'modelId', placeholder: 'nvidia/nemotron-3-nano-omni-30b-a3b-reasoning' },
-                    { label: 'Badge', field: 'badge', placeholder: 'Fast · Reasoning' },
-                    { label: 'Description', field: 'description', placeholder: 'Short description shown to users' },
+                    { label: 'ID du modèle', field: 'modelId', placeholder: 'nvidia/nemotron-3-nano-omni-30b-a3b-reasoning' },
+                    { label: 'Badge', field: 'badge', placeholder: 'Rapide · Raisonnement' },
+                    { label: 'Description', field: 'description', placeholder: 'Courte description affichée aux utilisateurs' },
                   ].map(({ label, field, placeholder }) => (
                     <div key={field}>
                       <label className="block text-sm font-semibold text-[#1C1B1A] mb-1">{label}</label>
@@ -388,7 +388,7 @@ const AIModels = () => {
 
                   <div className="flex gap-4">
                     <div className="flex-1">
-                      <label className="block text-sm font-semibold text-[#1C1B1A] mb-1">Order</label>
+                      <label className="block text-sm font-semibold text-[#1C1B1A] mb-1">Ordre</label>
                       <input
                         type="number"
                         className="w-full border border-[#E5E0D8] rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-[#FC0903]/30 focus:border-[#FC0903]"
@@ -399,25 +399,25 @@ const AIModels = () => {
                     <div className="flex-1 flex flex-col justify-end gap-2">
                       <label className="flex items-center gap-2 cursor-pointer select-none">
                         <input type="checkbox" checked={form.isActive} onChange={e => setField('isActive', e.target.checked)} className="rounded" />
-                        <span className="text-sm font-semibold text-[#1C1B1A]">Active</span>
+                        <span className="text-sm font-semibold text-[#1C1B1A]">Actif</span>
                       </label>
                       <label className="flex items-center gap-2 cursor-pointer select-none">
                         <input type="checkbox" checked={form.isDefault} onChange={e => setField('isDefault', e.target.checked)} className="rounded" />
-                        <span className="text-sm font-semibold text-[#1C1B1A]">Default model</span>
+                        <span className="text-sm font-semibold text-[#1C1B1A]">Modèle par défaut</span>
                       </label>
                     </div>
                   </div>
 
                   {/* Config section */}
                   <div className="border-t border-[#E5E0D8] pt-4">
-                    <h3 className="text-sm font-bold text-[#1C1B1A] mb-3">Model Config</h3>
+                    <h3 className="text-sm font-bold text-[#1C1B1A] mb-3">Configuration du modèle</h3>
                     <div className="grid grid-cols-2 gap-3">
                       {[
-                        { label: 'Max Tokens', field: 'config.maxTokens', type: 'number' },
-                        { label: 'Timeout (ms)', field: 'config.timeoutMs', type: 'number' },
-                        { label: 'Temperature', field: 'config.temperature', type: 'number', step: '0.1' },
+                        { label: 'Jetons max', field: 'config.maxTokens', type: 'number' },
+                        { label: 'Délai d\'attente (ms)', field: 'config.timeoutMs', type: 'number' },
+                        { label: 'Température', field: 'config.temperature', type: 'number', step: '0.1' },
                         { label: 'Top P', field: 'config.topP', type: 'number', step: '0.05' },
-                        { label: 'Reasoning Budget', field: 'config.reasoningBudget', type: 'number' },
+                        { label: 'Budget de raisonnement', field: 'config.reasoningBudget', type: 'number' },
                       ].map(({ label, field, type, step }) => (
                         <div key={field}>
                           <label className="block text-xs font-semibold text-[#6B7280] mb-1">{label}</label>
@@ -442,7 +442,7 @@ const AIModels = () => {
                             onChange={e => setField('config.enableThinking', e.target.checked)}
                             className="rounded"
                           />
-                          <span className="text-xs font-semibold text-[#6B7280]">Enable Thinking</span>
+                          <span className="text-xs font-semibold text-[#6B7280]">Activer la réflexion</span>
                         </label>
                       </div>
                     </div>
@@ -454,14 +454,14 @@ const AIModels = () => {
                     onClick={closeForm}
                     className="px-4 py-2 text-sm text-[#6B7280] hover:text-[#1C1B1A] rounded-lg hover:bg-[#F3F0EB] transition-colors"
                   >
-                    Cancel
+                    Annuler
                   </button>
                   <button
                     onClick={handleSave}
                     disabled={saving}
                     className="px-4 py-2 text-sm font-semibold text-white bg-[#FC0903] hover:bg-[#C05E44] rounded-lg transition-colors disabled:opacity-50"
                   >
-                    {saving ? 'Saving…' : editingId ? 'Save Changes' : 'Create Model'}
+                    {saving ? 'Enregistrement…' : editingId ? 'Enregistrer les modifications' : 'Créer le modèle'}
                   </button>
                 </div>
               </motion.div>

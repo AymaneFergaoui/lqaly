@@ -27,23 +27,23 @@ const Login = () => {
       if (response.data.success) {
         localStorage.setItem("token", response.data.token);
         localStorage.setItem("isAdmin", "true");
-        toast.success("Welcome back, Admin!");
+        toast.success("Bon retour, Administrateur !");
         navigate("/dashboard");
       } else {
-        toast.error(response.data.message || "Login failed");
+        toast.error(response.data.message || "Échec de la connexion");
       }
     } catch (error) {
       console.error("Error logging in:", error);
-      toast.error(error.response?.data?.message || "Invalid admin credentials");
+      toast.error(error.response?.data?.message || "Identifiants d'administrateur invalides");
     } finally {
       setLoading(false);
     }
   };
 
   const stats = [
-    { icon: Building2, label: "Properties", value: "500+" },
-    { icon: Users, label: "Happy Clients", value: "2,000+" },
-    { icon: TrendingUp, label: "Deals Closed", value: "1,200+" },
+    { icon: Building2, label: "Propriétés", value: "500+" },
+    { icon: Users, label: "Clients Satisfaits", value: "2,000+" },
+    { icon: TrendingUp, label: "Affaires Conclues", value: "1,200+" },
   ];
 
   return (
@@ -78,19 +78,19 @@ const Login = () => {
             />
             <div>
               <div className="text-xl font-bold text-[#FAF8F4]">Lqaly</div>
-              <div className="text-xs text-[#9CA3AF] uppercase tracking-widest">Admin Panel</div>
+              <div className="text-xs text-[#9CA3AF] uppercase tracking-widest">Panneau d'Administration</div>
             </div>
           </div>
 
           <h1 className="text-4xl font-bold text-[#FAF8F4] leading-tight mb-4">
-            Manage Your
+            Gérez Votre
             <br />
-            <span className="text-[#FC0903]">Real Estate</span>
+            <span className="text-[#FC0903]">Immobilier</span>
             <br />
-            Portfolio
+            Portefeuille
           </h1>
           <p className="text-[#9CA3AF] text-base leading-relaxed max-w-xs">
-            A powerful admin dashboard to manage properties, appointments, and clients — all in one place.
+            Un tableau de bord administrateur puissant pour gérer les propriétés, les rendez-vous et les clients — tout au même endroit.
           </p>
         </div>
 
@@ -108,7 +108,7 @@ const Login = () => {
         {/* Footer */}
         <div className="relative z-10 flex items-center gap-2 text-xs text-[#5A5856]">
           <Shield className="w-3.5 h-3.5" />
-          <span>Secured with 256-bit encryption • Lqaly © 2025</span>
+          <span>Sécurisé avec un cryptage 256 bits • Lqaly © 2025</span>
         </div>
       </motion.div>
 
@@ -127,13 +127,13 @@ const Login = () => {
               alt="Lqaly Logo"
               className="w-9 h-9 object-contain"
             />
-            <div className="text-lg font-bold text-[#1C1B1A]">Lqaly Admin</div>
+            <div className="text-lg font-bold text-[#1C1B1A]">Administration Lqaly</div>
           </div>
 
           {/* Header */}
           <div className="mb-8">
-            <h2 className="text-3xl font-bold text-[#1C1B1A] mb-2">Welcome back</h2>
-            <p className="text-[#5A5856]">Sign in to your admin account to continue</p>
+            <h2 className="text-3xl font-bold text-[#1C1B1A] mb-2">Bon retour</h2>
+            <p className="text-[#5A5856]">Connectez-vous à votre compte administrateur pour continuer</p>
           </div>
 
           {/* Form */}
@@ -141,7 +141,7 @@ const Login = () => {
             {/* Email */}
             <div>
               <label htmlFor="email" className="block text-sm font-semibold text-[#1C1B1A] mb-2">
-                Email Address
+                Adresse E-mail
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -173,7 +173,7 @@ const Login = () => {
             {/* Password */}
             <div>
               <label htmlFor="password" className="block text-sm font-semibold text-[#1C1B1A] mb-2">
-                Password
+                Mot de passe
               </label>
               <div className="relative">
                 <div className="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
@@ -191,7 +191,7 @@ const Login = () => {
                   onChange={(e) => setPassword(e.target.value)}
                   onFocus={() => setFocusedField("password")}
                   onBlur={() => setFocusedField(null)}
-                  placeholder="Enter your password"
+                  placeholder="Entrez votre mot de passe"
                   className={cn(
                     "w-full pl-11 pr-12 py-3.5 bg-white border rounded-xl text-[#1C1B1A] placeholder-[#9CA3AF] text-sm transition-all duration-200 outline-none",
                     focusedField === "password"
@@ -220,11 +220,11 @@ const Login = () => {
               {loading ? (
                 <>
                   <Loader2 className="w-4.5 h-4.5 animate-spin" />
-                  Signing in...
+                  Connexion en cours...
                 </>
               ) : (
                 <>
-                  Sign in to Dashboard
+                  Se connecter au tableau de bord
                   <ArrowRight className="w-4.5 h-4.5" />
                 </>
               )}
@@ -234,7 +234,7 @@ const Login = () => {
           {/* Security note */}
           <div className="mt-8 flex items-center justify-center gap-2 text-xs text-[#9CA3AF]">
             <Shield className="w-3.5 h-3.5" />
-            <span>Secure admin access only</span>
+            <span>Accès administrateur sécurisé uniquement</span>
           </div>
         </div>
       </motion.div>

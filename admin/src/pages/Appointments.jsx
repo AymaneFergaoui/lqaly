@@ -10,9 +10,9 @@ import apiClient from "../services/apiClient";
 import { cn, formatDate } from "../lib/utils";
 
 const STATUS_CONFIG = {
-  pending: { label: "Pending", className: "bg-amber-50 text-amber-700 border border-amber-200" },
-  confirmed: { label: "Confirmed", className: "bg-emerald-50 text-emerald-700 border border-emerald-200" },
-  cancelled: { label: "Cancelled", className: "bg-red-50 text-red-700 border border-red-200" },
+  pending: { label: "En attente", className: "bg-amber-50 text-amber-700 border border-amber-200" },
+  confirmed: { label: "Confirmé", className: "bg-emerald-50 text-emerald-700 border border-emerald-200" },
+  cancelled: { label: "Annulé", className: "bg-red-50 text-red-700 border border-red-200" },
 };
 
 const StatusBadge = ({ status }) => {
@@ -45,7 +45,7 @@ const Appointments = () => {
       }
     } catch (error) {
       console.error("Error fetching appointments:", error);
-      toast.error("Failed to fetch appointments");
+      toast.error("Échec de la récupération des rendez-vous");
     } finally {
       setLoading(false);
     }
@@ -56,25 +56,25 @@ const Appointments = () => {
       setUpdatingId(appointmentId);
       const response = await apiClient.put('/api/appointments/status', { appointmentId, status: newStatus });
       if (response.data.success) {
-        toast.success(`Appointment ${newStatus} successfully`);
+        toast.success(`Rendez-vous ${newStatus} avec succès`);
         fetchAppointments();
       } else {
         toast.error(response.data.message);
       }
     } catch (error) {
       console.error("Error updating appointment:", error);
-      toast.error("Failed to update appointment status");
+      toast.error("Échec de la mise à jour du statut du rendez-vous");
     } finally {
       setUpdatingId(null);
     }
   };
 
   const handleMeetingLinkUpdate = async (appointmentId) => {
-    if (!meetingLink) { toast.error("Please enter a meeting link"); return; }
+    if (!meetingLink) { toast.error("Veuillez entrer un lien de réunion"); return; }
     try {
       const response = await apiClient.put('/api/appointments/update-meeting', { appointmentId, meetingLink });
       if (response.data.success) {
-        toast.success("Meeting link sent successfully");
+        toast.success("Lien de réunion envoyé avec succès");
         setEditingMeetingLink(null);
         setMeetingLink("");
         fetchAppointments();
@@ -83,7 +83,7 @@ const Appointments = () => {
       }
     } catch (error) {
       console.error("Error updating meeting link:", error);
-      toast.error("Failed to update meeting link");
+      toast.error("Échec de la mise à jour du lien de réunion");
     }
   };
 
@@ -113,7 +113,7 @@ const Appointments = () => {
       <div className="min-h-screen pt-8 flex items-center justify-center bg-[#FAF8F4]">
         <div className="text-center">
           <div className="w-12 h-12 border-3 border-[#FC0903] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-[#5A5856] font-medium">Loading appointments...</p>
+          <p className="text-[#5A5856] font-medium">Chargement des rendez-vous...</p>
         </div>
       </div>
     );
@@ -125,8 +125,8 @@ const Appointments = () => {
 
         {/* Header */}
         <motion.div initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }} className="mb-8">
-          <h1 className="text-3xl font-bold text-[#1C1B1A] mb-1">Appointments</h1>
-          <p className="text-[#5A5856]">Manage and track property viewing appointments</p>
+          <h1 className="text-3xl font-bold text-[#1C1B1A] mb-1">Rendez-vous</h1>
+          <p className="text-[#5A5856]">Gérer et suivre les rendez-vous de visite de propriétés</p>
         </motion.div>
 
         {/* Filter Tabs + Search */}
@@ -143,7 +143,7 @@ const Appointments = () => {
                       ? "bg-[#1C1B1A] text-[#FAF8F4] shadow-sm"
                       : "text-[#5A5856] hover:text-[#1C1B1A]"
                   )}>
-                  {status === "all" ? "All" : status.charAt(0).toUpperCase() + status.slice(1)}
+                  {status === "all" ? "Tous" : status === "pending" ? "En attente" : status === "confirmed" ? "Confirmé" : "Annulé"}
                   <span className={cn(
                     "ml-1.5 text-xs px-1.5 py-0.5 rounded-full",
                     filter === status ? "bg-white/20" : "bg-[#E6D5C3] text-[#5A5856]"
@@ -157,7 +157,7 @@ const Appointments = () => {
             {/* Search */}
             <div className="relative w-full sm:w-72">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9CA3AF]" />
-              <input type="text" placeholder="Search by property, client..."
+              <input type="text" placeholder="Rechercher par propriété, client..."
                 value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-9 pr-4 py-2.5 bg-[#FAF8F4] border border-[#E6D5C3] rounded-xl text-sm text-[#1C1B1A] placeholder-[#9CA3AF] outline-none focus:border-[#FC0903] focus:ring-2 focus:ring-[#FC0903]/15 transition-all" />
             </div>
@@ -171,7 +171,7 @@ const Appointments = () => {
             <table className="w-full">
               <thead>
                 <tr className="bg-[#1C1B1A]">
-                  {["Property", "Client", "Date & Time", "Status", "Meeting Link", "Actions"].map((h) => (
+                  {["Propriété", "Client", "Date et heure", "Statut", "Lien de la réunion", "Actions"].map((h) => (
                     <th key={h} className="px-6 py-4 text-left text-xs font-semibold text-[#9CA3AF] uppercase tracking-wider">
                       {h}
                     </th>
@@ -208,13 +208,13 @@ const Appointments = () => {
                           </div>
                           <div>
                             <p className="text-sm font-semibold text-[#1C1B1A]">
-                              {appointment.userId?.name || appointment.guestInfo?.name || "Unknown"}
+                              {appointment.userId?.name || appointment.guestInfo?.name || "Inconnu"}
                             </p>
                             <p className="text-xs text-[#9CA3AF]">
                               {appointment.userId?.email || appointment.guestInfo?.email || "—"}
                             </p>
                             {!appointment.userId && appointment.guestInfo && (
-                              <span className="text-[10px] px-1.5 py-0.5 bg-amber-50 text-amber-600 border border-amber-200 rounded-full font-medium">Guest</span>
+                              <span className="text-[10px] px-1.5 py-0.5 bg-amber-50 text-amber-600 border border-amber-200 rounded-full font-medium">Invité</span>
                             )}
                           </div>
                         </div>
@@ -247,7 +247,7 @@ const Appointments = () => {
                           <div className="flex items-center gap-1.5">
                             <input type="url" value={meetingLink}
                               onChange={(e) => setMeetingLink(e.target.value)}
-                              placeholder="Paste meeting link..."
+                              placeholder="Coller le lien de la réunion..."
                               className="px-2.5 py-1.5 border border-[#E6D5C3] rounded-lg text-xs w-40 outline-none focus:border-[#FC0903] focus:ring-1 focus:ring-[#FC0903]/20" />
                             <button onClick={() => handleMeetingLinkUpdate(appointment._id)}
                               className="p-1.5 bg-[#FC0903] text-white rounded-lg hover:bg-[#C05E44] transition-colors">
@@ -264,10 +264,10 @@ const Appointments = () => {
                               <a href={appointment.meetingLink} target="_blank" rel="noopener noreferrer"
                                 className="flex items-center gap-1 text-xs text-[#FC0903] hover:text-[#C05E44] font-medium underline underline-offset-2">
                                 <LinkIcon className="w-3.5 h-3.5" />
-                                View Link
+                                Voir le lien
                               </a>
                             ) : (
-                              <span className="text-xs text-[#9CA3AF]">No link</span>
+                              <span className="text-xs text-[#9CA3AF]">Aucun lien</span>
                             )}
                             {appointment.status === "confirmed" && (
                               <button onClick={() => { setEditingMeetingLink(appointment._id); setMeetingLink(appointment.meetingLink || ""); }}
@@ -291,13 +291,13 @@ const Appointments = () => {
                                   onClick={() => handleStatusChange(appointment._id, "confirmed")}
                                   className="flex items-center gap-1 px-2.5 py-1.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-lg text-xs font-medium hover:bg-emerald-100 transition-colors">
                                   <Check className="w-3.5 h-3.5" />
-                                  Confirm
+                                  Confirmer
                                 </button>
                                 <button
                                   onClick={() => handleStatusChange(appointment._id, "cancelled")}
                                   className="flex items-center gap-1 px-2.5 py-1.5 bg-red-50 text-red-700 border border-red-200 rounded-lg text-xs font-medium hover:bg-red-100 transition-colors">
                                   <X className="w-3.5 h-3.5" />
-                                  Cancel
+                                  Annuler
                                 </button>
                               </>
                             )}
@@ -316,9 +316,9 @@ const Appointments = () => {
               <div className="w-14 h-14 bg-[#F5F1E8] rounded-2xl flex items-center justify-center mx-auto mb-4">
                 <Calendar className="w-7 h-7 text-[#E6D5C3]" />
               </div>
-              <h3 className="text-base font-semibold text-[#1C1B1A] mb-1">No appointments found</h3>
+              <h3 className="text-base font-semibold text-[#1C1B1A] mb-1">Aucun rendez-vous trouvé</h3>
               <p className="text-sm text-[#9CA3AF]">
-                {searchTerm || filter !== "all" ? "Try adjusting your search or filters" : "No appointments have been scheduled yet"}
+                {searchTerm || filter !== "all" ? "Essayez de modifier votre recherche ou vos filtres" : "Aucun rendez-vous n'a encore été programmé"}
               </p>
             </div>
           )}

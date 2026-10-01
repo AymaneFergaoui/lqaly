@@ -7,8 +7,16 @@ import { X, Upload, Home, MapPin, Phone, DollarSign, BedDouble, Bath, Maximize, 
 import { AMENITIES_LIST } from '../constants/amenities';
 import { cn } from '../lib/utils';
 
-const PROPERTY_TYPES = ['House', 'Apartment', 'Office', 'Villa'];
-const AVAILABILITY_TYPES = ['rent', 'buy'];
+const PROPERTY_TYPES = [
+  { value: 'House', label: 'Maison' },
+  { value: 'Apartment', label: 'Appartement' },
+  { value: 'Office', label: 'Bureau' },
+  { value: 'Villa', label: 'Villa' }
+];
+const AVAILABILITY_TYPES = [
+  { value: 'rent', label: 'À louer' },
+  { value: 'buy', label: 'À acheter' }
+];
 
 const inputClass = "w-full px-4 py-3 bg-white border border-[#E6D5C3] rounded-xl text-[#1C1B1A] placeholder-[#9CA3AF] text-sm transition-all duration-200 outline-none focus:border-[#FC0903] focus:ring-2 focus:ring-[#FC0903]/15";
 const labelClass = "block text-sm font-semibold text-[#1C1B1A] mb-2";
@@ -61,7 +69,7 @@ const Update = () => {
         }
       } catch (error) {
         console.error('Error fetching property:', error);
-        toast.error('Failed to load property details.');
+        toast.error('Échec du chargement des détails de la propriété.');
       } finally {
         setFetching(false);
       }
@@ -117,14 +125,14 @@ const Update = () => {
 
       const response = await apiClient.post('/api/products/update', formdata);
       if (response.data.success) {
-        toast.success('Property updated successfully!');
+        toast.success('Propriété mise à jour avec succès !');
         navigate('/list');
       } else {
         toast.error(response.data.message);
       }
     } catch (error) {
       console.error(error);
-      toast.error('An error occurred. Please try again.');
+      toast.error('Une erreur est survenue. Veuillez réessayer.');
     } finally {
       setLoading(false);
     }
@@ -135,7 +143,7 @@ const Update = () => {
       <div className="min-h-screen pt-8 flex items-center justify-center bg-[#FAF8F4]">
         <div className="text-center">
           <div className="w-12 h-12 border-3 border-[#FC0903] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-[#5A5856] font-medium">Loading property details...</p>
+          <p className="text-[#5A5856] font-medium">Chargement des détails de la propriété...</p>
         </div>
       </div>
     );
@@ -149,10 +157,10 @@ const Update = () => {
           <button onClick={() => navigate('/list')}
             className="flex items-center gap-2 text-sm text-[#5A5856] hover:text-[#FC0903] mb-4 transition-colors">
             <ArrowLeft className="w-4 h-4" />
-            Back to Properties
+            Retour aux propriétés
           </button>
-          <h1 className="text-3xl font-bold text-[#1C1B1A] mb-1">Update Property</h1>
-          <p className="text-[#5A5856]">Edit and save changes to this property listing</p>
+          <h1 className="text-3xl font-bold text-[#1C1B1A] mb-1">Mettre à jour la propriété</h1>
+          <p className="text-[#5A5856]">Modifiez et enregistrez les modifications apportées à cette propriété</p>
         </motion.div>
 
         <motion.form initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1 }}
@@ -160,10 +168,10 @@ const Update = () => {
 
           {/* Basic Information */}
           <div className="bg-white rounded-2xl p-6 border border-[#E6D5C3] shadow-card">
-            <SectionHeader icon={Home} title="Basic Information" />
+            <SectionHeader icon={Home} title="Informations de base" />
             <div className="space-y-4">
               <div>
-                <label htmlFor="title" className={labelClass}>Property Title</label>
+                <label htmlFor="title" className={labelClass}>Titre de la propriété</label>
                 <input type="text" id="title" name="title" required value={formData.title}
                   onChange={handleInputChange} className={inputClass} />
               </div>
@@ -174,20 +182,20 @@ const Update = () => {
               </div>
               <div className="grid grid-cols-2 gap-4">
                 <div>
-                  <label htmlFor="type" className={labelClass}>Property Type</label>
+                  <label htmlFor="type" className={labelClass}>Type de propriété</label>
                   <select id="type" name="type" required value={formData.type}
                     onChange={handleInputChange} className={inputClass}>
-                    <option value="">Select Type</option>
-                    {PROPERTY_TYPES.map((type) => <option key={type} value={type}>{type}</option>)}
+                    <option value="">Sélectionner le type</option>
+                    {PROPERTY_TYPES.map((type) => <option key={type.value} value={type.value}>{type.label}</option>)}
                   </select>
                 </div>
                 <div>
-                  <label htmlFor="availability" className={labelClass}>Availability</label>
+                  <label htmlFor="availability" className={labelClass}>Disponibilité</label>
                   <select id="availability" name="availability" required value={formData.availability}
                     onChange={handleInputChange} className={inputClass}>
-                    <option value="">Select Availability</option>
+                    <option value="">Sélectionner la disponibilité</option>
                     {AVAILABILITY_TYPES.map((type) => (
-                      <option key={type} value={type}>{type.charAt(0).toUpperCase() + type.slice(1)}</option>
+                      <option key={type.value} value={type.value}>{type.label}</option>
                     ))}
                   </select>
                 </div>
@@ -197,10 +205,10 @@ const Update = () => {
 
           {/* Location & Pricing */}
           <div className="bg-white rounded-2xl p-6 border border-[#E6D5C3] shadow-card">
-            <SectionHeader icon={MapPin} title="Location & Pricing" />
+            <SectionHeader icon={MapPin} title="Emplacement et prix" />
             <div className="grid grid-cols-2 gap-4">
               <div>
-                <label htmlFor="price" className={labelClass}>Price (₹)</label>
+                <label htmlFor="price" className={labelClass}>Prix (MAD)</label>
                 <div className="relative">
                   <DollarSign className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9CA3AF]" />
                   <input type="number" id="price" name="price" required min="0"
@@ -208,7 +216,7 @@ const Update = () => {
                 </div>
               </div>
               <div>
-                <label htmlFor="location" className={labelClass}>Location</label>
+                <label htmlFor="location" className={labelClass}>Emplacement</label>
                 <div className="relative">
                   <MapPin className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9CA3AF]" />
                   <input type="text" id="location" name="location" required
@@ -216,7 +224,7 @@ const Update = () => {
                 </div>
               </div>
               <div>
-                <label htmlFor="phone" className={labelClass}>Contact Phone</label>
+                <label htmlFor="phone" className={labelClass}>Téléphone de contact</label>
                 <div className="relative">
                   <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9CA3AF]" />
                   <input type="tel" id="phone" name="phone" required
@@ -225,7 +233,7 @@ const Update = () => {
               </div>
               <div>
                 <label htmlFor="googleMapLink" className={labelClass}>
-                  Google Maps Link <span className="text-[#9CA3AF] font-normal">(optional)</span>
+                  Lien Google Maps <span className="text-[#9CA3AF] font-normal">(optionnel)</span>
                 </label>
                 <div className="relative">
                   <LinkIcon className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9CA3AF]" />
@@ -238,12 +246,12 @@ const Update = () => {
 
           {/* Property Details */}
           <div className="bg-white rounded-2xl p-6 border border-[#E6D5C3] shadow-card">
-            <SectionHeader icon={Maximize} title="Property Details" />
+            <SectionHeader icon={Maximize} title="Détails de la propriété" />
             <div className="grid grid-cols-3 gap-4">
               {[
-                { id: 'beds', label: 'Bedrooms', icon: BedDouble },
-                { id: 'baths', label: 'Bathrooms', icon: Bath },
-                { id: 'sqft', label: 'Square Feet', icon: Maximize },
+                { id: 'beds', label: 'Chambres', icon: BedDouble },
+                { id: 'baths', label: 'Salles de bain', icon: Bath },
+                { id: 'sqft', label: 'Superficie (m²)', icon: Maximize },
               ].map(({ id: fieldId, label, icon: Icon }) => (
                 <div key={fieldId}>
                   <label htmlFor={fieldId} className={labelClass}>{label}</label>
@@ -259,7 +267,7 @@ const Update = () => {
 
           {/* Amenities */}
           <div className="bg-white rounded-2xl p-6 border border-[#E6D5C3] shadow-card">
-            <SectionHeader icon={CheckSquare} title="Amenities" />
+            <SectionHeader icon={CheckSquare} title="Commodités" />
             <div className="flex flex-wrap gap-2 mb-4">
               {AMENITIES_LIST.map((amenity) => {
                 const selected = formData.amenities.includes(amenity);
@@ -280,10 +288,10 @@ const Update = () => {
             <div className="flex gap-2">
               <input type="text" value={newAmenity} onChange={(e) => setNewAmenity(e.target.value)}
                 onKeyDown={(e) => e.key === 'Enter' && (e.preventDefault(), handleAddAmenity())}
-                placeholder="Add custom amenity..." className={cn(inputClass, 'flex-1')} />
+                placeholder="Ajouter une commodité personnalisée..." className={cn(inputClass, 'flex-1')} />
               <button type="button" onClick={handleAddAmenity}
                 className="flex items-center gap-1.5 px-4 py-2.5 bg-[#1C1B1A] text-white rounded-xl text-sm font-medium hover:bg-[#FC0903] transition-colors">
-                <Plus className="w-4 h-4" /> Add
+                <Plus className="w-4 h-4" /> Ajouter
               </button>
             </div>
             {formData.amenities.filter((a) => !AMENITIES_LIST.includes(a)).length > 0 && (
@@ -302,7 +310,7 @@ const Update = () => {
 
           {/* Image Upload */}
           <div className="bg-white rounded-2xl p-6 border border-[#E6D5C3] shadow-card">
-            <SectionHeader icon={Upload} title="Property Images" subtitle={`${previewUrls.length}/4 images`} />
+            <SectionHeader icon={Upload} title="Images de la propriété" subtitle={`${previewUrls.length}/4 images`} />
             {previewUrls.length > 0 && (
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-4">
                 {previewUrls.map((url, index) => (
@@ -322,7 +330,7 @@ const Update = () => {
               className="flex flex-col items-center justify-center w-full h-28 border-2 border-dashed border-[#E6D5C3] rounded-xl cursor-pointer bg-[#FAF8F4] hover:border-[#FC0903] hover:bg-[#FC0903]/5 transition-all duration-200 group">
               <Upload className="w-6 h-6 text-[#9CA3AF] group-hover:text-[#FC0903] mb-1.5 transition-colors" />
               <span className="text-sm font-medium text-[#5A5856] group-hover:text-[#FC0903] transition-colors">
-                Replace images
+                Remplacer les images
               </span>
               <input id="images" name="images" type="file" multiple accept="image/*"
                 onChange={handleImageChange} className="sr-only" />
@@ -333,12 +341,12 @@ const Update = () => {
           <div className="flex gap-3">
             <button type="button" onClick={() => navigate('/list')}
               className="flex-1 py-4 bg-white border border-[#E6D5C3] text-[#1C1B1A] rounded-xl font-semibold text-base hover:bg-[#FAF8F4] transition-colors">
-              Cancel
+              Annuler
             </button>
             <motion.button type="submit" disabled={loading}
               whileHover={{ scale: loading ? 1 : 1.01 }} whileTap={{ scale: loading ? 1 : 0.99 }}
               className="flex-1 flex items-center justify-center gap-2 py-4 bg-[#1C1B1A] hover:bg-[#FC0903] text-[#FAF8F4] rounded-xl font-semibold text-base transition-all duration-300 shadow-lg hover:shadow-terracotta disabled:opacity-60 disabled:cursor-not-allowed">
-              {loading ? <><Loader2 className="w-4 h-4 animate-spin" /> Saving...</> : 'Save Changes'}
+              {loading ? <><Loader2 className="w-4 h-4 animate-spin" /> Enregistrement...</> : 'Enregistrer les modifications'}
             </motion.button>
           </div>
         </motion.form>

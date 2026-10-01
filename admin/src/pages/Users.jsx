@@ -80,7 +80,7 @@ const UsersManagement = () => {
       }
     } catch (err) {
       console.error("Error fetching users:", err);
-      setError("Unable to load users. Please try again.");
+      setError("Impossible de charger les utilisateurs. Veuillez réessayer.");
     } finally {
       setLoading(false);
       setRefreshing(false);
@@ -101,7 +101,7 @@ const UsersManagement = () => {
       );
 
       if (response.data.success) {
-        toast.success(`User suspended for ${suspendData.days} days`);
+        toast.success(`Utilisateur suspendu pour ${suspendData.days} jours`);
         setShowSuspendModal(false);
         setSelectedUser(null);
         fetchUsers(true);
@@ -110,7 +110,7 @@ const UsersManagement = () => {
       }
     } catch (err) {
       console.error("Error suspending user:", err);
-      toast.error("Failed to suspend user");
+      toast.error("Échec de la suspension de l'utilisateur");
     } finally {
       setActionLoading(false);
     }
@@ -125,7 +125,7 @@ const UsersManagement = () => {
       );
 
       if (response.data.success) {
-        toast.success("User banned successfully");
+        toast.success("Utilisateur banni avec succès");
         setShowBanModal(false);
         setSelectedUser(null);
         fetchUsers(true);
@@ -134,7 +134,7 @@ const UsersManagement = () => {
       }
     } catch (err) {
       console.error("Error banning user:", err);
-      toast.error("Failed to ban user");
+      toast.error("Échec du bannissement de l'utilisateur");
     } finally {
       setActionLoading(false);
     }
@@ -149,14 +149,14 @@ const UsersManagement = () => {
       );
 
       if (response.data.success) {
-        toast.success("User account reactivated");
+        toast.success("Compte utilisateur réactivé");
         fetchUsers(true);
       } else {
         toast.error(response.data.message);
       }
     } catch (err) {
       console.error("Error reactivating user:", err);
-      toast.error("Failed to reactivate user");
+      toast.error("Échec de la réactivation de l'utilisateur");
     } finally {
       setActionLoading(false);
     }
@@ -172,7 +172,7 @@ const UsersManagement = () => {
       });
 
       if (response.data.success) {
-        toast.success(`${response.data.count} users suspended`);
+        toast.success(`${response.data.count} utilisateurs suspendus`);
         setSelectedUsers(new Set());
         fetchUsers(true);
       } else {
@@ -180,7 +180,7 @@ const UsersManagement = () => {
       }
     } catch (err) {
       console.error("Error bulk suspending users:", err);
-      toast.error("Failed to suspend selected users");
+      toast.error("Échec de la suspension des utilisateurs sélectionnés");
     } finally {
       setActionLoading(false);
     }
@@ -195,7 +195,7 @@ const UsersManagement = () => {
       });
 
       if (response.data.success) {
-        toast.success(`${response.data.count} users banned`);
+        toast.success(`${response.data.count} utilisateurs bannis`);
         setSelectedUsers(new Set());
         fetchUsers(true);
       } else {
@@ -203,7 +203,7 @@ const UsersManagement = () => {
       }
     } catch (err) {
       console.error("Error bulk banning users:", err);
-      toast.error("Failed to ban selected users");
+      toast.error("Échec du bannissement des utilisateurs sélectionnés");
     } finally {
       setActionLoading(false);
     }
@@ -230,10 +230,10 @@ const UsersManagement = () => {
 
   // Filter Tabs
   const filterTabs = [
-    { key: 'all', label: 'All Users', count: statusCounts.total },
-    { key: 'active', label: 'Active', count: statusCounts.active },
-    { key: 'suspended', label: 'Suspended', count: statusCounts.suspended },
-    { key: 'banned', label: 'Banned', count: statusCounts.banned },
+    { key: 'all', label: 'Tous les utilisateurs', count: statusCounts.total },
+    { key: 'active', label: 'Actifs', count: statusCounts.active },
+    { key: 'suspended', label: 'Suspendus', count: statusCounts.suspended },
+    { key: 'banned', label: 'Bannis', count: statusCounts.banned },
   ];
 
   // ── User initials avatar ──
@@ -299,11 +299,11 @@ const UsersManagement = () => {
           <div className="w-14 h-14 bg-red-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
             <AlertCircle className="w-7 h-7 text-red-500" />
           </div>
-          <h3 className="font-semibold text-[#111110] mb-1">Failed to load users</h3>
+          <h3 className="font-semibold text-[#111110] mb-1">Échec du chargement des utilisateurs</h3>
           <p className="text-sm text-[#9B9B99] mb-5">{error}</p>
           <button onClick={() => fetchUsers()}
             className="px-5 py-2.5 bg-[#FC0903] text-white rounded-lg text-sm font-medium hover:bg-[#C05E44] active:scale-[0.98] transition-all">
-            Try Again
+            Réessayer
           </button>
         </div>
       </div>
@@ -317,9 +317,9 @@ const UsersManagement = () => {
         {/* Header */}
         <div className="flex items-start justify-between mb-6">
           <div>
-            <h1 className="text-2xl font-bold text-[#111110] tracking-tight mb-0.5">Users</h1>
+            <h1 className="text-2xl font-bold text-[#111110] tracking-tight mb-0.5">Utilisateurs</h1>
             <p className="text-sm text-[#9B9B99]">
-              {pagination.totalUsers ?? users.length} registered accounts
+              {pagination.totalUsers ?? users.length} comptes enregistrés
             </p>
           </div>
           <button
@@ -328,7 +328,7 @@ const UsersManagement = () => {
             className="flex items-center gap-2 px-4 py-2 bg-white border border-[#E8E7E5] text-[#6B6B6A] rounded-lg text-sm font-medium hover:border-[#FC0903] hover:text-[#FC0903] active:scale-[0.97] transition-all shadow-sm disabled:opacity-50"
           >
             <RefreshCw className={cn("w-3.5 h-3.5", refreshing && "animate-spin")} />
-            {refreshing ? "Refreshing…" : "Refresh"}
+            {refreshing ? "Actualisation…" : "Actualiser"}
           </button>
         </div>
 
@@ -366,7 +366,7 @@ const UsersManagement = () => {
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9B9B99]" />
               <input
                 type="text"
-                placeholder="Search by name or email…"
+                placeholder="Rechercher par nom ou e-mail…"
                 value={searchTerm}
                 onChange={(e) => { setSearchTerm(e.target.value); setCurrentPage(1); }}
                 className="w-full pl-10 pr-4 py-2 border border-[#E8E7E5] rounded-lg text-sm text-[#111110] placeholder:text-[#9B9B99] focus:outline-none focus:ring-2 focus:ring-[#FC0903]/15 focus:border-[#FC0903] transition-all"
@@ -377,14 +377,14 @@ const UsersManagement = () => {
               onChange={(e) => { setSortBy(e.target.value); setCurrentPage(1); }}
               className="px-3 py-2 border border-[#E8E7E5] rounded-lg bg-white text-sm text-[#6B6B6A] focus:outline-none focus:border-[#FC0903] transition-all"
             >
-              <option value="createdAt">Date Joined</option>
-              <option value="lastActive">Last Active</option>
-              <option value="name">Name</option>
+              <option value="createdAt">Date d'inscription</option>
+              <option value="lastActive">Dernière activité</option>
+              <option value="name">Nom</option>
             </select>
             <button
               onClick={() => { setSortOrder(sortOrder === "asc" ? "desc" : "asc"); setCurrentPage(1); }}
               className="px-3 py-2 border border-[#E8E7E5] rounded-lg bg-white text-sm text-[#6B6B6A] hover:bg-[#F5F5F3] transition-colors font-space-mono"
-              title={sortOrder === "asc" ? "Sort descending" : "Sort ascending"}
+              title={sortOrder === "asc" ? "Trier par ordre décroissant" : "Trier par ordre croissant"}
             >
               {sortOrder === "asc" ? "↑" : "↓"}
             </button>
@@ -405,10 +405,10 @@ const UsersManagement = () => {
                       className="w-4 h-4 rounded border-[#D0CFCE] accent-[#FC0903] cursor-pointer"
                     />
                   </th>
-                  <th className="px-4 py-3 text-left text-xs font-semibold text-[#9B9B99] uppercase tracking-wider">User</th>
-                  <th className="px-4 py-3 text-left text-xs font-semibold text-[#9B9B99] uppercase tracking-wider">Status</th>
-                  <th className="px-4 py-3 text-left text-xs font-semibold text-[#9B9B99] uppercase tracking-wider">Properties</th>
-                  <th className="px-4 py-3 text-left text-xs font-semibold text-[#9B9B99] uppercase tracking-wider">Joined</th>
+                  <th className="px-4 py-3 text-left text-xs font-semibold text-[#9B9B99] uppercase tracking-wider">Utilisateur</th>
+                  <th className="px-4 py-3 text-left text-xs font-semibold text-[#9B9B99] uppercase tracking-wider">Statut</th>
+                  <th className="px-4 py-3 text-left text-xs font-semibold text-[#9B9B99] uppercase tracking-wider">Propriétés</th>
+                  <th className="px-4 py-3 text-left text-xs font-semibold text-[#9B9B99] uppercase tracking-wider">Inscrit le</th>
                   <th className="px-4 py-3 text-left text-xs font-semibold text-[#9B9B99] uppercase tracking-wider">Actions</th>
                 </tr>
               </thead>
@@ -457,7 +457,7 @@ const UsersManagement = () => {
                           user.status === "active" ? "bg-emerald-500" :
                           user.status === "suspended" ? "bg-amber-500" : "bg-red-500"
                         )} />
-                        {user.status}
+                        {user.status === "active" ? "actif" : user.status === "suspended" ? "suspendu" : "banni"}
                       </span>
                     </td>
 
@@ -481,18 +481,18 @@ const UsersManagement = () => {
                             <button
                               onClick={() => { setSelectedUser(user); setShowSuspendModal(true); }}
                               className="flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium text-amber-700 bg-amber-50 hover:bg-amber-100 rounded-lg transition-colors border border-amber-200/60"
-                              title="Suspend"
+                              title="Suspendre"
                             >
                               <Clock className="w-3.5 h-3.5" />
-                              <span className="hidden sm:inline">Suspend</span>
+                              <span className="hidden sm:inline">Suspendre</span>
                             </button>
                             <button
                               onClick={() => { setSelectedUser(user); setShowBanModal(true); }}
                               className="flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium text-red-700 bg-red-50 hover:bg-red-100 rounded-lg transition-colors border border-red-200/60"
-                              title="Ban"
+                              title="Bannir"
                             >
                               <Ban className="w-3.5 h-3.5" />
-                              <span className="hidden sm:inline">Ban</span>
+                              <span className="hidden sm:inline">Bannir</span>
                             </button>
                           </>
                         )}
@@ -503,13 +503,13 @@ const UsersManagement = () => {
                             className="flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium text-emerald-700 bg-emerald-50 hover:bg-emerald-100 rounded-lg transition-colors border border-emerald-200/60 disabled:opacity-50"
                           >
                             <UserCheck className="w-3.5 h-3.5" />
-                            <span className="hidden sm:inline">Reactivate</span>
+                            <span className="hidden sm:inline">Réactiver</span>
                           </button>
                         )}
                         <button
                           onClick={() => navigate(`/users/${user._id}`)}
                           className="p-1.5 text-[#9B9B99] hover:text-[#111110] hover:bg-[#F5F5F3] rounded-lg transition-colors"
-                          title="View profile"
+                          title="Voir le profil"
                         >
                           <Eye className="w-4 h-4" />
                         </button>
@@ -525,11 +525,11 @@ const UsersManagement = () => {
           {users.length === 0 && (
             <div className="py-16 text-center">
               <Users className="w-10 h-10 text-[#D0CFCE] mx-auto mb-3" />
-              <p className="text-sm font-medium text-[#6B6B6A] mb-1">No users found</p>
+              <p className="text-sm font-medium text-[#6B6B6A] mb-1">Aucun utilisateur trouvé</p>
               <p className="text-xs text-[#9B9B99]">
                 {searchTerm || statusFilter !== "all"
-                  ? "Try adjusting your filters or search"
-                  : "Users will appear here once they register"}
+                  ? "Essayez de modifier vos filtres ou votre recherche"
+                  : "Les utilisateurs apparaîtront ici une fois qu'ils se seront inscrits"}
               </p>
             </div>
           )}
@@ -538,8 +538,8 @@ const UsersManagement = () => {
           {pagination.totalPages > 1 && (
             <div className="px-5 py-3.5 border-t border-[#F0EFED] flex items-center justify-between">
               <p className="text-xs text-[#9B9B99]">
-                Page {pagination.currentPage} of {pagination.totalPages}
-                <span className="ml-1 text-[#6B6B6A]">({pagination.totalUsers} users)</span>
+                Page {pagination.currentPage} sur {pagination.totalPages}
+                <span className="ml-1 text-[#6B6B6A]">({pagination.totalUsers} utilisateurs)</span>
               </p>
               <div className="flex gap-2">
                 <button
@@ -547,14 +547,14 @@ const UsersManagement = () => {
                   disabled={!pagination.hasPreviousPage}
                   className="px-3 py-1.5 text-xs font-medium border border-[#E8E7E5] rounded-lg disabled:opacity-40 hover:bg-[#F5F5F3] transition-colors"
                 >
-                  Previous
+                  Précédent
                 </button>
                 <button
                   onClick={() => setCurrentPage(currentPage + 1)}
                   disabled={!pagination.hasNextPage}
                   className="px-3 py-1.5 text-xs font-medium border border-[#E8E7E5] rounded-lg disabled:opacity-40 hover:bg-[#F5F5F3] transition-colors"
                 >
-                  Next
+                  Suivant
                 </button>
               </div>
             </div>
@@ -568,11 +568,11 @@ const UsersManagement = () => {
         onClearSelection={() => setSelectedUsers(new Set())}
         onSuspendAll={() => {
           // Show bulk suspend modal (would need to create this)
-          toast.info('Bulk suspend functionality coming soon');
+          toast.info('Fonctionnalité de suspension en masse à venir');
         }}
         onBanAll={() => {
           // Show bulk ban modal (would need to create this)
-          toast.info('Bulk ban functionality coming soon');
+          toast.info('Fonctionnalité de bannissement en masse à venir');
         }}
         context="users"
         isVisible={selectedUsers.size > 0}

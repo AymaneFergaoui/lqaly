@@ -53,7 +53,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
 
           {/* Favourite */}
           <button
-            aria-label={favorited ? 'Remove from favourites' : 'Add to favourites'}
+            aria-label={favorited ? 'Retirer des favoris' : 'Ajouter aux favoris'}
             onClick={e => { e.preventDefault(); setFavorited(f => !f); }}
             className="absolute top-3 right-3 w-9 h-9 flex items-center justify-center rounded-full bg-white/20 backdrop-blur-sm hover:bg-white/40 transition-colors duration-200 active:scale-[0.96]"
           >

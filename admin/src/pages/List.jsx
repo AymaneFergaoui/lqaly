@@ -11,10 +11,17 @@ import apiClient from "../services/apiClient";
 import { cn, formatPrice } from "../lib/utils";
 
 const PROPERTY_TYPES = ["all", "House", "Apartment", "Office", "Villa"];
+const TYPE_LABELS = {
+  all: "Tous les types",
+  House: "Maison",
+  Apartment: "Appartement",
+  Office: "Bureau",
+  Villa: "Villa"
+};
 const SORT_OPTIONS = [
-  { value: "newest", label: "Newest First" },
-  { value: "price-low", label: "Price: Low → High" },
-  { value: "price-high", label: "Price: High → Low" },
+  { value: "newest", label: "Plus récent" },
+  { value: "price-low", label: "Prix : Croissant" },
+  { value: "price-high", label: "Prix : Décroissant" },
 ];
 
 const parseAmenities = (amenities) => {
@@ -60,7 +67,7 @@ const PropertyGridCard = ({ property, onRemove }) => (
             ? "bg-blue-600/80 text-white"
             : "bg-[#FC0903]/80 text-white"
         )}>
-          {property.availability === "rent" ? "For Rent" : "For Sale"}
+          {property.availability === "rent" ? "À louer" : "À vendre"}
         </span>
       </div>
     </div>
@@ -75,16 +82,16 @@ const PropertyGridCard = ({ property, onRemove }) => (
 
       {/* Specs */}
       <div className="flex items-center gap-3 text-xs text-[#5A5856] mb-4">
-        <span className="flex items-center gap-1"><BedDouble className="w-3.5 h-3.5 text-[#FC0903]" />{property.beds} Beds</span>
-        <span className="flex items-center gap-1"><Bath className="w-3.5 h-3.5 text-[#FC0903]" />{property.baths} Baths</span>
-        <span className="flex items-center gap-1"><Maximize className="w-3.5 h-3.5 text-[#FC0903]" />{property.sqft} sqft</span>
+        <span className="flex items-center gap-1"><BedDouble className="w-3.5 h-3.5 text-[#FC0903]" />{property.beds} Chambres</span>
+        <span className="flex items-center gap-1"><Bath className="w-3.5 h-3.5 text-[#FC0903]" />{property.baths} Sdb</span>
+        <span className="flex items-center gap-1"><Maximize className="w-3.5 h-3.5 text-[#FC0903]" />{property.sqft} m²</span>
       </div>
 
       {/* Price + Actions */}
       <div className="flex items-center justify-between pt-3 border-t border-[#F5F1E8]">
         <div>
           <span className="text-lg font-bold text-[#FC0903]">{formatPrice(property.price)}</span>
-          {property.availability === "rent" && <span className="text-xs text-[#9CA3AF] ml-1">/mo</span>}
+          {property.availability === "rent" && <span className="text-xs text-[#9CA3AF] ml-1">/mois</span>}
         </div>
         <div className="flex items-center gap-1.5">
           <Link to={`/update/${property._id}`}>
@@ -128,7 +135,7 @@ const PropertyListRow = ({ property, onRemove }) => (
     <div className="flex-1 min-w-0">
       <div className="flex items-center gap-2 mb-0.5">
         <h3 className="font-semibold text-[#1C1B1A] text-sm truncate">{property.title}</h3>
-        <span className="px-2 py-0.5 bg-[#1C1B1A] text-[#FAF8F4] text-xs rounded-full flex-shrink-0">{property.type}</span>
+        <span className="px-2 py-0.5 bg-[#1C1B1A] text-[#FAF8F4] text-xs rounded-full flex-shrink-0">{TYPE_LABELS[property.type] || property.type}</span>
       </div>
       <div className="flex items-center gap-1 text-xs text-[#9CA3AF]">
         <MapPin className="w-3 h-3" />
@@ -150,7 +157,7 @@ const PropertyListRow = ({ property, onRemove }) => (
         "text-xs font-medium mt-0.5",
         property.availability === "rent" ? "text-blue-600" : "text-emerald-600"
       )}>
-        {property.availability === "rent" ? "For Rent" : "For Sale"}
+        {property.availability === "rent" ? "À louer" : "À vendre"}
       </div>
     </div>
 
@@ -194,7 +201,7 @@ const PropertyListings = () => {
       }
     } catch (error) {
       console.error("Error fetching properties:", error);
-      toast.error("Failed to fetch properties");
+      toast.error("Échec de la récupération des propriétés");
     } finally {
       setLoading(false);
     }
@@ -204,22 +211,22 @@ const PropertyListings = () => {
     setRefreshing(true);
     await fetchProperties();
     setRefreshing(false);
-    toast.success("Properties refreshed!");
+    toast.success("Propriétés actualisées !");
   };
 
   const handleRemoveProperty = async (propertyId, propertyTitle) => {
-    if (!window.confirm(`Remove "${propertyTitle}"? This cannot be undone.`)) return;
+    if (!window.confirm(`Supprimer "${propertyTitle}" ? Cette action est irréversible.`)) return;
     try {
       const response = await apiClient.post('/api/products/remove', { id: propertyId });
       if (response.data.success) {
-        toast.success("Property removed successfully");
+        toast.success("Propriété supprimée avec succès");
         await fetchProperties();
       } else {
         toast.error(response.data.message);
       }
     } catch (error) {
       console.error("Error removing property:", error);
-      toast.error("Failed to remove property");
+      toast.error("Échec de la suppression de la propriété");
     }
   };
 
@@ -243,7 +250,7 @@ const PropertyListings = () => {
       <div className="min-h-screen pt-8 flex items-center justify-center bg-[#FAF8F4]">
         <div className="text-center">
           <div className="w-12 h-12 border-3 border-[#FC0903] border-t-transparent rounded-full animate-spin mx-auto mb-4" />
-          <p className="text-[#5A5856] font-medium">Loading properties...</p>
+          <p className="text-[#5A5856] font-medium">Chargement des propriétés...</p>
         </div>
       </div>
     );
@@ -257,9 +264,9 @@ const PropertyListings = () => {
         <motion.div initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }}
           className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <div>
-            <h1 className="text-3xl font-bold text-[#1C1B1A] mb-1">Properties</h1>
+            <h1 className="text-3xl font-bold text-[#1C1B1A] mb-1">Propriétés</h1>
             <p className="text-[#5A5856] text-sm">
-              <span className="font-semibold text-[#FC0903]">{filteredProperties.length}</span> listings found
+              <span className="font-semibold text-[#FC0903]">{filteredProperties.length}</span> annonces trouvées
             </p>
           </div>
           <div className="flex items-center gap-2">
@@ -267,13 +274,13 @@ const PropertyListings = () => {
               whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
               className="flex items-center gap-2 px-4 py-2.5 bg-white border border-[#E6D5C3] text-[#1C1B1A] rounded-xl text-sm font-medium hover:border-[#FC0903] hover:text-[#FC0903] transition-all shadow-card disabled:opacity-60">
               <RefreshCw className={cn("w-4 h-4", refreshing && "animate-spin")} />
-              <span className="hidden sm:inline">Refresh</span>
+              <span className="hidden sm:inline">Actualiser</span>
             </motion.button>
             <Link to="/add">
               <motion.button whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}
                 className="flex items-center gap-2 px-5 py-2.5 bg-[#FC0903] hover:bg-[#C05E44] text-white rounded-xl text-sm font-semibold transition-all shadow-lg hover:shadow-terracotta">
                 <Plus className="w-4 h-4" />
-                Add Property
+                Ajouter une propriété
               </motion.button>
             </Link>
           </div>
@@ -286,7 +293,7 @@ const PropertyListings = () => {
             {/* Search */}
             <div className="relative flex-1 w-full">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-[#9CA3AF]" />
-              <input type="text" placeholder="Search properties..."
+              <input type="text" placeholder="Rechercher des propriétés..."
                 value={searchTerm} onChange={(e) => setSearchTerm(e.target.value)}
                 className="w-full pl-9 pr-4 py-2.5 bg-[#FAF8F4] border border-[#E6D5C3] rounded-xl text-sm text-[#1C1B1A] placeholder-[#9CA3AF] outline-none focus:border-[#FC0903] focus:ring-2 focus:ring-[#FC0903]/15 transition-all" />
             </div>
@@ -301,7 +308,7 @@ const PropertyListings = () => {
                       ? "bg-[#1C1B1A] text-[#FAF8F4] shadow-sm"
                       : "text-[#5A5856] hover:text-[#1C1B1A]"
                   )}>
-                  {type === "all" ? "All Types" : type}
+                  {TYPE_LABELS[type] || type}
                 </button>
               ))}
             </div>
@@ -337,14 +344,14 @@ const PropertyListings = () => {
               <div className="w-16 h-16 bg-[#F5F1E8] rounded-2xl flex items-center justify-center mx-auto mb-4">
                 <Home className="w-8 h-8 text-[#E6D5C3]" />
               </div>
-              <h3 className="text-lg font-bold text-[#1C1B1A] mb-2">No properties found</h3>
+              <h3 className="text-lg font-bold text-[#1C1B1A] mb-2">Aucune propriété trouvée</h3>
               <p className="text-sm text-[#9CA3AF] mb-6">
-                {searchTerm || filterType !== "all" ? "Try adjusting your search or filters" : "Add your first property to get started"}
+                {searchTerm || filterType !== "all" ? "Essayez d'ajuster votre recherche ou vos filtres" : "Ajoutez votre première propriété pour commencer"}
               </p>
               {!searchTerm && filterType === "all" && (
                 <Link to="/add">
                   <button className="px-6 py-3 bg-[#FC0903] text-white rounded-xl font-semibold text-sm hover:bg-[#C05E44] transition-colors">
-                    Add First Property
+                    Ajouter la première propriété
                   </button>
                 </Link>
               )}

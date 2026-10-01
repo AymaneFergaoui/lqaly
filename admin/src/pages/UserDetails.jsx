@@ -45,11 +45,11 @@ const UserDetailsPage = () => {
         setProperties(response.data.properties || []);
         setAppointments(response.data.appointments || []);
       } else {
-        setError(response.data.message || "User not found");
+        setError(response.data.message || "Utilisateur non trouvé");
       }
     } catch (err) {
       console.error("Error fetching user details:", err);
-      setError("Unable to load user details");
+      setError("Impossible de charger les détails de l'utilisateur");
     } finally {
       setLoading(false);
     }
@@ -71,14 +71,14 @@ const UserDetailsPage = () => {
       );
 
       if (response.data.success) {
-        toast.success(`User suspended for ${suspendData.days} days`);
+        toast.success(`Utilisateur suspendu pour ${suspendData.days} jours`);
         setShowSuspendModal(false);
         fetchUserDetails();
       } else {
         toast.error(response.data.message);
       }
     } catch (err) {
-      toast.error("Failed to suspend user");
+      toast.error("Échec de la suspension de l'utilisateur");
     } finally {
       setActionLoading(false);
     }
@@ -93,14 +93,14 @@ const UserDetailsPage = () => {
       );
 
       if (response.data.success) {
-        toast.success("User banned successfully");
+        toast.success("Utilisateur banni avec succès");
         setShowBanModal(false);
         fetchUserDetails();
       } else {
         toast.error(response.data.message);
       }
     } catch (err) {
-      toast.error("Failed to ban user");
+      toast.error("Échec du bannissement de l'utilisateur");
     } finally {
       setActionLoading(false);
     }
@@ -115,13 +115,13 @@ const UserDetailsPage = () => {
       );
 
       if (response.data.success) {
-        toast.success("User account reactivated");
+        toast.success("Compte utilisateur réactivé");
         fetchUserDetails();
       } else {
         toast.error(response.data.message);
       }
     } catch (err) {
-      toast.error("Failed to reactivate user");
+      toast.error("Échec de la réactivation de l'utilisateur");
     } finally {
       setActionLoading(false);
     }
@@ -129,9 +129,9 @@ const UserDetailsPage = () => {
 
   // Tabs
   const tabs = [
-    { key: 'overview', label: 'Overview', icon: Users },
-    { key: 'properties', label: `Properties (${properties.length})`, icon: Home },
-    { key: 'appointments', label: `Appointments (${appointments.length})`, icon: Calendar },
+    { key: 'overview', label: 'Aperçu', icon: Users },
+    { key: 'properties', label: `Propriétés (${properties.length})`, icon: Home },
+    { key: 'appointments', label: `Rendez-vous (${appointments.length})`, icon: Calendar },
   ];
 
   // Loading State
@@ -165,13 +165,13 @@ const UserDetailsPage = () => {
           <div className="w-16 h-16 bg-red-50 rounded-2xl flex items-center justify-center mx-auto mb-4">
             <AlertCircle className="w-8 h-8 text-red-500" />
           </div>
-          <h3 className="text-lg font-bold text-[#1C1B1A] mb-2">User not found</h3>
+          <h3 className="text-lg font-bold text-[#1C1B1A] mb-2">Utilisateur non trouvé</h3>
           <p className="text-[#5A5856] mb-6 text-sm">{error}</p>
           <button
             onClick={() => navigate('/admin/users')}
             className="px-6 py-3 bg-[#FC0903] text-white rounded-xl font-semibold text-sm hover:bg-[#C05E44] transition-colors"
           >
-            Back to Users
+            Retour aux utilisateurs
           </button>
         </div>
       </div>
@@ -194,8 +194,8 @@ const UserDetailsPage = () => {
             <ArrowLeft className="w-5 h-5" />
           </button>
           <div>
-            <h1 className="text-3xl font-bold text-[#1C1B1A]">User Details</h1>
-            <p className="text-[#5A5856] text-sm">Complete user information and management</p>
+            <h1 className="text-3xl font-bold text-[#1C1B1A]">Détails de l'utilisateur</h1>
+            <p className="text-[#5A5856] text-sm">Informations complètes sur l'utilisateur et gestion</p>
           </div>
         </motion.div>
 
@@ -231,7 +231,7 @@ const UserDetailsPage = () => {
                     className="flex items-center gap-2 px-4 py-2.5 bg-amber-50 text-amber-700 border border-amber-200 rounded-xl font-medium text-sm hover:bg-amber-100 transition-colors disabled:opacity-50"
                   >
                     <Clock className="w-4 h-4" />
-                    Suspend
+                    Suspendre
                   </button>
                   <button
                     onClick={() => setShowBanModal(true)}
@@ -239,7 +239,7 @@ const UserDetailsPage = () => {
                     className="flex items-center gap-2 px-4 py-2.5 bg-red-50 text-red-700 border border-red-200 rounded-xl font-medium text-sm hover:bg-red-100 transition-colors disabled:opacity-50"
                   >
                     <Ban className="w-4 h-4" />
-                    Ban
+                    Bannir
                   </button>
                 </>
               )}
@@ -250,7 +250,7 @@ const UserDetailsPage = () => {
                   className="flex items-center gap-2 px-4 py-2.5 bg-emerald-50 text-emerald-700 border border-emerald-200 rounded-xl font-medium text-sm hover:bg-emerald-100 transition-colors disabled:opacity-50"
                 >
                   <UserCheck className="w-4 h-4" />
-                  Reactivate
+                  Réactiver
                 </button>
               )}
               <button
@@ -259,7 +259,7 @@ const UserDetailsPage = () => {
                 className="flex items-center gap-2 px-4 py-2.5 border border-[#E6D5C3] text-[#5A5856] rounded-xl font-medium text-sm hover:bg-[#F5F1E8] transition-colors disabled:opacity-50"
               >
                 <RefreshCw className={cn("w-4 h-4", actionLoading && "animate-spin")} />
-                Refresh
+                Actualiser
               </button>
             </div>
           </div>
@@ -267,15 +267,15 @@ const UserDetailsPage = () => {
           {/* User Metadata */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8 pt-8 border-t border-[#E6D5C3]">
             <div>
-              <p className="text-sm text-[#5A5856] mb-1">Member Since</p>
+              <p className="text-sm text-[#5A5856] mb-1">Membre depuis</p>
               <p className="font-semibold text-[#1C1B1A]">{formatDate(user.createdAt)}</p>
             </div>
             <div>
-              <p className="text-sm text-[#5A5856] mb-1">Properties Listed</p>
+              <p className="text-sm text-[#5A5856] mb-1">Propriétés listées</p>
               <p className="font-semibold text-[#1C1B1A]">{user.propertyCount || 0}</p>
             </div>
             <div>
-              <p className="text-sm text-[#5A5856] mb-1">Total Appointments</p>
+              <p className="text-sm text-[#5A5856] mb-1">Total des rendez-vous</p>
               <p className="font-semibold text-[#1C1B1A]">{user.appointmentCount || 0}</p>
             </div>
           </div>
@@ -285,13 +285,13 @@ const UserDetailsPage = () => {
             <div className="mt-6 p-4 bg-amber-50 border border-amber-200 rounded-xl">
               <div className="flex items-center gap-2 mb-2">
                 <Clock className="w-4 h-4 text-amber-600" />
-                <span className="font-medium text-amber-800">Suspension Details</span>
+                <span className="font-medium text-amber-800">Détails de la suspension</span>
               </div>
               <p className="text-sm text-amber-700 mb-1">
-                <strong>Reason:</strong> {user.suspendReason || 'Not specified'}
+                <strong>Raison :</strong> {user.suspendReason || 'Non spécifié'}
               </p>
               <p className="text-sm text-amber-700">
-                <strong>Expires:</strong> {new Date(user.suspendedUntil).toLocaleString()}
+                <strong>Expire le :</strong> {new Date(user.suspendedUntil).toLocaleString('fr-FR')}
               </p>
             </div>
           )}
@@ -300,13 +300,13 @@ const UserDetailsPage = () => {
             <div className="mt-6 p-4 bg-red-50 border border-red-200 rounded-xl">
               <div className="flex items-center gap-2 mb-2">
                 <Ban className="w-4 h-4 text-red-600" />
-                <span className="font-medium text-red-800">Ban Details</span>
+                <span className="font-medium text-red-800">Détails du bannissement</span>
               </div>
               <p className="text-sm text-red-700 mb-1">
-                <strong>Reason:</strong> {user.banReason || 'Not specified'}
+                <strong>Raison :</strong> {user.banReason || 'Non spécifié'}
               </p>
               <p className="text-sm text-red-700">
-                <strong>Banned on:</strong> {formatDate(user.bannedAt)}
+                <strong>Banni le :</strong> {formatDate(user.bannedAt)}
               </p>
             </div>
           )}
@@ -341,26 +341,26 @@ const UserDetailsPage = () => {
           <div className="p-6">
             {activeTab === 'overview' && (
               <div className="space-y-6">
-                <h3 className="text-lg font-bold text-[#1C1B1A]">Account Overview</h3>
+                <h3 className="text-lg font-bold text-[#1C1B1A]">Aperçu du compte</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-4">
                     <div>
-                      <p className="text-sm text-[#5A5856] mb-1">Email Address</p>
+                      <p className="text-sm text-[#5A5856] mb-1">Adresse email</p>
                       <p className="text-[#1C1B1A]">{user.email}</p>
                     </div>
                     <div>
-                      <p className="text-sm text-[#5A5856] mb-1">Account Status</p>
+                      <p className="text-sm text-[#5A5856] mb-1">Statut du compte</p>
                       <UserStatusBadge status={user.status} />
                     </div>
                   </div>
                   <div className="space-y-4">
                     <div>
-                      <p className="text-sm text-[#5A5856] mb-1">Registration Date</p>
-                      <p className="text-[#1C1B1A]">{new Date(user.createdAt).toLocaleString()}</p>
+                      <p className="text-sm text-[#5A5856] mb-1">Date d'inscription</p>
+                      <p className="text-[#1C1B1A]">{new Date(user.createdAt).toLocaleString('fr-FR')}</p>
                     </div>
                     <div>
-                      <p className="text-sm text-[#5A5856] mb-1">Last Updated</p>
-                      <p className="text-[#1C1B1A]">{new Date(user.updatedAt).toLocaleString()}</p>
+                      <p className="text-sm text-[#5A5856] mb-1">Dernière mise à jour</p>
+                      <p className="text-[#1C1B1A]">{new Date(user.updatedAt).toLocaleString('fr-FR')}</p>
                     </div>
                   </div>
                 </div>
@@ -369,7 +369,7 @@ const UserDetailsPage = () => {
 
             {activeTab === 'properties' && (
               <div>
-                <h3 className="text-lg font-bold text-[#1C1B1A] mb-4">User's Properties</h3>
+                <h3 className="text-lg font-bold text-[#1C1B1A] mb-4">Propriétés de l'utilisateur</h3>
                 {properties.length > 0 ? (
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {properties.map((property) => (
@@ -386,7 +386,10 @@ const UserDetailsPage = () => {
                             property.status === 'rejected' && "bg-red-50 text-red-700",
                             property.status === 'expired' && "bg-gray-50 text-gray-700"
                           )}>
-                            {property.status}
+                            {property.status === 'active' ? 'Actif' :
+                             property.status === 'pending' ? 'En attente' :
+                             property.status === 'rejected' ? 'Rejeté' :
+                             property.status === 'expired' ? 'Expiré' : property.status}
                           </span>
                         </div>
                         <div className="space-y-2 text-sm text-[#5A5856]">
@@ -403,7 +406,7 @@ const UserDetailsPage = () => {
                             className="flex items-center gap-1 px-2 py-1 text-xs border border-[#E6D5C3] rounded hover:bg-[#F5F1E8] transition-colors"
                           >
                             <ExternalLink className="w-3 h-3" />
-                            View
+                            Voir
                           </button>
                         </div>
                       </div>
@@ -412,7 +415,7 @@ const UserDetailsPage = () => {
                 ) : (
                   <div className="text-center py-12">
                     <Home className="w-12 h-12 text-[#E6D5C3] mx-auto mb-4" />
-                    <p className="text-[#5A5856]">No properties listed yet</p>
+                    <p className="text-[#5A5856]">Aucune propriété listée pour le moment</p>
                   </div>
                 )}
               </div>
@@ -420,7 +423,7 @@ const UserDetailsPage = () => {
 
             {activeTab === 'appointments' && (
               <div>
-                <h3 className="text-lg font-bold text-[#1C1B1A] mb-4">User's Appointments</h3>
+                <h3 className="text-lg font-bold text-[#1C1B1A] mb-4">Rendez-vous de l'utilisateur</h3>
                 {appointments.length > 0 ? (
                   <div className="space-y-4">
                     {appointments.map((appointment) => (
@@ -431,7 +434,7 @@ const UserDetailsPage = () => {
                         <div className="flex items-start justify-between mb-3">
                           <div>
                             <h4 className="font-semibold text-[#1C1B1A] mb-1">
-                              {appointment.propertyId?.title || 'Property Unavailable'}
+                              {appointment.propertyId?.title || 'Propriété indisponible'}
                             </h4>
                             <p className="text-sm text-[#5A5856]">
                               {appointment.propertyId?.location}
@@ -444,13 +447,16 @@ const UserDetailsPage = () => {
                             appointment.status === 'cancelled' && "bg-red-50 text-red-700",
                             appointment.status === 'completed' && "bg-blue-50 text-blue-700"
                           )}>
-                            {appointment.status}
+                            {appointment.status === 'confirmed' ? 'Confirmé' :
+                             appointment.status === 'pending' ? 'En attente' :
+                             appointment.status === 'cancelled' ? 'Annulé' :
+                             appointment.status === 'completed' ? 'Terminé' : appointment.status}
                           </span>
                         </div>
                         <div className="flex items-center gap-4 text-sm text-[#5A5856]">
                           <div className="flex items-center gap-1">
                             <Calendar className="w-3 h-3" />
-                            {new Date(appointment.date).toLocaleDateString()}
+                            {new Date(appointment.date).toLocaleDateString('fr-FR')}
                           </div>
                           <div className="flex items-center gap-1">
                             <Clock className="w-3 h-3" />
@@ -468,7 +474,7 @@ const UserDetailsPage = () => {
                 ) : (
                   <div className="text-center py-12">
                     <Calendar className="w-12 h-12 text-[#E6D5C3] mx-auto mb-4" />
-                    <p className="text-[#5A5856]">No appointments booked yet</p>
+                    <p className="text-[#5A5856]">Aucun rendez-vous réservé pour le moment</p>
                   </div>
                 )}
               </div>

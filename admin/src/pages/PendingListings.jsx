@@ -41,7 +41,7 @@ const ImageGallery = ({ images, title }) => {
     return (
       <div className="h-52 bg-[#F5F5F3] flex flex-col items-center justify-center gap-2 border-b border-[#E8E7E5]">
         <Building2 className="w-10 h-10 text-[#CCCCC9]" />
-        <p className="text-xs text-[#9B9B99]">No images uploaded</p>
+        <p className="text-xs text-[#9B9B99]">Aucune image téléchargée</p>
       </div>
     );
   }
@@ -216,7 +216,7 @@ const RejectModal = ({ listing, onClose, onConfirm, loading }) => {
                 <X className="w-4 h-4 text-red-500" />
               </div>
               <div>
-                <h3 className="font-semibold text-[#111110] text-sm">Reject Listing</h3>
+                <h3 className="font-semibold text-[#111110] text-sm">Rejeter l'annonce</h3>
                 <p className="text-xs text-[#9B9B99] mt-0.5 truncate max-w-[220px]">{listing.title}</p>
               </div>
             </div>
@@ -228,22 +228,22 @@ const RejectModal = ({ listing, onClose, onConfirm, loading }) => {
           <form onSubmit={(e) => { e.preventDefault(); if (reason.trim()) onConfirm(reason.trim()); }} className="space-y-4">
             <div>
               <label className="block text-xs font-medium text-[#6B6B6A] uppercase tracking-wider mb-2">
-                Rejection reason <span className="text-red-400">*</span>
+                Raison du rejet <span className="text-red-400">*</span>
               </label>
               <textarea
                 value={reason}
                 onChange={(e) => setReason(e.target.value)}
                 rows={4}
-                placeholder="e.g. Missing price details, unclear photos, prohibited content…"
+                placeholder="ex. Détails de prix manquants, photos floues, contenu interdit…"
                 className="w-full border border-[#E8E7E5] rounded-xl px-3 py-2.5 text-sm text-[#111110] focus:outline-none focus:ring-2 focus:ring-red-200 focus:border-red-300 resize-none"
                 autoFocus
               />
-              <p className="text-xs text-[#9B9B99] mt-1">This will be emailed to the listing owner.</p>
+              <p className="text-xs text-[#9B9B99] mt-1">Ceci sera envoyé par e-mail au propriétaire de l'annonce.</p>
             </div>
             <div className="flex gap-3 pt-1">
               <button type="button" onClick={onClose} disabled={loading}
                 className="flex-1 py-2.5 text-sm font-medium text-[#6B6B6A] border border-[#E8E7E5] rounded-xl hover:bg-[#F5F5F3] transition-colors">
-                Cancel
+                Annuler
               </button>
               <button type="submit" disabled={loading || !reason.trim()}
                 className="flex-1 py-2.5 text-sm font-semibold text-white bg-red-500 hover:bg-red-600 rounded-xl transition-colors disabled:opacity-50 flex items-center justify-center gap-2">
@@ -251,7 +251,7 @@ const RejectModal = ({ listing, onClose, onConfirm, loading }) => {
                   <motion.span className="w-3.5 h-3.5 border-2 border-white border-t-transparent rounded-full"
                     animate={{ rotate: 360 }} transition={{ repeat: Infinity, duration: 0.75, ease: "linear" }} />
                 )}
-                Reject Listing
+                Rejeter l'annonce
               </button>
             </div>
           </form>
@@ -289,7 +289,7 @@ const ListingCard = ({ listing, onApprove, onReject, actionLoading }) => {
               {listing.type}
             </span>
             <span className="text-xs font-medium text-amber-700 bg-amber-50 border border-amber-200/60 px-2 py-0.5 rounded-full">
-              Under Review
+              En cours de révision
             </span>
           </div>
         </div>
@@ -307,13 +307,13 @@ const ListingCard = ({ listing, onApprove, onReject, actionLoading }) => {
           </span>
           <span className="text-[#CCCCC9]">·</span>
           <span className="flex items-center gap-1 text-xs text-[#6B6B6A]">
-            <BedDouble className="w-3.5 h-3.5" /> {listing.beds} bed
+            <BedDouble className="w-3.5 h-3.5" /> {listing.beds} lit{listing.beds > 1 ? 's' : ''}
           </span>
           <span className="flex items-center gap-1 text-xs text-[#6B6B6A]">
-            <Bath className="w-3.5 h-3.5" /> {listing.baths} bath
+            <Bath className="w-3.5 h-3.5" /> {listing.baths} sdb
           </span>
           <span className="flex items-center gap-1 text-xs text-[#6B6B6A]">
-            <Maximize className="w-3.5 h-3.5" /> {listing.sqft?.toLocaleString()} sqft
+            <Maximize className="w-3.5 h-3.5" /> {listing.sqft?.toLocaleString()} pi²
           </span>
           {listing.availability && (
             <span className="text-xs text-[#9B9B99] bg-[#F5F5F3] px-2 py-0.5 rounded-full capitalize">
@@ -333,7 +333,7 @@ const ListingCard = ({ listing, onApprove, onReject, actionLoading }) => {
         <div className="flex flex-wrap items-center gap-3 pt-3 border-t border-[#F5F5F3] mb-4">
           <div className="flex items-center gap-1.5 text-xs text-[#6B6B6A]">
             <User className="w-3.5 h-3.5 text-[#9B9B99]" />
-            <span className="font-medium">{submitter?.name ?? "Unknown"}</span>
+            <span className="font-medium">{submitter?.name ?? "Inconnu"}</span>
           </div>
           {submitter?.email && (
             <div className="flex items-center gap-1.5 text-xs text-[#9B9B99]">
@@ -343,7 +343,7 @@ const ListingCard = ({ listing, onApprove, onReject, actionLoading }) => {
           )}
           <div className="flex items-center gap-1.5 text-xs text-[#9B9B99] ml-auto">
             <Clock className="w-3.5 h-3.5" />
-            <span>Submitted {formatDate(listing.createdAt)}</span>
+            <span>Soumis le {formatDate(listing.createdAt)}</span>
           </div>
         </div>
 
@@ -363,7 +363,7 @@ const ListingCard = ({ listing, onApprove, onReject, actionLoading }) => {
             ) : (
               <Check className="w-4 h-4" />
             )}
-            Approve
+            Approuver
           </button>
           <button
             onClick={() => onReject(listing)}
@@ -379,7 +379,7 @@ const ListingCard = ({ listing, onApprove, onReject, actionLoading }) => {
             ) : (
               <X className="w-4 h-4" />
             )}
-            Reject
+            Rejeter
           </button>
         </div>
       </div>
@@ -402,7 +402,7 @@ const PendingListings = () => {
       const data = res.data.listings ?? res.data.properties ?? res.data ?? [];
       setListings(Array.isArray(data) ? data : []);
     } catch (err) {
-      toast.error(err.response?.data?.message || "Failed to fetch pending listings.");
+      toast.error(err.response?.data?.message || "Échec de la récupération des annonces en attente.");
     } finally {
       setLoading(false);
     }
@@ -415,9 +415,9 @@ const PendingListings = () => {
     try {
       await apiClient.put(`/api/admin/properties/${id}/approve`, {});
       setListings((prev) => prev.filter((l) => l._id !== id));
-      toast.success("Listing approved and is now live!");
+      toast.success("Annonce approuvée et maintenant en ligne !");
     } catch (err) {
-      toast.error(err.response?.data?.message || "Failed to approve listing.");
+      toast.error(err.response?.data?.message || "Échec de l'approbation de l'annonce.");
     } finally {
       setActionLoading(null);
     }
@@ -430,9 +430,9 @@ const PendingListings = () => {
     try {
       await apiClient.put(`/api/admin/properties/${id}/reject`, { reason });
       setListings((prev) => prev.filter((l) => l._id !== id));
-      toast.success("Listing rejected. Owner has been notified.");
+      toast.success("Annonce rejetée. Le propriétaire a été notifié.");
     } catch (err) {
-      toast.error(err.response?.data?.message || "Failed to reject listing.");
+      toast.error(err.response?.data?.message || "Échec du rejet de l'annonce.");
     } finally {
       setActionLoading(null);
       setRejectTarget(null);
@@ -478,21 +478,21 @@ const PendingListings = () => {
         <div className="flex items-start justify-between mb-6">
           <div>
             <div className="flex items-center gap-3 mb-1">
-              <h1 className="text-2xl font-bold text-[#111110] tracking-tight">Review Queue</h1>
+              <h1 className="text-2xl font-bold text-[#111110] tracking-tight">File d'attente de révision</h1>
               {listings.length > 0 && (
                 <span className="bg-amber-100 text-amber-700 text-xs font-bold px-2.5 py-1 rounded-full border border-amber-200/60">
-                  {listings.length} pending
+                  {listings.length} en attente
                 </span>
               )}
             </div>
-            <p className="text-sm text-[#9B9B99]">Approve or reject user-submitted property listings.</p>
+            <p className="text-sm text-[#9B9B99]">Approuvez ou rejetez les annonces de propriétés soumises par les utilisateurs.</p>
           </div>
           <button
             onClick={fetchPending}
             className="flex items-center gap-2 px-4 py-2 text-sm font-medium text-[#6B6B6A] bg-white border border-[#E8E7E5] rounded-lg hover:border-[#FC0903] hover:text-[#FC0903] active:scale-[0.97] transition-all shadow-sm"
           >
             <RefreshCw className="w-3.5 h-3.5" />
-            Refresh
+            Actualiser
           </button>
         </div>
 
@@ -504,7 +504,7 @@ const PendingListings = () => {
               type="text"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Search by title, location, or submitter…"
+              placeholder="Rechercher par titre, emplacement ou expéditeur…"
               className="w-full pl-10 pr-4 py-2.5 bg-white border border-[#E8E7E5] rounded-xl text-sm text-[#111110] focus:outline-none focus:ring-2 focus:ring-[#FC0903]/20 focus:border-[#FC0903] transition-all"
             />
           </div>
@@ -517,12 +517,12 @@ const PendingListings = () => {
               {searchQuery ? <Search className="w-7 h-7 text-emerald-500" /> : <Check className="w-7 h-7 text-emerald-500" />}
             </div>
             <h3 className="font-semibold text-[#111110] mb-1">
-              {searchQuery ? "No results found" : "All clear!"}
+              {searchQuery ? "Aucun résultat trouvé" : "Tout est bon !"}
             </h3>
             <p className="text-sm text-[#9B9B99]">
               {searchQuery
-                ? `No listings match "${searchQuery}"`
-                : "No listings waiting for review right now."}
+                ? `Aucune annonce ne correspond à "${searchQuery}"`
+                : "Aucune annonce en attente de révision pour le moment."}
             </p>
           </div>
         )}
