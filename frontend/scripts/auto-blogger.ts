@@ -17,13 +17,13 @@ const config = {
   githubToken: process.env.GITHUB_TOKEN,
   githubOwner: process.env.GITHUB_OWNER,
   githubRepo: process.env.GITHUB_REPO,
-  githubBranch: process.env.GITHUB_BRANCH || 'main',
+  githubBranch: process.env.GITHUB_BRANCH || 'master',
   postsDirectory: process.env.POSTS_DIRECTORY || 'frontend/src/content/blog',
   googleServiceAccountEmail: process.env.GOOGLE_SERVICE_ACCOUNT_EMAIL,
   googlePrivateKey: process.env.GOOGLE_PRIVATE_KEY?.replace(/\\n/g, '\n'),
   googleSheetId: process.env.GOOGLE_SHEET_ID,
   rssDataSheet: 'RSS Data',
-  wpDataSheet: 'WordPress Data',
+  wpDataSheet: 'Lqaly Data',
   rssFeedUrls: (process.env.RSS_FEED_LQALY || '').split(',').map(u => u.trim()).filter(Boolean),
 };
 
@@ -367,7 +367,7 @@ async function commitToGithub(slug: string, content: string) {
  */
 async function downloadUnsplashImage(slug: string): Promise<{ buffer: Buffer }> {
   console.log(`[Image] Téléchargement d'une image pour ${slug}...`);
-  
+
   const url = `https://picsum.photos/seed/${slug}/1200/630`;
 
   const response = await fetch(url);
@@ -467,9 +467,9 @@ async function main() {
           // Ensure critical fields are never empty before passing to Agent 2
           seoData.permalinkSlug = seoData.permalinkSlug || item.title?.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || `untitled-${Date.now()}`;
           seoData.metaTitle = seoData.metaTitle || item.title || 'Untitled Article';
-          let fallbackDesc = item.contentSnippet || '';
+          let fallbackDesc = item.contentSnippet || item.content || '';
           if (fallbackDesc.trim().toLowerCase() === 'comments' || fallbackDesc.trim() === '') {
-            fallbackDesc = 'Découvrez cet article fascinant sur les dernières tendances immobilières.';
+            fallbackDesc = `Découvrez notre analyse détaillée sur : "${item.title}". Restez informé des dernières actualités et tendances de l'immobilier au Maroc avec Lqaly.`;
           }
           seoData.metaDescription = seoData.metaDescription && seoData.metaDescription.toLowerCase() !== 'comments' ? seoData.metaDescription : fallbackDesc;
 
@@ -488,7 +488,7 @@ async function main() {
 
           await commitToGithub(slug, markdownContent);
 
-          // 4. Update databases (WordPress Data & RSS Data)
+          // 4. Update databases (Lqaly Data)
           await logWordPressData(seoData);
           await logRssUrl(itemUrl);
 
