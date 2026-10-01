@@ -19,7 +19,7 @@ const ContactHeroSection: React.FC = () => {
 
           {/* Subtitle */}
           <p className="font-manrope text-lg text-[#4B5563] leading-relaxed max-w-[672px] mx-auto">
-            Que vous ayez une question sur nos annonces, besoin d'assistance avec nos outils d'IA, ou
+            Que vous ayez une question sur nos annonces ou
             que vous souhaitiez explorer des opportunités de partenariat, notre équipe est à votre écoute.
           </p>
         </div>

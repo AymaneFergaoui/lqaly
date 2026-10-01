@@ -45,7 +45,7 @@ const PropertyDetailsPage: React.FC = () => {
       ? `${property.title} à ${property.location}. ${property.beds} chambres, ${property.baths} salles de bain, ${property.sqft} m². ${property.type}.`
       : 'Voir les détails de la propriété sur Lqaly.',
     image: property?.image?.[0] || undefined,
-    url: property ? `https://lqaly.vercel.app/property/${property._id}` : undefined,
+    url: property ? `https://www.lqaly.com/property/${property._id}` : undefined,
     type: 'article',
   });
 

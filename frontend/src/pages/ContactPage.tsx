@@ -34,7 +34,7 @@ const ContactPage: React.FC = () => {
   useSEO({
     title: 'Nous Contacter',
     description: 'Entrez en contact avec Lqaly. Nous sommes là pour vous aider à trouver la propriété de vos rêves.',
-    url: 'https://lqaly.vercel.app/contact',
+    url: 'https://www.lqaly.com/contact',
   });
 
   return (

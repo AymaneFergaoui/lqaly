@@ -28,7 +28,7 @@ const PropertiesPage: React.FC = () => {
   useSEO({
     title: 'Parcourir les propriétés',
     description: 'Parcourez des appartements, villas et maisons à vendre ou à louer. Filtrez par prix, nombre de chambres et emplacement.',
-    url: 'https://lqaly.vercel.app/properties',
+    url: 'https://www.lqaly.com/properties',
   });
 
   const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');

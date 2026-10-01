@@ -12,9 +12,9 @@ import AboutCTASection from '../components/about/AboutCTASection';
 
 const AboutUsPage: React.FC = () => {
   useSEO({
-    title: 'À propos de Lqaly — Immobilier propulsé par l\'IA au Maroc',
-    description: 'Lqaly est une plateforme immobilière propulsée par l\'IA au service des acheteurs et des vendeurs à Casablanca, Rabat, Marrakech et Tanger. Découvrez notre mission et notre technologie.',
-    url: 'https://lqaly.vercel.app/about',
+    title: 'À propos de Lqaly — L\'immobilier de luxe au Maroc',
+    description: 'Lqaly est une plateforme immobilière au service des acheteurs et des vendeurs à Casablanca, Rabat, Marrakech et Tanger. Découvrez notre mission.',
+    url: 'https://www.lqaly.com/about',
   });
 
   return (
@@ -37,7 +37,7 @@ const AboutUsPage: React.FC = () => {
       <AboutValuesSection />
 
       {/* AI Intelligence Section */}
-      <AboutAISection />
+      {/* <AboutAISection /> */}
 
       {/* CTA Section */}
       <AboutCTASection />

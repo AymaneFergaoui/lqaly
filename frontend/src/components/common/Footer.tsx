@@ -23,7 +23,7 @@ const Footer: React.FC = () => {
               <span className="font-fraunces text-2xl font-bold">Lqaly</span>
             </Link>
             <p className="font-manrope font-extralight text-[#9ca3af] text-sm leading-relaxed mb-6">
-              Plateforme d'immobilier de luxe propulsée par l'IA vous connectant à la maison de vos rêves grâce à une correspondance intelligente et des recommandations personnalisées.
+              Plateforme d'immobilier de luxe vous connectant à la maison de vos rêves grâce à des recommandations personnalisées.
             </p>
             {/* Social Links */}
             <div className="flex gap-3">
@@ -147,7 +147,7 @@ const Footer: React.FC = () => {
         <div className="border-t border-[rgba(255,255,255,0.1)] pt-8">
           <div className="flex flex-col md:flex-row justify-between items-center gap-4">
             <p className="font-manrope font-extralight text-[#6b7280] text-sm text-center md:text-left">
-              © 2026 Lqaly. Tous droits réservés. Propulsé par l'IA.
+              © 2026 Lqaly. Tous droits réservés.
             </p>
             <div className="flex flex-wrap justify-center gap-6">
               <a href="#" className="font-manrope font-extralight text-[#6b7280] text-sm hover:text-white transition-[color]">

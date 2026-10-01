@@ -14,9 +14,9 @@ import CTASection from '../components/home/CTASection';
 
 const HomePage: React.FC = () => {
   useSEO({
-    title: 'Trouvez des Appartements et Villas au Maroc avec l\'IA',
-    description: 'Lqaly vous aide à trouver des appartements et des villas à Casablanca, Rabat, Marrakech et Tanger grâce à la recherche alimentée par l\'IA et l\'analyse de marché en direct.',
-    url: 'https://lqaly.vercel.app',
+    title: 'Trouvez des Appartements et Villas au Maroc',
+    description: 'Lqaly vous aide à trouver des appartements et des villas à Casablanca, Rabat, Marrakech et Tanger.',
+    url: 'https://lqaly.com',
   });
 
   return (
@@ -29,9 +29,9 @@ const HomePage: React.FC = () => {
         type="howTo"
         data={{
           howToName: 'Comment acheter une propriété avec Lqaly',
-          howToDescription: 'Étapes assistées par l\'IA pour trouver et acheter votre maison idéale.',
+          howToDescription: 'Étapes pour trouver et acheter votre maison idéale.',
           steps: [
-            { name: 'Analyse du Profil', text: 'Notre IA analyse en profondeur vos préférences, votre style de vie et vos objectifs financiers pour créer un profil d\'acheteur complet.' },
+            { name: 'Analyse du Profil', text: 'Nous analysons en profondeur vos préférences, votre style de vie et vos objectifs financiers pour créer un profil d\'acheteur complet.' },
             { name: 'Correspondance Intelligente', text: 'Les algorithmes scannent des milliers d\'annonces pour trouver les propriétés qui correspondent à vos critères uniques, en éliminant le superflu.' },
             { name: 'Visites Virtuelles & Aperçus', text: 'Découvrez des maisons à distance avec des visites 3D immersives et recevez des rapports détaillés sur les analyses du quartier.' },
             { name: 'Clôture Transparente', text: 'De l\'offre à la remise des clés, notre plateforme numérique gère les formalités administratives, les négociations et la logistique de clôture sans effort.' },
@@ -49,7 +49,7 @@ const HomePage: React.FC = () => {
       <StatsSection />
 
       {/* AI Intelligence Section */}
-      <AIIntelligenceSection />
+      {/* <AIIntelligenceSection /> */}
 
       {/* Curated Listings Section */}
       <CuratedListingsSection />

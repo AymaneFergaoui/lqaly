@@ -1,7 +1,7 @@
 import React from 'react';
 import { useLocation } from 'react-router-dom';
 
-const SITE_URL = 'https://lqaly.vercel.app';
+const SITE_URL = 'https://www.lqaly.com';
 
 interface StructuredDataProps {
   type: 'website' | 'organization' | 'property' | 'aiHub' | 'localBusiness' | 'breadcrumb' | 'faqPage' | 'howTo' | 'speakable';

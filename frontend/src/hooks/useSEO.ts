@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-const SITE_URL = 'https://lqaly.vercel.app';
+const SITE_URL = 'https://www.lqaly.com';
 const DEFAULT_TITLE = 'Lqaly - AI-Powered Luxury Real Estate | Find Your Dream Home';
 const DEFAULT_DESCRIPTION = 'Find your perfect property with AI-powered insights, market analysis, and personalized recommendations across India.';
 const DEFAULT_IMAGE = `${SITE_URL}/og-image.png`;

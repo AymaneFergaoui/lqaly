@@ -38,7 +38,7 @@ const PropertyCard: React.FC<PropertyCardProps> = ({
         )}
         {aiMatch && (
           <div className="absolute top-4 right-4 bg-[rgba(212,117,91,0.1)] px-2 py-1 rounded">
-            <span className="font-manrope font-bold text-xs text-[#FC0903]">AI MATCH: {aiMatch}%</span>
+            <span className="font-manrope font-bold text-xs text-[#FC0903]">EXCLUSIVITÉ</span>
           </div>
         )}
       </div>

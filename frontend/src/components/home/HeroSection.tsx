@@ -80,7 +80,7 @@ const HeroSection: React.FC = () => {
               <motion.div variants={itemVariants} className="inline-flex items-center gap-3 bg-[rgba(212,117,91,0.1)] border border-[rgba(212,117,91,0.2)] rounded-full px-4 py-2 mb-10">
                 <div className="w-2 h-2 bg-[#FC0903] rounded-full" />
                 <span className="font-manrope font-bold text-xs text-[#FC0903] uppercase tracking-wider">
-                  Immobilier Propulsé par l'IA
+                  Immobilier de Luxe
                 </span>
               </motion.div>
 
@@ -88,13 +88,13 @@ const HeroSection: React.FC = () => {
               <motion.h1 data-speakable variants={itemVariants} className="font-fraunces text-[56px] lg:text-[70px] leading-[1.1] text-[#111827] mb-8">
                 Découvrez la<br />
                 <span className="italic text-[#FC0903]">Maison de vos Rêves</span> avec<br />
-                l'Intelligence Artificielle
+                Notre Expertise
               </motion.h1>
 
               {/* Description */}
               <motion.p data-speakable variants={itemVariants} className="font-manrope font-light text-xl leading-7 text-[#4b5563] mb-12 max-w-[676px]">
                 Trouvez des appartements, villas et propriétés à Casablanca, Rabat, Marrakech et Tanger.
-                Lqaly utilise une recherche propulsée par l'IA et une analyse de marché en direct pour vous trouver la bonne propriété.
+                Lqaly utilise une recherche avancée et une analyse de marché en direct pour vous trouver la bonne propriété.
               </motion.p>
 
               {/* CTA Buttons */}
@@ -138,7 +138,7 @@ const HeroSection: React.FC = () => {
                         <p className="font-space-mono text-xs text-[#6b7280] uppercase tracking-wide">Marrakech, MA</p>
                       </div>
                       <div className="bg-[rgba(212,117,91,0.1)] px-2 py-1 rounded">
-                        <span className="font-manrope font-bold text-xs text-[#FC0903]">CORRESPONDANCE IA : 98%</span>
+                        <span className="font-manrope font-bold text-xs text-[#FC0903]">EXCLUSIVITÉ</span>
                       </div>
                     </div>
                     <div className="border-t border-[#e5e7eb] pt-3 flex items-center justify-between">

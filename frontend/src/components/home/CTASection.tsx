@@ -20,7 +20,7 @@ const CTASection: React.FC = () => {
           Prêt à Trouver la Maison de vos Rêves ?
         </h2>
         <p className="font-manrope font-light text-xl text-white/90 mb-10 max-w-[680px] mx-auto">
-          Rejoignez des milliers de propriétaires satisfaits qui ont trouvé leur propriété idéale grâce à la plateforme propulsée par l'IA de Lqaly.
+          Rejoignez des milliers de propriétaires satisfaits qui ont trouvé leur propriété idéale avec Lqaly.
         </p>
         <div className="flex gap-4 justify-center">
           <Link to="/signup" className="bg-white text-[#C05621] font-manrope font-bold text-lg px-10 py-4 rounded-xl shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1)] hover:shadow-2xl transition-all inline-block">

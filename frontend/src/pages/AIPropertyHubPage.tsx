@@ -273,7 +273,7 @@ const AIPropertyHubPage: React.FC = () => {
   useSEO({
     title: 'Hub Immobilier IA — Recherchez des Appartements et Maisons au Maroc avec GPT-4',
     description: 'Recherchez des appartements, villas et maisons au Maroc à l\'aide de l\'IA. Lqaly extrait des annonces en direct de Mubawab, Sarouty et Avito, puis classe les résultats avec GPT-4.',
-    url: 'https://lqaly.vercel.app/ai-hub',
+    url: 'https://www.lqaly.com/ai-hub',
   });
 
   /* ── AI Hub disabled → show "download & run locally" page ── */
