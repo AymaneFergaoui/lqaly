@@ -1,0 +1,39 @@
+name: Run Auto Blogger
+
+on:
+  schedule:
+    # Runs every 12 hours (at minute 0 past hour 0 and 12 UTC)
+    - cron: '0 0,12 * * *'
+  workflow_dispatch: # Allows you to manually trigger it from the GitHub UI
+
+jobs:
+  run-script:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '24' # Updated to avoid deprecation warnings
+
+      - name: Install dependencies
+        working-directory: ./frontend
+        run: npm ci || npm install
+
+      - name: Run Auto Blogger Script
+        working-directory: ./frontend
+        run: npm run auto-blogger
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_OWNER: ${{ secrets.GITHUB_OWNER || github.repository_owner }}
+          GITHUB_REPO: ${{ secrets.GITHUB_REPO || github.event.repository.name }}
+          GITHUB_BRANCH: ${{ secrets.GITHUB_BRANCH || 'main' }}
+          GOOGLE_SERVICE_ACCOUNT_EMAIL: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_EMAIL }}
+          GOOGLE_PRIVATE_KEY: ${{ secrets.GOOGLE_PRIVATE_KEY }}
+          GOOGLE_SHEET_ID: ${{ secrets.GOOGLE_SHEET_ID }}
+          RSS_FEED_LQALY: ${{ secrets.RSS_FEED_LQALY }}
+          CLAUDE_BASE_URL: ${{ secrets.CLAUDE_BASE_URL }}
+          CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}

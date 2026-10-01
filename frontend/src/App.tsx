@@ -26,6 +26,9 @@ const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'));
 const TermsOfService = lazy(() => import('./pages/TermsOfService'));
 const CookiePolicy = lazy(() => import('./pages/CookiePolicy'));
 const Sitemap = lazy(() => import('./pages/Sitemap'));
+const BlogPage = lazy(() => import('./pages/BlogPage'));
+const BlogDetailsPage = lazy(() => import('./pages/BlogDetailsPage'));
+const CareersPage = lazy(() => import('./pages/CareersPage'));
 
 function NotFoundPage() {
   return (
@@ -77,6 +80,9 @@ function AnimatedRoutes() {
           <Route path="/terms" element={<PageTransition><TermsOfService /></PageTransition>} />
           <Route path="/cookie-policy" element={<PageTransition><CookiePolicy /></PageTransition>} />
           <Route path="/sitemap" element={<PageTransition><Sitemap /></PageTransition>} />
+          <Route path="/blog" element={<PageTransition><BlogPage /></PageTransition>} />
+          <Route path="/blog/:slug" element={<PageTransition><BlogDetailsPage /></PageTransition>} />
+          <Route path="/careers" element={<PageTransition><CareersPage /></PageTransition>} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </AnimatePresence>
