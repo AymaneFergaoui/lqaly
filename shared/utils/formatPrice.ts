@@ -10,11 +10,11 @@
  * formatPrice(50000)     // "₹50,000"
  */
 export function formatPrice(price: number): string {
-  if (price >= 10_000_000) {
-    return `₹${(price / 10_000_000).toFixed(2)} Cr`;
+  if (price >= 1_000_000) {
+    return `${(price / 1_000_000).toFixed(2)}M MAD`;
   }
-  if (price >= 100_000) {
-    return `₹${(price / 100_000).toFixed(1)} L`;
+  if (price >= 1_000) {
+    return `${(price / 1_000).toFixed(1)}K MAD`;
   }
-  return `₹${price.toLocaleString('en-IN')}`;
+  return `${price.toLocaleString('fr-MA')} MAD`;
 }

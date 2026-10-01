@@ -108,7 +108,7 @@ const Login = () => {
         {/* Footer */}
         <div className="relative z-10 flex items-center gap-2 text-xs text-[#5A5856]">
           <Shield className="w-3.5 h-3.5" />
-          <span>Sécurisé avec un cryptage 256 bits • Lqaly © 2025</span>
+          <span>Sécurisé avec un cryptage 256 bits • Lqaly © 2026</span>
         </div>
       </motion.div>
 

@@ -397,7 +397,7 @@ const UserDetailsPage = () => {
                             <MapPin className="w-3 h-3" />
                             {property.location}
                           </div>
-                          <div>₹{property.price?.toLocaleString()}</div>
+                          <div>{property.price?.toLocaleString('fr-MA')} MAD</div>
                           <div className="text-xs">{formatDate(property.createdAt)}</div>
                         </div>
                         <div className="flex gap-2 mt-3">

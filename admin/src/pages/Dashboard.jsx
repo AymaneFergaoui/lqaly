@@ -279,7 +279,7 @@ const Dashboard = () => {
     {
       label: "Prix Moyen des Propriétés",
       value: stats?.avgPropertyPrice
-        ? `₹${(stats.avgPropertyPrice / 100000).toFixed(1)}L`
+        ? `${(stats.avgPropertyPrice / 1000000).toFixed(2)}M MAD`
         : null,
       sub: "Prix moyen des annonces",
       icon: DollarSign,

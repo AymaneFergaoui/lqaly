@@ -14,9 +14,9 @@ export function cn(...inputs) {
  * @returns {string} Formatted price (e.g., "₹2.50 Cr", "₹75.0 L", "₹50,000")
  */
 export function formatPrice(price) {
-  if (price >= 10000000) return `₹${(price / 10000000).toFixed(2)} Cr`;
-  if (price >= 100000) return `₹${(price / 100000).toFixed(1)} L`;
-  return `₹${price.toLocaleString('en-IN')}`;
+  if (price >= 1000000) return `${(price / 1000000).toFixed(2)}M MAD`;
+  if (price >= 1000) return `${(price / 1000).toFixed(1)}K MAD`;
+  return `${price.toLocaleString('fr-MA')} MAD`;
 }
 
 /**
@@ -28,7 +28,7 @@ export function formatDate(date) {
   const parsed = new Date(date);
   if (Number.isNaN(parsed.getTime())) return 'N/A';
 
-  return parsed.toLocaleDateString('en-IN', {
+  return parsed.toLocaleDateString('fr-MA', {
     day: 'numeric',
     month: 'short',
     year: 'numeric',
