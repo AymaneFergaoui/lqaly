@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import glassPavilion from '../../images/The Glass Pavilion.jpg';
-import skylinePenthouse from '../../images/Skyline Penthouse.jpg';
-import desertOasis from '../../images/Desert Oasis.jpg';
-import coastalRetreat from '../../images/Coastal Retreat.jpg';
+import glassPavilion from '../../images/bouskoura_villa.jpg';
+import skylinePenthouse from '../../images/agadir_penthouse.jpg';
+import desertOasis from '../../images/marrakech_oasis.jpg';
+import coastalRetreat from '../../images/tangier_coastal.jpg';
 
 const CuratedListingsSection: React.FC = () => {
     const propertyImages = [

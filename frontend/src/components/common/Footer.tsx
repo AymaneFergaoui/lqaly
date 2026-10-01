@@ -27,25 +27,25 @@ const Footer: React.FC = () => {
             </p>
             {/* Social Links */}
             <div className="flex gap-3">
-              <a 
-                href="https://www.facebook.com/profile.php?id=61572350921063" 
-                target="_blank" 
+              <a
+                href="https://www.facebook.com/profile.php?id=61572350921063"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-[rgba(255,255,255,0.05)] hover:bg-[#FC0903] border border-[rgba(255,255,255,0.1)] rounded-lg flex items-center justify-center transition-all group"
               >
                 <Facebook className="w-5 h-5 text-[#9ca3af] group-hover:text-white transition-[color]" />
               </a>
-              <a 
-                href="https://www.instagram.com/lqalyimmobilier/" 
-                target="_blank" 
+              <a
+                href="https://www.instagram.com/lqalyimmobilier/"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-[rgba(255,255,255,0.05)] hover:bg-[#FC0903] border border-[rgba(255,255,255,0.1)] rounded-lg flex items-center justify-center transition-all group"
               >
                 <Instagram className="w-5 h-5 text-[#9ca3af] group-hover:text-white transition-[color]" />
               </a>
-              <a 
-                href="https://www.tiktok.com/@lqalyimmobilier" 
-                target="_blank" 
+              <a
+                href="https://www.tiktok.com/@lqalyimmobilier"
+                target="_blank"
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-[rgba(255,255,255,0.05)] hover:bg-[#FC0903] border border-[rgba(255,255,255,0.1)] rounded-lg flex items-center justify-center transition-all group"
               >
@@ -107,9 +107,9 @@ const Footer: React.FC = () => {
                 </a>
               </li>
               <li>
-                <a href="mailto:hello@lqaly.com" className="flex items-center gap-3 font-manrope font-extralight text-[#9ca3af] text-sm hover:text-white transition-[color]">
+                <a href="mailto:contact@lqaly.com" className="flex items-center gap-3 font-manrope font-extralight text-[#9ca3af] text-sm hover:text-white transition-[color]">
                   <Mail className="w-5 h-5 flex-shrink-0 text-[#FC0903]" />
-                  <span>hello@lqaly.com</span>
+                  <span>contact@lqaly.com</span>
                 </a>
               </li>
             </ul>
@@ -130,7 +130,7 @@ const Footer: React.FC = () => {
                 className="w-full bg-[rgba(255,255,255,0.05)] border border-[rgba(255,255,255,0.1)] rounded-lg px-4 py-3 font-manrope font-extralight text-sm text-white placeholder:text-[#6b7280] focus:outline-none focus:border-[#FC0903] transition-[border-color]"
                 required
               />
-              <button 
+              <button
                 type="submit"
                 className="w-full bg-[#FC0903] hover:bg-[#C05621] text-white font-manrope font-bold text-sm px-4 py-3 rounded-lg transition-all shadow-lg hover:shadow-xl"
               >
