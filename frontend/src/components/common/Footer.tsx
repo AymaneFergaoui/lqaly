@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Twitter, Instagram, Linkedin, Youtube, MapPin, Phone, Mail } from 'lucide-react';
+import { Facebook, Instagram, Video, MapPin, Phone, Mail } from 'lucide-react';
 
 const Footer: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -28,7 +28,7 @@ const Footer: React.FC = () => {
             {/* Social Links */}
             <div className="flex gap-3">
               <a 
-                href="https://facebook.com" 
+                href="https://www.facebook.com/profile.php?id=61572350921063" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-[rgba(255,255,255,0.05)] hover:bg-[#FC0903] border border-[rgba(255,255,255,0.1)] rounded-lg flex items-center justify-center transition-all group"
@@ -36,15 +36,7 @@ const Footer: React.FC = () => {
                 <Facebook className="w-5 h-5 text-[#9ca3af] group-hover:text-white transition-[color]" />
               </a>
               <a 
-                href="https://twitter.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-[rgba(255,255,255,0.05)] hover:bg-[#FC0903] border border-[rgba(255,255,255,0.1)] rounded-lg flex items-center justify-center transition-all group"
-              >
-                <Twitter className="w-5 h-5 text-[#9ca3af] group-hover:text-white transition-[color]" />
-              </a>
-              <a 
-                href="https://instagram.com" 
+                href="https://www.instagram.com/lqalyimmobilier/" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-[rgba(255,255,255,0.05)] hover:bg-[#FC0903] border border-[rgba(255,255,255,0.1)] rounded-lg flex items-center justify-center transition-all group"
@@ -52,20 +44,12 @@ const Footer: React.FC = () => {
                 <Instagram className="w-5 h-5 text-[#9ca3af] group-hover:text-white transition-[color]" />
               </a>
               <a 
-                href="https://linkedin.com" 
+                href="https://www.tiktok.com/@lqalyimmobilier" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-[rgba(255,255,255,0.05)] hover:bg-[#FC0903] border border-[rgba(255,255,255,0.1)] rounded-lg flex items-center justify-center transition-all group"
               >
-                <Linkedin className="w-5 h-5 text-[#9ca3af] group-hover:text-white transition-[color]" />
-              </a>
-              <a 
-                href="https://youtube.com" 
-                target="_blank" 
-                rel="noopener noreferrer"
-                className="w-10 h-10 bg-[rgba(255,255,255,0.05)] hover:bg-[#FC0903] border border-[rgba(255,255,255,0.1)] rounded-lg flex items-center justify-center transition-all group"
-              >
-                <Youtube className="w-5 h-5 text-[#9ca3af] group-hover:text-white transition-[color]" />
+                <Video className="w-5 h-5 text-[#9ca3af] group-hover:text-white transition-[color]" />
               </a>
             </div>
           </div>
@@ -79,11 +63,7 @@ const Footer: React.FC = () => {
                   Parcourir les Propriétés
                 </Link>
               </li>
-              <li>
-                <Link to="/ai-hub" className="font-manrope font-extralight text-[#9ca3af] text-sm hover:text-white hover:pl-2 transition-all inline-block">
-                  Hub Immobilier IA
-                </Link>
-              </li>
+
               <li>
                 <Link to="/about" className="font-manrope font-extralight text-[#9ca3af] text-sm hover:text-white hover:pl-2 transition-all inline-block">
                   À propos
@@ -112,19 +92,18 @@ const Footer: React.FC = () => {
             <h4 className="font-syne font-bold text-white text-lg mb-6">Coordonnées</h4>
             <ul className="space-y-4">
               <li>
-                <a href="https://maps.google.com" target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 font-manrope font-extralight text-[#9ca3af] text-sm hover:text-white transition-[color] group">
+                <a href="https://www.google.com/maps/place/Lqaly/@33.5470625,-7.5973125,942m/data=!3m2!1e3!4b1!4m6!3m5!1s0xda633b86dd47a5d:0x690ebea7aa300d20!8m2!3d33.5470625!4d-7.5973125!16s%2Fg%2F11nr87ggrc?entry=ttu&g_ep=EgoyMDI2MDkyOC4wIKXMDSoASAFQAw%3D%3D" target="_blank" rel="noopener noreferrer" className="flex items-start gap-3 font-manrope font-extralight text-[#9ca3af] text-sm hover:text-white transition-[color] group">
                   <MapPin className="w-5 h-5 mt-0.5 flex-shrink-0 text-[#FC0903]" />
                   <span className="leading-relaxed">
-                    502, Devpath Building,<br />
-                    Near Torrent Lab,<br />
-                    Ashram Road, Ahmedabad
+                    GCW3+R35,<br />
+                    Casablanca 20000
                   </span>
                 </a>
               </li>
               <li>
-                <a href="tel:+919876543210" className="flex items-center gap-3 font-manrope font-extralight text-[#9ca3af] text-sm hover:text-white transition-[color]">
+                <a href="tel:+212699945264" className="flex items-center gap-3 font-manrope font-extralight text-[#9ca3af] text-sm hover:text-white transition-[color]">
                   <Phone className="w-5 h-5 flex-shrink-0 text-[#FC0903]" />
-                  <span>+91 98765 43210</span>
+                  <span>+212 699-945264</span>
                 </a>
               </li>
               <li>

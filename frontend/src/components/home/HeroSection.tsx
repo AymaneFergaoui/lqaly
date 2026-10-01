@@ -103,10 +103,6 @@ const HeroSection: React.FC = () => {
                   Explorer les Propriétés
                   <span className="font-material-icons text-sm ml-2" aria-hidden="true">arrow_forward</span>
                 </Link>
-                <Link to="/ai-hub" className="border-2 border-[#d1d5db] text-[#374151] font-manrope font-bold text-lg px-8 py-4 rounded-xl hover:border-[#FC0903] hover:text-[#FC0903] transition-all inline-flex items-center">
-                  <span className="font-material-icons text-2xl text-[#FC0903] mr-2" aria-hidden="true">smart_toy</span>
-                  {import.meta.env.PROD ? 'Hub Immobilier IA' : 'Essayer la Recherche IA'}
-                </Link>
               </motion.div>
 
               {/* Social Proof */}
