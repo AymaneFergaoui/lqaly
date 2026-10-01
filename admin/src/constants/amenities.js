@@ -1,54 +1,53 @@
 /**
- * Master amenity list for Indian real estate.
- * Used by both Add and Update forms. Keep in sync with
- * new_frontend/src/constants/amenities.ts
+ * Master amenity list for real estate.
+ * Used by both Add and Update forms. Keep in sync with frontend/src/constants/amenities.ts
  */
 export const AMENITIES_LIST = [
   // Fitness & Recreation
-  'Gym',
-  'Swimming Pool',
-  'Jogging Track',
-  'Indoor Games',
-  'Sports Facility',
-  'Yoga Room',
-  'Clubhouse',
-  'Children Play Area',
-  'Multipurpose Hall',
-  'Home Theater',
+  'Salle de sport',
+  'Piscine',
+  'Piste de course',
+  'Jeux d\'intérieur',
+  'Installations sportives',
+  'Salle de yoga',
+  'Club-house',
+  'Aire de jeux pour enfants',
+  'Salle polyvalente',
+  'Home Cinéma',
 
   // Safety & Security
-  'Security',
-  'CCTV Surveillance',
-  'Fire Safety',
-  'Gated Community',
-  'Intercom',
+  'Sécurité',
+  'Surveillance vidéo',
+  'Sécurité incendie',
+  'Résidence fermée',
+  'Interphone',
 
   // Parking & Transport
   'Parking',
-  'Covered Parking',
-  'Visitor Parking',
-  'EV Charging',
+  'Parking couvert',
+  'Parking visiteurs',
+  'Recharge pour VE',
 
   // Utilities
-  'Power Backup',
-  'Lift',
-  'Water Supply 24/7',
-  'Piped Gas',
+  'Générateur de secours',
+  'Ascenseur',
+  'Eau 24/7',
+  'Gaz de ville',
   'Wi-Fi',
-  'Air Conditioning',
-  'Rain Water Harvesting',
+  'Climatisation',
+  'Récupération d\'eau de pluie',
 
   // Outdoor & Living
-  'Garden',
-  'Landscaped Garden',
-  'Balcony',
-  'Terrace',
-  'Lake View',
-  'Fireplace',
+  'Jardin',
+  'Jardin paysager',
+  'Balcon',
+  'Terrasse',
+  'Vue sur le lac',
+  'Cheminée',
 
   // Services
-  'Laundry Service',
-  'Servant Room',
-  'Pet Friendly',
-  'Vastu Compliant',
+  'Service de blanchisserie',
+  'Chambre de service',
+  'Animaux acceptés',
+  'Conforme au Vastu',
 ];

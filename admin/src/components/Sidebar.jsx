@@ -53,6 +53,7 @@ const Sidebar = ({ isOpen, setIsOpen, isCollapsed, setIsCollapsed }) => {
         { path: '/dashboard', label: 'Tableau de Bord', icon: LayoutDashboard },
         { path: '/pending-listings', label: 'File de Révision', icon: ClipboardList },
         { path: '/list', label: 'Toutes les Propriétés', icon: Building2 },
+        { path: '/add-ai', label: 'Ajouter via IA', icon: Cpu },
         { path: '/users', label: 'Utilisateurs', icon: Users },
         { path: '/appointments', label: 'Rendez-vous', icon: Calendar },
       ],
@@ -183,20 +184,20 @@ const Sidebar = ({ isOpen, setIsOpen, isCollapsed, setIsCollapsed }) => {
         <div className="border-t border-white/10 p-4 flex-shrink-0">
           {/* Notifications */}
           {!isCollapsed ? (
-            <button className="w-full flex items-center gap-3 px-3 py-2.5 mb-2 text-[#9CA3AF] hover:text-[#FAF8F4] hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-medium">
+            <Link to="/notifications" className="w-full flex items-center gap-3 px-3 py-2.5 mb-2 text-[#9CA3AF] hover:text-[#FAF8F4] hover:bg-white/10 rounded-lg transition-all duration-200 text-sm font-medium">
               <Bell className="h-5 w-5" />
               <span className="flex-1 text-left">Notifications</span>
               <span className="h-5 w-5 bg-[#FC0903] text-white text-xs flex items-center justify-center rounded-full">
                 3
               </span>
-            </button>
+            </Link>
           ) : (
-            <button className="w-full flex items-center justify-center px-3 py-2.5 mb-2 text-[#9CA3AF] hover:text-[#FAF8F4] hover:bg-white/10 rounded-lg transition-all duration-200 relative">
+            <Link to="/notifications" className="w-full flex items-center justify-center px-3 py-2.5 mb-2 text-[#9CA3AF] hover:text-[#FAF8F4] hover:bg-white/10 rounded-lg transition-all duration-200 relative">
               <Bell className="h-5 w-5" />
               <span className="absolute -top-1 -right-1 h-4 w-4 bg-[#FC0903] text-white text-[10px] flex items-center justify-center rounded-full">
                 3
               </span>
-            </button>
+            </Link>
           )}
 
           {/* Profile */}

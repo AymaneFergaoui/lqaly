@@ -18,6 +18,7 @@ import Login from "./components/login";
 import Dashboard from "./pages/Dashboard";
 import PropertyListings from "./pages/List";
 import Add from "./pages/Add";
+import AiAdd from "./pages/AiAdd";
 import Update from "./pages/Update";
 import Appointments from "./pages/Appointments";
 import PendingListings from "./pages/PendingListings";
@@ -25,6 +26,7 @@ import Users from "./pages/Users";
 import UserDetails from "./pages/UserDetails";
 import ActivityLogs from "./pages/ActivityLogs";
 import AIModels from "./pages/AIModels";
+import Notifications from "./pages/Notifications";
 
 // Page transition variants
 const pageVariants = {
@@ -81,6 +83,7 @@ const AppLayout = () => {
                 <Route path="/dashboard" element={<Dashboard />} />
                 <Route path="/list" element={<PropertyListings />} />
                 <Route path="/add" element={<Add />} />
+                <Route path="/add-ai" element={<AiAdd />} />
                 <Route path="/update/:id" element={<Update />} />
                 <Route path="/appointments" element={<Appointments />} />
                 <Route path="/pending-listings" element={<PendingListings />} />
@@ -88,6 +91,7 @@ const AppLayout = () => {
                 <Route path="/users/:id" element={<UserDetails />} />
                 <Route path="/activity-logs" element={<ActivityLogs />} />
                 <Route path="/ai-models" element={<AIModels />} />
+                <Route path="/notifications" element={<Notifications />} />
               </Route>
 
               {/* 404 Route */}

@@ -100,8 +100,11 @@ const Update = () => {
 
   const handleImageChange = (e) => {
     const files = Array.from(e.target.files);
-    setPreviewUrls(files.map((file) => URL.createObjectURL(file)));
-    setFormData((prev) => ({ ...prev, images: files }));
+    const existing = formData.images.filter((img) => typeof img === 'string');
+    const combined = [...existing, ...files].slice(0, 4);
+
+    setPreviewUrls(combined.map((item) => (typeof item === 'string' ? item : URL.createObjectURL(item))));
+    setFormData((prev) => ({ ...prev, images: combined }));
   };
 
   const removeImage = (index) => {
@@ -119,11 +122,20 @@ const Update = () => {
         formdata.append(key, formData[key]);
       });
       formData.amenities.forEach((amenity, i) => formdata.append(`amenities[${i}]`, amenity));
-      formData.images.forEach((image, i) => {
-        if (typeof image !== 'string') formdata.append(`image${i + 1}`, image);
+      
+      let newImageCount = 1;
+      formData.images.forEach((image) => {
+        if (typeof image === 'string') {
+          formdata.append('existingImages', image);
+        } else {
+          formdata.append(`image${newImageCount}`, image);
+          newImageCount++;
+        }
       });
 
-      const response = await apiClient.post('/api/products/update', formdata);
+      const response = await apiClient.post('/api/products/update', formdata, {
+        headers: { 'Content-Type': 'multipart/form-data' },
+      });
       if (response.data.success) {
         toast.success('Propriété mise à jour avec succès !');
         navigate('/list');
@@ -330,7 +342,7 @@ const Update = () => {
               className="flex flex-col items-center justify-center w-full h-28 border-2 border-dashed border-[#E6D5C3] rounded-xl cursor-pointer bg-[#FAF8F4] hover:border-[#FC0903] hover:bg-[#FC0903]/5 transition-all duration-200 group">
               <Upload className="w-6 h-6 text-[#9CA3AF] group-hover:text-[#FC0903] mb-1.5 transition-colors" />
               <span className="text-sm font-medium text-[#5A5856] group-hover:text-[#FC0903] transition-colors">
-                Remplacer les images
+                Ajouter des images
               </span>
               <input id="images" name="images" type="file" multiple accept="image/*"
                 onChange={handleImageChange} className="sr-only" />

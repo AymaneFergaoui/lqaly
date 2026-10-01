@@ -150,18 +150,18 @@ const Footer: React.FC = () => {
               © 2026 Lqaly. Tous droits réservés.
             </p>
             <div className="flex flex-wrap justify-center gap-6">
-              <a href="#" className="font-manrope font-extralight text-[#6b7280] text-sm hover:text-white transition-[color]">
+              <Link to="/privacy-policy" className="font-manrope font-extralight text-[#6b7280] text-sm hover:text-white transition-[color]">
                 Politique de Confidentialité
-              </a>
-              <a href="#" className="font-manrope font-extralight text-[#6b7280] text-sm hover:text-white transition-[color]">
+              </Link>
+              <Link to="/terms" className="font-manrope font-extralight text-[#6b7280] text-sm hover:text-white transition-[color]">
                 Conditions d'Utilisation
-              </a>
-              <a href="#" className="font-manrope font-extralight text-[#6b7280] text-sm hover:text-white transition-[color]">
+              </Link>
+              <Link to="/cookie-policy" className="font-manrope font-extralight text-[#6b7280] text-sm hover:text-white transition-[color]">
                 Politique des Cookies
-              </a>
-              <a href="#" className="font-manrope font-extralight text-[#6b7280] text-sm hover:text-white transition-[color]">
+              </Link>
+              <Link to="/sitemap" className="font-manrope font-extralight text-[#6b7280] text-sm hover:text-white transition-[color]">
                 Plan du Site
-              </a>
+              </Link>
             </div>
           </div>
         </div>

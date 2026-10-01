@@ -14,24 +14,22 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onFilterChange }) => {
   const [selectedAmenities, setSelectedAmenities] = useState<string[]>([]);
   const isFirstRender = useRef(true);
 
-  // Aligned with backend: admin/src/pages/Add.jsx → PROPERTY_TYPES
   const propertyTypes = [
-    { id: 'apartment', label: 'Apartment', icon: 'apartment' },
-    { id: 'house', label: 'House', icon: 'house' },
+    { id: 'apartment', label: 'Appartement', icon: 'apartment' },
+    { id: 'house', label: 'Maison', icon: 'house' },
     { id: 'villa', label: 'Villa', icon: 'villa' },
-    { id: 'office', label: 'Office', icon: 'business' },
+    { id: 'office', label: 'Bureau', icon: 'business' },
   ];
 
   const availabilityTypes = [
-    { id: 'buy', label: 'Buy' },
-    { id: 'rent', label: 'Rent' },
+    { id: 'buy', label: 'À acheter' },
+    { id: 'rent', label: 'À louer' },
   ];
 
-  // Aligned with backend: admin/src/constants/amenities.js (most common subset)
   const amenitiesList = [
-    'Parking', 'Swimming Pool', 'Gym', 'Garden', 'Security',
-    'Clubhouse', 'Power Backup', 'Lift', 'Balcony', 'CCTV Surveillance',
-    'Children Play Area', 'Gated Community',
+    'Parking', 'Piscine', 'Salle de sport', 'Jardin', 'Sécurité',
+    'Club-house', 'Générateur de secours', 'Ascenseur', 'Balcon', 'Surveillance vidéo',
+    'Aire de jeux pour enfants', 'Résidence fermée',
   ];
 
   // Price display helper — shows L or Cr
@@ -93,20 +91,20 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onFilterChange }) => {
         {/* Header */}
         <div className="flex items-center justify-between mb-6">
           <h2 className="font-manrope font-extralight text-lg text-[#111827]">
-            Refine Your Search
+            Affiner votre recherche
           </h2>
           <button 
             onClick={handleReset}
             className="font-manrope font-extralight text-sm text-[#FC0903] hover:underline"
           >
-            Reset all
+            Tout réinitialiser
           </button>
         </div>
 
         {/* Location Filter */}
         <div className="mb-8 border-b border-[#F5F1E8] pb-8">
           <h3 className="font-manrope font-bold text-sm text-[#111827] mb-4 uppercase tracking-wider">
-            Location
+            Emplacement
           </h3>
           
           {/* Search Input */}
@@ -118,7 +116,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onFilterChange }) => {
               type="text"
               value={selectedLocation}
               onChange={(e) => setSelectedLocation(e.target.value)}
-              placeholder="City, neighborhood..."
+              placeholder="Ville, quartier..."
               className="w-full bg-[#F5F1E8] border border-[#EBE5DE] rounded-lg pl-10 pr-4 py-3 font-manrope text-sm text-[#111827] placeholder:text-[#6B7280] focus:outline-none focus:border-[#FC0903] transition-all"
             />
           </div>
@@ -127,7 +125,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onFilterChange }) => {
         {/* Availability (Buy / Rent) */}
         <div className="mb-8 border-b border-[#F5F1E8] pb-8">
           <h3 className="font-manrope font-bold text-sm text-[#111827] mb-4 uppercase tracking-wider">
-            Availability
+            Disponibilité
           </h3>
           <div className="flex gap-3">
             {availabilityTypes.map((avail) => (
@@ -150,7 +148,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onFilterChange }) => {
         <div className="mb-8 border-b border-[#F5F1E8] pb-8">
           <div className="flex items-center justify-between mb-4">
             <h3 className="font-manrope font-bold text-sm text-[#111827] uppercase tracking-wider">
-              Price Range
+              Prix
             </h3>
             <span className="font-space-mono text-sm text-[#FC0903]">
               {formatPriceLabel(priceRange[0])} MAD - {formatPriceLabel(priceRange[1])} MAD
@@ -199,7 +197,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onFilterChange }) => {
         {/* Property Type Filter */}
         <div className="mb-8 border-b border-[#F5F1E8] pb-8">
           <h3 className="font-manrope font-bold text-sm text-[#111827] mb-4 uppercase tracking-wider">
-            Property Type
+            Type de propriété
           </h3>
           
           <div className="grid grid-cols-2 gap-3">
@@ -227,7 +225,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onFilterChange }) => {
         {/* Bedrooms */}
         <div className="mb-8 border-b border-[#F5F1E8] pb-8">
           <h3 className="font-manrope font-bold text-sm text-[#111827] mb-4 uppercase tracking-wider">
-            Bedrooms
+            Chambres
           </h3>
           <div className="flex gap-2">
             {[0, 1, 2, 3, 4, 5].map((num) => (
@@ -240,7 +238,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onFilterChange }) => {
                     : 'bg-white border-[#E6E0DA] text-[#6B7280] hover:border-[#FC0903]'
                 }`}
               >
-                {num === 0 ? 'Any' : num === 5 ? '5+' : num}
+                {num === 0 ? 'Tous' : num === 5 ? '5+' : num}
               </button>
             ))}
           </div>
@@ -249,7 +247,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onFilterChange }) => {
         {/* Bathrooms */}
         <div className="mb-8 border-b border-[#F5F1E8] pb-8">
           <h3 className="font-manrope font-bold text-sm text-[#111827] mb-4 uppercase tracking-wider">
-            Bathrooms
+            Salles de bain
           </h3>
           <div className="flex gap-2">
             {[0, 1, 2, 3, 4].map((num) => (
@@ -262,7 +260,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onFilterChange }) => {
                     : 'bg-white border-[#E6E0DA] text-[#6B7280] hover:border-[#FC0903]'
                 }`}
               >
-                {num === 0 ? 'Any' : num === 4 ? '4+' : num}
+                {num === 0 ? 'Tous' : num === 4 ? '4+' : num}
               </button>
             ))}
           </div>
@@ -271,7 +269,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onFilterChange }) => {
         {/* Amenities */}
         <div className="mb-8">
           <h3 className="font-manrope font-bold text-sm text-[#111827] mb-4 uppercase tracking-wider">
-            Amenities
+            Commodités
           </h3>
           <div className="grid grid-cols-2 gap-3">
             {amenitiesList.map((amenity) => (
@@ -313,7 +311,7 @@ const FilterSidebar: React.FC<FilterSidebarProps> = ({ onFilterChange }) => {
           onClick={handleReset}
           className="w-full bg-white border border-[#FC0903] text-[#FC0903] font-manrope font-bold text-base py-4 rounded-xl transition-all hover:bg-[#FC0903] hover:text-white sticky bottom-0"
         >
-          Reset Filters
+          Réinitialiser les filtres
         </button>
       </div>
     </div>
