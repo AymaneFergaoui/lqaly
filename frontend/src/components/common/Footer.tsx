@@ -1,6 +1,12 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Facebook, Instagram, Video, MapPin, Phone, Mail } from 'lucide-react';
+import { Facebook, Instagram, MapPin, Phone, Mail } from 'lucide-react';
+
+const TikTokIcon = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 448 512" fill="currentColor" className={className}>
+    <path d="M448,209.91a210.06,210.06,0,0,1-122.77-39.25V349.38A162.55,162.55,0,1,1,185,188.31V278.2a74.62,74.62,0,1,0,52.23,71.18V0l88,0a121.18,121.18,0,0,0,1.86,22.17h0A122.18,122.18,0,0,0,381,102.39a121.43,121.43,0,0,0,67,20.14Z"/>
+  </svg>
+);
 
 const Footer: React.FC = () => {
   const [email, setEmail] = useState('');
@@ -18,9 +24,8 @@ const Footer: React.FC = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-12">
           {/* Brand Column */}
           <div>
-            <Link to="/" className="flex items-center gap-3 mb-6">
-              <img src="/logo.png" alt="Lqaly" loading="lazy" decoding="async" width="40" height="40" className="h-10 w-auto brightness-0 invert" />
-              <span className="font-fraunces text-2xl font-bold">Lqaly</span>
+            <Link to="/" className="flex items-center mb-6">
+              <img src="/landscape-logo.png" alt="Lqaly" loading="lazy" decoding="async" className="h-10 w-auto brightness-0 invert" />
             </Link>
             <p className="font-manrope font-extralight text-[#9ca3af] text-sm leading-relaxed mb-6">
               Plateforme d'immobilier de luxe vous connectant à la maison de vos rêves grâce à des recommandations personnalisées.
@@ -49,7 +54,7 @@ const Footer: React.FC = () => {
                 rel="noopener noreferrer"
                 className="w-10 h-10 bg-[rgba(255,255,255,0.05)] hover:bg-[#FC0903] border border-[rgba(255,255,255,0.1)] rounded-lg flex items-center justify-center transition-all group"
               >
-                <Video className="w-5 h-5 text-[#9ca3af] group-hover:text-white transition-[color]" />
+                <TikTokIcon className="w-5 h-5 text-[#9ca3af] group-hover:text-white transition-[color]" />
               </a>
             </div>
           </div>

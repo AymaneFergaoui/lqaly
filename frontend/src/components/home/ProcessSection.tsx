@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const ProcessSection: React.FC = () => {
   return (
@@ -16,9 +17,9 @@ const ProcessSection: React.FC = () => {
               <p className="font-manrope font-light text-lg text-[#4b5563] mb-8 leading-relaxed">
                 Nous avons simplifié le parcours complexe de l'achat d'une maison en quatre étapes fluides assistées par l'IA.
               </p>
-              <button className="bg-[#111827] text-white font-manrope font-medium px-8 py-3 rounded-lg shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1)] hover:bg-[#1f2937] transition-all">
+              <Link to="/properties" className="inline-block bg-[#111827] text-white font-manrope font-medium px-8 py-3 rounded-lg shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1)] hover:bg-[#1f2937] transition-all">
                 Commencer Votre Parcours
-              </button>
+              </Link>
             </div>
           </div>
 

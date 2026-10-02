@@ -16,7 +16,7 @@ const OtherWaysSection: React.FC = () => {
       title: 'Contactez-nous sur WhatsApp',
       description: 'Discutez directement avec notre équipe d\'assistance via WhatsApp pour une aide instantanée.',
       action: 'Démarrer le chat',
-      actionLink: 'https://wa.me/212600000000',
+      actionLink: 'https://wa.me/212699945264',
       bgColor: 'bg-[#E8F5E9]'
     },
     {
@@ -24,7 +24,7 @@ const OtherWaysSection: React.FC = () => {
       title: 'Chat en Direct',
       description: 'Connectez-vous instantanément avec un expert immobilier via notre chat en direct.',
       action: 'Lancer le chat',
-      actionLink: '#',
+      actionLink: 'https://wa.me/212699945264',
       bgColor: 'bg-[#E3F2FD]'
     },
     {
@@ -32,7 +32,7 @@ const OtherWaysSection: React.FC = () => {
       title: 'Planifier un Appel',
       description: 'Réservez un moment qui vous convient pour une consultation détaillée avec nos spécialistes.',
       action: 'Réserver Maintenant',
-      actionLink: '#',
+      actionLink: 'tel:+212699945264',
       bgColor: 'bg-[#FFF3E0]'
     }
   ];
@@ -53,9 +53,12 @@ const OtherWaysSection: React.FC = () => {
         {/* Methods Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           {methods.map((method, index) => (
-            <div 
+            <a 
               key={index}
-              className="bg-white border border-[#E6E0DA] rounded-2xl p-8 hover:shadow-xl transition-all group"
+              href={method.actionLink}
+              target={method.actionLink.startsWith('http') ? '_blank' : '_self'}
+              rel={method.actionLink.startsWith('http') ? 'noopener noreferrer' : ''}
+              className="block bg-white border border-[#E6E0DA] rounded-2xl p-8 hover:shadow-xl transition-all group cursor-pointer"
             >
               {/* Icon */}
               <div className={`w-16 h-16 ${method.bgColor} rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform`}>
@@ -74,19 +77,14 @@ const OtherWaysSection: React.FC = () => {
                 {method.description}
               </p>
 
-              {/* Action Link */}
-              <a 
-                href={method.actionLink}
-                target={method.actionLink.startsWith('http') ? '_blank' : '_self'}
-                rel={method.actionLink.startsWith('http') ? 'noopener noreferrer' : ''}
-                className="inline-flex items-center gap-2 font-manrope font-bold text-sm text-[#FC0903] hover:text-[#C05621] transition-[color] group"
-              >
+              {/* Action Link Text */}
+              <div className="inline-flex items-center gap-2 font-manrope font-bold text-sm text-[#FC0903] group-hover:text-[#C05621] transition-[color]">
                 <span>{method.action}</span>
                 <span className="material-icons text-sm group-hover:translate-x-1 transition-transform">
                   arrow_forward
                 </span>
-              </a>
-            </div>
+              </div>
+            </a>
           ))}
         </div>
       </div>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Eye, EyeOff, Mail, Lock, Shield, ArrowRight, Loader2, Home, Building2, Users, TrendingUp } from "lucide-react";
+import { Eye, EyeOff, Mail, Lock, Shield, ArrowRight, Loader2, Home, Building2, Users, TrendingUp, MapPin, Clock } from "lucide-react";
 import { toast } from "sonner";
 import apiClient from "../services/apiClient";
 import { cn } from "../lib/utils";
@@ -41,9 +41,10 @@ const Login = () => {
   };
 
   const stats = [
-    { icon: Building2, label: "Propriétés", value: "500+" },
-    { icon: Users, label: "Clients Satisfaits", value: "2,000+" },
-    { icon: TrendingUp, label: "Affaires Conclues", value: "1,200+" },
+    { icon: Building2, label: "Propriétés Disponibles", value: "15+" },
+    { icon: Users, label: "Engagement Client", value: "100%" },
+    { icon: MapPin, label: "Villes Couvertes", value: "3+" },
+    { icon: Clock, label: "Disponibilité", value: "24/7" },
   ];
 
   return (
@@ -95,7 +96,7 @@ const Login = () => {
         </div>
 
         {/* Stats */}
-        <div className="relative z-10 grid grid-cols-3 gap-4">
+        <div className="relative z-10 grid grid-cols-2 2xl:grid-cols-4 gap-4">
           {stats.map(({ icon: Icon, label, value }) => (
             <div key={label} className="bg-white/5 border border-white/10 rounded-2xl p-4">
               <Icon className="w-5 h-5 text-[#FC0903] mb-2" />
