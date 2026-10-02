@@ -138,7 +138,9 @@ app.use(cors({
       return callback(null, true);
     }
 
-    return callback(new Error(`CORS blocked for origin: ${origin}`));
+    const err = new Error(`CORS blocked for origin: ${origin}`);
+    err.status = 403;
+    return callback(err);
   },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS', 'HEAD'],
