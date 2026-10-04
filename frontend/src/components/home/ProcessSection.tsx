@@ -1,98 +1,59 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { Percent, ShieldCheck, Wrench, Wallet } from 'lucide-react';
 
 const ProcessSection: React.FC = () => {
   return (
-    <section className="bg-[#F0EBE5] py-24">
-      <div className="max-w-[1280px] mx-auto px-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16">
-          {/* Left - Sticky Content */}
-          <div className="lg:col-span-4">
-            <div className="lg:sticky lg:top-24">
-              <div className="font-space-mono text-sm text-[#FC0903] uppercase tracking-widest mb-6">Processus</div>
-              <h2 className="font-fraunces text-5xl text-[#111827] mb-6 leading-tight">
-                Le Chemin vers Votre<br />
-                <span className="italic text-[#FC0903]">Nouveau Départ</span>
-              </h2>
-              <p className="font-manrope font-light text-lg text-[#4b5563] mb-8 leading-relaxed">
-                Nous avons simplifié le parcours complexe de l'achat d'une maison en quatre étapes fluides assistées par l'IA.
-              </p>
-              <Link to="/properties" className="inline-block bg-[#111827] text-white font-manrope font-medium px-8 py-3 rounded-lg shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1)] hover:bg-[#1f2937] transition-all">
-                Commencer Votre Parcours
-              </Link>
-            </div>
-          </div>
-
-          {/* Right - Process Steps */}
-          <div className="lg:col-span-8 space-y-12">
-            {/* Step 1 */}
+    <section className="bg-background py-12 font-sans">
+      <div className="max-w-[1440px] mx-auto px-6">
+        <h2 className="text-[24px] font-bold text-foreground mb-8">Services immobiliers</h2>
+        
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+          
+          {/* Tile 1 */}
+          <Link to="/mortgage" className="group relative overflow-hidden rounded-[16px] p-6 min-h-[160px] flex flex-col justify-between transition-transform hover:-translate-y-1" style={{ background: 'linear-gradient(135deg, #DDF7DE 0%, #F7FFF5 100%)' }}>
             <div>
-              <div className="flex gap-6">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 border border-[#d1d5db] rounded-full flex items-center justify-center">
-                    <span className="font-space-mono font-bold text-lg text-[#9ca3af]">01</span>
-                  </div>
-                </div>
-                <div>
-                  <h3 className="font-syne font-bold text-2xl text-[#111827] mb-3">Analyse du Profil</h3>
-                  <p className="font-manrope text-base text-[#4b5563] leading-relaxed">
-                    Notre IA analyse en profondeur vos préférences, vos besoins de style de vie et vos objectifs financiers pour créer un profil d'acheteur complet.
-                  </p>
-                </div>
-              </div>
+              <h3 className="text-[18px] font-semibold text-[#1B3B1C] mb-1">Potentiel hypothécaire</h3>
+              <p className="text-[14px] text-[#2C5F2D]">Découvrez votre capacité d'emprunt</p>
             </div>
+            <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-[#BCEABF] rounded-full opacity-50 group-hover:scale-110 transition-transform flex items-center justify-center">
+              <Percent size={40} className="text-[#1B3B1C] opacity-30 -mr-2 -mt-2" />
+            </div>
+          </Link>
 
-            {/* Step 2 */}
+          {/* Tile 2 */}
+          <Link to="/services/legal" className="group relative overflow-hidden rounded-[16px] p-6 min-h-[160px] flex flex-col justify-between transition-transform hover:-translate-y-1" style={{ background: 'linear-gradient(135deg, #E6F0FF 0%, #F5F9FF 100%)' }}>
             <div>
-              <div className="flex gap-6">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 border border-[#d1d5db] rounded-full flex items-center justify-center">
-                    <span className="font-space-mono font-bold text-lg text-[#9ca3af]">02</span>
-                  </div>
-                </div>
-                <div>
-                  <h3 className="font-syne font-bold text-2xl text-[#111827] mb-3">Correspondance Intelligente</h3>
-                  <p className="font-manrope text-base text-[#4b5563] leading-relaxed">
-                    Les algorithmes scannent des milliers d'annonces pour trouver les propriétés qui correspondent à vos critères uniques, en éliminant le superflu.
-                  </p>
-                </div>
-              </div>
+              <h3 className="text-[18px] font-semibold text-[#1A365D] mb-1">Vérification juridique</h3>
+              <p className="text-[14px] text-[#2B6CB0]">Achetez en toute sécurité</p>
             </div>
+            <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-[#BEE3F8] rounded-full opacity-50 group-hover:scale-110 transition-transform flex items-center justify-center">
+              <ShieldCheck size={40} className="text-[#1A365D] opacity-30 -mr-2 -mt-2" />
+            </div>
+          </Link>
 
-            {/* Step 3 */}
+          {/* Tile 3 */}
+          <Link to="/services/moving" className="group relative overflow-hidden rounded-[16px] p-6 min-h-[160px] flex flex-col justify-between transition-transform hover:-translate-y-1" style={{ background: 'linear-gradient(135deg, #FFF0E6 0%, #FFFAF5 100%)' }}>
             <div>
-              <div className="flex gap-6">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 border border-[#d1d5db] rounded-full flex items-center justify-center">
-                    <span className="font-space-mono font-bold text-lg text-[#9ca3af]">03</span>
-                  </div>
-                </div>
-                <div>
-                  <h3 className="font-syne font-bold text-2xl text-[#111827] mb-3">Visites Virtuelles & Aperçus</h3>
-                  <p className="font-manrope text-base text-[#4b5563] leading-relaxed">
-                    Découvrez des maisons à distance avec des visites 3D immersives et recevez des rapports détaillés sur les analyses du quartier.
-                  </p>
-                </div>
-              </div>
+              <h3 className="text-[18px] font-semibold text-[#7B341E] mb-1">Aide au déménagement</h3>
+              <p className="text-[14px] text-[#C05621]">Des partenaires fiables</p>
             </div>
+            <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-[#FEEBC8] rounded-full opacity-50 group-hover:scale-110 transition-transform flex items-center justify-center">
+              <Wrench size={40} className="text-[#7B341E] opacity-30 -mr-2 -mt-2" />
+            </div>
+          </Link>
 
-            {/* Step 4 */}
+          {/* Tile 4 */}
+          <Link to="/services/valuation" className="group relative overflow-hidden rounded-[16px] p-6 min-h-[160px] flex flex-col justify-between transition-transform hover:-translate-y-1" style={{ background: 'linear-gradient(135deg, #F3E8FF 0%, #FAEDFF 100%)' }}>
             <div>
-              <div className="flex gap-6">
-                <div className="flex-shrink-0">
-                  <div className="w-12 h-12 border border-[#d1d5db] rounded-full flex items-center justify-center">
-                    <span className="font-space-mono font-bold text-lg text-[#9ca3af]">04</span>
-                  </div>
-                </div>
-                <div>
-                  <h3 className="font-syne font-bold text-2xl text-[#111827] mb-3">Clôture Transparente</h3>
-                  <p className="font-manrope text-base text-[#4b5563] leading-relaxed">
-                    De l'offre à la remise des clés, notre plateforme numérique gère les formalités administratives, les négociations et la logistique de clôture sans effort.
-                  </p>
-                </div>
-              </div>
+              <h3 className="text-[18px] font-semibold text-[#44337A] mb-1">Évaluation en ligne</h3>
+              <p className="text-[14px] text-[#6B46C1]">Estimez le prix de votre bien</p>
             </div>
-          </div>
+            <div className="absolute -bottom-4 -right-4 w-24 h-24 bg-[#E9D8FD] rounded-full opacity-50 group-hover:scale-110 transition-transform flex items-center justify-center">
+              <Wallet size={40} className="text-[#44337A] opacity-30 -mr-2 -mt-2" />
+            </div>
+          </Link>
+
         </div>
       </div>
     </section>

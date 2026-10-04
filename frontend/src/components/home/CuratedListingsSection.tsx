@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { propertiesAPI } from '../../services/api';
+import { ChevronRight, MapPin } from 'lucide-react';
 import glassPavilion from '../../images/bouskoura_villa.jpg';
 import skylinePenthouse from '../../images/agadir_penthouse.jpg';
 import desertOasis from '../../images/marrakech_oasis.jpg';
@@ -31,33 +32,8 @@ const CuratedListingsSection: React.FC = () => {
         const response = await propertiesAPI.getAll();
         const allProperties: Property[] = response.data.property || [];
         
-        // Logic to extract exactly 4 properties from 4 different cities
-        const selected: Property[] = [];
-        const citiesSeen = new Set<string>();
-
-        for (const prop of allProperties) {
-          // Extract the city from location (assuming "Neighborhood, City" format)
-          const parts = prop.location.split(',').map(s => s.trim());
-          const city = parts[parts.length - 1].toLowerCase();
-          
-          if (!citiesSeen.has(city)) {
-            citiesSeen.add(city);
-            selected.push(prop);
-          }
-          if (selected.length === 4) break;
-        }
-
-        // Fill up to 4 if we couldn't find 4 distinct cities
-        if (selected.length < 4) {
-          for (const prop of allProperties) {
-            if (!selected.find(s => s._id === prop._id)) {
-              selected.push(prop);
-            }
-            if (selected.length === 4) break;
-          }
-        }
-
-        setProperties(selected);
+        // Show up to 8 properties for a 4-column grid (2 rows)
+        setProperties(allProperties.slice(0, 8));
       } catch (error) {
         console.error("Failed to fetch curated listings:", error);
       } finally {
@@ -74,144 +50,68 @@ const CuratedListingsSection: React.FC = () => {
 
   if (loading) {
     return (
-      <section className="bg-[#F9F7F2] py-24 relative overflow-hidden flex justify-center items-center min-h-[600px]">
-         <div className="font-space-mono text-[#FC0903] animate-pulse">Chargement des propriétés exclusives...</div>
+      <section className="bg-background py-16 relative flex justify-center items-center min-h-[400px]">
+         <div className="font-sans text-primary animate-pulse">Chargement des recommandations...</div>
       </section>
     );
   }
 
-  const p1 = properties[0];
-  const p2 = properties[1];
-  const p3 = properties[2];
-  const p4 = properties[3];
+  // Use fallback dummy properties if none fetched
+  const displayProperties = properties.length > 0 ? properties : [
+    { _id: '1', title: 'Villa de luxe à Bouskoura', location: 'Bouskoura, Casablanca', price: 4500000, beds: 4, baths: 3, sqft: 350, type: 'house', availability: 'available', image: [glassPavilion] },
+    { _id: '2', title: 'Penthouse avec vue', location: 'Marina, Agadir', price: 3200000, beds: 3, baths: 2, sqft: 180, type: 'apartment', availability: 'available', image: [skylinePenthouse] },
+    { _id: '3', title: 'Oasis au coeur de la palmeraie', location: 'Palmeraie, Marrakech', price: 8900000, beds: 6, baths: 5, sqft: 600, type: 'house', availability: 'available', image: [desertOasis] },
+    { _id: '4', title: 'Retraite côtière', location: 'Achakkar, Tanger', price: 5400000, beds: 4, baths: 4, sqft: 420, type: 'house', availability: 'available', image: [coastalRetreat] },
+  ];
 
   return (
-    <section className="bg-[#F9F7F2] py-24 relative overflow-hidden">
-      {/* Background Pattern */}
-      <div className="absolute inset-0 opacity-30 pointer-events-none">
-        <svg className="w-5 h-5" fill="none" viewBox="0 0 20 20">
-          <path d="M0 0h20v20H0z" fill="#FC0903" opacity="0.05" />
-        </svg>
-      </div>
-
-      <div className="max-w-[1280px] mx-auto px-8 relative z-10">
+    <section className="bg-background py-12 font-sans">
+      <div className="max-w-[1440px] mx-auto px-6">
+        
         {/* Section Header */}
-        <div className="flex justify-between items-center mb-16">
-          <div>
-            <div className="font-space-mono text-sm text-[#FC0903] uppercase tracking-widest mb-4">Sélection Exclusive</div>
-            <h2 className="font-fraunces text-5xl text-[#111827]">Propriétés d'Exception</h2>
-          </div>
-
-          <Link to="/properties" className="flex items-center gap-2 font-manrope font-bold text-[#FC0903] hover:gap-4 transition-all">
-            Voir Toutes les Propriétés
-            <span className="font-material-icons text-sm" aria-hidden="true">arrow_forward</span>
+        <div className="flex justify-between items-center mb-8">
+          <h2 className="text-[24px] font-bold text-foreground">Recommandé pour vous</h2>
+          <Link to="/properties" className="flex items-center gap-1 text-primary font-medium hover:underline text-[15px]">
+            Voir tout
+            <ChevronRight size={18} />
           </Link>
         </div>
 
-        {/* Property Grid */}
-        <div className="grid grid-cols-12 gap-6">
-
-          {/* Large Featured Property (Slot 1) */}
-          {p1 && (
-            <div className="col-span-12 md:col-span-8 rounded-2xl overflow-hidden shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.1)] relative group">
-              <Link to={`/properties/${p1._id}`} className="block relative h-[500px]">
+        {/* Property Grid (4 columns) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+          {displayProperties.map((prop, idx) => (
+            <Link key={prop._id || idx} to={`/properties/${prop._id}`} className="group block bg-card rounded-[16px] overflow-hidden shadow-sm hover:shadow-md transition-shadow border border-border/50">
+              <div className="relative aspect-[4/3] w-full overflow-hidden bg-muted">
                 <img 
-                  src={p1.image?.[0] || fallbackImages[0]} 
-                  alt={p1.title} 
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
-                  loading="eager"
-                  fetchPriority="high"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-8">
-                  <div className="bg-[#FC0903] inline-block px-3 py-1 rounded text-white font-manrope font-bold text-xs mb-4">
-                    EN VEDETTE
-                  </div>
-                  <h3 className="font-fraunces text-3xl text-white mb-2">{p1.title}</h3>
-                  <p className="font-manrope font-light text-white/80 mb-4">{p1.location}</p>
-                  <div className="border-t border-white/20 pt-4 flex items-center justify-between">
-                    <span className="font-space-mono text-white">{formatPrice(p1.price)}</span>
-                    <div className="flex items-center gap-6 text-white/90">
-                      <div className="flex items-center gap-2">
-                        <span className="font-material-icons text-sm" aria-hidden="true">bed</span>
-                        <span className="font-space-mono text-sm">{p1.beds} Chambres</span>
-                      </div>
-                      <div className="flex items-center gap-2">
-                        <span className="font-material-icons text-sm" aria-hidden="true">square_foot</span>
-                        <span className="font-space-mono text-sm">{p1.sqft} m²</span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </Link>
-            </div>
-          )}
-
-          {/* Small Property Card (Slot 2) */}
-          {p2 && (
-            <div className="col-span-12 md:col-span-4 rounded-2xl overflow-hidden shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.1)] relative group">
-              <Link to={`/properties/${p2._id}`} className="block relative h-[500px]">
-                <img 
-                  src={p2.image?.[0] || fallbackImages[1]} 
-                  alt={p2.title} 
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
+                  src={prop.image?.[0] || fallbackImages[idx % fallbackImages.length]} 
+                  alt={prop.title} 
+                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="font-fraunces text-xl text-white mb-1 line-clamp-1">{p2.title}</h3>
-                  <p className="font-manrope text-sm text-white/70 mb-3 line-clamp-1">{p2.location}</p>
-                  <span className="font-space-mono text-sm text-white">{formatPrice(p2.price)}</span>
+                {/* Badge */}
+                <div className="absolute top-3 left-3 bg-primary text-white font-bold text-[12px] px-2.5 py-1 rounded-[6px]">
+                  Nouveau
                 </div>
-              </Link>
-            </div>
-          )}
-
-          {/* Desert Oasis (Slot 3) */}
-          {p3 && (
-            <div className="col-span-12 md:col-span-4 rounded-2xl overflow-hidden shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.1)] aspect-square group">
-              <Link to={`/properties/${p3._id}`} className="block relative h-full">
-                <img 
-                  src={p3.image?.[0] || fallbackImages[2]} 
-                  alt={p3.title} 
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <h3 className="font-fraunces text-xl text-white mb-1 line-clamp-1">{p3.title}</h3>
-                  <p className="font-manrope text-sm text-white/70 mb-3 line-clamp-1">{p3.location}</p>
-                  <span className="font-space-mono text-sm text-white">{formatPrice(p3.price)}</span>
+              </div>
+              <div className="p-4">
+                <div className="text-[18px] font-bold text-foreground mb-1">
+                  {formatPrice(prop.price)}
                 </div>
-              </Link>
-            </div>
-          )}
-
-          {/* Coastal Retreat (Slot 4) */}
-          {p4 && (
-            <div className="col-span-12 md:col-span-8 rounded-2xl overflow-hidden shadow-[0px_20px_25px_-5px_rgba(0,0,0,0.1)] relative group">
-              <Link to={`/properties/${p4._id}`} className="block relative h-[800px]">
-                <img 
-                  src={p4.image?.[0] || fallbackImages[3]} 
-                  alt={p4.title} 
-                  className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" 
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 to-transparent" />
-                <div className="absolute bottom-0 left-0 right-0 p-8">
-                  <h3 className="font-fraunces text-2xl text-white mb-2">{p4.title}</h3>
-                  <p className="font-manrope text-white/70 mb-6">{p4.location}</p>
-                  <div className="border-t border-white/20 pt-6 flex items-center justify-between">
-                    <span className="font-space-mono text-white">{formatPrice(p4.price)}</span>
-                    <button className="text-white bg-white/10 hover:bg-white/20 p-2 rounded-full transition-all" aria-label={`Voir ${p4.title}`}>
-                      <span className="font-material-icons text-2xl" aria-hidden="true">arrow_forward</span>
-                    </button>
-                  </div>
+                <div className="text-[14px] text-muted-foreground truncate mb-1">
+                  {prop.beds} pièces • {prop.sqft} m²
                 </div>
-              </Link>
-            </div>
-          )}
+                <div className="text-[14px] text-foreground truncate mb-2">
+                  {prop.title}
+                </div>
+                <div className="flex items-center gap-1.5 text-[13px] text-muted-foreground mt-2">
+                  <MapPin size={14} className="text-primary/70" />
+                  <span className="truncate">{prop.location}</span>
+                </div>
+              </div>
+            </Link>
+          ))}
         </div>
+
       </div>
     </section>
   );

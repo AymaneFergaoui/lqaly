@@ -1,166 +1,81 @@
 import React from 'react';
-import { motion, useReducedMotion } from 'framer-motion';
-import { Link } from 'react-router-dom';
-import happyHomeowner1 from '../../images/Happy Homeowners_1.jpg';
-import happyHomeowner2 from '../../images/Happy Homeowners_2.jpg';
-import happyHomeowner3 from '../../images/Team section.jpg';
-import rightFeatureCard from '../../images/hero_villa.jpg';
+import { motion } from 'framer-motion';
+import { Search, Map, SlidersHorizontal } from 'lucide-react';
 
 const HeroSection: React.FC = () => {
-  const prefersReducedMotion = useReducedMotion();
-  const propertyImages = [
-    happyHomeowner1,
-    happyHomeowner2,
-    happyHomeowner3,
-    rightFeatureCard, 
-  ];
-
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.2,
-        delayChildren: 0.3
-      }
-    }
-  };
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.8, ease: "easeOut" as const }
-    }
-  };
-
   return (
-    <section className="relative bg-[#F8F6F6] pt-20 pb-32 overflow-hidden">
-        {/* Background decorative blurs */}
-        <motion.div
-          animate={prefersReducedMotion ? {} : {
-            scale: [1, 1.2, 1],
-            opacity: [0.3, 0.5, 0.3],
-            x: [0, 20, 0],
-            y: [0, -20, 0],
-          }}
-          transition={{
-            duration: 8,
-            repeat: prefersReducedMotion ? 0 : Infinity,
-            ease: "easeInOut" as const
-          }}
-          className="absolute right-0 top-14 w-64 h-64 bg-[rgba(236,70,19,0.1)] rounded-full blur-[32px]"
-        />
-        <motion.div
-          animate={prefersReducedMotion ? {} : {
-            scale: [1, 1.1, 1],
-            opacity: [0.2, 0.4, 0.2],
-            x: [0, -30, 0],
-            y: [0, 30, 0],
-          }}
-          transition={{
-            duration: 10,
-            delay: 1,
-            repeat: prefersReducedMotion ? 0 : Infinity,
-            ease: "easeInOut" as const
-          }}
-          className="absolute left-[738px] bottom-22 w-64 h-64 bg-[rgba(254,215,170,0.2)] rounded-full blur-[32px]"
-        />
+    <section className="bg-background pt-16 pb-20 font-sans">
+      <div className="max-w-[1440px] mx-auto px-6 flex flex-col items-center">
+        <motion.h1 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          className="text-[34px] md:text-[40px] font-bold text-foreground text-center mb-8"
+        >
+          Recherche de biens immobiliers
+        </motion.h1>
 
-        <div className="max-w-[1280px] mx-auto px-8 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-            {/* Left Content */}
-            <motion.div
-              variants={containerVariants}
-              initial="hidden"
-              animate="visible"
-            >
-              {/* Badge */}
-              <motion.div variants={itemVariants} className="inline-flex items-center gap-3 bg-[rgba(212,117,91,0.1)] border border-[rgba(212,117,91,0.2)] rounded-full px-4 py-2 mb-10">
-                <div className="w-2 h-2 bg-[#FC0903] rounded-full" />
-                <span className="font-manrope font-bold text-xs text-[#FC0903] uppercase tracking-wider">
-                  Immobilier de Luxe
-                </span>
-              </motion.div>
+        {/* Filter Pills */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.1 }}
+          className="flex flex-wrap items-center justify-center gap-2 mb-6"
+        >
+          <button className="bg-[#171717] text-white px-5 py-2.5 rounded-full text-[14px] font-medium border border-transparent">
+            Acheter
+          </button>
+          <button className="bg-card text-foreground px-5 py-2.5 rounded-full text-[14px] font-medium border border-border flex items-center gap-2 hover:border-gray-300 transition-colors">
+            Louer
+          </button>
+          <button className="bg-card text-foreground px-5 py-2.5 rounded-full text-[14px] font-medium border border-border flex items-center gap-2 hover:border-gray-300 transition-colors">
+            Hypothèque
+          </button>
+          <button className="bg-card text-foreground px-5 py-2.5 rounded-full text-[14px] font-medium border border-border flex items-center gap-2 hover:border-gray-300 transition-colors">
+            Nouveaux bâtiments
+          </button>
+          <button className="bg-card text-foreground px-5 py-2.5 rounded-full text-[14px] font-medium border border-border flex items-center gap-2 hover:border-gray-300 transition-colors">
+            Construire
+          </button>
+        </motion.div>
 
-              {/* Heading */}
-              <motion.h1 data-speakable variants={itemVariants} className="font-fraunces text-[56px] lg:text-[70px] leading-[1.1] text-[#111827] mb-8">
-                Découvrez la<br />
-                <span className="italic text-[#FC0903]">Maison de vos Rêves</span> avec<br />
-                Notre Expertise
-              </motion.h1>
-
-              {/* Description */}
-              <motion.p data-speakable variants={itemVariants} className="font-manrope font-light text-xl leading-7 text-[#4b5563] mb-12 max-w-[676px]">
-                Trouvez des appartements, villas et propriétés à Casablanca, Rabat, Marrakech et Tanger.
-                Lqaly utilise une recherche avancée et une analyse de marché en direct pour vous trouver la bonne propriété.
-              </motion.p>
-
-              {/* CTA Buttons */}
-              <motion.div variants={itemVariants} className="flex flex-wrap gap-4 mb-10">
-                <Link to="/properties" className="bg-[#FC0903] text-white font-manrope font-bold text-lg px-8 py-4 rounded-xl shadow-[0px_10px_15px_-3px_rgba(212,117,91,0.25),0px_4px_6px_-4px_rgba(212,117,91,0.25)] hover:bg-[#B86851] transition-all hover:shadow-xl inline-flex items-center">
-                  Explorer les Propriétés
-                  <span className="font-material-icons text-sm ml-2" aria-hidden="true">arrow_forward</span>
-                </Link>
-              </motion.div>
-
-              {/* Social Proof */}
-              <motion.div variants={itemVariants} className="flex items-center gap-4">
-                <div className="flex -space-x-2">
-                  <img src={propertyImages[0]} alt="" className="w-10 h-10 rounded-full border-2 border-[#f8f6f6] object-cover" />
-                  <img src={propertyImages[1]} alt="" className="w-10 h-10 rounded-full border-2 border-[#f8f6f6] object-cover" />
-                  <img src={propertyImages[2]} alt="" className="w-10 h-10 rounded-full border-2 border-[#f8f6f6] object-cover" />
-                  <div className="w-10 h-10 bg-[#111827] rounded-full border-2 border-[#f8f6f6] flex items-center justify-center">
-                    <span className="font-manrope font-bold text-xs text-white">+2k</span>
-                  </div>
-                </div>
-                <span className="font-manrope text-sm text-[#6b7280]">
-                  Rejoignez plus de 2 000 propriétaires heureux
-                </span>
-              </motion.div>
-            </motion.div>
-
-            {/* Right - Featured Property Card */}
-            <div className="relative">
-              <div className="rounded-2xl overflow-hidden shadow-[0px_25px_50px_-12px_#e5e7eb]">
-                <div className="relative h-[625px]">
-                  <img
-                    src={propertyImages[3]}
-                    alt="Villa Serenity"
-                    className="absolute inset-0 w-full h-full object-cover"
-                  />
-                  {/* Property Info Overlay */}
-                  <div className="absolute bottom-6 left-6 right-6 backdrop-blur-md bg-white/90 border border-white/20 rounded-xl p-4 shadow-[0px_10px_15px_-3px_rgba(0,0,0,0.1)]">
-                    <div className="flex justify-between items-start mb-3">
-                      <div>
-                        <h3 className="font-fraunces font-bold text-lg text-[#111827] mb-1">Villa Serenity</h3>
-                        <p className="font-space-mono text-xs text-[#6b7280] uppercase tracking-wide">Marrakech, MA</p>
-                      </div>
-                      <div className="bg-[rgba(212,117,91,0.1)] px-2 py-1 rounded">
-                        <span className="font-manrope font-bold text-xs text-[#FC0903]">EXCLUSIVITÉ</span>
-                      </div>
-                    </div>
-                    <div className="border-t border-[#e5e7eb] pt-3 flex items-center justify-between">
-                      <span className="font-space-mono text-sm text-[#4b5563]">4,250,000 MAD</span>
-                      <div className="flex items-center gap-4 text-[#4b5563]">
-                        <div className="flex items-center gap-1">
-                          <span className="font-material-icons text-xs" aria-hidden="true">bed</span>
-                          <span className="font-manrope text-sm">4</span>
-                        </div>
-                        <div className="flex items-center gap-1">
-                          <span className="font-material-icons text-xs" aria-hidden="true">shower</span>
-                          <span className="font-manrope text-sm">3.5</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
+        {/* Search Bar Container */}
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.2 }}
+          className="w-full max-w-4xl bg-card rounded-[20px] shadow-[0_4px_12px_rgba(16,24,40,0.08)] p-6 mb-12"
+        >
+          <div className="flex flex-col sm:flex-row items-center bg-muted rounded-[16px] p-1 gap-2">
+            
+            <div className="flex-1 flex items-center w-full px-4">
+              <Search className="text-muted-foreground w-5 h-5 flex-shrink-0" />
+              <input 
+                type="text" 
+                placeholder="Région, ville, rue, complexe résidentiel, métro" 
+                className="w-full bg-transparent border-none py-4 px-3 text-[15px] text-foreground focus:outline-none placeholder:text-muted-foreground"
+              />
             </div>
+            
+            <div className="flex items-center gap-2 w-full sm:w-auto p-1">
+              <button className="bg-card border border-border rounded-[12px] p-3.5 flex items-center justify-center text-foreground hover:bg-gray-50 transition-colors">
+                <SlidersHorizontal className="w-5 h-5" />
+              </button>
+              
+              <button className="bg-card border border-border rounded-full px-4 py-3.5 flex items-center gap-2 text-[14px] font-medium text-foreground hover:bg-gray-50 transition-colors whitespace-nowrap">
+                <Map className="w-4 h-4 text-primary" />
+                <span>Sur la carte</span>
+              </button>
+              
+              <button className="bg-primary hover:bg-[#C42B3D] text-white rounded-full px-7 py-3.5 text-[15px] font-semibold transition-colors shadow-sm whitespace-nowrap w-full sm:w-auto">
+                Trouver
+              </button>
+            </div>
+
           </div>
-        </div>
-      </section>
+        </motion.div>
+
+      </div>
+    </section>
   );
 };
 
