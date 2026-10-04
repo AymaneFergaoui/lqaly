@@ -29,13 +29,14 @@ const Sitemap = lazy(() => import('./pages/Sitemap'));
 const BlogPage = lazy(() => import('./pages/BlogPage'));
 const BlogDetailsPage = lazy(() => import('./pages/BlogDetailsPage'));
 const CareersPage = lazy(() => import('./pages/CareersPage'));
+const ServicesPage = lazy(() => import('./pages/ServicesPage'));
 
 function NotFoundPage() {
   return (
-    <PageTransition className="min-h-screen flex flex-col items-center justify-center bg-[#FAF8F4]">
-      <h1 className="font-fraunces text-6xl font-bold text-[#FC0903] mb-4">404</h1>
-      <p className="font-manrope text-xl text-[#374151] mb-8">Page non trouvée</p>
-      <a href="/" className="bg-[#FC0903] text-white font-manrope font-bold px-8 py-3 rounded-lg hover:bg-[#B86851] transition-all">
+    <PageTransition className="min-h-screen flex flex-col items-center justify-center bg-background">
+      <h1 className="font-sans text-6xl font-bold text-[#E8384F] mb-4">404</h1>
+      <p className="font-sans text-xl text-foreground mb-8">Page non trouvée</p>
+      <a href="/" className="bg-[#E8384F] text-white font-sans font-bold px-8 py-3 rounded-lg hover:bg-[#B86851] transition-all">
         Aller à l'Accueil
       </a>
     </PageTransition>
@@ -44,8 +45,8 @@ function NotFoundPage() {
 
 function PageLoader() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-[#FAF8F4]">
-      <div className="w-12 h-12 border-4 border-[#FC0903] border-t-transparent rounded-full animate-spin"></div>
+    <div className="min-h-screen flex items-center justify-center bg-background">
+      <div className="w-12 h-12 border-4 border-[#E8384F] border-t-transparent rounded-full animate-spin"></div>
     </div>
   );
 }
@@ -83,6 +84,7 @@ function AnimatedRoutes() {
           <Route path="/blog" element={<PageTransition><BlogPage /></PageTransition>} />
           <Route path="/blog/:slug" element={<PageTransition><BlogDetailsPage /></PageTransition>} />
           <Route path="/careers" element={<PageTransition><CareersPage /></PageTransition>} />
+          <Route path="/services" element={<PageTransition><ServicesPage /></PageTransition>} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </AnimatePresence>

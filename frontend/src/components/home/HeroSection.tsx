@@ -1,8 +1,14 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Search, Map, SlidersHorizontal } from 'lucide-react';
+import { useNavigate } from 'react-router-dom';
 
 const HeroSection: React.FC = () => {
+  const navigate = useNavigate();
+
+  const handleSearch = () => {
+    navigate('/properties');
+  };
   return (
     <section className="bg-background pt-16 pb-20 font-sans">
       <div className="max-w-[1440px] mx-auto px-6 flex flex-col items-center">
@@ -21,19 +27,19 @@ const HeroSection: React.FC = () => {
           transition={{ delay: 0.1 }}
           className="flex flex-wrap items-center justify-center gap-2 mb-6"
         >
-          <button className="bg-[#171717] text-white px-5 py-2.5 rounded-full text-[14px] font-medium border border-transparent">
+          <button onClick={() => navigate('/properties?type=buy')} className="bg-[#171717] text-white px-5 py-2.5 rounded-full text-[14px] font-medium border border-transparent">
             Acheter
           </button>
-          <button className="bg-card text-foreground px-5 py-2.5 rounded-full text-[14px] font-medium border border-border flex items-center gap-2 hover:border-gray-300 transition-colors">
+          <button onClick={() => navigate('/properties?type=rent')} className="bg-card text-foreground px-5 py-2.5 rounded-full text-[14px] font-medium border border-border flex items-center gap-2 hover:border-gray-300 transition-colors">
             Louer
           </button>
-          <button className="bg-card text-foreground px-5 py-2.5 rounded-full text-[14px] font-medium border border-border flex items-center gap-2 hover:border-gray-300 transition-colors">
+          <button onClick={() => navigate('/services')} className="bg-card text-foreground px-5 py-2.5 rounded-full text-[14px] font-medium border border-border flex items-center gap-2 hover:border-gray-300 transition-colors">
             Hypothèque
           </button>
-          <button className="bg-card text-foreground px-5 py-2.5 rounded-full text-[14px] font-medium border border-border flex items-center gap-2 hover:border-gray-300 transition-colors">
+          <button onClick={() => navigate('/properties?new=true')} className="bg-card text-foreground px-5 py-2.5 rounded-full text-[14px] font-medium border border-border flex items-center gap-2 hover:border-gray-300 transition-colors">
             Nouveaux bâtiments
           </button>
-          <button className="bg-card text-foreground px-5 py-2.5 rounded-full text-[14px] font-medium border border-border flex items-center gap-2 hover:border-gray-300 transition-colors">
+          <button onClick={() => navigate('/services')} className="bg-card text-foreground px-5 py-2.5 rounded-full text-[14px] font-medium border border-border flex items-center gap-2 hover:border-gray-300 transition-colors">
             Construire
           </button>
         </motion.div>
@@ -57,16 +63,16 @@ const HeroSection: React.FC = () => {
             </div>
             
             <div className="flex items-center gap-2 w-full sm:w-auto p-1">
-              <button className="bg-card border border-border rounded-[12px] p-3.5 flex items-center justify-center text-foreground hover:bg-gray-50 transition-colors">
+              <button onClick={handleSearch} className="bg-card border border-border rounded-[12px] p-3.5 flex items-center justify-center text-foreground hover:bg-gray-50 transition-colors">
                 <SlidersHorizontal className="w-5 h-5" />
               </button>
               
-              <button className="bg-card border border-border rounded-full px-4 py-3.5 flex items-center gap-2 text-[14px] font-medium text-foreground hover:bg-gray-50 transition-colors whitespace-nowrap">
+              <button onClick={handleSearch} className="bg-card border border-border rounded-full px-4 py-3.5 flex items-center gap-2 text-[14px] font-medium text-foreground hover:bg-gray-50 transition-colors whitespace-nowrap">
                 <Map className="w-4 h-4 text-primary" />
                 <span>Sur la carte</span>
               </button>
               
-              <button className="bg-primary hover:bg-[#C42B3D] text-white rounded-full px-7 py-3.5 text-[15px] font-semibold transition-colors shadow-sm whitespace-nowrap w-full sm:w-auto">
+              <button onClick={handleSearch} className="bg-primary hover:bg-[#C42B3D] text-white rounded-full px-7 py-3.5 text-[15px] font-semibold transition-colors shadow-sm whitespace-nowrap w-full sm:w-auto">
                 Trouver
               </button>
             </div>

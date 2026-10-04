@@ -1,29 +1,30 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
-import { motion, useScroll, useTransform } from 'framer-motion';
 import { useAuth } from '../../contexts/AuthContext';
+import { MapPin, Search, MessageCircle, Heart, PlusCircle, LogIn, X, User } from 'lucide-react';
 
-const navLinks = [
-  { path: '/', label: 'Accueil' },
-  { path: '/properties', label: 'Propriétés' },
-  { path: '/about', label: 'À propos' },
-  { path: '/contact', label: 'Contact' },
+const mainNavLinks = [
+  { path: '/properties?type=buy', label: 'Achat' },
+  { path: '/properties?type=rent', label: 'Louer', hasNotification: true },
+  { path: '/properties?new=true', label: 'Nouveaux bâtiments' },
+  { path: '/services', label: 'Services' },
+  { path: '/blog', label: 'Le Magazine' },
+  { path: '/contact', label: 'Agents & Contact' },
 ];
 
 const Navbar: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
   const { user, isAuthenticated, logout } = useAuth();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
-  const [isUserMenuOpen, setIsUserMenuOpen] = React.useState(false);
+  
+  const [isPromoVisible, setIsPromoVisible] = useState(true);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isUserMenuOpen, setIsUserMenuOpen] = useState(false);
   const userMenuRef = useRef<HTMLDivElement>(null);
-
-  const { scrollY } = useScroll();
-  const bgOpacity = useTransform(scrollY, [0, 100], [0.8, 0.95]);
 
   const isActive = (path: string) => {
     if (path === '/' && location.pathname === '/') return true;
-    if (path !== '/' && location.pathname.startsWith(path)) return true;
+    if (path !== '/' && location.pathname.startsWith(path.split('?')[0])) return true;
     return false;
   };
 
@@ -36,7 +37,6 @@ const Navbar: React.FC = () => {
     navigate('/');
   };
 
-  // Close user menu when clicking outside
   useEffect(() => {
     const handler = (e: MouseEvent) => {
       if (userMenuRef.current && !userMenuRef.current.contains(e.target as Node)) {
@@ -47,198 +47,164 @@ const Navbar: React.FC = () => {
     return () => document.removeEventListener('mousedown', handler);
   }, []);
 
-  // Initials avatar
   const initials = user?.name
     ? user.name.split(' ').map((w) => w[0]).join('').slice(0, 2).toUpperCase()
     : '?';
 
   return (
     <>
-    {/* Skip-to-main-content — keyboard accessibility */}
-    <a
-      href="#main-content"
-      className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-[#FC0903] focus:text-white focus:font-manrope focus:font-bold focus:px-4 focus:py-2 focus:rounded-lg focus:shadow-lg"
-    >
-      Passer au contenu principal
-    </a>
-    <motion.nav
-      initial={{ y: -100 }}
-      animate={{ y: 0 }}
-      transition={{ duration: 0.6, ease: 'easeOut' }}
-      style={{ backgroundColor: `rgba(255, 255, 255, ${bgOpacity.get()})` }}
-      className="sticky top-0 z-50 border-b border-[#E6D5C3] backdrop-blur-md"
-    >
-      <div className="max-w-[1280px] mx-auto px-8 flex items-center justify-between h-20">
-        {/* Logo */}
-        <Link to="/" className="flex items-center shrink-0" onClick={closeMobileMenu}>
-          <img src="/landscape-logo.png" alt="Lqaly" className="h-10 w-auto" />
-        </Link>
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[9999] focus:bg-primary focus:text-white focus:px-4 focus:py-2 focus:rounded-md"
+      >
+        Passer au contenu principal
+      </a>
 
-        {/* Desktop nav links */}
-        <div className="hidden md:flex items-center gap-8">
-          {navLinks.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              className={`font-manrope transition-[color] ${
-                isActive(link.path)
-                  ? 'text-[#FC0903] font-semibold'
-                  : 'text-[#374151] hover:text-[#FC0903]'
-              }`}
-            >
-              {link.label}
-            </Link>
-          ))}
-        </div>
-
-        {/* Desktop right side */}
-        <div className="hidden md:flex items-center gap-3">
-          {isAuthenticated && user ? (
-            <>
-              <Link
-                to="/add-property"
-                className="bg-[#FC0903] text-white font-manrope font-bold px-5 py-2 rounded-xl hover:bg-[#B86851] transition-[background-color,box-shadow] hover:shadow-md active:scale-[0.96] transition-transform"
-              >
-                + Ajouter une Propriété
-              </Link>
-
-              {/* User avatar dropdown */}
-              <div className="relative" ref={userMenuRef}>
-                <button
-                  onClick={() => setIsUserMenuOpen((v) => !v)}
-                  aria-expanded={isUserMenuOpen}
-                  aria-label="User menu"
-                  className="flex items-center gap-2 pl-1 pr-3 py-1 rounded-xl hover:bg-[#FAF8F4] transition-[background-color,border-color] border border-transparent hover:border-[#E6D5C3] active:scale-[0.96]"
-                >
-                  <div className="w-8 h-8 rounded-lg bg-[#FC0903] text-white font-manrope font-bold text-xs flex items-center justify-center shrink-0">
-                    {initials}
-                  </div>
-                  <span className="font-manrope font-semibold text-[#221410] max-w-[100px] truncate">
-                    {user.name.split(' ')[0]}
-                  </span>
-                  <span className="font-material-icons text-[#9CA3AF] text-lg" aria-hidden="true">
-                    {isUserMenuOpen ? 'expand_less' : 'expand_more'}
-                  </span>
-                </button>
-
-                {isUserMenuOpen && (
-                  <div className="absolute right-0 top-full mt-2 w-52 bg-white border border-[#E6D5C3] rounded-2xl shadow-[0_4px_24px_rgba(0,0,0,0.08),0_1px_4px_rgba(0,0,0,0.04)] py-2 z-50">
-                    <div className="px-4 py-2.5 border-b border-[#F3F0EC] mb-1">
-                      <p className="font-manrope text-xs text-[#9CA3AF]">Connecté en tant que</p>
-                      <p className="font-manrope text-sm font-semibold text-[#221410] truncate">{user.email}</p>
-                    </div>
-                    {[
-                      { to: '/dashboard', icon: 'dashboard', label: 'Tableau de bord' },
-                      { to: '/my-listings', icon: 'home_work', label: 'Mes Annonces' },
-                    ].map(({ to, icon, label }) => (
-                      <Link
-                        key={to}
-                        to={to}
-                        onClick={() => setIsUserMenuOpen(false)}
-                        className={`flex items-center gap-2.5 px-4 py-2.5 font-manrope text-sm transition-[background-color,color] mx-1 rounded-xl ${
-                          isActive(to) ? 'text-[#FC0903] font-semibold bg-[#FAF8F4]' : 'text-[#374151] hover:bg-[#FAF8F4] hover:text-[#FC0903]'
-                        }`}
-                      >
-                        <span className="font-material-icons text-base" aria-hidden="true">{icon}</span>
-                        {label}
-                      </Link>
-                    ))}
-                    <div className="border-t border-[#F3F0EC] mt-1 pt-1">
-                      <button
-                        onClick={handleLogout}
-                        className="w-full flex items-center gap-2.5 px-4 py-2.5 font-manrope text-sm text-[#374151] hover:bg-red-50 hover:text-red-500 transition-[background-color,color] mx-1 rounded-xl"
-                        style={{ width: 'calc(100% - 8px)' }}
-                      >
-                        <span className="font-material-icons text-base" aria-hidden="true">logout</span>
-                        Déconnexion
-                      </button>
-                    </div>
-                  </div>
-                )}
+      <header className="w-full flex flex-col font-sans">
+        
+        {/* 1. Promo banner strip */}
+        {isPromoVisible && (
+          <div className="relative w-full text-white text-sm" style={{ background: 'var(--gradient-promo-banner)' }}>
+            <div className="max-w-[1440px] mx-auto px-6 h-12 flex items-center justify-between">
+              <div className="flex items-center gap-4">
+                <span className="font-bold">Promotion Exclusive</span>
+                <span className="hidden sm:inline text-white/80">Profitez de nos offres spéciales sur les nouveaux bâtiments</span>
               </div>
-            </>
-          ) : (
-            <>
-              <Link
-                to="/signin"
-                className="font-manrope font-semibold text-[#374151] hover:text-[#FC0903] transition-[color] px-4 py-2"
-              >
-                Se connecter
-              </Link>
-              <Link
-                to="/signup"
-                className="bg-[#FC0903] text-white font-manrope font-bold px-6 py-2 rounded-xl hover:bg-[#B86851] transition-[background-color,box-shadow] hover:shadow-md active:scale-[0.96]"
-              >
-                S'inscrire
-              </Link>
-            </>
-          )}
-        </div>
-
-        {/* Mobile menu button */}
-        <button
-          className="md:hidden p-2 text-[#374151] hover:text-[#FC0903] transition-[color]"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          aria-label={isMobileMenuOpen ? 'Close menu' : 'Open menu'}
-          aria-expanded={isMobileMenuOpen}
-        >
-          <span className="font-material-icons text-2xl" aria-hidden="true">
-            {isMobileMenuOpen ? 'close' : 'menu'}
-          </span>
-        </button>
-      </div>
-
-      {/* Mobile menu */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-20 left-0 w-full bg-white border-b border-[#E6D5C3] shadow-lg py-4 px-8 flex flex-col gap-1">
-          {navLinks.map((link) => (
-            <Link
-              key={link.path}
-              to={link.path}
-              className={`font-manrope text-base py-2.5 transition-[color] ${
-                isActive(link.path) ? 'text-[#FC0903] font-semibold' : 'text-[#374151]'
-              }`}
-              onClick={closeMobileMenu}
-            >
-              {link.label}
-            </Link>
-          ))}
-
-          <div className="border-t border-gray-100 mt-2 pt-3 flex flex-col gap-1">
-            {isAuthenticated && user ? (
-              <>
-                <p className="font-manrope text-xs text-[#9CA3AF] mb-1">
-                  Connecté en tant que <span className="font-semibold text-[#374151]">{user.name}</span>
-                </p>
-                <Link to="/dashboard" className="font-manrope text-base py-2.5 text-[#374151] hover:text-[#FC0903] transition-[color]" onClick={closeMobileMenu}>Tableau de bord</Link>
-                <Link to="/my-listings" className="font-manrope text-base py-2.5 text-[#374151] hover:text-[#FC0903] transition-[color]" onClick={closeMobileMenu}>Mes Annonces</Link>
-                <Link
-                  to="/add-property"
-                  className="mt-2 bg-[#FC0903] text-white font-manrope font-bold text-sm px-6 py-3 rounded-lg hover:bg-[#B86851] transition-all text-center"
-                  onClick={closeMobileMenu}
-                >
-                  + Ajouter une Propriété
-                </Link>
-                <button onClick={handleLogout} className="font-manrope text-base py-2.5 text-left text-[#374151] hover:text-red-500 transition-[color]">
-                  Déconnexion
+              <div className="flex items-center gap-3">
+                <span className="bg-black/35 rounded-full px-2.5 py-1 text-xs">Publicité ⓘ</span>
+                <button onClick={() => setIsPromoVisible(false)} className="hover:text-white/70 transition-colors">
+                  <X size={16} />
                 </button>
-              </>
-            ) : (
-              <>
-                <Link to="/signin" className="font-manrope font-semibold text-base py-2.5 text-[#374151]" onClick={closeMobileMenu}>Se connecter</Link>
-                <Link
-                  to="/signup"
-                  className="mt-2 bg-[#FC0903] text-white font-manrope font-bold text-sm px-6 py-3 rounded-lg hover:bg-[#B86851] transition-all text-center"
-                  onClick={closeMobileMenu}
-                >
-                  S'inscrire
+              </div>
+            </div>
+          </div>
+        )}
+
+        {/* 2. Utility bar */}
+        <div className="w-full bg-card hidden md:block border-b border-border">
+          <div className="max-w-[1440px] mx-auto px-6 py-4 flex items-center justify-between text-muted-foreground text-sm font-medium">
+            <div className="flex items-center gap-6">
+              <button className="flex items-center gap-1.5 hover:text-foreground transition-colors">
+                <MapPin size={18} />
+                <span>Moscou</span>
+              </button>
+              <button className="flex items-center gap-1.5 hover:text-foreground transition-colors">
+                <User size={18} />
+                <span>Aux partenaires</span>
+              </button>
+            </div>
+            
+            <div className="flex items-center gap-6">
+              <button className="flex items-center gap-1.5 hover:text-foreground transition-colors">
+                <Search size={18} />
+                <span>Recherche</span>
+              </button>
+              <button className="flex items-center gap-1.5 hover:text-foreground transition-colors">
+                <MessageCircle size={18} />
+                <span>Chat</span>
+              </button>
+              <button className="flex items-center gap-1.5 hover:text-foreground transition-colors">
+                <Heart size={18} />
+                <span>Favoris</span>
+              </button>
+              <Link to="/add-property" className="flex items-center gap-1.5 hover:text-foreground transition-colors">
+                <PlusCircle size={18} />
+                <span>Publier une annonce</span>
+              </Link>
+              
+              {isAuthenticated && user ? (
+                 <div className="relative" ref={userMenuRef}>
+                   <button
+                     onClick={() => setIsUserMenuOpen(!isUserMenuOpen)}
+                     className="flex items-center gap-2 hover:text-foreground transition-colors"
+                   >
+                     <div className="w-6 h-6 rounded-full bg-primary text-white text-[10px] flex items-center justify-center font-bold">
+                       {initials}
+                     </div>
+                     <span>{user.name.split(' ')[0]}</span>
+                   </button>
+                   {isUserMenuOpen && (
+                     <div className="absolute right-0 top-full mt-2 w-48 bg-card border border-border rounded-lg shadow-dropdown py-2 z-50">
+                       <Link to="/dashboard" className="block px-4 py-2 hover:bg-muted text-foreground">Tableau de bord</Link>
+                       <Link to="/my-listings" className="block px-4 py-2 hover:bg-muted text-foreground">Mes Annonces</Link>
+                       <button onClick={handleLogout} className="w-full text-left px-4 py-2 hover:bg-muted text-red-600">Déconnexion</button>
+                     </div>
+                   )}
+                 </div>
+              ) : (
+                <Link to="/signin" className="flex items-center gap-1.5 hover:text-foreground transition-colors">
+                  <LogIn size={18} />
+                  <span>Connexion</span>
                 </Link>
-              </>
-            )}
+              )}
+            </div>
           </div>
         </div>
-      )}
-    </motion.nav>
+
+        {/* 3. Main nav bar */}
+        <div className="w-full bg-card border-b border-border sticky top-0 z-40 shadow-sm">
+          <div className="max-w-[1440px] mx-auto px-6 py-5 flex items-center justify-between md:justify-start gap-8">
+            {/* Logo */}
+            <Link to="/" className="flex items-center shrink-0 gap-2" onClick={closeMobileMenu}>
+              <img src="/landscape-logo.png" alt="Lqaly" className="h-8 w-auto object-contain" />
+            </Link>
+
+            {/* Desktop Nav Links */}
+            <nav className="hidden lg:flex items-center gap-7 flex-1">
+              {mainNavLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`relative text-[15px] font-medium transition-colors hover:text-primary ${
+                    isActive(link.path) ? 'text-primary' : 'text-foreground'
+                  }`}
+                >
+                  {link.label}
+                  {link.hasNotification && (
+                    <span className="absolute -top-1 -right-2.5 w-1.5 h-1.5 bg-primary rounded-full"></span>
+                  )}
+                </Link>
+              ))}
+            </nav>
+
+            {/* Mobile Actions */}
+            <div className="flex items-center gap-4 lg:hidden text-muted-foreground">
+               <button><Search size={24} /></button>
+               <button
+                  onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                  aria-label="Menu"
+               >
+                 {isMobileMenuOpen ? <X size={28} /> : <div className="space-y-1.5"><div className="w-6 h-0.5 bg-current"></div><div className="w-6 h-0.5 bg-current"></div><div className="w-6 h-0.5 bg-current"></div></div>}
+               </button>
+            </div>
+          </div>
+
+          {/* Mobile dropdown menu */}
+          {isMobileMenuOpen && (
+            <div className="lg:hidden absolute top-full left-0 w-full bg-card border-b border-border shadow-lg py-4 px-6 flex flex-col gap-4">
+               {mainNavLinks.map((link) => (
+                <Link
+                  key={link.path}
+                  to={link.path}
+                  className={`text-base font-medium ${isActive(link.path) ? 'text-primary' : 'text-foreground'}`}
+                  onClick={closeMobileMenu}
+                >
+                  {link.label}
+                </Link>
+              ))}
+              <div className="h-px bg-border my-2"></div>
+              {!isAuthenticated ? (
+                 <Link to="/signin" className="text-base font-medium text-foreground" onClick={closeMobileMenu}>Connexion</Link>
+              ) : (
+                 <>
+                   <Link to="/dashboard" className="text-base font-medium text-foreground" onClick={closeMobileMenu}>Tableau de bord</Link>
+                   <button onClick={handleLogout} className="text-left text-base font-medium text-red-600">Déconnexion</button>
+                 </>
+              )}
+            </div>
+          )}
+        </div>
+      </header>
     </>
   );
 };
