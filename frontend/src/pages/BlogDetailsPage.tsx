@@ -1,6 +1,7 @@
 import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import ReactMarkdown from 'react-markdown';
+import rehypeRaw from 'rehype-raw';
 import Navbar from '../components/common/Navbar';
 import Footer from '../components/common/Footer';
 import { useSEO } from '../hooks/useSEO';
@@ -66,7 +67,7 @@ const BlogDetailsPage: React.FC = () => {
         {/* Content Section */}
         <div className="max-w-[800px] mx-auto px-6 pt-16">
           <article className="prose prose-lg md:prose-xl prose-stone max-w-none font-manrope prose-headings:font-syne prose-headings:font-bold prose-h2:text-[#1C1B1A] prose-a:text-[#FC0903] prose-img:rounded-xl">
-            <ReactMarkdown>
+            <ReactMarkdown rehypePlugins={[rehypeRaw]}>
               {post.content}
             </ReactMarkdown>
           </article>
