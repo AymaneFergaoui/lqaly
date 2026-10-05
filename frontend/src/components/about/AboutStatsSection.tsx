@@ -1,27 +1,27 @@
 import React from 'react';
-import { Building2, Users, MapPin, CheckCircle } from 'lucide-react';
+import { Building2, Users, MapPin, Clock } from 'lucide-react';
 
 const AboutStatsSection: React.FC = () => {
   const stats = [
     {
       icon: Building2,
-      value: '2,450+',
-      label: 'Propriétés'
+      value: '15+',
+      label: 'Propriétés Disponibles'
     },
     {
       icon: Users,
-      value: '12k+',
-      label: 'Clients Satisfaits'
+      value: '100%',
+      label: 'Engagement Client'
     },
     {
       icon: MapPin,
-      value: '18',
-      label: 'Grandes Villes'
+      value: '3+',
+      label: 'Villes Couvertes'
     },
     {
-      icon: CheckCircle,
-      value: '98%',
-      label: 'Taux de Match'
+      icon: Clock,
+      value: '24/7',
+      label: 'Disponibilité'
     }
   ];
 

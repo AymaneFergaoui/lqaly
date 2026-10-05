@@ -1,55 +1,73 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Bell, CheckCircle2, AlertCircle, Info, Clock, Check } from 'lucide-react';
-
-const mockNotifications = [
-  {
-    id: 1,
-    type: 'alert',
-    title: 'Nouvelle propriété en attente',
-    message: 'Une nouvelle villa à Marrakech nécessite votre approbation.',
-    time: 'Il y a 5 min',
-    isRead: false,
-    icon: AlertCircle,
-    color: 'text-orange-500',
-    bgColor: 'bg-orange-500/10'
-  },
-  {
-    id: 2,
-    type: 'success',
-    title: 'Propriété approuvée',
-    message: 'Appartement au centre-ville de Rabat a été publié avec succès.',
-    time: 'Il y a 2 heures',
-    isRead: false,
-    icon: CheckCircle2,
-    color: 'text-green-500',
-    bgColor: 'bg-green-500/10'
-  },
-  {
-    id: 3,
-    type: 'info',
-    title: 'Nouveau message utilisateur',
-    message: 'Un utilisateur a envoyé un message concernant "Villa sur l\'Océan".',
-    time: 'Il y a 1 jour',
-    isRead: false,
-    icon: Info,
-    color: 'text-blue-500',
-    bgColor: 'bg-blue-500/10'
-  },
-  {
-    id: 4,
-    type: 'system',
-    title: 'Mise à jour du système',
-    message: 'Le système a été mis à jour avec de nouvelles fonctionnalités d\'IA.',
-    time: 'Il y a 2 jours',
-    isRead: true,
-    icon: Bell,
-    color: 'text-gray-500',
-    bgColor: 'bg-gray-500/10'
-  }
-];
+import { Bell, CheckCircle2, AlertCircle, Info, Clock, Check, Loader2 } from 'lucide-react';
+import apiClient from '../services/apiClient';
 
 const Notifications = () => {
+  const [notifications, setNotifications] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchNotifications = async () => {
+      try {
+        setLoading(true);
+        const [pendingRes, appointmentsRes] = await Promise.all([
+          apiClient.get('/api/admin/properties/pending'),
+          apiClient.get('/api/admin/appointments?limit=20')
+        ]);
+        
+        let notifs = [];
+        
+        // Add pending properties
+        if (pendingRes.data?.success && pendingRes.data?.properties) {
+          pendingRes.data.properties.forEach(prop => {
+            notifs.push({
+              id: `prop-${prop._id}`,
+              type: 'alert',
+              title: 'Nouvelle propriété en attente',
+              message: `La propriété "${prop.title}" nécessite votre approbation.`,
+              time: new Date(prop.createdAt).toLocaleDateString(),
+              dateObj: new Date(prop.createdAt),
+              isRead: false,
+              icon: AlertCircle,
+              color: 'text-orange-500',
+              bgColor: 'bg-orange-500/10'
+            });
+          });
+        }
+        
+        // Add pending appointments
+        if (appointmentsRes.data?.success && appointmentsRes.data?.appointments) {
+          appointmentsRes.data.appointments.forEach(app => {
+            if (app.status === 'pending') {
+              notifs.push({
+                id: `app-${app._id}`,
+                type: 'info',
+                title: 'Nouveau rendez-vous',
+                message: `Un rendez-vous est en attente pour "${app.propertyId?.title || 'une propriété'}".`,
+                time: new Date(app.createdAt).toLocaleDateString(),
+                dateObj: new Date(app.createdAt),
+                isRead: false,
+                icon: Info,
+                color: 'text-blue-500',
+                bgColor: 'bg-blue-500/10'
+              });
+            }
+          });
+        }
+        
+        // Sort by newest first
+        notifs.sort((a, b) => b.dateObj - a.dateObj);
+        setNotifications(notifs);
+      } catch (error) {
+        console.error("Error fetching notifications:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    fetchNotifications();
+  }, []);
   return (
     <div className="min-h-screen p-8 bg-[#FAF8F4]">
       <div className="max-w-4xl mx-auto">
@@ -77,15 +95,20 @@ const Notifications = () => {
           animate={{ opacity: 1, y: 0 }}
           className="bg-white rounded-2xl border border-[#E6D5C3] shadow-card overflow-hidden"
         >
-          {mockNotifications.length > 0 ? (
+          {loading ? (
+            <div className="p-12 flex justify-center items-center">
+              <Loader2 className="w-8 h-8 text-[#FC0903] animate-spin" />
+            </div>
+          ) : notifications.length > 0 ? (
             <div className="divide-y divide-[#E6D5C3]">
-              {mockNotifications.map((notification, index) => (
-                <motion.div
+              {notifications.map((notification, index) => (
+                <motion.a
+                  href="https://app.lqaly.com/notifications"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ delay: index * 0.05 }}
                   key={notification.id}
-                  className={`p-6 hover:bg-[#FAF8F4] transition-colors cursor-pointer flex gap-4 ${
+                  className={`block p-6 hover:bg-[#FAF8F4] transition-colors cursor-pointer flex gap-4 ${
                     !notification.isRead ? 'bg-[#FC0903]/[0.02]' : ''
                   }`}
                 >
@@ -113,7 +136,7 @@ const Notifications = () => {
                       <div className="w-2.5 h-2.5 bg-[#FC0903] rounded-full" />
                     </div>
                   )}
-                </motion.div>
+                </motion.a>
               ))}
             </div>
           ) : (
