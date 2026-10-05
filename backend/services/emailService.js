@@ -6,7 +6,7 @@
  * types of emails with proper error handling and logging.
  */
 
-import { sendEmail } from '../config/nodemailer.js';
+import { sendEmail, checkEmailHealth } from '../config/nodemailer.js';
 import logger from '../utils/logger.js';
 import {
   getSchedulingEmailTemplate,
@@ -232,14 +232,10 @@ class EmailService {
   async getHealthStatus() {
     try {
       // Test basic configuration
-      if (!process.env.BREVO_API_KEY) {
-        return { status: 'error', message: 'BREVO_API_KEY not configured' };
-      }
-
+      const health = await checkEmailHealth();
       return {
-        status: 'healthy',
-        message: 'Email service operational',
-        provider: 'Brevo REST API',
+        ...health,
+        provider: 'SMTP',
         fromAddress: this.fromAddress
       };
     } catch (error) {

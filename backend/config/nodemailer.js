@@ -1,66 +1,78 @@
-import axios from 'axios';
+import nodemailer from 'nodemailer';
 import dotenv from 'dotenv';
 
 dotenv.config();
 
-// Create a pseudo-transporter that uses Brevo's REST API instead of SMTP
-// This bypasses free-tier Render's strict block on outbound port 587 traffic.
+// Standard SMTP transporter (works with any provider: Gmail, Outlook, Zoho,
+// Hostinger, cPanel mail, Mailgun SMTP, etc.)
+// Required env: SMTP_HOST, SMTP_PORT, SMTP_USER, SMTP_PASS
+// Optional env: SMTP_SECURE ("true" for port 465), EMAIL_USER (sender address), EMAIL_FROM_NAME
+const SMTP_HOST = process.env.SMTP_HOST;
+const SMTP_PORT = Number(process.env.SMTP_PORT) || 587;
+const SMTP_SECURE = process.env.SMTP_SECURE
+  ? process.env.SMTP_SECURE === 'true'
+  : SMTP_PORT === 465;
+const FROM_NAME = process.env.EMAIL_FROM_NAME || 'Lqaly';
+
+const isConfigured = () =>
+  Boolean(SMTP_HOST && process.env.SMTP_USER && process.env.SMTP_PASS);
+
 const createTransporter = () => {
-  if (!process.env.BREVO_API_KEY) {
-    console.warn('⚠️  Email API configuration incomplete. Missing BREVO_API_KEY environment variable. Emails will fail silently.');
+  if (!isConfigured()) {
+    console.warn('⚠️  SMTP configuration incomplete. Set SMTP_HOST, SMTP_PORT, SMTP_USER and SMTP_PASS. Emails will fail.');
   }
 
-  return {
-    sendMail: async (mailOptions) => {
-      if (!process.env.BREVO_API_KEY) {
-        throw new Error('Missing BREVO_API_KEY. Cannot send email.');
-      }
-
-      try {
-        const payload = {
-          sender: { name: 'Lqaly', email: mailOptions.from },
-          to: [{ email: mailOptions.to }],
-          subject: mailOptions.subject,
-          htmlContent: mailOptions.html
-        };
-
-        const response = await axios.post('https://api.brevo.com/v3/smtp/email', payload, {
-          headers: {
-            'api-key': process.env.BREVO_API_KEY,
-            'accept': 'application/json',
-            'content-type': 'application/json'
-          }
-        });
-
-        console.log('✅ Email sent successfully via REST API:', response.data.messageId);
-        return response.data;
-      } catch (error) {
-        console.error('❌ Failed to send email via REST API:', error.response?.data || error.message);
-        throw error;
-      }
+  return nodemailer.createTransport({
+    host: SMTP_HOST,
+    port: SMTP_PORT,
+    secure: SMTP_SECURE, // true for 465, false for 587/25 (STARTTLS)
+    auth: {
+      user: process.env.SMTP_USER,
+      pass: process.env.SMTP_PASS,
     },
-    verify: async () => {
-       if (!process.env.BREVO_API_KEY) {
-          throw new Error('Transporter not configured with BREVO_API_KEY');
-       }
-       return true; // We can assume it is verified if the key exists during boot
-    }
-  };
+    pool: true,
+    maxConnections: 5,
+    connectionTimeout: 15000,
+    greetingTimeout: 10000,
+    socketTimeout: 20000,
+  });
 };
 
 const transporter = createTransporter();
 
 // Helper function to send emails with error handling
 export const sendEmail = async (mailOptions) => {
-  return await transporter.sendMail(mailOptions);
+  if (!isConfigured()) {
+    throw new Error('SMTP not configured. Cannot send email.');
+  }
+
+  const senderEmail = mailOptions.from || process.env.EMAIL_USER || process.env.SMTP_USER;
+  const options = {
+    ...mailOptions,
+    from: senderEmail.includes('<') ? senderEmail : `"${FROM_NAME}" <${senderEmail}>`,
+  };
+
+  try {
+    const info = await transporter.sendMail(options);
+    console.log('✅ Email sent successfully via SMTP:', info.messageId);
+    return info;
+  } catch (error) {
+    console.error('❌ Failed to send email via SMTP:', error.message);
+    throw error;
+  }
 };
 
 // Health check function
 export const checkEmailHealth = async () => {
-  if (!process.env.BREVO_API_KEY) {
-    return { status: 'error', message: 'BREVO_API_KEY not configured' };
+  if (!isConfigured()) {
+    return { status: 'error', message: 'SMTP not configured (SMTP_HOST/SMTP_USER/SMTP_PASS)' };
   }
-  return { status: 'healthy', message: 'Email service is operational via Brevo REST API' };
+  try {
+    await transporter.verify();
+    return { status: 'healthy', message: `Email service is operational via SMTP (${SMTP_HOST}:${SMTP_PORT})` };
+  } catch (error) {
+    return { status: 'error', message: `SMTP verification failed: ${error.message}` };
+  }
 };
 
 export default transporter;
