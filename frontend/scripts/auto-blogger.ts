@@ -297,13 +297,13 @@ You are an expert real estate journalist and content writer. You MUST write the 
 ---
 id: ${data.permalinkSlug}
 slug: ${data.permalinkSlug}
-title: "${data.metaTitle.replace(/"/g, '\\"')}"
+title: "${data.metaTitle.replace(/"/g, '\\"').replace(/\n/g, ' ').replace(/\r/g, '')}"
 category: ${data.category}
 author: Lqaly
 date: ${new Intl.DateTimeFormat('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date())}
 readTime: 5 min de lecture
 isoDate: ${Date.now()}
-description: "${data.metaDescription.replace(/"/g, '\\"')}"
+description: "${data.metaDescription.replace(/"/g, '\\"').replace(/\n/g, ' ').replace(/\r/g, '')}"
 coverImage: /images/blog/${data.permalinkSlug}.jpg
 ---
 3. Do not include any conversational intro or outro (e.g., "Here is your article:"). Start immediately with "---".
