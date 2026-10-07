@@ -159,37 +159,148 @@ async function logWordPressData(data: ArticleData, status: string = 'Done') {
   }
 }
 
+function cleanRssSnippet(rawText: string): string {
+  if (!rawText) return '';
+  return rawText
+    .replace(/The post\s+.*?\s+appeared first on\s+.*?(\.|$)/gi, '')
+    .replace(/appeared first on\s+.*?(\.|$)/gi, '')
+    .replace(/\[\.\.\.\]/g, '')
+    .replace(/Comments/gi, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function cleanAndParseJson(text: string): any {
+  let cleaned = text.trim();
+  cleaned = cleaned.replace(/^```json\s*/i, '').replace(/^```\s*/i, '').replace(/```\s*$/i, '').trim();
+  const start = cleaned.indexOf('{');
+  const end = cleaned.lastIndexOf('}');
+  if (start !== -1 && end !== -1 && end > start) {
+    cleaned = cleaned.substring(start, end + 1);
+  }
+  return JSON.parse(cleaned);
+}
+
+function slugifyFrench(str: string): string {
+  return str
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/(^-|-$)/g, '');
+}
+
+function isLikelyEnglish(str: string): boolean {
+  if (!str) return false;
+  const englishPatterns = [
+    /\b(for rent|for sale|renter's guide|local guide|apartments|villas|riads|triplexes|the post|appeared first on|how to|top \d+|discover|find|what to expect)\b/i,
+    /\b(does .* work|origin story|five years later|is here|hacked|trained at home|shut down|falls to|in an \$\d+|bedroom|living in)\b/i
+  ];
+  return englishPatterns.some(p => p.test(str));
+}
+
+/**
+ * Ensures all SEO data fields are strictly in French, translating if necessary.
+ */
+async function ensureFrenchSeoData(data: ArticleData, sourceTitle: string, sourceSummary: string): Promise<ArticleData> {
+  const needsTranslation = 
+    !data.metaTitle || 
+    isLikelyEnglish(data.metaTitle) || 
+    !data.metaDescription || 
+    isLikelyEnglish(data.metaDescription) || 
+    isLikelyEnglish(data.permalinkSlug) ||
+    isLikelyEnglish(data.primaryKeyword);
+
+  if (needsTranslation) {
+    console.log(`🌐 [Agent SEO] Détection d'éléments en anglais ou manquants. Traduction et adaptation en français...`);
+    const transPrompt = `
+Tu es un rédacteur et consultant SEO expert pour Lqaly, une plateforme immobilière de prestige au Maroc.
+Le titre ou les métadonnées de l'article source ci-dessous sont en ANGLAIS ou incomplets.
+Tu DOIS les traduire, les adapter et les optimiser STRICTEMENT EN FRANÇAIS pour le public marocain et francophone.
+
+Source Title : "${sourceTitle}"
+Source Summary : "${cleanRssSnippet(sourceSummary)}"
+Titre actuel : "${data.metaTitle || sourceTitle}"
+Description actuelle : "${data.metaDescription || ''}"
+Mot-clé actuel : "${data.primaryKeyword || ''}"
+
+Réponds UNIQUEMENT avec un objet JSON valide contenant ces 4 champs STRICTEMENT EN FRANÇAIS :
+{
+  "metaTitle": "Titre engageant et optimisé SEO en français (max 60 caractères)",
+  "metaDescription": "Méta description percutante en français (150-160 caractères, sans mention de Sarouty ou source externe)",
+  "primaryKeyword": "mot-clé principal en français (ex: location riad azzouzia marrakech)",
+  "permalinkSlug": "slug-kebab-case-en-francais-sans-accent"
+}
+`;
+    try {
+      const resp = await openai.chat.completions.create({
+        model: "claude-sonnet-4.6",
+        messages: [{ role: "user", content: transPrompt }],
+        response_format: { type: "json_object" }
+      });
+      const parsed = cleanAndParseJson(resp.choices[0].message?.content || '{}');
+      if (parsed.metaTitle) data.metaTitle = parsed.metaTitle;
+      if (parsed.metaDescription) data.metaDescription = parsed.metaDescription;
+      if (parsed.primaryKeyword) data.primaryKeyword = parsed.primaryKeyword;
+      if (parsed.permalinkSlug) data.permalinkSlug = slugifyFrench(parsed.permalinkSlug);
+    } catch (err: any) {
+      console.warn("⚠️ Échec de la traduction IA d'urgence:", err.message);
+    }
+  }
+
+  // Nettoyage final des résidus
+  if (data.metaDescription) {
+    data.metaDescription = cleanRssSnippet(data.metaDescription);
+  }
+
+  if (!data.metaDescription || data.metaDescription.length < 20 || isLikelyEnglish(data.metaDescription)) {
+    data.metaDescription = `Découvrez notre guide complet sur : "${data.metaTitle}". Prix du marché, caractéristiques des biens et conseils d'experts avec Lqaly.`;
+  }
+
+  if (data.permalinkSlug) {
+    data.permalinkSlug = slugifyFrench(data.permalinkSlug);
+  }
+
+  return data;
+}
+
 /**
  * Agent 1: Generates SEO data (JSON) based on an RSS feed item.
  */
 async function analyzeArticleSEO(feedItem: any): Promise<ArticleData> {
   console.log(`🕵️ [Agent 1] Analyzing article and generating SEO Data: "${feedItem.title}"...`);
 
-  let sourceSummary = feedItem.contentSnippet || feedItem.content || "No summary provided.";
-  if (sourceSummary.trim().toLowerCase() === 'comments') {
+  let sourceSummary = cleanRssSnippet(feedItem.contentSnippet || feedItem.content || "No summary provided.");
+  if (sourceSummary.trim().toLowerCase() === 'comments' || !sourceSummary) {
     sourceSummary = "No summary provided.";
   }
 
   const prompt = `
-You are an expert SEO Manager and Content Strategist specializing in Real Estate. Your goal is to analyze the source article and generate a highly optimized SEO strategy in French for writing a new, original article for Lqaly, a premium Moroccan real estate platform.
+Tu es un Directeur SEO et Stratège de Contenu senior spécialisé dans l'immobilier au Maroc pour Lqaly, une plateforme immobilière de référence.
+Ton rôle est d'analyser l'article source et de concevoir une stratégie de contenu originale et performante EN FRANÇAIS.
 
-Source Title: ${feedItem.title}
-Source Content Summary: ${sourceSummary}
-Source URL: ${feedItem.link}
+Article Source :
+- Titre Source : ${feedItem.title}
+- Résumé Source : ${sourceSummary}
+- URL Source : ${feedItem.link}
 
-You MUST output a valid JSON object with the following fields (the JSON keys must remain in English, but all content values MUST be in French):
-- "metaTitle": An improved, engaging title for the new article (max 60 chars).
-- "metaDescription": A compelling SEO meta description (150-160 chars).
-- "primaryKeyword": The single best primary keyword for this topic.
-- "secondaryKeywords": A comma-separated list of 3-5 LSI/secondary keywords.
-- "permalinkSlug": A URL-friendly kebab-case string based on the primary keyword.
-- "internalLinks": A comma-separated list of 3 hypothetical internal URLs starting with 'https://lqaly.com/' related to this topic.
-- "externalLinks": A comma-separated list of 3 authoritative external URLs (e.g., reputable news sites or academic sources) related to this topic.
-- "keywordStrategy": Instructions on how to use the keywords and semantic variations.
-- "contentGaps": Identify what the source article missed that we should cover to provide unique value.
-- "contentStructure": A brief outline of the H2 and H3 sections to be written.
-- "imagePrompt": A prompt for an AI image generator to create a featured image for this article.
-- "category": The most appropriate category for this article (e.g., "Immobilier", "Tendances du Marché", "Investissement", "Conseils Pratiques", "Luxe").
+⚠️ EXIGENCE LINGUISTIQUE ABSOLUE : 100% EN FRANÇAIS (FRENCH ONLY)
+Même si le titre source, le résumé ou le flux RSS est en ANGLAIS, TOUTES les valeurs de ton objet JSON doivent être STRICTEMENT TRADUITES ET RÉDIGÉES EN FRANÇAIS.
+AUCUN mot en anglais n'est autorisé dans les valeurs du JSON.
+
+Tu DOIS retourner un objet JSON avec les champs suivants (les clés doivent rester en anglais, mais toutes les valeurs DOIVENT être en français) :
+- "metaTitle": Un titre accrocheur, vendeur et optimisé SEO rédigé STRICTEMENT EN FRANÇAIS (max 60 caractères). Ex: "Location de Riads à Azzouzia Marrakech : Guide et Prix". Ne conserve JAMAIS le titre source en anglais !
+- "metaDescription": Une méta description captivante et incitative STRICTEMENT EN FRANÇAIS (150-160 caractères). Ne JAMAIS inclure d'anglais ni de mention telle que "The post ... appeared first on ...".
+- "primaryKeyword": Le mot-clé principal STRICTEMENT EN FRANÇAIS (ex: "location riad azzouzia marrakech", et SURTOUT PAS "riads for rent").
+- "secondaryKeywords": 3 à 5 mots-clés secondaires LSI séparés par des virgules, STRICTEMENT EN FRANÇAIS.
+- "permalinkSlug": Un slug d'URL en minuscules kebab-case STRICTEMENT EN FRANÇAIS basé sur le mot-clé principal français, sans accents (ex: "location-riad-azzouzia-marrakech", et SURTOUT PAS "riads-for-rent...").
+- "internalLinks": Liste de 3 URLs internes suggérées relatives au sujet (ex: "https://lqaly.com/villas, https://lqaly.com/marrakech, https://lqaly.com/contact").
+- "externalLinks": Liste de 3 URLs externes d'autorité relatives au sujet (portails institutionnels ou économiques).
+- "keywordStrategy": Recommandations d'intégration des mots-clés et variantes sémantiques en français.
+- "contentGaps": Analyse des lacunes du contenu source que notre article doit combler en français.
+- "contentStructure": Plan détaillé des sections H2 et H3 à rédiger en français.
+- "imagePrompt": Prompt pour générer une image représentative (peut être en anglais ou français).
+- "category": La catégorie la plus appropriée en français (ex: "Immobilier", "Tendances du Marché", "Investissement", "Conseils Pratiques", "Luxe").
 `;
 
   const response = await openai.chat.completions.create({
@@ -200,23 +311,25 @@ You MUST output a valid JSON object with the following fields (the JSON keys mus
   const text = response.choices[0].message?.content || '{}';
 
   try {
-    const data = JSON.parse(text);
-    return {
-      metaTitle: data.metaTitle || data.title || '',
-      metaDescription: data.metaDescription || data.description || '',
-      primaryKeyword: data.primaryKeyword || data.keyword || '',
-      secondaryKeywords: data.secondaryKeywords || data.keywords || '',
-      permalinkSlug: data.permalinkSlug || data.slug || '',
-      internalLinks: data.internalLinks || '',
-      externalLinks: data.externalLinks || '',
-      keywordStrategy: data.keywordStrategy || '',
-      contentGaps: data.contentGaps || '',
-      contentStructure: data.contentStructure || '',
-      imagePrompt: data.imagePrompt || '',
+    const data = cleanAndParseJson(text);
+    const initialSeoData: ArticleData = {
+      metaTitle: data.metaTitle || data.meta_title || data.title || data.titre || data.titreMeta || '',
+      metaDescription: data.metaDescription || data.meta_description || data.description || data.descriptionMeta || '',
+      primaryKeyword: data.primaryKeyword || data.primary_keyword || data.keyword || data.motClePrincipal || '',
+      secondaryKeywords: data.secondaryKeywords || data.secondary_keywords || data.keywords || data.motsCles || '',
+      permalinkSlug: data.permalinkSlug || data.permalink_slug || data.slug || data.urlSlug || '',
+      internalLinks: data.internalLinks || data.internal_links || '',
+      externalLinks: data.externalLinks || data.external_links || '',
+      keywordStrategy: data.keywordStrategy || data.keyword_strategy || '',
+      contentGaps: data.contentGaps || data.content_gaps || '',
+      contentStructure: data.contentStructure || data.content_structure || '',
+      imagePrompt: data.imagePrompt || data.image_prompt || '',
       category: data.category || 'Immobilier'
     };
+
+    return await ensureFrenchSeoData(initialSeoData, feedItem.title || '', sourceSummary);
   } catch (error) {
-    console.error("❌ Failed to parse SEO JSON from Gemini:", text);
+    console.error("❌ Failed to parse SEO JSON from LLM:", text);
     throw new Error("Invalid JSON generated by SEO Agent.");
   }
 }
@@ -228,72 +341,65 @@ async function generateArticle(data: ArticleData): Promise<string> {
   console.log(`🤖 [Agent 2] Writing content for: "${data.metaTitle}"...`);
 
   const prompt = `
-You are an expert real estate journalist and content writer. You MUST write the entire article in French (Français) tailored for the Moroccan real estate market.
+Tu es un journaliste et rédacteur immobilier senior. Tu DOIS rédiger l'intégralité de l'article en FRANÇAIS (Français soigné) adapté au marché immobilier marocain pour la plateforme Lqaly.
 
-# INPUT DATA
-- **Improved Title**: ${data.metaTitle}
-- **Meta Description**: ${data.metaDescription}
-- **Primary Keyword**: ${data.primaryKeyword}
-- **Secondary Keywords**: ${data.secondaryKeywords}
-- **Keyword Strategy**: ${data.keywordStrategy}
-- **Content Gaps to Fill**: ${data.contentGaps}
-- **Content Structure**: ${data.contentStructure}
-- **Internal Links**: ${data.internalLinks}
-- **External Links**: ${data.externalLinks}
+# DONNÉES D'ENTRÉE (SEO)
+- **Titre optimisé (Français)**: ${data.metaTitle}
+- **Méta Description (Français)**: ${data.metaDescription}
+- **Mot-clé Principal**: ${data.primaryKeyword}
+- **Mots-clés Secondaires**: ${data.secondaryKeywords}
+- **Stratégie de Mots-clés**: ${data.keywordStrategy}
+- **Lacunes de Contenu à Combler**: ${data.contentGaps}
+- **Structure du Contenu**: ${data.contentStructure}
+- **Liens Internes**: ${data.internalLinks}
+- **Liens Externes**: ${data.externalLinks}
 
-# INPUT UTILIZATION RULES
-- **Improved Title**: Defines the editorial framing and narrative direction. Use it to understand positioning, but do NOT output or restate the title in the body (except in the YAML frontmatter).
-- **Primary Keyword**: Defines the main SEO focus and must guide topic relevance and terminology.
-- **Keyword Strategy**: Must guide semantic variations, terminology choices, and topical emphasis throughout the article without keyword stuffing.
-- **Content Structure**: The organizational backbone of the article. Progress logically through its points. Use \`##\` (H2) and \`###\` (H3) tags for main sections and subsections. Do NOT skip heading levels.
-- **Content Gaps**: Must be addressed naturally by adding missing explanations, context, examples, or analysis where appropriate.
-- **Internal and External Links**: Must be used EXACTLY as provided and follow all linking rules below.
+# EXIGENCE LINGUISTIQUE ABSOLUE : 100% EN FRANÇAIS
+- L'intégralité du contenu (titre, chapô, intertitres H2/H3, corps, FAQ, métadonnées) DOIT être rédigée en FRANÇAIS.
+- AUCUN mot, titre ou paragraphe en anglais n'est autorisé.
 
-# WRITING STYLE
-- Open with a bold, specific claim or provocative statement relevant to real estate.
-- Use an inverted pyramid: lead claim -> context -> detail -> examples -> implication.
-- Write short, scannable paragraphs (2-4 sentences max).
-- Build the argument naturally and end with a synthesis or implication, never abruptly on a quote.
-- Tone must be neutral, journalistic, confident, and lightly analytical.
-- Avoid hype, promotion, weak transitions, filler phrases, and unexplained jargon.
-- Use "such as" instead of "like" in formal constructions.
-- Define niche or emerging terms on first use.
-- Keep pronoun perspective consistent.
-- Quotes must advance the argument, not decorate it. Do not stack more than two quotes without a narrative beat. Introduce quotes with context, and paraphrase if too long or repetitive.
+# RÈGLES D'UTILISATION DES DONNÉES
+- **Titre optimisé**: Définit l'orientation éditoriale. Utilisez-le pour le positionnement, mais NE RÉPÉTEZ PAS le titre H1 dans le corps du texte (il est géré par le frontmatter YAML).
+- **Mot-clé Principal**: Guide la pertinence SEO et la terminologie tout au long de l'article.
+- **Structure**: Respectez la progression logique avec des balises Markdown \`##\` (H2) et \`###\` (H3). Ne sautez aucun niveau de titre.
+- **Liens internes et externes**: Intégrez-les naturellement selon les règles ci-dessous.
 
-# SEO & READABILITY
-- **Length**: Target between 800 and 1200 words. This is a comprehensive article.
-- Integrate the primary keyword naturally within the first 1-2 sentences.
-- Use formatting tags like \`**bold**\`, \`<ul>\` (bullet points), and \`<ol>\` (numbered lists) to break up the text and facilitate diagonal reading.
-- At the very end of the article, you MUST integrate a FAQ section using the exact Schema.org HTML format:
-<h2>FAQ sur [Topic]</h2>
+# STYLE RÉDACTIONNEL
+- Ouvrez avec une phrase forte, informative et engageante sur l'immobilier marocain.
+- Adoptez une structure en pyramide inversée : fait marquant -> contexte -> détails -> exemples concrets -> implications.
+- Rédigez des paragraphes courts et digestes (2 à 4 phrases maximum).
+- Ton journalistique, expert, neutre et analytique.
+- Évitez le remplissage, le sensationnalisme ou le jargon non expliqué.
+
+# SEO & LISIBILITÉ
+- **Longueur**: Visez entre 800 et 1200 mots. Article complet, fouillé et riche en valeur ajoutée.
+- Intégrez le mot-clé principal naturellement dès les premières phrases.
+- Utilisez du formattage dynamique : balises \`**gras**\`, \`<ul>\` (puces), et \`<ol>\` (listes numérotées) pour fluidifier la lecture.
+- Tout à la fin de l'article, intégrez OBLIGATOIREMENT une section FAQ en français au format Schema.org :
+<h2>FAQ sur ${data.metaTitle.replace(/"/g, '')}</h2>
 <div itemscope itemtype="https://schema.org/FAQPage">
     <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <h3 itemprop="name">[Question 1]</h3>
+        <h3 itemprop="name">[Question 1 en français]</h3>
         <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-            <p itemprop="text">[Answer 1]</p>
+            <p itemprop="text">[Réponse 1 détaillée en français]</p>
         </div>
     </div>
     <div itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
-        <h3 itemprop="name">[Question 2]</h3>
+        <h3 itemprop="name">[Question 2 en français]</h3>
         <div itemscope itemprop="acceptedAnswer" itemtype="https://schema.org/Answer">
-            <p itemprop="text">[Answer 2]</p>
+            <p itemprop="text">[Réponse 2 détaillée en français]</p>
         </div>
     </div>
 </div>
 
-# LINK DISTRIBUTION
-- **Internal Links**: Use them naturally in the body. Format as Markdown: \`[descriptive anchor text](EXACT_URL_FROM_INPUT)\`.
-- **External Links**: Use them to support facts, definitions, or statistics. Format as Markdown: \`[descriptive anchor text](EXACT_URL_FROM_INPUT)\`.
-- Distribute links naturally across the full article. Place at least:
-  - 1 link in the first 30%,
-  - 1 in the middle,
-  - 1 before the final paragraph (not in the conclusion).
-- Never cluster multiple links in one paragraph. Maximum 1 link per paragraph. Links must feel fully integrated into the sentence.
+# DISTRIBUTION DES LIENS
+- **Liens internes**: Intégrez-les sous forme de lien Markdown : \`[texte d'ancre naturel](URL_INTERNE)\`.
+- **Liens externes**: Pour sourcer des données ou études : \`[texte d'ancre naturel](URL_EXTERNE)\`.
+- Répartir les liens de manière équilibrée (au moins 1 au début, 1 au milieu, 1 avant la conclusion). Maximum 1 lien par paragraphe.
 
-# OUTPUT FORMAT (CRITICAL)
-1. Your output MUST be strict raw Markdown. Do NOT wrap your output in markdown code blocks (e.g. \`\`\`markdown). Just output the raw text directly.
-2. You MUST include YAML Frontmatter at the very top of the file, structured exactly like this:
+# FORMAT DE SORTIE OBLIGATOIRE
+1. Sortie STRICTEMENT en Markdown brut (aucun bloc \`\`\`markdown).
+2. Frontmatter YAML obligatoire tout en haut du fichier, strictement en FRANÇAIS :
 ---
 id: ${data.permalinkSlug}
 slug: ${data.permalinkSlug}
@@ -306,7 +412,7 @@ isoDate: ${Date.now()}
 description: "${data.metaDescription.replace(/"/g, '\\"').replace(/\n/g, ' ').replace(/\r/g, '')}"
 coverImage: /images/blog/${data.permalinkSlug}.jpg
 ---
-3. Do not include any conversational intro or outro (e.g., "Here is your article:"). Start immediately with "---".
+3. Ne commencez par aucun mot d'introduction comme "Voici l'article :". Démarrez immédiatement par "---".
 `;
 
   const response = await openai.chat.completions.create({
@@ -461,17 +567,19 @@ async function main() {
         console.log(`\n📝 Processing new item: ${item.title}`);
 
         try {
-          // 1. Agent 1: Generate SEO Data
+          // 1. Agent 1: Generate SEO Data (Strictly French)
           const seoData = await analyzeArticleSEO(item);
 
-          // Ensure critical fields are never empty before passing to Agent 2
-          seoData.permalinkSlug = seoData.permalinkSlug || item.title?.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '') || `untitled-${Date.now()}`;
-          seoData.metaTitle = seoData.metaTitle || item.title || 'Untitled Article';
-          let fallbackDesc = item.contentSnippet || item.content || '';
-          if (fallbackDesc.trim().toLowerCase() === 'comments' || fallbackDesc.trim() === '') {
-            fallbackDesc = `Découvrez notre analyse détaillée sur : "${item.title}". Restez informé des dernières actualités et tendances de l'immobilier au Maroc avec Lqaly.`;
+          // Safeguards: ensure French slug and valid metadata
+          if (!seoData.permalinkSlug) {
+            seoData.permalinkSlug = slugifyFrench(seoData.metaTitle || `immobilier-maroc-${Date.now()}`);
           }
-          seoData.metaDescription = seoData.metaDescription && seoData.metaDescription.toLowerCase() !== 'comments' ? seoData.metaDescription : fallbackDesc;
+          if (!seoData.metaTitle) {
+            seoData.metaTitle = "Guide et Tendances Immobilières au Maroc";
+          }
+          if (!seoData.metaDescription) {
+            seoData.metaDescription = `Découvrez notre guide complet sur : "${seoData.metaTitle}". Retrouvez les dernières tendances du marché immobilier au Maroc avec Lqaly.`;
+          }
 
           // 2. Agent 2: Write Article
           const markdownContent = await generateArticle(seoData);

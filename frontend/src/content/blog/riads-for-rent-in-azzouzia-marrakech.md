@@ -1,14 +1,13 @@
 ---
 id: riads-for-rent-in-azzouzia-marrakech
 slug: riads-for-rent-in-azzouzia-marrakech
-title: "Riads for Rent in Azzouzia Marrakech"
+title: "Location de Riads à Azzouzia, Marrakech : Guide & Prix"
 category: Immobilier
 author: Lqaly
 date: 5 octobre 2026
 readTime: 5 min de lecture
 isoDate: 1791206514340
-description: "Find riads for rent in Azzouzia, Marrakech. Discover spacious traditional homes away from the medina with gardens, parking, and authentic Moroccan architecture.
-The post Riads for Rent in Azzouzia Marrakech appeared first on Sarouty."
+description: "Trouvez un riad à louer à Azzouzia, Marrakech. Découvrez des demeures traditionnelles spacieuses avec jardin et parking, loin de la cohue de la médina."
 coverImage: /images/blog/riads-for-rent-in-azzouzia-marrakech.jpg
 ---
 
