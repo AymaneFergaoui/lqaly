@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Lqaly Immobilier Blog</title>
+    <link>https://lqaly.com</link>
+    <description>Guide et tendances de l'immobilier au Maroc</description>
+    <language>fr</language>
+    <lastBuildDate>Wed, 07 Oct 2026 16:48:25 GMT</lastBuildDate>
+    <atom:link href="https://lqaly.com/feed.xml" rel="self" type="application/rss+xml" />
+  </channel>
+</rss>

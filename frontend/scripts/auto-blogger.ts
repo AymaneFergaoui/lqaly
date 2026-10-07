@@ -235,8 +235,7 @@ Réponds UNIQUEMENT avec un objet JSON valide contenant ces 4 champs STRICTEMENT
     try {
       const resp = await openai.chat.completions.create({
         model: "claude-sonnet-4.6",
-        messages: [{ role: "user", content: transPrompt }],
-        response_format: { type: "json_object" }
+        messages: [{ role: "user", content: transPrompt }]
       });
       const parsed = cleanAndParseJson(resp.choices[0].message?.content || '{}');
       if (parsed.metaTitle) data.metaTitle = parsed.metaTitle;
@@ -253,12 +252,18 @@ Réponds UNIQUEMENT avec un objet JSON valide contenant ces 4 champs STRICTEMENT
     data.metaDescription = cleanRssSnippet(data.metaDescription);
   }
 
+  if (!data.metaTitle || isLikelyEnglish(data.metaTitle)) {
+    throw new Error("Génération annulée : metaTitle est manquant ou invalide.");
+  }
+
   if (!data.metaDescription || data.metaDescription.length < 20 || isLikelyEnglish(data.metaDescription)) {
-    data.metaDescription = `Découvrez notre guide complet sur : "${data.metaTitle}". Prix du marché, caractéristiques des biens et conseils d'experts avec Lqaly.`;
+    throw new Error("Génération annulée : metaDescription est manquante ou invalide.");
   }
 
   if (data.permalinkSlug) {
     data.permalinkSlug = slugifyFrench(data.permalinkSlug);
+  } else {
+    data.permalinkSlug = slugifyFrench(data.metaTitle);
   }
 
   return data;
@@ -305,8 +310,7 @@ Tu DOIS retourner un objet JSON avec les champs suivants (les clés doivent rest
 
   const response = await openai.chat.completions.create({
     model: "claude-sonnet-4.6",
-    messages: [{ role: "user", content: prompt }],
-    response_format: { type: "json_object" }
+    messages: [{ role: "user", content: prompt }]
   });
   const text = response.choices[0].message?.content || '{}';
 
@@ -570,15 +574,12 @@ async function main() {
           // 1. Agent 1: Generate SEO Data (Strictly French)
           const seoData = await analyzeArticleSEO(item);
 
-          // Safeguards: ensure French slug and valid metadata
+          // Safeguards: ensure valid metadata exists
+          if (!seoData.metaTitle || !seoData.metaDescription) {
+            throw new Error("Les métadonnées (titre ou description) n'ont pas été générées correctement.");
+          }
           if (!seoData.permalinkSlug) {
-            seoData.permalinkSlug = slugifyFrench(seoData.metaTitle || `immobilier-maroc-${Date.now()}`);
-          }
-          if (!seoData.metaTitle) {
-            seoData.metaTitle = "Guide et Tendances Immobilières au Maroc";
-          }
-          if (!seoData.metaDescription) {
-            seoData.metaDescription = `Découvrez notre guide complet sur : "${seoData.metaTitle}". Retrouvez les dernières tendances du marché immobilier au Maroc avec Lqaly.`;
+            seoData.permalinkSlug = slugifyFrench(seoData.metaTitle);
           }
 
           // 2. Agent 2: Write Article
@@ -587,12 +588,8 @@ async function main() {
           // 3. Commit Image and Markdown to GitHub
           const slug = seoData.permalinkSlug;
 
-          try {
-            const { buffer } = await downloadUnsplashImage(slug);
-            await commitImageToGithub(slug, buffer);
-          } catch (imgError: any) {
-            console.error(`❌ Failed to download/commit image:`, imgError.message);
-          }
+          const { buffer } = await downloadUnsplashImage(slug);
+          await commitImageToGithub(slug, buffer);
 
           await commitToGithub(slug, markdownContent);
 

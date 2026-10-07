@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "build": "vite build",
+    "build": "tsx scripts/generate-rss.ts && vite build",
     "dev": "vite",
     "preview": "vite preview",
     "auto-blogger": "tsx scripts/auto-blogger.ts"
