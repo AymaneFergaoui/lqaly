@@ -5,10 +5,10 @@ import { Octokit } from '@octokit/rest';
 import * as dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
-import sharp from 'sharp';
 
 // Load environment variables
 dotenv.config();
+dotenv.config({ path: '.env.local' });
 dotenv.config({ path: '../.env.local' });
 
 // Configuration mapping
@@ -26,6 +26,7 @@ const config = {
   rssDataSheet: 'RSS Data',
   wpDataSheet: 'Lqaly Data',
   rssFeedUrls: (process.env.RSS_FEED_LQALY || '').split(',').map(u => u.trim()).filter(Boolean),
+  unsplashAccessKey: process.env.UNSPLASH_ACCESS_KEY,
 };
 
 // Validate configuration
@@ -473,92 +474,51 @@ async function commitToGithub(slug: string, content: string) {
 }
 
 /**
- * 1. Génération de l'image de fond via Pollinations (Alternative gratuite 100% fiable)
+ * Downloads a real image from Unsplash API matching the article's title/keyword.
+ * Requires UNSPLASH_ACCESS_KEY in .env.
  */
-async function generateRealEstateSubject(promptKeyword: string): Promise<Buffer> {
-  const prompt = `Modern Moroccan luxury architecture, villa or apartment building, real estate concept: ${promptKeyword}, bright studio lighting, pure white clean background, 3D architectural render, commercial photography, high quality.`;
-  
-  // Utilisation de Pollinations.ai au lieu de HuggingFace car l'API HF est bloquée sur ton réseau ("fetch failed")
-  const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=1080&height=1350&nologo=true`;
-
-  let retries = 3;
-  while (retries > 0) {
-    try {
-      const response = await fetch(url);
-      if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
-      
-      const arrayBuffer = await response.arrayBuffer();
-      return Buffer.from(arrayBuffer);
-    } catch (err: any) {
-      console.log(`[Image] Erreur de connexion Pollinations, nouvel essai... (Restant: ${retries - 1})`);
-      retries--;
-      if (retries === 0) throw err;
-      await new Promise(r => setTimeout(r, 5000));
-    }
+async function downloadUnsplashImage(slug: string, keyword: string): Promise<{ localPath: string; buffer: Buffer }> {
+  console.log(`[Image] Recherche d'une image réelle sur Unsplash pour "${keyword}"...`);
+  const imagesDir = fs.existsSync(path.join(process.cwd(), 'frontend', 'public'))
+    ? path.join(process.cwd(), 'frontend', 'public', 'images', 'blog')
+    : path.join(process.cwd(), 'public', 'images', 'blog');
+  if (!fs.existsSync(imagesDir)) {
+    fs.mkdirSync(imagesDir, { recursive: true });
   }
-  
-  throw new Error("Failed to generate image after retries.");
-}
 
-/**
- * 2. Overlay Branding Lqaly (Logo, Titre dynamique, Bande Rouge)
- */
-function createLqalyBrandingSvg(title: string, category: string): Buffer {
-  const shortTitle = title.length > 40 ? title.substring(0, 37) + '...' : title;
+  const localPath = path.join(imagesDir, `${slug}.jpg`);
+  let imageUrl = `https://picsum.photos/seed/${slug}/1200/630`; // Fallback if no API key or error
 
-  const svg = `
-  <svg width="1080" height="1350" viewBox="0 0 1080 1350" xmlns="http://www.w3.org/2000/svg">
-    <style>
-      .logo-txt { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 42px; letter-spacing: 12px; fill: #111827; }
-      .sub-logo { font-family: sans-serif; font-size: 16px; letter-spacing: 4px; fill: #DC2626; font-weight: bold; }
-      .title-black { font-family: sans-serif; font-weight: 900; font-size: 54px; fill: #0f172a; }
-      .title-red { font-family: sans-serif; font-weight: 900; font-size: 58px; fill: #DC2626; }
-      .website-btn { font-family: sans-serif; font-weight: bold; font-size: 24px; fill: #DC2626; }
-    </style>
+  if (config.unsplashAccessKey) {
+    try {
+      const searchUrl = `https://api.unsplash.com/photos/random?query=${encodeURIComponent(keyword)}&orientation=landscape&client_id=${config.unsplashAccessKey}`;
+      const searchRes = await fetch(searchUrl);
+      if (searchRes.ok) {
+        const data = await searchRes.json();
+        if (data && data.urls && data.urls.regular) {
+          imageUrl = data.urls.regular;
+          console.log(`[Image] Image Unsplash trouvée !`);
+        }
+      } else {
+        console.warn(`[Image] Erreur Unsplash API (${searchRes.status}), utilisation de l'image de secours.`);
+      }
+    } catch (e: any) {
+      console.warn(`[Image] Échec de l'API Unsplash, utilisation de l'image de secours : ${e.message}`);
+    }
+  } else {
+    console.warn(`⚠️ UNSPLASH_ACCESS_KEY non trouvée dans .env. Veuillez l'ajouter pour avoir des images en rapport avec le titre. On utilise l'image par défaut.`);
+  }
 
-    <!-- Logo Lqaly (Haut Gauche) -->
-    <text x="80" y="90" class="logo-txt">LQALY</text>
-    <text x="80" y="125" class="sub-logo">IMMOBILIER AU MAROC</text>
-    <line x1="80" y1="140" x2="320" y2="140" stroke="#DC2626" stroke-width="2" />
+  const response = await fetch(imageUrl);
+  if (!response.ok) throw new Error(`Erreur HTTP lors du téléchargement de l'image: ${response.status}`);
 
-    <!-- Grand Titre dynamique -->
-    <text x="80" y="240" class="title-black">GUIDE IMMO</text>
-    <text x="80" y="310" class="title-red">${shortTitle.toUpperCase()}</text>
+  const arrayBuffer = await response.arrayBuffer();
+  const buffer = Buffer.from(arrayBuffer);
 
-    <!-- Diagonal Red Stripe (Style Lqaly) -->
-    <polygon points="850,0 950,0 720,450 620,450" fill="#DC2626" />
+  fs.writeFileSync(localPath, buffer);
+  console.log(`[Image] Image sauvegardée : /images/blog/${slug}.jpg`);
 
-    <!-- Bouton URL (Bas Droite) -->
-    <rect x="730" y="1240" width="270" height="60" rx="30" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="2" />
-    <text x="865" y="1278" text-anchor="middle" class="website-btn">www.lqaly.com</text>
-  </svg>
-  `;
-  return Buffer.from(svg);
-}
-
-/**
- * 3. Assemblage final en image HD prête pour le blog
- */
-async function generateAutoLqalyCover(data: ArticleData): Promise<{ buffer: Buffer }> {
-  console.log(`🖼️ [Auto-Image] Génération gratuite pour : ${data.permalinkSlug}`);
-
-  // 1. Récupération de l'image du sujet via Hugging Face
-  const baseAiBuffer = await generateRealEstateSubject(data.primaryKeyword);
-
-  // 2. Redimensionnement (Format vertical 4:5 idéal pour social/blog)
-  const resizedBase = await sharp(baseAiBuffer)
-    .resize(1080, 1350, { fit: 'cover', position: 'bottom' })
-    .toBuffer();
-
-  // 3. Fusion avec le Branding SVG
-  const brandingOverlay = createLqalyBrandingSvg(data.metaTitle, data.category);
-
-  const finalImage = await sharp(resizedBase)
-    .composite([{ input: brandingOverlay, top: 0, left: 0 }])
-    .jpeg({ quality: 90 })
-    .toBuffer();
-
-  return { buffer: finalImage };
+  return { localPath, buffer };
 }
 
 /**
@@ -660,8 +620,13 @@ async function main() {
           // 3. Commit Image and Markdown to GitHub
           const slug = seoData.permalinkSlug;
 
-          const { buffer } = await generateAutoLqalyCover(seoData);
-          await commitImageToGithub(slug, buffer);
+          try {
+            const searchKeyword = seoData.primaryKeyword || item.title || slug;
+            const { buffer } = await downloadUnsplashImage(slug, searchKeyword);
+            await commitImageToGithub(slug, buffer);
+          } catch (imgError: any) {
+            console.error(`❌ Failed to download/commit image:`, imgError.message);
+          }
 
           await commitToGithub(slug, markdownContent);
 
