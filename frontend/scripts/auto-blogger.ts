@@ -13,6 +13,7 @@ const __dirname = path.dirname(__filename);
 
 // Load environment variables
 dotenv.config();
+dotenv.config({ path: path.resolve(__dirname, '../.env') });
 dotenv.config({ path: '.env.local' });
 dotenv.config({ path: '../.env.local' });
 
@@ -479,39 +480,64 @@ async function commitToGithub(slug: string, content: string) {
 }
 
 /**
+ * Builds candidate search queries for Unsplash from French article topics
+ */
+function buildUnsplashSearchQueries(keyword: string, title: string): string[] {
+  const text = `${keyword} ${title}`.toLowerCase();
+  const queries: string[] = [];
+
+  if (text.includes('appartement') || text.includes('apartment')) {
+    if (text.includes('agadir')) queries.push('agadir apartment architecture');
+    queries.push('modern apartment building architecture');
+    queries.push('luxury apartment interior modern');
+  } else if (text.includes('sci') || text.includes('societe') || text.includes('investiss') || text.includes('patrimoin')) {
+    queries.push('luxury real estate investment architecture');
+    queries.push('modern luxury property real estate');
+    queries.push('modern architectural property morocco');
+  } else if (text.includes('riad')) {
+    queries.push('moroccan riad traditional architecture');
+    queries.push('morocco riad courtyard architecture');
+  } else if (text.includes('villa') || text.includes('maison')) {
+    queries.push('luxury villa modern architecture');
+    queries.push('modern house villa morocco');
+  }
+
+  const cleanKeyword = keyword.replace(/[^a-zA-Z\s]/g, ' ').trim().replace(/\s+/g, ' ');
+  if (cleanKeyword && cleanKeyword.length > 3 && !queries.includes(cleanKeyword)) {
+    queries.unshift(cleanKeyword);
+  }
+
+  queries.push('modern luxury real estate architecture');
+  queries.push('real estate villa house');
+  return queries;
+}
+
+/**
  * 1. Génération de l'image de fond via Unsplash API officielle
  */
 async function generateRealEstateSubject(promptKeyword: string, title: string): Promise<Buffer> {
-  // Nettoyage et préparation des mots-clés
-  const safeTitle = title.replace(/[^a-zA-Z0-9\s]/g, '').trim().replace(/\s+/g, ',');
-  const safeKeyword = promptKeyword.replace(/[^a-zA-Z0-9\s]/g, '').trim().replace(/\s+/g, ',');
-  const searchKeywords = `${safeKeyword || safeTitle || 'real estate,house,architecture'}`;
-
   let imageUrl = `https://picsum.photos/1080/1350`;
 
   if (config.unsplashAccessKey) {
-    try {
-      console.log(`[Image] Recherche d'une image réelle sur Unsplash pour "${searchKeywords}"...`);
-      const searchUrl = `https://api.unsplash.com/photos/random?query=${encodeURIComponent(searchKeywords)}&orientation=portrait&client_id=${config.unsplashAccessKey}`;
-      const searchRes = await fetch(searchUrl);
-      if (searchRes.ok) {
-        const data: any = await searchRes.json();
-        if (data?.urls?.regular) {
-          imageUrl = data.urls.regular;
-          console.log(`[Image] Image Unsplash trouvée : ${imageUrl}`);
-        }
-      } else {
-        console.warn(`[Image] Erreur Unsplash API (${searchRes.status}), fallback vers recherche générique real estate.`);
-        const fallbackRes = await fetch(`https://api.unsplash.com/photos/random?query=real%20estate%20villa%20house&orientation=portrait&client_id=${config.unsplashAccessKey}`);
-        if (fallbackRes.ok) {
-          const fallbackData: any = await fallbackRes.json();
-          if (fallbackData?.urls?.regular) {
-            imageUrl = fallbackData.urls.regular;
+    const candidateQueries = buildUnsplashSearchQueries(promptKeyword, title);
+    for (const query of candidateQueries) {
+      try {
+        console.log(`[Image] Recherche Unsplash pour "${query}"...`);
+        const searchUrl = `https://api.unsplash.com/photos/random?query=${encodeURIComponent(query)}&orientation=portrait&client_id=${config.unsplashAccessKey}`;
+        const searchRes = await fetch(searchUrl);
+        if (searchRes.ok) {
+          const data: any = await searchRes.json();
+          if (data?.urls?.regular) {
+            imageUrl = data.urls.regular;
+            console.log(`[Image] ✅ Image Unsplash trouvée pour "${query}" : ${imageUrl}`);
+            break;
           }
+        } else {
+          console.log(`[Image] Aucun résultat Unsplash pour "${query}" (${searchRes.status}), essai suivant...`);
         }
+      } catch (e: any) {
+        console.warn(`[Image] Échec requête Unsplash (${query}) : ${e.message}`);
       }
-    } catch (e: any) {
-      console.warn(`[Image] Échec API Unsplash : ${e.message}`);
     }
   } else {
     console.warn(`⚠️ UNSPLASH_ACCESS_KEY non trouvée dans l'environnement.`);
@@ -538,13 +564,24 @@ async function generateRealEstateSubject(promptKeyword: string, title: string): 
 
 const DANGLING_WORDS = new Set([
   'À', 'A', 'DE', 'DU', 'DES', 'EN', 'AU', 'AUX', 'DANS',
-  'POUR', 'SUR', 'ET', 'OU', 'PAR', 'AVEC', 'LE', 'LA', 'LES', 'UN', 'UNE'
+  'POUR', 'SUR', 'ET', 'OU', 'PAR', 'AVEC', 'LE', 'LA', 'LES', 'UN', 'UNE',
+  'AL', 'EL', 'D\'', 'L\'', ':', '-'
 ]);
 
+function escapeXml(unsafe: string): string {
+  return unsafe
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&apos;');
+}
+
 async function measureTextExact(text: string, fontSize: number): Promise<number> {
+  const safeText = escapeXml(text);
   const svg = `
   <svg width="1200" height="150" xmlns="http://www.w3.org/2000/svg">
-    <text x="30" y="90" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-weight="800" font-size="${fontSize}px" fill="#000000">${text}</text>
+    <text x="30" y="90" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-weight="800" font-size="${fontSize}px" fill="#000000">${safeText}</text>
   </svg>
   `;
   try {
@@ -645,7 +682,7 @@ async function createLqalyBrandingSvg(title: string, category: string): Promise<
       <!-- Badge Ligne ${index + 1} -->
       <g filter="url(#badge-shadow)">
         <rect x="${startX}" y="${boxY}" width="${boxWidth}" height="${badgeHeight}" rx="${rx}" fill="${bgColor}" />
-        <text x="${textCenterX}" y="${textY}" text-anchor="middle" class="badge-text" font-size="${fontSize}px" fill="${textColor}">${lineText}</text>
+        <text x="${textCenterX}" y="${textY}" text-anchor="middle" class="badge-text" font-size="${fontSize}px" fill="${textColor}">${escapeXml(lineText)}</text>
       </g>
     `;
   });
@@ -704,7 +741,7 @@ async function createLqalyBrandingSvg(title: string, category: string): Promise<
     <!-- Barre Inférieure Footer -->
     <g transform="translate(80, 1260)">
       <text x="0" y="24" class="footer-brand">www.lqaly.com</text>
-      <text x="920" y="24" text-anchor="end" class="footer-tag">${categoryLabel}</text>
+      <text x="920" y="24" text-anchor="end" class="footer-tag">${escapeXml(categoryLabel)}</text>
     </g>
   </svg>
   `;
@@ -752,6 +789,20 @@ async function generateAutoLqalyCover(data: ArticleData): Promise<{ buffer: Buff
     .jpeg({ quality: 92 })
     .toBuffer();
 
+  // Enregistrement local automatique dans public/images/blog
+  const blogImagesDirs = [
+    path.resolve(process.cwd(), 'frontend/public/images/blog'),
+    path.resolve(process.cwd(), 'public/images/blog'),
+    path.resolve(__dirname, '../public/images/blog')
+  ];
+  const targetImagesDir = blogImagesDirs.find(d => fs.existsSync(d)) || blogImagesDirs[0];
+  if (!fs.existsSync(targetImagesDir)) {
+    fs.mkdirSync(targetImagesDir, { recursive: true });
+  }
+  const localFilePath = path.join(targetImagesDir, `${data.permalinkSlug}.jpg`);
+  fs.writeFileSync(localFilePath, finalImage);
+  console.log(`💾 Image enregistrée localement : ${localFilePath}`);
+
   return { buffer: finalImage };
 }
 
@@ -794,9 +845,118 @@ async function commitImageToGithub(slug: string, buffer: Buffer) {
 }
 
 /**
+ * CLI helper: Regenerates cover images for specified article slugs or titles.
+ */
+async function regenerateImagesForArticles(targets: string[]) {
+  console.log(`\n🎨 Régénération des couvertures pour : ${targets.join(', ')}`);
+
+  const blogDirs = [
+    path.resolve(process.cwd(), 'frontend/src/content/blog'),
+    path.resolve(process.cwd(), 'src/content/blog'),
+    path.resolve(__dirname, '../src/content/blog')
+  ];
+  const blogDir = blogDirs.find(d => fs.existsSync(d));
+  if (!blogDir) {
+    throw new Error("Dossier des articles blog (src/content/blog) introuvable.");
+  }
+
+  const files = fs.readdirSync(blogDir).filter(f => f.endsWith('.md'));
+
+  for (const target of targets) {
+    const cleanTarget = target.trim().toLowerCase();
+
+    // Match file by slug or title
+    let matchedFile: string | undefined;
+    let fileContent = '';
+
+    for (const file of files) {
+      const content = fs.readFileSync(path.join(blogDir, file), 'utf-8');
+      const slugMatch = content.match(/slug:\s*([^\r\n]+)/);
+      const titleMatch = content.match(/title:\s*["']?([^"'\r\n]+)["']?/);
+      const fileSlug = (slugMatch ? slugMatch[1].trim() : file.replace('.md', '')).toLowerCase();
+      const fileTitle = (titleMatch ? titleMatch[1].trim() : '').toLowerCase();
+
+      if (
+        file.toLowerCase().includes(cleanTarget) ||
+        fileSlug === cleanTarget ||
+        fileTitle.includes(cleanTarget) ||
+        cleanTarget.includes(fileSlug) ||
+        cleanTarget.includes(fileTitle)
+      ) {
+        matchedFile = file;
+        fileContent = content;
+        break;
+      }
+    }
+
+    if (!matchedFile) {
+      console.warn(`⚠️ Article non trouvé pour la cible : "${target}"`);
+      continue;
+    }
+
+    const titleMatch = fileContent.match(/title:\s*["']?([^"'\r\n]+)["']?/);
+    const categoryMatch = fileContent.match(/category:\s*([^\r\n]+)/);
+    const slugMatch = fileContent.match(/slug:\s*([^\r\n]+)/);
+
+    const title = titleMatch ? titleMatch[1].trim() : target;
+    const category = categoryMatch ? categoryMatch[1].trim() : 'Conseils Pratiques';
+    const slug = slugMatch ? slugMatch[1].trim() : matchedFile.replace('.md', '');
+
+    const articleData: ArticleData = {
+      metaTitle: title,
+      metaDescription: '',
+      primaryKeyword: title,
+      secondaryKeywords: '',
+      permalinkSlug: slug,
+      internalLinks: '',
+      externalLinks: '',
+      keywordStrategy: '',
+      contentGaps: '',
+      contentStructure: '',
+      imagePrompt: '',
+      category: category,
+    };
+
+    console.log(`\n========================================`);
+    console.log(`📸 Génération couverture : "${title}" (${slug})`);
+    console.log(`========================================`);
+
+    const { buffer } = await generateAutoLqalyCover(articleData);
+
+    // Commit to GitHub if configured
+    if (config.githubToken && config.githubOwner && config.githubRepo) {
+      if (!octokit) {
+        octokit = new Octokit({ auth: config.githubToken });
+      }
+      try {
+        await commitImageToGithub(slug, buffer);
+      } catch (err: any) {
+        console.warn(`⚠️ Octokit push warning : ${err.message}`);
+      }
+    }
+
+    console.log(`✨ Couverture mise à jour pour : ${slug}`);
+  }
+}
+
+/**
  * Main execution pipeline
  */
 async function main() {
+  console.log("🚀 Lancement de auto-blogger.ts...", process.argv.slice(2));
+  const args = process.argv.slice(2);
+  const imageOnlyIndex = args.findIndex(a => a === '--image-only' || a === '--image' || a === '--regenerate-image');
+
+  if (imageOnlyIndex !== -1) {
+    const targets = args.slice(imageOnlyIndex + 1).filter(a => !a.startsWith('--'));
+    if (targets.length === 0) {
+      console.error("Veuillez spécifier au moins un slug ou titre après --image-only");
+      process.exit(1);
+    }
+    await regenerateImagesForArticles(targets);
+    return;
+  }
+
   validateConfig();
   await initServices();
 
