@@ -13,6 +13,7 @@ const __dirname = path.dirname(__filename);
 
 // Load environment variables
 dotenv.config();
+dotenv.config({ path: '.env.local' });
 dotenv.config({ path: '../.env.local' });
 
 // Configuration mapping
@@ -209,11 +210,11 @@ function isLikelyEnglish(str: string): boolean {
  * Ensures all SEO data fields are strictly in French, translating if necessary.
  */
 async function ensureFrenchSeoData(data: ArticleData, sourceTitle: string, sourceSummary: string): Promise<ArticleData> {
-  const needsTranslation = 
-    !data.metaTitle || 
-    isLikelyEnglish(data.metaTitle) || 
-    !data.metaDescription || 
-    isLikelyEnglish(data.metaDescription) || 
+  const needsTranslation =
+    !data.metaTitle ||
+    isLikelyEnglish(data.metaTitle) ||
+    !data.metaDescription ||
+    isLikelyEnglish(data.metaDescription) ||
     isLikelyEnglish(data.permalinkSlug) ||
     isLikelyEnglish(data.primaryKeyword);
 
@@ -521,7 +522,7 @@ async function generateRealEstateSubject(promptKeyword: string, title: string): 
     try {
       const response = await fetch(imageUrl);
       if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
-      
+
       const arrayBuffer = await response.arrayBuffer();
       return Buffer.from(arrayBuffer);
     } catch (err: any) {
@@ -531,12 +532,12 @@ async function generateRealEstateSubject(promptKeyword: string, title: string): 
       await new Promise(r => setTimeout(r, 5000));
     }
   }
-  
+
   throw new Error("Failed to generate image after retries.");
 }
 
 const DANGLING_WORDS = new Set([
-  'À', 'A', 'DE', 'DU', 'DES', 'EN', 'AU', 'AUX', 'DANS', 
+  'À', 'A', 'DE', 'DU', 'DES', 'EN', 'AU', 'AUX', 'DANS',
   'POUR', 'SUR', 'ET', 'OU', 'PAR', 'AVEC', 'LE', 'LA', 'LES', 'UN', 'UNE'
 ]);
 
@@ -853,8 +854,12 @@ async function main() {
           // 3. Commit Image and Markdown to GitHub
           const slug = seoData.permalinkSlug;
 
-          const { buffer } = await generateAutoLqalyCover(seoData);
-          await commitImageToGithub(slug, buffer);
+          try {
+            const { buffer } = await generateAutoLqalyCover(seoData);
+            await commitImageToGithub(slug, buffer);
+          } catch (imgError: any) {
+            console.error(`❌ Failed to generate/commit image:`, imgError.message);
+          }
 
           await commitToGithub(slug, markdownContent);
 
