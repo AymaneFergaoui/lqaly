@@ -39,3 +39,4 @@ jobs:
           RSS_FEED_LQALY: ${{ secrets.RSS_FEED_LQALY }}
           CLAUDE_BASE_URL: ${{ secrets.CLAUDE_BASE_URL }}
           CLAUDE_API_KEY: ${{ secrets.CLAUDE_API_KEY }}
+          UNSPLASH_ACCESS_KEY: ${{ secrets.UNSPLASH_ACCESS_KEY }}

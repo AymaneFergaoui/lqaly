@@ -6,6 +6,10 @@ import * as dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
 import sharp from 'sharp';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 // Load environment variables
 dotenv.config();
@@ -26,6 +30,7 @@ const config = {
   rssDataSheet: 'RSS Data',
   wpDataSheet: 'Lqaly Data',
   rssFeedUrls: (process.env.RSS_FEED_LQALY || '').split(',').map(u => u.trim()).filter(Boolean),
+  unsplashAccessKey: process.env.UNSPLASH_ACCESS_KEY || 'CmdAwIJueFh0v7KIl0jcF9qdoGwfvhPiMzi4aQ1Hz5I',
 };
 
 // Validate configuration
@@ -323,8 +328,8 @@ Tu DOIS retourner un objet JSON avec les champs suivants (les clés doivent rest
       primaryKeyword: data.primaryKeyword || data.primary_keyword || data.keyword || data.motClePrincipal || '',
       secondaryKeywords: data.secondaryKeywords || data.secondary_keywords || data.keywords || data.motsCles || '',
       permalinkSlug: data.permalinkSlug || data.permalink_slug || data.slug || data.urlSlug || '',
-      internalLinks: data.internalLinks || data.internal_links || '',
-      externalLinks: data.externalLinks || data.external_links || '',
+      internalLinks: Array.isArray(data.internalLinks) ? data.internalLinks.join(', ') : (data.internalLinks || data.internal_links || ''),
+      externalLinks: Array.isArray(data.externalLinks) ? data.externalLinks.join(', ') : (data.externalLinks || data.external_links || ''),
       keywordStrategy: data.keywordStrategy || data.keyword_strategy || '',
       contentGaps: data.contentGaps || data.content_gaps || '',
       contentStructure: data.contentStructure || data.content_structure || '',
@@ -473,24 +478,54 @@ async function commitToGithub(slug: string, content: string) {
 }
 
 /**
- * 1. Génération de l'image de fond via Pollinations (Alternative gratuite 100% fiable)
+ * 1. Génération de l'image de fond via Unsplash API officielle
  */
-async function generateRealEstateSubject(promptKeyword: string): Promise<Buffer> {
-  const prompt = `Modern Moroccan luxury architecture, villa or apartment building, real estate concept: ${promptKeyword}, bright studio lighting, pure white clean background, 3D architectural render, commercial photography, high quality.`;
-  
-  // Utilisation de Pollinations.ai au lieu de HuggingFace car l'API HF est bloquée sur ton réseau ("fetch failed")
-  const url = `https://image.pollinations.ai/prompt/${encodeURIComponent(prompt)}?width=1080&height=1350&nologo=true`;
+async function generateRealEstateSubject(promptKeyword: string, title: string): Promise<Buffer> {
+  // Nettoyage et préparation des mots-clés
+  const safeTitle = title.replace(/[^a-zA-Z0-9\s]/g, '').trim().replace(/\s+/g, ',');
+  const safeKeyword = promptKeyword.replace(/[^a-zA-Z0-9\s]/g, '').trim().replace(/\s+/g, ',');
+  const searchKeywords = `${safeKeyword || safeTitle || 'real estate,house,architecture'}`;
+
+  let imageUrl = `https://picsum.photos/1080/1350`;
+
+  if (config.unsplashAccessKey) {
+    try {
+      console.log(`[Image] Recherche d'une image réelle sur Unsplash pour "${searchKeywords}"...`);
+      const searchUrl = `https://api.unsplash.com/photos/random?query=${encodeURIComponent(searchKeywords)}&orientation=portrait&client_id=${config.unsplashAccessKey}`;
+      const searchRes = await fetch(searchUrl);
+      if (searchRes.ok) {
+        const data: any = await searchRes.json();
+        if (data?.urls?.regular) {
+          imageUrl = data.urls.regular;
+          console.log(`[Image] Image Unsplash trouvée : ${imageUrl}`);
+        }
+      } else {
+        console.warn(`[Image] Erreur Unsplash API (${searchRes.status}), fallback vers recherche générique real estate.`);
+        const fallbackRes = await fetch(`https://api.unsplash.com/photos/random?query=real%20estate%20villa%20house&orientation=portrait&client_id=${config.unsplashAccessKey}`);
+        if (fallbackRes.ok) {
+          const fallbackData: any = await fallbackRes.json();
+          if (fallbackData?.urls?.regular) {
+            imageUrl = fallbackData.urls.regular;
+          }
+        }
+      }
+    } catch (e: any) {
+      console.warn(`[Image] Échec API Unsplash : ${e.message}`);
+    }
+  } else {
+    console.warn(`⚠️ UNSPLASH_ACCESS_KEY non trouvée dans l'environnement.`);
+  }
 
   let retries = 3;
   while (retries > 0) {
     try {
-      const response = await fetch(url);
+      const response = await fetch(imageUrl);
       if (!response.ok) throw new Error(`HTTP Error: ${response.status}`);
       
       const arrayBuffer = await response.arrayBuffer();
       return Buffer.from(arrayBuffer);
     } catch (err: any) {
-      console.log(`[Image] Erreur de connexion Pollinations, nouvel essai... (Restant: ${retries - 1})`);
+      console.log(`[Image] Erreur de téléchargement image, nouvel essai... (Restant: ${retries - 1})`);
       retries--;
       if (retries === 0) throw err;
       await new Promise(r => setTimeout(r, 5000));
@@ -500,37 +535,176 @@ async function generateRealEstateSubject(promptKeyword: string): Promise<Buffer>
   throw new Error("Failed to generate image after retries.");
 }
 
+const DANGLING_WORDS = new Set([
+  'À', 'A', 'DE', 'DU', 'DES', 'EN', 'AU', 'AUX', 'DANS', 
+  'POUR', 'SUR', 'ET', 'OU', 'PAR', 'AVEC', 'LE', 'LA', 'LES', 'UN', 'UNE'
+]);
+
+async function measureTextExact(text: string, fontSize: number): Promise<number> {
+  const svg = `
+  <svg width="1200" height="150" xmlns="http://www.w3.org/2000/svg">
+    <text x="30" y="90" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif" font-weight="800" font-size="${fontSize}px" fill="#000000">${text}</text>
+  </svg>
+  `;
+  try {
+    const { info } = await sharp(Buffer.from(svg)).trim().toBuffer({ resolveWithObject: true });
+    return info.width;
+  } catch (e) {
+    return text.length * fontSize * 0.72;
+  }
+}
+
+async function formatTitleBadgesExact(title: string, maxAvailableWidth: number = 920): Promise<{ lines: string[], fontSize: number, measuredWidths: number[] }> {
+  const cleanTitle = title.toUpperCase().replace(/\s+/g, ' ').trim();
+  const words = cleanTitle.split(' ');
+
+  let fontSize = 44;
+  let bestLines: string[] = [];
+
+  if (words.length <= 2) {
+    let w = await measureTextExact(cleanTitle, fontSize);
+    while (w + 80 > maxAvailableWidth && fontSize > 28) {
+      fontSize -= 2;
+      w = await measureTextExact(cleanTitle, fontSize);
+    }
+    return { lines: [cleanTitle], fontSize, measuredWidths: [w] };
+  }
+
+  let minDiff = Infinity;
+  let chosenSplit = 1;
+
+  for (let i = 1; i < words.length; i++) {
+    const line1 = words.slice(0, i).join(' ');
+    const line2 = words.slice(i).join(' ');
+    const lastWord = words[i - 1];
+    const penalty = DANGLING_WORDS.has(lastWord) ? 250 : 0;
+
+    const w1 = await measureTextExact(line1, fontSize);
+    const w2 = await measureTextExact(line2, fontSize);
+
+    const diff = Math.abs(w1 - w2) + penalty;
+    if (w1 + 80 <= maxAvailableWidth && w2 + 80 <= maxAvailableWidth) {
+      if (diff < minDiff) {
+        minDiff = diff;
+        chosenSplit = i;
+      }
+    }
+  }
+
+  bestLines = [
+    words.slice(0, chosenSplit).join(' '),
+    words.slice(chosenSplit).join(' ')
+  ];
+
+  let w1 = await measureTextExact(bestLines[0], fontSize);
+  let w2 = await measureTextExact(bestLines[1], fontSize);
+
+  while ((w1 + 80 > maxAvailableWidth || w2 + 80 > maxAvailableWidth) && fontSize > 28) {
+    fontSize -= 2;
+    w1 = await measureTextExact(bestLines[0], fontSize);
+    w2 = await measureTextExact(bestLines[1], fontSize);
+  }
+
+  return { lines: bestLines, fontSize, measuredWidths: [w1, w2] };
+}
+
 /**
- * 2. Overlay Branding Lqaly (Logo, Titre dynamique, Bande Rouge)
+ * 2. Overlay Branding Lqaly (Badges Titre en bas: Blanc ligne 1, Rouge ligne 2)
  */
-function createLqalyBrandingSvg(title: string, category: string): Buffer {
-  const shortTitle = title.length > 40 ? title.substring(0, 37) + '...' : title;
+async function createLqalyBrandingSvg(title: string, category: string): Promise<Buffer> {
+  const maxAvailableWidth = 920;
+  const { lines, fontSize, measuredWidths } = await formatTitleBadgesExact(title, maxAvailableWidth);
+
+  const paddingX = 36;
+  const badgeHeight = Math.round(fontSize * 1.65);
+  const badgeSpacing = 14;
+  const rx = 8;
+  const startX = 80;
+
+  const totalBadgesHeight = lines.length * badgeHeight + (lines.length - 1) * badgeSpacing;
+  const endY = 1200;
+  const startY = endY - totalBadgesHeight;
+
+  let badgesSvg = '';
+
+  lines.forEach((lineText, index) => {
+    const textWidth = measuredWidths[index];
+    const boxWidth = Math.min(maxAvailableWidth, Math.ceil(textWidth) + paddingX * 2);
+    const boxY = startY + index * (badgeHeight + badgeSpacing);
+    const textY = Math.round(boxY + badgeHeight * 0.68);
+    const textCenterX = Math.round(startX + boxWidth / 2);
+
+    // Ligne 1: Fond Blanc, Texte Sombre
+    // Ligne 2: Fond Rouge, Texte Blanc
+    const isRed = index % 2 === 1;
+    const bgColor = isRed ? '#DC2626' : '#FFFFFF';
+    const textColor = isRed ? '#FFFFFF' : '#0F172A';
+
+    badgesSvg += `
+      <!-- Badge Ligne ${index + 1} -->
+      <g filter="url(#badge-shadow)">
+        <rect x="${startX}" y="${boxY}" width="${boxWidth}" height="${badgeHeight}" rx="${rx}" fill="${bgColor}" />
+        <text x="${textCenterX}" y="${textY}" text-anchor="middle" class="badge-text" font-size="${fontSize}px" fill="${textColor}">${lineText}</text>
+      </g>
+    `;
+  });
+
+  const categoryLabel = (category || 'Guide Immo').toUpperCase();
 
   const svg = `
   <svg width="1080" height="1350" viewBox="0 0 1080 1350" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <!-- Dégradé sombre en bas pour garantir un contraste optimal -->
+      <linearGradient id="bottom-gradient" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0%" stop-color="#000000" stop-opacity="0" />
+        <stop offset="35%" stop-color="#000000" stop-opacity="0.35" />
+        <stop offset="100%" stop-color="#000000" stop-opacity="0.78" />
+      </linearGradient>
+
+      <!-- Ombre portée douce pour les badges -->
+      <filter id="badge-shadow" x="-5%" y="-15%" width="120%" height="140%">
+        <feDropShadow dx="0" dy="5" stdDeviation="8" flood-color="#000000" flood-opacity="0.30" />
+      </filter>
+    </defs>
+
     <style>
-      .logo-txt { font-family: 'Montserrat', sans-serif; font-weight: 900; font-size: 42px; letter-spacing: 12px; fill: #111827; }
-      .sub-logo { font-family: sans-serif; font-size: 16px; letter-spacing: 4px; fill: #DC2626; font-weight: bold; }
-      .title-black { font-family: sans-serif; font-weight: 900; font-size: 54px; fill: #0f172a; }
-      .title-red { font-family: sans-serif; font-weight: 900; font-size: 58px; fill: #DC2626; }
-      .website-btn { font-family: sans-serif; font-weight: bold; font-size: 24px; fill: #DC2626; }
+      .badge-text { 
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; 
+        font-weight: 800; 
+        letter-spacing: 0.5px; 
+      }
+      .footer-brand { 
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; 
+        font-weight: 700; 
+        font-size: 26px; 
+        fill: #FFFFFF; 
+        letter-spacing: 0.5px; 
+      }
+      .footer-tag { 
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; 
+        font-weight: 700; 
+        font-size: 22px; 
+        fill: #F1F5F9; 
+        letter-spacing: 1.5px; 
+      }
     </style>
 
-    <!-- Logo Lqaly (Haut Gauche) -->
-    <text x="80" y="90" class="logo-txt">LQALY</text>
-    <text x="80" y="125" class="sub-logo">IMMOBILIER AU MAROC</text>
-    <line x1="80" y1="140" x2="320" y2="140" stroke="#DC2626" stroke-width="2" />
+    <!-- Fond protecteur Logo (Carte blanche avec ombre) -->
+    <g filter="url(#badge-shadow)">
+      <rect x="80" y="65" width="320" height="84" rx="14" fill="#FFFFFF" />
+    </g>
 
-    <!-- Grand Titre dynamique -->
-    <text x="80" y="240" class="title-black">GUIDE IMMO</text>
-    <text x="80" y="310" class="title-red">${shortTitle.toUpperCase()}</text>
+    <!-- Vignette / Dégradé sombre inférieur -->
+    <rect x="0" y="680" width="1080" height="670" fill="url(#bottom-gradient)" />
 
-    <!-- Diagonal Red Stripe (Style Lqaly) -->
-    <polygon points="850,0 950,0 720,450 620,450" fill="#DC2626" />
+    <!-- Badges Titre -->
+    ${badgesSvg}
 
-    <!-- Bouton URL (Bas Droite) -->
-    <rect x="730" y="1240" width="270" height="60" rx="30" fill="#FFFFFF" stroke="#E5E7EB" stroke-width="2" />
-    <text x="865" y="1278" text-anchor="middle" class="website-btn">www.lqaly.com</text>
+    <!-- Barre Inférieure Footer -->
+    <g transform="translate(80, 1260)">
+      <text x="0" y="24" class="footer-brand">www.lqaly.com</text>
+      <text x="920" y="24" text-anchor="end" class="footer-tag">${categoryLabel}</text>
+    </g>
   </svg>
   `;
   return Buffer.from(svg);
@@ -542,20 +716,39 @@ function createLqalyBrandingSvg(title: string, category: string): Buffer {
 async function generateAutoLqalyCover(data: ArticleData): Promise<{ buffer: Buffer }> {
   console.log(`🖼️ [Auto-Image] Génération gratuite pour : ${data.permalinkSlug}`);
 
-  // 1. Récupération de l'image du sujet via Hugging Face
-  const baseAiBuffer = await generateRealEstateSubject(data.primaryKeyword);
+  // 1. Récupération de l'image du sujet via Unsplash
+  const baseAiBuffer = await generateRealEstateSubject(data.primaryKeyword, data.metaTitle);
 
   // 2. Redimensionnement (Format vertical 4:5 idéal pour social/blog)
   const resizedBase = await sharp(baseAiBuffer)
     .resize(1080, 1350, { fit: 'cover', position: 'bottom' })
     .toBuffer();
 
-  // 3. Fusion avec le Branding SVG
-  const brandingOverlay = createLqalyBrandingSvg(data.metaTitle, data.category);
+  // 3. Fusion avec le Branding SVG et le logo officiel paysage
+  const brandingOverlay = await createLqalyBrandingSvg(data.metaTitle, data.category);
+
+  const logoCandidates = [
+    path.join(__dirname, '../public/landscape-logo.png'),
+    path.resolve(process.cwd(), 'public/landscape-logo.png'),
+    path.resolve(process.cwd(), 'frontend/public/landscape-logo.png')
+  ];
+  const logoPath = logoCandidates.find(p => fs.existsSync(p)) || logoCandidates[0];
+
+  const logoWidth = 270;
+  const logoHeight = Math.round(logoWidth * (520 / 2502)); // ~56px
+  const logoLeft = Math.round(80 + (320 - logoWidth) / 2); // 105px
+  const logoTop = Math.round(65 + (84 - logoHeight) / 2); // 79px
+
+  const logoBuffer = await sharp(logoPath)
+    .resize(logoWidth)
+    .toBuffer();
 
   const finalImage = await sharp(resizedBase)
-    .composite([{ input: brandingOverlay, top: 0, left: 0 }])
-    .jpeg({ quality: 90 })
+    .composite([
+      { input: brandingOverlay, top: 0, left: 0 },
+      { input: logoBuffer, top: logoTop, left: logoLeft }
+    ])
+    .jpeg({ quality: 92 })
     .toBuffer();
 
   return { buffer: finalImage };
